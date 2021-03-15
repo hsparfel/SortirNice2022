@@ -1,0 +1,2 @@
+rootProject.name='SortirNice'
+include ':app'
