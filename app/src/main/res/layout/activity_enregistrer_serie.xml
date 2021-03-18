@@ -26,6 +26,12 @@
             android:background="?attr/colorPrimary"
             app:theme="@style/ToolBarStyle"/>
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

@@ -25,6 +25,8 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.pouillos.sortirnice.activities.AfficherEventsActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.pouillos.sortirnice.activities.AfficherEventDetailActivity"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

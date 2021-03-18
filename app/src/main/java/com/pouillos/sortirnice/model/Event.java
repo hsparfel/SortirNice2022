@@ -41,6 +41,9 @@ public class Event {
     @ElementList(name="profiles", required=false)
     private List<Profile> listProfiles;
 
+    @ElementList(name="stations", required=false)
+    private List<Station> listStations;
+
     //@ElementList(inline=true, name="categories")
    // private List<Category> listCategories;
 
@@ -52,6 +55,12 @@ public class Event {
 
     @ElementList(name="categories", required=false)
     private List<Category> listCategories;
+
+    @ElementList(name="options", required=false)
+    private List<Option> listOptions;
+
+    @ElementList(name="sector", required=false)
+    private List<Secto> listSectors;
 
     @ElementList(name="descriptions", required=false)
     private List<Description> listDescriptions;
@@ -222,5 +231,29 @@ public class Event {
 
     public void setUpdated(String updated) {
         this.updated = updated;
+    }
+
+    public List<Station> getListStations() {
+        return listStations;
+    }
+
+    public void setListStations(List<Station> listStations) {
+        this.listStations = listStations;
+    }
+
+    public List<Option> getListOptions() {
+        return listOptions;
+    }
+
+    public void setListOptions(List<Option> listOptions) {
+        this.listOptions = listOptions;
+    }
+
+    public List<Secto> getListSectors() {
+        return listSectors;
+    }
+
+    public void setListSectors(List<Secto> listSectors) {
+        this.listSectors = listSectors;
     }
 }

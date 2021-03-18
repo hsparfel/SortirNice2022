@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pouillos.sortirnice"
+    android:targetSandboxVersion="2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="28" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:icon="@mipmap/logo_app"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo_app"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AccueilActivity"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.pouillos.sortirnice.activities.EnregistrerSerieActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherSaisonActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEventsActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEventDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+    </application>
+
+</manifest>

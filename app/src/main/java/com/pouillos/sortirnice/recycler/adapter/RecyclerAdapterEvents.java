@@ -32,8 +32,8 @@ public class RecyclerAdapterEvents extends RecyclerView.Adapter<RecyclerViewHold
         public RecyclerViewHolderEvents onCreateViewHolder(ViewGroup parent, int viewType) {
             Context context = parent.getContext();
             LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.recycler_list_event, parent, false);
-
+            //View view = inflater.inflate(R.layout.recycler_list_event, parent, false);
+            View view = inflater.inflate(R.layout.recycler_list_event_card, parent, false);
             return new RecyclerViewHolderEvents(view);
         }
 
