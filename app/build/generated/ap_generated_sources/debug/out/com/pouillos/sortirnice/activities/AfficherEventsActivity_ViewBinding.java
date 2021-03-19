@@ -2,6 +2,7 @@
 package com.pouillos.sortirnice.activities;
 
 import android.view.View;
+import android.widget.ProgressBar;
 import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ public class AfficherEventsActivity_ViewBinding implements Unbinder {
     this.target = target;
 
     target.list_recycler_event = Utils.findRequiredViewAsType(source, R.id.list_recycler_event, "field 'list_recycler_event'", RecyclerView.class);
+    target.progressBar = Utils.findRequiredViewAsType(source, R.id.simpleProgressBar, "field 'progressBar'", ProgressBar.class);
   }
 
   @Override
@@ -34,5 +36,6 @@ public class AfficherEventsActivity_ViewBinding implements Unbinder {
     this.target = null;
 
     target.list_recycler_event = null;
+    target.progressBar = null;
   }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,9 +16,9 @@ import com.pouillos.sortirnice.R;
 
 import com.pouillos.sortirnice.entities.EventEntity;
 import com.pouillos.sortirnice.interfaces.EventsApiService;
-import com.pouillos.sortirnice.model.Description;
-import com.pouillos.sortirnice.model.Event;
-import com.pouillos.sortirnice.model.Events;
+import com.pouillos.sortirnice.modelevents.Description;
+import com.pouillos.sortirnice.modelevents.Event;
+import com.pouillos.sortirnice.modelevents.Events;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEvents;
 import com.pouillos.sortirnice.utils.DateUtils;
 import com.pouillos.sortirnice.utils.ItemClickSupport;
@@ -44,6 +45,9 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
 
     @BindView(R.id.list_recycler_event)
     RecyclerView list_recycler_event;
+
+    @BindView(R.id.simpleProgressBar)
+    ProgressBar progressBar;
 
     private RecyclerAdapterEvents adapterEvents;
 
@@ -118,6 +122,7 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
                     saveListEvents();
                     isResponded = true;
                     Log.d(TAG, "Number of events received: " + listEvents.size());
+                    progressBar.setVisibility(View.GONE);
                 } else {
 
                     dateDemande = DateUtils.calculerVeille(dateDemande);

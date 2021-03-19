@@ -1,32 +1,9 @@
 package com.pouillos.sortirnice.entities;
 
 
-import com.pouillos.sortirnice.dao.DaoSession;
-import com.pouillos.sortirnice.dao.EpisodeDao;
-import com.pouillos.sortirnice.dao.SaisonDao;
-import com.pouillos.sortirnice.model.Address;
-import com.pouillos.sortirnice.model.Category;
-import com.pouillos.sortirnice.model.Description;
-import com.pouillos.sortirnice.model.Image;
-import com.pouillos.sortirnice.model.Option;
-import com.pouillos.sortirnice.model.Profile;
-import com.pouillos.sortirnice.model.RefEntries;
-import com.pouillos.sortirnice.model.Secto;
-import com.pouillos.sortirnice.model.Station;
-import com.pouillos.sortirnice.utils.BasicUtils;
-
-import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.ToOne;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.ElementMap;
-
-import java.util.List;
-import java.util.Map;
 
 @Entity
 public class EventEntity implements Comparable<EventEntity> {

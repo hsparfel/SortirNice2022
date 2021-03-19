@@ -1,4 +1,4 @@
-package com.pouillos.sortirnice.model;
+package com.pouillos.sortirnice.modelevents;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

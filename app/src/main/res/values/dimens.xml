@@ -7,5 +7,7 @@
      <!-- <dimen name="nav_header_width">128dp</dimen> -->
     <!-- <dimen name="fab_margin">16dp</dimen> -->
 
-    <dimen name="text_view_detail">16dp</dimen>
+    <dimen name="text_view_detail_large">16dp</dimen>
+    <dimen name="text_view_detail_middle">8dp</dimen>
+    <dimen name="text_view_detail_short">3dp</dimen>
 </resources>

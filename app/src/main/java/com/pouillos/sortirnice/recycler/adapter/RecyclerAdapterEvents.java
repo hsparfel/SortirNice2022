@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillos.sortirnice.R;
-import com.pouillos.sortirnice.model.Event;
+import com.pouillos.sortirnice.modelevents.Event;
 import com.pouillos.sortirnice.recycler.holder.RecyclerViewHolderEvents;
 
 import java.util.List;

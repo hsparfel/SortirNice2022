@@ -31,7 +31,7 @@
 
         app:layout_constraintBottom_toTopOf="@+id/fabSave"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
         >
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="@dimen/text_view_detail"
+
                     android:text="profile"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
@@ -89,7 +89,7 @@
                 android:id="@+id/description_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="description_description"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -98,13 +98,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/text_view_detail_large">
 
                 <TextView
                     android:id="@+id/start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/text_view_detail"
+
                     android:text="start"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
@@ -113,17 +114,18 @@
                     android:id="@+id/end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/text_view_detail"
+
                     android:text="end"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
 
+
             <TextView
                 android:id="@+id/description_horaires"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="description_horaires"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -132,16 +134,37 @@
                 android:id="@+id/description_tarification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="description_tarification"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/text_view_detail_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Lieu: "
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
             <TextView
                 android:id="@+id/description_situation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+
                 android:text="description_situation"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -150,7 +173,7 @@
                 android:id="@+id/adress_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+
                 android:text="adress_content"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -164,7 +187,7 @@
                     android:id="@+id/adress_zip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/text_view_detail"
+
                     android:text="adress_zip"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
@@ -173,48 +196,55 @@
                     android:id="@+id/adress_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/text_view_detail"
-                    android:layout_marginLeft="@dimen/text_view_detail"
+
+                    android:layout_marginLeft="@dimen/text_view_detail_short"
                     android:text="adress_city"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+
 
             <TextView
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="phone"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:autoLink="phone"/>
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="email"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:autoLink="email"/>
 
             <TextView
                 android:id="@+id/website_situation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="website_situation"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:autoLink="web"/>
 
             <TextView
                 android:id="@+id/website_principal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_short"
                 android:text="website_principal"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:autoLink="web"/>
 
 
 
@@ -222,7 +252,7 @@
                 android:id="@+id/station"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="station"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -231,7 +261,7 @@
                 android:id="@+id/option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="option"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -240,7 +270,7 @@
                 android:id="@+id/secto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail"
+                android:layout_marginTop="@dimen/text_view_detail_large"
                 android:text="secto"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
@@ -277,6 +307,8 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

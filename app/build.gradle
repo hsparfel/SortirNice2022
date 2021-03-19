@@ -67,4 +67,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     // Retrofit XML converter (Simple)
     implementation 'com.squareup.retrofit2:converter-simplexml:2.5.0'
+
+    //creer des links dans textview
+    //implementation 'com.klinkerapps:link_builder:2.0.5'
 }

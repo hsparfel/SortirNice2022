@@ -1571,7 +1571,9 @@ dimen test_navigation_bar_item_min_width
 dimen test_navigation_bar_label_padding
 dimen test_navigation_bar_shadow_height
 dimen test_navigation_bar_text_size
-dimen text_view_detail
+dimen text_view_detail_large
+dimen text_view_detail_middle
+dimen text_view_detail_short
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -2093,6 +2095,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id simpleProgressBar
 id sin
 id skipCollapsed
 id slide

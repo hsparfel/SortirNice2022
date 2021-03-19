@@ -2,7 +2,6 @@ package com.pouillos.sortirnice.recycler.holder;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.view.View;
@@ -14,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillos.sortirnice.R;
 
-import com.pouillos.sortirnice.model.Description;
-import com.pouillos.sortirnice.model.Event;
+import com.pouillos.sortirnice.modelevents.Description;
+import com.pouillos.sortirnice.modelevents.Event;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEvents;
 import com.pouillos.sortirnice.utils.BasicUtils;
 
@@ -25,8 +24,6 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +62,7 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
             }
         }
 
-        RecyclerViewHolderEvents.AsyncTaskRunnerImage runnerImage = new RecyclerViewHolderEvents.AsyncTaskRunnerImage();
+        AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
         runnerImage.execute();
         //creer asynctask pour faire ce job
         /**/
@@ -115,9 +112,9 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
 
         protected void onPostExecute(Void result) {
             if (bitmap != null) {
-                RecyclerViewHolderEvents.this.image.setImageBitmap(bitmap);
+                image.setImageBitmap(bitmap);
             } else {
-                RecyclerViewHolderEvents.this.image.setImageResource(R.drawable.outline_camera);
+                image.setImageResource(R.drawable.outline_camera);
             }
         }
 

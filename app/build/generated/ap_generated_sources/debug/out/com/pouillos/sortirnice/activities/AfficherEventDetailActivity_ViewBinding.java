@@ -2,6 +2,7 @@
 package com.pouillos.sortirnice.activities;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
@@ -23,6 +24,7 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
   public AfficherEventDetailActivity_ViewBinding(AfficherEventDetailActivity target, View source) {
     this.target = target;
 
+    target.image = Utils.findRequiredViewAsType(source, R.id.image, "field 'image'", ImageView.class);
     target.nameFr = Utils.findRequiredViewAsType(source, R.id.name_fr, "field 'nameFr'", TextView.class);
     target.category = Utils.findRequiredViewAsType(source, R.id.category, "field 'category'", TextView.class);
     target.descriptionDescription = Utils.findRequiredViewAsType(source, R.id.description_description, "field 'descriptionDescription'", TextView.class);
@@ -51,6 +53,7 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
     if (target == null) throw new IllegalStateException("Bindings already cleared.");
     this.target = null;
 
+    target.image = null;
     target.nameFr = null;
     target.category = null;
     target.descriptionDescription = null;

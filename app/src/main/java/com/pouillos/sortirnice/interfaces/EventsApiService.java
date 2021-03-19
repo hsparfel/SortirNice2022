@@ -1,10 +1,9 @@
 package com.pouillos.sortirnice.interfaces;
 
-import com.pouillos.sortirnice.model.Events;
+import com.pouillos.sortirnice.modelevents.Events;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public interface EventsApiService {
 
