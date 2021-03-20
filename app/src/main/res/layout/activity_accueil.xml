@@ -35,6 +35,15 @@
             android:onClick="afficherEvents"
             />
 
+        <Button
+            android:id="@+id/entriesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entries button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntries"
+            />
+
     </LinearLayout>
 
     <LinearLayout

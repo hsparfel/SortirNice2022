@@ -1,6 +1,7 @@
 package com.pouillos.sortirnice.activities;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -99,9 +100,7 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         //linkSetup();
     }
 
-    public void exit(View view) {
-        finish();
-    }
+
 
     public void traiterIntent() {
         Intent intent = getIntent();
@@ -116,6 +115,11 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
     }
 
     private void hideFields() {
+
+        if (eventTransmis.getImage() == null) {
+            image.setVisibility(View.GONE);
+        }
+
         if (eventTransmis.getNameFr() == null) {
             nameFr.setVisibility(View.GONE);
         }
@@ -264,5 +268,49 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         }
     }
 
+    public void exit(View view) {
+        finish();
+    }
+
+    public void launchGoogleMap(View view) {
+        String url = "geo:";
+        String addr = "";
+        if (eventTransmis.getLatitude() != 0 && eventTransmis.getLongitude() != 0) {
+            url += eventTransmis.getLatitude()+","+eventTransmis.getLongitude();
+            url += "?q="+eventTransmis.getLatitude()+","+eventTransmis.getLongitude();
+        } else if (eventTransmis.getAdressContent() != null || eventTransmis.getAdressZip() != null
+        || eventTransmis.getAdressCity() != null) {
+            url += "0,0?q=";
+            addr += Uri.parse(eventTransmis.getAdressContent()+" "+eventTransmis.getAdressZip()+" "+eventTransmis.getAdressCity());
+            url += addr;
+        }
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+        intent.setPackage("com.google.android.apps.maps");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void launchWaze(View view) {
+        try
+        {
+            String url = "";
+            if (eventTransmis.getLatitude() !=0d && eventTransmis.getLongitude()!=0d) {
+                url = "https://waze.com/ul?ll=";
+                url += eventTransmis.getLatitude()+","+eventTransmis.getLongitude()+"&navigate=yes";
+            } else {
+                url = "https://waze.com/ul?q=";
+                url += eventTransmis.getAdressContent()+" " +eventTransmis.getAdressZip()+" " + eventTransmis.getAdressCity();
+            }
+
+            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+            startActivity( intent );
+        }
+        catch ( ActivityNotFoundException ex  )
+        {
+            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+            startActivity(intent);
+        }
+    }
 }
 

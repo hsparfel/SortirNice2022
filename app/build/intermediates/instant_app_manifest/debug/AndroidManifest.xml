@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.pouillos.sortirnice.App"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -42,6 +43,12 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.pouillos.sortirnice.activities.AfficherEventDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryDetailActivity"
             android:windowSoftInputMode="stateHidden" />
     </application>
 

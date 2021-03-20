@@ -45,6 +45,10 @@ public class AccueilActivity extends NavDrawerActivity {
         ouvrirActiviteSuivante(this, AfficherEventsActivity.class,false);
     }
 
+    public void afficherEntries(View view) {
+        ouvrirActiviteSuivante(this, AfficherEntriesActivity.class,false);
+    }
+
     public void createLanguageDialog() {
 
     }

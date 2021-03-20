@@ -71,7 +71,29 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
         this.titre.setText(event.getNameFr());
         this.textSecondaire.setText(category);
         this.textSupport.setText(BasicUtils.stringRaccourci(description,100));
+
+        hideFields();
+
         this.callbackWeakRef = new WeakReference<RecyclerAdapterEvents.Listener>(callback);
+    }
+
+    public void showAllFields() {
+        titre.setVisibility(View.VISIBLE);
+        textSecondaire.setVisibility(View.VISIBLE);
+        textSupport.setVisibility(View.VISIBLE);
+    }
+
+    public void hideFields() {
+        showAllFields();
+        if (titre.getText().toString().equalsIgnoreCase("")) {
+            titre.setVisibility(View.GONE);
+        }
+        if (textSecondaire.getText().toString().equalsIgnoreCase("")) {
+            textSecondaire.setVisibility(View.GONE);
+        }
+        if (textSupport.getText().toString().equalsIgnoreCase("")) {
+            textSupport.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -115,6 +137,7 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
                 image.setImageBitmap(bitmap);
             } else {
                 image.setImageResource(R.drawable.outline_camera);
+                //image.setVisibility(View.GONE);
             }
         }
 

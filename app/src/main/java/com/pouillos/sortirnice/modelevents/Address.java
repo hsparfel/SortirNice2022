@@ -7,13 +7,13 @@ import org.simpleframework.xml.Root;
 @Root
 public class Address {
 
-    @Element (name="address_content")
+    @Element (name="address_content", required=false)
     private String addressContent;
 
-    @Element
+    @Element(required=false)
     private String zip;
 
-    @Element
+    @Element(required=false)
     private String city;
 
     @Attribute

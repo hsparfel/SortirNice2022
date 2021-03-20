@@ -23,6 +23,7 @@ import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.dao.AppOpenHelper;
 import com.pouillos.sortirnice.dao.DaoMaster;
 import com.pouillos.sortirnice.dao.DaoSession;
+import com.pouillos.sortirnice.dao.EntryEntityDao;
 import com.pouillos.sortirnice.dao.EpisodeDao;
 import com.pouillos.sortirnice.dao.EventEntityDao;
 import com.pouillos.sortirnice.dao.SaisonDao;
@@ -46,6 +47,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected SaisonDao saisonDao;
     protected EpisodeDao episodeDao;
     protected EventEntityDao eventEntityDao;
+    protected EntryEntityDao entryEntityDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         saisonDao = daoSession.getSaisonDao();
         episodeDao = daoSession.getEpisodeDao();
         eventEntityDao = daoSession.getEventEntityDao();
+        entryEntityDao = daoSession.getEntryEntityDao();
     }
 
     @Override
