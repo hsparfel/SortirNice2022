@@ -24,11 +24,6 @@ public class Entry {
     @Element(required=false)
     private Address address;
 
-    @Element(required=false)
-    private String zip;
-
-    @Element(required=false)
-    private String city;
 
     @Element(required=false)
     private String phone;
@@ -168,8 +163,8 @@ public class Entry {
     @Element(required=false)
     private double longitude;
 
-    @Element(required=false)
-    private String location_map;
+    @Element(name = "location_map", required=false)
+    private String locationMap;
 
     @Element(required=false)
     private String note;
@@ -263,14 +258,6 @@ public class Entry {
 
     public Address getAddress() {
         return address;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public String getPhone() {
@@ -401,8 +388,8 @@ public class Entry {
         return longitude;
     }
 
-    public String getLocation_map() {
-        return location_map;
+    public String getLocationMap() {
+        return locationMap;
     }
 
     public String getNote() {
@@ -428,4 +415,6 @@ public class Entry {
     public String getUpdated() {
         return updated;
     }
+
+
 }

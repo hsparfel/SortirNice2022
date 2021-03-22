@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillos.sortirnice.R;
 
-import com.pouillos.sortirnice.entities.EventEntity;
+import com.pouillos.sortirnice.entities.event.EventEntity;
 import com.pouillos.sortirnice.interfaces.EventsApiService;
 import com.pouillos.sortirnice.modelevents.Description;
 import com.pouillos.sortirnice.modelevents.Event;

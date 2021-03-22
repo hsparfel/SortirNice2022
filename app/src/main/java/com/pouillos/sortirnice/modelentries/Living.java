@@ -63,6 +63,30 @@ public class Living {
     @Element(name="furnished_room_count", required=false)
     private int furnishedRoomCount;
 
+    public int getRoomAccessibleCount() {
+        return roomAccessibleCount;
+    }
+
+    public int getSingleCount() {
+        return singleCount;
+    }
+
+    public int getDoubleCount() {
+        return doubleCount;
+    }
+
+    public int getTripleCount() {
+        return tripleCount;
+    }
+
+    public int getTwinsCount() {
+        return twinsCount;
+    }
+
+    public int getFamilyCount() {
+        return familyCount;
+    }
+
     public int getRoomCount() {
         return roomCount;
     }

@@ -30,6 +30,18 @@ public class Capacity {
     @Element(name = "disabled_count", required=false)
     private int disabledCount;
 
+    public int getOutdoor() {
+        return outdoor;
+    }
+
+    public int getSeated() {
+        return seated;
+    }
+
+    public int getCocktail() {
+        return cocktail;
+    }
+
     public int getTotal() {
         return total;
     }

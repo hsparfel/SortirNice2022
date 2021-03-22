@@ -12,6 +12,11 @@ public class Closure {
     @Element (name="closure_span",required=false)
     private String closureSpan;
 
+    public String getClosureDay() {
+        return closureDay;
+    }
 
-
+    public String getClosureSpan() {
+        return closureSpan;
+    }
 }

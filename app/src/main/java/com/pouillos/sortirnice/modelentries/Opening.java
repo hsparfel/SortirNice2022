@@ -21,4 +21,20 @@ public class Opening {
 
     @ElementList(name="grids", required=false)
     private List<Grid> listGrids;
+
+    public String getOpeningStart() {
+        return openingStart;
+    }
+
+    public String getOpeningEnd() {
+        return openingEnd;
+    }
+
+    public String getOpeningReplay() {
+        return openingReplay;
+    }
+
+    public List<Grid> getListGrids() {
+        return listGrids;
+    }
 }

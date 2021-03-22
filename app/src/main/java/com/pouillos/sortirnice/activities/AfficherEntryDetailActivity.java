@@ -17,7 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.pouillos.sortirnice.R;
-import com.pouillos.sortirnice.entities.EventEntity;
+import com.pouillos.sortirnice.entities.event.EventEntity;
 import com.pouillos.sortirnice.utils.DateUtils;
 
 import java.io.IOException;
