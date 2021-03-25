@@ -20,9 +20,9 @@ import java.lang.Override;
 public class AfficherSaisonActivity_ViewBinding implements Unbinder {
   private AfficherSaisonActivity target;
 
-  private View view7f0800bd;
+  private View view7f0800c7;
 
-  private View view7f0800bc;
+  private View view7f0800c6;
 
   @UiThread
   public AfficherSaisonActivity_ViewBinding(AfficherSaisonActivity target) {
@@ -39,7 +39,7 @@ public class AfficherSaisonActivity_ViewBinding implements Unbinder {
     target.btnAddSaison = Utils.findRequiredViewAsType(source, R.id.btnAddSaison, "field 'btnAddSaison'", Button.class);
     view = Utils.findRequiredView(source, R.id.fabSave, "field 'fabSave' and method 'fabSaveClick'");
     target.fabSave = Utils.castView(view, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
-    view7f0800bd = view;
+    view7f0800c7 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,7 +48,7 @@ public class AfficherSaisonActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.fabCancel, "field 'fabCancel' and method 'fabCancelClick'");
     target.fabCancel = Utils.castView(view, R.id.fabCancel, "field 'fabCancel'", FloatingActionButton.class);
-    view7f0800bc = view;
+    view7f0800c6 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -84,9 +84,9 @@ public class AfficherSaisonActivity_ViewBinding implements Unbinder {
     target.switchLgg = null;
     target.switchFini = null;
 
-    view7f0800bd.setOnClickListener(null);
-    view7f0800bd = null;
-    view7f0800bc.setOnClickListener(null);
-    view7f0800bc = null;
+    view7f0800c7.setOnClickListener(null);
+    view7f0800c7 = null;
+    view7f0800c6.setOnClickListener(null);
+    view7f0800c6 = null;
   }
 }

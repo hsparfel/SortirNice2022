@@ -20,22 +20,24 @@ import com.pouillos.sortirnice.App;
 import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.entities.entry.EntryEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryAmenityEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryAnimationEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryAtmospherEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryCategoryEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryChainEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryClosingEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryClosureEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryDisabledOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryFamilyOptionEntity;
-import com.pouillos.sortirnice.entities.entry.detail.EntryFrpOptionEntity;
-import com.pouillos.sortirnice.entities.entry.detail.EntryGroupOptionEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryGridEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLabelEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLanguageEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLocationEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryOpeningEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryPaymentEntity;
-import com.pouillos.sortirnice.entities.entry.detail.EntryPoiOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryProfileEntity;
-import com.pouillos.sortirnice.entities.event.EventEntity;
-import com.pouillos.sortirnice.modelentries.Category;
-import com.pouillos.sortirnice.modelentries.Payment;
-import com.pouillos.sortirnice.utils.DateUtils;
+import com.pouillos.sortirnice.entities.entry.detail.EntryServiceEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryStationEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,13 +60,8 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
     TextView nameFr;
     @BindView(R.id.category)
     TextView category;
-    @BindView(R.id.description_description)
-    TextView descriptionDescription;
 
-    @BindView(R.id.start)
-    TextView start;
-    @BindView(R.id.end)
-    TextView end;
+
     @BindView(R.id.address_line1)
     TextView addressLine1;
     @BindView(R.id.address_line2)
@@ -77,45 +74,31 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
     TextView addressCity;
     @BindView(R.id.phone)
     TextView phone;
+    @BindView(R.id.fax)
+    TextView fax;
     @BindView(R.id.email)
     TextView email;
     @BindView(R.id.website)
     TextView website;
-    @BindView(R.id.website_reservation)
-    TextView websiteReservation;
+
     @BindView(R.id.facebook)
     TextView facebook;
     @BindView(R.id.twitter)
     TextView twitter;
-    @BindView(R.id.profile)
-    TextView profile;
+
     @BindView(R.id.station)
     TextView station;
     @BindView(R.id.option)
     TextView option;
-    @BindView(R.id.disabled_option)
-    TextView disabledOption;
-    @BindView(R.id.frp_option)
-    TextView frpOption;
-    @BindView(R.id.poi_option)
-    TextView poiOption;
-    @BindView(R.id.group_option)
-    TextView groupOption;
-    @BindView(R.id.family_option)
-    TextView familyOption;
-    @BindView(R.id.secto)
-    TextView secto;
-    @BindView(R.id.description_situation)
-    TextView descriptionSituation;
-    @BindView(R.id.description_tarification)
-    TextView descriptionTarification;
-    @BindView(R.id.description_horaires)
-    TextView descriptionHoraires;
+
+
+
+
+
 
     @BindView(R.id.payment)
     TextView payment;
-    @BindView(R.id.language)
-    TextView language;
+
     @BindView(R.id.amenity)
     TextView amenity;
     @BindView(R.id.location)
@@ -126,9 +109,42 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
     TextView label;
     @BindView(R.id.service)
     TextView service;
+    @BindView(R.id.opening)
+    TextView opening;
+    @BindView(R.id.closing)
+    TextView closing;
+    @BindView(R.id.openings)
+    TextView openings;
+    @BindView(R.id.closings)
+    TextView closings;
 
+
+    @BindView(R.id.animation)
+    TextView animation;
+
+    @BindView(R.id.atmosphere)
+    TextView atmosphere;
+
+
+
+
+    @BindView(R.id.capacity_total)
+    TextView capacityTotal;
+    @BindView(R.id.capacity_interieur)
+    TextView capacityInterieur;
+    @BindView(R.id.capacity_exterieur)
+    TextView capacityExterieur;
+    @BindView(R.id.capacity_assis)
+    TextView capacityAssis;
+    @BindView(R.id.capacity_debout)
+    TextView capacityDebout;
+    @BindView(R.id.capacity_group)
+    TextView capacityGroup;
+    @BindView(R.id.capacity_salle)
+    TextView capacitySalle;
 
     Bitmap bitmap = null;
+    String newLine = System.getProperty("line.separator");
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -157,7 +173,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
             Long entryId = intent.getLongExtra("entryId", 0);
             entryTransmis = entryEntityDao.load(entryId);
             fillAllFields();
-            hideFields();
+         //   hideFields();
             AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
             runnerImage.execute();
         }
@@ -212,9 +228,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         if (entryTransmis.getWebsite() == null) {
             website.setVisibility(View.GONE);
         }
-        if (entryTransmis.getWebsiteReservation() == null) {
-            websiteReservation.setVisibility(View.GONE);
-        }
+
         if (entryTransmis.getFacebook() == null) {
             facebook.setVisibility(View.GONE);
         }
@@ -224,9 +238,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         if (entryTransmis.getListPayments() == null) {
             payment.setVisibility(View.GONE);
         }
-        if (entryTransmis.getListLanguages() == null) {
-            language.setVisibility(View.GONE);
-        }
+
         if (entryTransmis.getListAmenities() == null) {
             amenity.setVisibility(View.GONE);
         }
@@ -239,27 +251,11 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         if (entryTransmis.getListLabels() == null) {
             label.setVisibility(View.GONE);
         }
-        if (entryTransmis.getListProfiles() == null) {
-            profile.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListDisabledOptions() == null) {
-            disabledOption.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListFrpOptions() == null) {
-            frpOption.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListPoiOptions() == null) {
-            poiOption.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListGroupOptions() == null) {
-            profile.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListFamilyOptions() == null) {
-            familyOption.setVisibility(View.GONE);
-        }
-        if (entryTransmis.getListGroupOptions() == null) {
-            groupOption.setVisibility(View.GONE);
-        }
+
+
+
+
+
 
 
 
@@ -276,7 +272,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
     }
 
     private void fillAllFields() {
-        nameFr.setText(entryTransmis.getNameFr());
+        nameFr.setText("name: "+entryTransmis.getNameFr());
         //category.setText(eventTransmis.getCategory());
         //descriptionDescription.setText(eventTransmis.getDescriptionDescription());
         //descriptionHoraires.setText("Horaires: "+eventTransmis.getDescriptionHoraires());
@@ -284,19 +280,34 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         //descriptionTarification.setText("Tarif: "+eventTransmis.getDescriptionTarification());
         //start.setText("Date: "+ DateUtils.formatDateDD_MM_YYYY(eventTransmis.getStart()));
        // end.setText(" au "+DateUtils.formatDateDD_MM_YYYY(eventTransmis.getEnd()));
-        addressLine1.setText(entryTransmis.getAddress().getAddressLine1());
-        addressLine2.setText(entryTransmis.getAddress().getAddressLine2());
-        addressLine3.setText(entryTransmis.getAddress().getAddressLine3());
-        addressZip.setText(entryTransmis.getAddress().getZip());
-        addressCity.setText(entryTransmis.getAddress().getCity());
+        addressLine1.setText("adr1: "+entryTransmis.getAddress().getAddressLine1());
+        addressLine2.setText("adr2: "+entryTransmis.getAddress().getAddressLine2());
+        addressLine3.setText("adr3: "+entryTransmis.getAddress().getAddressLine3());
+        addressZip.setText("zip: "+entryTransmis.getAddress().getZip());
+        addressCity.setText("city: "+entryTransmis.getAddress().getCity());
         phone.setText("Tel: "+entryTransmis.getPhone());
+        fax.setText("Fax: "+entryTransmis.getFax());
         email.setText("Email: "+entryTransmis.getEmail());
         website.setText("Site: "+entryTransmis.getWebsite());
-        websiteReservation.setText("Site: "+entryTransmis.getWebsiteReservation());
-        facebook.setText("Site: "+entryTransmis.getFacebook());
-        twitter.setText("Site: "+entryTransmis.getTwitter());
 
-        String paymentString = "";
+        facebook.setText("Fb: "+entryTransmis.getFacebook());
+        twitter.setText("Twitter: "+entryTransmis.getTwitter());
+        opening.setText("ouvert: "+entryTransmis.getOpening());
+        closing.setText("ferme: "+entryTransmis.getClosing());
+
+
+
+
+        capacityTotal.setText("Cap. Total: "+entryTransmis.getCapacity().getTotal()+" pers");
+        capacityInterieur.setText("Cap. Total: "+entryTransmis.getCapacity().getIndoor()+" pers");
+        capacityExterieur.setText("Cap. Total: "+entryTransmis.getCapacity().getOutdoor()+" pers");
+        capacityAssis.setText("Cap. Total: "+entryTransmis.getCapacity().getSeated()+" pers");
+        capacityDebout.setText("Cap. Total: "+entryTransmis.getCapacity().getCocktail()+" pers");
+        capacityGroup.setText("Cap. Total: "+entryTransmis.getCapacity().getGroup()+" pers");
+        capacitySalle.setText("Nb Salle: "+entryTransmis.getCapacity().getRoomCount());
+
+
+        String paymentString = "payment: ";
         if (entryTransmis.getListPayments()!=null) {
             int i = 1;
             for (EntryPaymentEntity current : entryTransmis.getListPayments()) {
@@ -309,20 +320,9 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         payment.setText(paymentString);
 
-        String languageString = "";
-        if (entryTransmis.getListLanguages()!=null) {
-            int i = 1;
-            for (EntryLanguageEntity current : entryTransmis.getListLanguages()) {
-                languageString += current.getValue();
-                if (i < entryTransmis.getListLanguages().size()) {
-                    languageString += " / ";
-                }
-                i++;
-            }
-        }
-        language.setText(languageString);
 
-        String amenityString = "";
+
+        String amenityString = "amenity: ";
         if (entryTransmis.getListAmenities()!=null) {
             int i = 1;
             for (EntryAmenityEntity current : entryTransmis.getListAmenities()) {
@@ -335,20 +335,22 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         amenity.setText(amenityString);
 
-        String locationString = "";
+        String locationString = "location: ";
         if (entryTransmis.getListLocations()!=null) {
             int i = 1;
             for (EntryLocationEntity current : entryTransmis.getListLocations()) {
-                locationString += current.getValue();
-                if (i < entryTransmis.getListLocations().size()) {
-                    locationString += " / ";
+                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
+                    locationString += current.getValue();
+                    if (i < entryTransmis.getListLocations().size()) {
+                        locationString += " / ";
+                    }
                 }
                 i++;
             }
         }
         location.setText(locationString);
 
-        String closureString = "";
+        String closureString = "closure: ";
         if (entryTransmis.getListClosures()!=null) {
             int i = 1;
             for (EntryClosureEntity current : entryTransmis.getListClosures()) {
@@ -361,7 +363,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         closure.setText(closureString);
 
-        String labelString = "";
+        String labelString = "label: ";
         if (entryTransmis.getListLabels()!=null) {
             int i = 1;
             for (EntryLabelEntity current : entryTransmis.getListLabels()) {
@@ -374,85 +376,14 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         label.setText(labelString);
 
-        String profileString = "";
-        if (entryTransmis.getListProfiles()!=null) {
-            int i = 1;
-            for (EntryProfileEntity current : entryTransmis.getListProfiles()) {
-                profileString += current.getValue();
-                if (i < entryTransmis.getListProfiles().size()) {
-                    profileString += " / ";
-                }
-                i++;
-            }
-        }
-        profile.setText(" - "+profileString);
 
-        String disabledOptionString = "";
-        if (entryTransmis.getListDisabledOptions()!=null) {
-            int i = 1;
-            for (EntryDisabledOptionEntity current : entryTransmis.getListDisabledOptions()) {
-                disabledOptionString += current.getValue();
-                if (i < entryTransmis.getListDisabledOptions().size()) {
-                    disabledOptionString += " / ";
-                }
-                i++;
-            }
-        }
-        disabledOption.setText(disabledOptionString);
 
-        String frpOptionString = "";
-        if (entryTransmis.getListFrpOptions()!=null) {
-            int i = 1;
-            for (EntryFrpOptionEntity current : entryTransmis.getListFrpOptions()) {
-                frpOptionString += current.getValue();
-                if (i < entryTransmis.getListFrpOptions().size()) {
-                    frpOptionString += " / ";
-                }
-                i++;
-            }
-        }
-        frpOption.setText(frpOptionString);
 
-        String poiOptionString = "";
-        if (entryTransmis.getListPoiOptions()!=null) {
-            int i = 1;
-            for (EntryPoiOptionEntity current : entryTransmis.getListPoiOptions()) {
-                poiOptionString += current.getValue();
-                if (i < entryTransmis.getListPoiOptions().size()) {
-                    poiOptionString += " / ";
-                }
-                i++;
-            }
-        }
-        poiOption.setText(poiOptionString);
 
-        String groupOptionString = "";
-        if (entryTransmis.getListGroupOptions()!=null) {
-            int i = 1;
-            for (EntryGroupOptionEntity current : entryTransmis.getListGroupOptions()) {
-                groupOptionString += current.getValue();
-                if (i < entryTransmis.getListGroupOptions().size()) {
-                    groupOptionString += " / ";
-                }
-                i++;
-            }
-        }
-        groupOption.setText(groupOptionString);
 
-        String familyOptionString = "";
-        if (entryTransmis.getListFamilyOptions()!=null) {
-            int i = 1;
-            for (EntryFamilyOptionEntity current : entryTransmis.getListFamilyOptions()) {
-                familyOptionString += current.getValue();
-                if (i < entryTransmis.getListFamilyOptions().size()) {
-                    familyOptionString += " / ";
-                }
-                i++;
-            }
-        }
-        familyOption.setText(familyOptionString);
 
-        String optionString = "";
+
+        String optionString = "option: ";
         if (entryTransmis.getListOptions()!=null) {
             int i = 1;
             for (EntryOptionEntity current : entryTransmis.getListOptions()) {
@@ -465,14 +396,120 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         option.setText(optionString);
 
+        String openingString = "opening: ";
+        if (entryTransmis.getListOpenings()!=null) {
+            int i = 1;
+            int j = 1;
+            for (EntryOpeningEntity current : entryTransmis.getListOpenings()) {
+                openingString += current.getOpeningStart() + " - "+current.getOpeningEnd()+ " - "+current.getOpeningReplay()+newLine;
+                for (EntryGridEntity currentGrid : current.getListGrids()) {
+                    openingString+= currentGrid.getOpeningDays()+" - "+currentGrid.getOpeningHours();
+                    if (j<current.getListGrids().size()){
+                        openingString += " / ";
+                    }
+                    j++;
+                }
+                if (i < entryTransmis.getListOpenings().size()) {
+                    openingString += " / ";
+                }
+                i++;
+            }
+        }
+        openings.setText(openingString);
+
+        String closingString = "closing: ";
+        if (entryTransmis.getListClosings()!=null) {
+            int i = 1;
+            for (EntryClosingEntity current : entryTransmis.getListClosings()) {
+                closingString += current.getValue();
+                if (i < entryTransmis.getListClosings().size()) {
+                    closingString += " / ";
+                }
+                i++;
+            }
+        }
+        closings.setText(closingString);
 
 
 
 
 
-        //station.setText(eventTransmis.getStation());
 
-        //secto.setText(eventTransmis.getSecto());
+
+        String serviceString = "service: ";
+        if (entryTransmis.getListServices()!=null) {
+            int i = 1;
+            for (EntryServiceEntity current : entryTransmis.getListServices()) {
+                serviceString += current.getValue();
+                if (i < entryTransmis.getListServices().size()) {
+                    serviceString += " / ";
+                }
+                i++;
+            }
+        }
+        service.setText(serviceString);
+
+
+
+        String stationString = "station: ";
+        if (entryTransmis.getListStations()!=null) {
+            int i = 1;
+            for (EntryStationEntity current : entryTransmis.getListStations()) {
+                stationString += current.getValue();
+                if (i < entryTransmis.getListStations().size()) {
+                    stationString += " / ";
+                }
+                i++;
+            }
+        }
+        station.setText(stationString);
+
+
+
+        String animationString = "animation: ";
+        if (entryTransmis.getListAnimations()!=null) {
+            int i = 1;
+            for (EntryAnimationEntity current : entryTransmis.getListAnimations()) {
+                animationString += current.getValue();
+                if (i < entryTransmis.getListAnimations().size()) {
+                    animationString += " / ";
+                }
+                i++;
+            }
+        }
+        animation.setText(animationString);
+
+
+
+
+
+        String categoryString = "category: ";
+        if (entryTransmis.getListCategories()!=null) {
+            int i = 1;
+            for (EntryCategoryEntity current : entryTransmis.getListCategories()) {
+                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))) {
+                    categoryString += current.getValue();
+                    if (i < entryTransmis.getListCategories().size()) {
+                        categoryString += " / ";
+                    }
+                }
+                i++;
+            }
+        }
+        category.setText(categoryString);
+
+        String atmosphereString = "atmosphere: ";
+        if (entryTransmis.getListAtmosphere()!=null) {
+            int i = 1;
+            for (EntryAtmospherEntity current : entryTransmis.getListAtmosphere()) {
+                atmosphereString += current.getValue();
+                if (i < entryTransmis.getListAtmosphere().size()) {
+                    atmosphereString += " / ";
+                }
+                i++;
+            }
+        }
+        atmosphere.setText(atmosphereString);
     }
 
     private class AsyncTaskRunnerImage extends AsyncTask<Void, Integer, Void> {
@@ -506,6 +543,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
                 image.setImageBitmap(bitmap);
             } else {
                 image.setImageResource(R.drawable.outline_camera);
+                image.setVisibility(View.GONE);
             }
         }
 

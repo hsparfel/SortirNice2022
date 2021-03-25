@@ -917,6 +917,7 @@ public class AfficherEntriesActivity extends NavDrawerActivity implements Recycl
                 //enregistrer list openings
                 if (current.getListOpenings() != null) {
                     for (Opening opening : current.getListOpenings()) {
+                        EntryOpeningEntity openingTemp = new EntryOpeningEntity();
                         List<EntryOpeningEntity> list = entryOpeningEntityDao.queryRaw("where opening_start = ? and opening_end = ? and opening_replay = ?",
                                 opening.getOpeningStart(),
                                 "" + opening.getOpeningEnd(),
@@ -932,26 +933,29 @@ public class AfficherEntriesActivity extends NavDrawerActivity implements Recycl
                             entryOpeningEntity.setOpeningReplay(opening.getOpeningReplay());
                             entryOpeningEntity.setId(entryOpeningEntityDao.insert(entryOpeningEntity));
                             join.setEntryOpeningEntityId(entryOpeningEntity.getId());
+                            openingTemp = entryOpeningEntity;
                         }
                         joinEntryEntityWithEntryOpeningEntityDao.insert(join);
 
                         //enregistrer list grids
-                        for (Grid grid : opening.getListGrids()) {
-                            List<EntryGridEntity> list2 = entryGridEntityDao.queryRaw("where opening_days = ? and opening_hours = ?",
-                                    grid.getOpeningDays(),
-                                    "" + grid.getOpeningHours());
-                            JoinEntryOpeningEntityWithEntryGridEntity join2 = new JoinEntryOpeningEntityWithEntryGridEntity();
-                            join2.setEntryOpeningEntityId(entryToSave.getId());
-                            if (list.size() > 0) {
-                                join2.setEntryGridEntityId(list.get(0).getId());
-                            } else {
-                                EntryGridEntity entryGridEntity = new EntryGridEntity();
-                                entryGridEntity.setOpeningDays(grid.getOpeningDays());
-                                entryGridEntity.setOpeningHours(grid.getOpeningHours());
-                                entryGridEntity.setId(entryGridEntityDao.insert(entryGridEntity));
-                                join2.setEntryGridEntityId(entryGridEntity.getId());
+                        if (opening.getListGrids()!= null) {
+                            for (Grid grid : opening.getListGrids()) {
+                                List<EntryGridEntity> list2 = entryGridEntityDao.queryRaw("where opening_days = ? and opening_hours = ?",
+                                        grid.getOpeningDays(),
+                                        "" + grid.getOpeningHours());
+                                JoinEntryOpeningEntityWithEntryGridEntity join2 = new JoinEntryOpeningEntityWithEntryGridEntity();
+                                join2.setEntryOpeningEntityId(openingTemp.getId());
+                                if (list2.size() > 0) {
+                                    join2.setEntryGridEntityId(list2.get(0).getId());
+                                } else {
+                                    EntryGridEntity entryGridEntity = new EntryGridEntity();
+                                    entryGridEntity.setOpeningDays(grid.getOpeningDays());
+                                    entryGridEntity.setOpeningHours(grid.getOpeningHours());
+                                    entryGridEntity.setId(entryGridEntityDao.insert(entryGridEntity));
+                                    join2.setEntryGridEntityId(entryGridEntity.getId());
+                                }
+                                joinEntryOpeningEntityWithEntryGridEntityDao.insert(join2);
                             }
-                            joinEntryOpeningEntityWithEntryGridEntityDao.insert(join2);
                         }
 
                     }

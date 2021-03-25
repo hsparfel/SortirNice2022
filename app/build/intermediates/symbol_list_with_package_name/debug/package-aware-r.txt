@@ -1821,9 +1821,11 @@ id always
 id amenity
 id animateToEnd
 id animateToStart
+id animation
 id arc
 id asConfigured
 id async
+id atmosphere
 id auto
 id autoComplete
 id autoCompleteToEnd
@@ -1843,6 +1845,13 @@ id buttonPanel
 id cache_measures
 id cancel_action
 id cancel_button
+id capacity_assis
+id capacity_debout
+id capacity_exterieur
+id capacity_group
+id capacity_interieur
+id capacity_salle
+id capacity_total
 id card
 id category
 id center
@@ -1863,6 +1872,8 @@ id clear_text
 id clip_horizontal
 id clip_vertical
 id clockwise
+id closing
+id closings
 id closure
 id collapseActionView
 id confirm_button
@@ -1899,7 +1910,6 @@ id direct
 id disableHome
 id disablePostScroll
 id disableScroll
-id disabled_option
 id disjoint
 id dragDown
 id dragEnd
@@ -1928,7 +1938,7 @@ id fabCancel
 id fabSave
 id facebook
 id fade
-id family_option
+id fax
 id fill
 id fill_horizontal
 id fill_vertical
@@ -1938,14 +1948,12 @@ id fixed
 id flip
 id floating
 id forever
-id frp_option
 id ghost_view
 id ghost_view_holder
 id gone
 id graph
 id graph_wrap
 id group_divider
-id group_option
 id grouping
 id groups
 id guideline
@@ -1971,7 +1979,6 @@ id jumpToEnd
 id jumpToStart
 id label
 id labeled
-id language
 id layout
 id layoutName
 id layoutNbEpisode
@@ -2056,6 +2063,8 @@ id notification_main_column
 id notification_main_column_container
 id off
 id on
+id opening
+id openings
 id option
 id outline
 id outward
@@ -2073,7 +2082,6 @@ id peekHeight
 id percent
 id phone
 id pin
-id poi_option
 id position
 id postLayout
 id profile
@@ -2215,7 +2223,6 @@ id view_offset_helper
 id visible
 id website
 id website_principal
-id website_reservation
 id website_situation
 id withText
 id withinBounds
@@ -2440,6 +2447,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string french
 string hide_bottom_view_on_scroll_behavior
 string home
 string icon_content_description
