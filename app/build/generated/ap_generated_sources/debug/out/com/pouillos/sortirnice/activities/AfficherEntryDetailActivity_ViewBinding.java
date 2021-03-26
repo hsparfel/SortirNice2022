@@ -3,6 +3,7 @@ package com.pouillos.sortirnice.activities;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
@@ -59,6 +60,13 @@ public class AfficherEntryDetailActivity_ViewBinding implements Unbinder {
     target.capacityDebout = Utils.findRequiredViewAsType(source, R.id.capacity_debout, "field 'capacityDebout'", TextView.class);
     target.capacityGroup = Utils.findRequiredViewAsType(source, R.id.capacity_group, "field 'capacityGroup'", TextView.class);
     target.capacitySalle = Utils.findRequiredViewAsType(source, R.id.capacity_salle, "field 'capacitySalle'", TextView.class);
+    target.layoutAddress = Utils.findRequiredViewAsType(source, R.id.layout_address, "field 'layoutAddress'", LinearLayout.class);
+    target.boutonsMapWaze = Utils.findRequiredViewAsType(source, R.id.boutons_map_waze, "field 'boutonsMapWaze'", LinearLayout.class);
+    target.ouvert = Utils.findRequiredViewAsType(source, R.id.ouvert, "field 'ouvert'", LinearLayout.class);
+    target.ferme = Utils.findRequiredViewAsType(source, R.id.ferme, "field 'ferme'", LinearLayout.class);
+    target.layoutPayment = Utils.findRequiredViewAsType(source, R.id.layout_payment, "field 'layoutPayment'", LinearLayout.class);
+    target.layoutLabel = Utils.findRequiredViewAsType(source, R.id.layout_label, "field 'layoutLabel'", LinearLayout.class);
+    target.layoutAnimation = Utils.findRequiredViewAsType(source, R.id.layout_animation, "field 'layoutAnimation'", LinearLayout.class);
   }
 
   @Override
@@ -103,5 +111,12 @@ public class AfficherEntryDetailActivity_ViewBinding implements Unbinder {
     target.capacityDebout = null;
     target.capacityGroup = null;
     target.capacitySalle = null;
+    target.layoutAddress = null;
+    target.boutonsMapWaze = null;
+    target.ouvert = null;
+    target.ferme = null;
+    target.layoutPayment = null;
+    target.layoutLabel = null;
+    target.layoutAnimation = null;
   }
 }

@@ -1840,6 +1840,7 @@ id bottom_navigation
 id bottom_navigation_add_serie
 id bottom_navigation_home
 id bounce
+id boutons_map_waze
 id btnAddSaison
 id buttonPanel
 id cache_measures
@@ -1935,10 +1936,12 @@ id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
 id fabCancel
+id fabExit
 id fabSave
 id facebook
 id fade
 id fax
+id ferme
 id fill
 id fill_horizontal
 id fill_vertical
@@ -1983,6 +1986,10 @@ id layout
 id layoutName
 id layoutNbEpisode
 id layoutNumSaison
+id layout_address
+id layout_animation
+id layout_label
+id layout_payment
 id left
 id leftToRight
 id line1
@@ -2068,6 +2075,7 @@ id openings
 id option
 id outline
 id outward
+id ouvert
 id packed
 id parallax
 id parent
