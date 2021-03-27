@@ -178,8 +178,10 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
             eventToSave.setLatitude(current.getLatitude());
             eventToSave.setLongitude(current.getLongitude());
             eventToSave.setNote(current.getNote());
-            eventToSave.setEntryId(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryId() : null);
-            eventToSave.setEntryName(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryName() : null);
+            //eventToSave.setEntryId(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryId() : null);
+            //eventToSave.setEntryName(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryName() : null);
+            eventToSave.setEntryId((current.getListRefEntries()!=null && current.getListRefEntries().size()>0) ? current.getListRefEntries().get(0).getRefEntryId() : null);
+            eventToSave.setEntryName((current.getListRefEntries()!=null && current.getListRefEntries().size()>0) ? current.getListRefEntries().get(0).getRefEntryName() : null);
             eventToSave.setCreated(current.getCreated());
             eventToSave.setUpdated(current.getUpdated());
             eventEntityDao.insert(eventToSave);

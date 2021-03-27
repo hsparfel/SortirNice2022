@@ -17,7 +17,7 @@ import java.lang.Override;
 public class EnregistrerSerieActivity_ViewBinding implements Unbinder {
   private EnregistrerSerieActivity target;
 
-  private View view7f0800c9;
+  private View view7f0800d1;
 
   @UiThread
   public EnregistrerSerieActivity_ViewBinding(EnregistrerSerieActivity target) {
@@ -33,7 +33,7 @@ public class EnregistrerSerieActivity_ViewBinding implements Unbinder {
     target.layoutName = Utils.findRequiredViewAsType(source, R.id.layoutName, "field 'layoutName'", TextInputLayout.class);
     view = Utils.findRequiredView(source, R.id.fabSave, "field 'fabSave' and method 'fabSaveClick'");
     target.fabSave = Utils.castView(view, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
-    view7f0800c9 = view;
+    view7f0800d1 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +53,7 @@ public class EnregistrerSerieActivity_ViewBinding implements Unbinder {
     target.layoutName = null;
     target.fabSave = null;
 
-    view7f0800c9.setOnClickListener(null);
-    view7f0800c9 = null;
+    view7f0800d1.setOnClickListener(null);
+    view7f0800d1 = null;
   }
 }

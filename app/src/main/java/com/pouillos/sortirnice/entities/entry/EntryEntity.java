@@ -57,6 +57,7 @@ import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryStati
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryTariffEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryActivityEntity;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
@@ -101,6 +102,8 @@ import com.pouillos.sortirnice.dao.EntryPaymentEntityDao;
 import com.pouillos.sortirnice.dao.EntryContactEntityDao;
 import com.pouillos.sortirnice.dao.EntryCapacityEntityDao;
 import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.converter.PropertyConverter;
+
 import com.pouillos.sortirnice.dao.EntryLivingEntityDao;
 import com.pouillos.sortirnice.dao.EntryAddressEntityDao;
 import com.pouillos.sortirnice.dao.EntryEntityDao;
@@ -118,6 +121,7 @@ import com.pouillos.sortirnice.entities.entry.detail.EntryCommonTagEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryContactEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryDescriptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryDisabledOptionEntity;
+import com.pouillos.sortirnice.enumeration.EntriesType;
 
 @Entity
 public class EntryEntity implements Comparable<EventEntity> {
@@ -126,6 +130,9 @@ public class EntryEntity implements Comparable<EventEntity> {
     private Long id;
 
     private Long entryEntityId;
+
+    @Convert(converter = EntriesTypeConverter.class, columnType = String.class)
+    private EntriesType entryType;
 
     private String nameFr;
 
@@ -381,15 +388,16 @@ private transient DaoSession daoSession;
 @Generated(hash = 767631628)
 private transient EntryEntityDao myDao;
 
-@Generated(hash = 1409827370)
-public EntryEntity(Long id, Long entryEntityId, String nameFr, String nameFrShort, long entryAddressEntityId,
-        String phone, String fax, String email, String website, String websiteReservation, String facebook,
-        String twitter, long entryLivingEntityId, long entryCapacityEntityId, String opening,
-        String commercial, String closing, double latitude, double longitude, String location_map,
-        String note, String start, boolean niceresAvailability, int niceresId, String created,
-        String updated) {
+@Generated(hash = 1507862954)
+public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr, String nameFrShort,
+        long entryAddressEntityId, String phone, String fax, String email, String website,
+        String websiteReservation, String facebook, String twitter, long entryLivingEntityId,
+        long entryCapacityEntityId, String opening, String commercial, String closing, double latitude,
+        double longitude, String location_map, String note, String start, boolean niceresAvailability,
+        int niceresId, String created, String updated) {
     this.id = id;
     this.entryEntityId = entryEntityId;
+    this.entryType = entryType;
     this.nameFr = nameFr;
     this.nameFrShort = nameFrShort;
     this.entryAddressEntityId = entryAddressEntityId;
@@ -1731,6 +1739,24 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getEntryEntityDao() : null;
 }
 
+public EntriesType getEntryType() {
+    return this.entryType;
+}
 
+public void setEntryType(EntriesType entryType) {
+    this.entryType = entryType;
+}
+
+    public static class EntriesTypeConverter implements PropertyConverter<EntriesType, String> {
+        @Override
+        public EntriesType convertToEntityProperty(String databaseValue) {
+            return EntriesType.valueOf(databaseValue);
+        }
+
+        @Override
+        public String convertToDatabaseValue(EntriesType entityProperty) {
+            return entityProperty.name();
+        }
+    }
 
 }

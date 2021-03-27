@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
 MERGED from [com.google.android.material:material:1.4.0-alpha01] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\77f5691e3e3ba536b55da1d498c00a96\material-1.4.0-alpha01\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\8fc15fd8d68105138bb0c45f23fdc077\constraintlayout-2.0.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\8055b044b47e9a66547d7c0453dbd598\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
@@ -46,20 +46,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\TNH\.gradle\c
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\aaf3d77c3aed0eabd411a30e31a27acb\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\27fc83bd7ced0f6d73b1230f1585ac5c\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\4f0d3231385078d6e09877ba7fad59af\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
+INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
 	package
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:3:5-38
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-37:12
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:1-69:12
 		INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:2:11-69
@@ -68,7 +68,7 @@ ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\Androi
 	android:name
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:7:5-35:19
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:7:5-67:19
 MERGED from [com.google.android.material:material:1.4.0-alpha01] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\77f5691e3e3ba536b55da1d498c00a96\material-1.4.0-alpha01\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0-alpha01] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\77f5691e3e3ba536b55da1d498c00a96\material-1.4.0-alpha01\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\8fc15fd8d68105138bb0c45f23fdc077\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
@@ -135,18 +135,114 @@ ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\Androi
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:30:13-54
 	android:name
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:29:19-96
-activity#com.pouillos.sortirnice.activities.AfficherEntriesActivity
+activity#com.pouillos.sortirnice.activities.AfficherEntriesSortieActivity
 ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:31:9-32:56
 	android:windowSoftInputMode
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:32:13-54
 	android:name
-		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:31:19-92
-activity#com.pouillos.sortirnice.activities.AfficherEntryDetailActivity
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:31:19-98
+activity#com.pouillos.sortirnice.activities.AfficherEntriesUtileActivity
 ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:33:9-34:56
 	android:windowSoftInputMode
 		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:34:13-54
 	android:name
-		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:33:19-96
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:33:19-97
+activity#com.pouillos.sortirnice.activities.AfficherEntriesShoppingActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:35:9-36:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:36:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:35:19-100
+activity#com.pouillos.sortirnice.activities.AfficherEntriesVisiteActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:37:9-38:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:38:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:37:19-98
+activity#com.pouillos.sortirnice.activities.AfficherEntriesHotelActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:39:9-40:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:40:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:39:19-97
+activity#com.pouillos.sortirnice.activities.AfficherEntriesHebergementActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:41:9-42:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:42:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:41:19-103
+activity#com.pouillos.sortirnice.activities.AfficherEntriesBoutiqueActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:43:9-44:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:44:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:43:19-100
+activity#com.pouillos.sortirnice.activities.AfficherEntriesTransportActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:45:9-46:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:46:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:45:19-101
+activity#com.pouillos.sortirnice.activities.AfficherEntriesRestaurantActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:47:9-48:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:48:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:47:19-102
+activity#com.pouillos.sortirnice.activities.AfficherEntrySortieDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:49:9-50:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:50:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:49:19-102
+activity#com.pouillos.sortirnice.activities.AfficherEntryRestaurantDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:51:9-52:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:52:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:51:19-106
+activity#com.pouillos.sortirnice.activities.AfficherEntryTransportDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:53:9-54:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:54:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:53:19-105
+activity#com.pouillos.sortirnice.activities.AfficherEntryHotelDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:55:9-56:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:56:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:55:19-101
+activity#com.pouillos.sortirnice.activities.AfficherEntryBoutiqueDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:57:9-58:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:58:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:57:19-104
+activity#com.pouillos.sortirnice.activities.AfficherEntryHebergementDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:59:9-60:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:60:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:59:19-107
+activity#com.pouillos.sortirnice.activities.AfficherEntryVisiteDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:61:9-62:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:62:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:61:19-102
+activity#com.pouillos.sortirnice.activities.AfficherEntryShoppingDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:63:9-64:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:64:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:63:19-104
+activity#com.pouillos.sortirnice.activities.AfficherEntryUtileDetailActivity
+ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:65:9-66:56
+	android:windowSoftInputMode
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:66:13-54
+	android:name
+		ADDED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:65:19-101
 uses-sdk
 INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml

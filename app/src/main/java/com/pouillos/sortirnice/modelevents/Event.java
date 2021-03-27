@@ -77,8 +77,10 @@ public class Event {
     @Element(required=false)
     private int note;
 
-    @Element(name="ref_entries", required=false)
-    private RefEntries refEntries;
+    //@Element(name="ref_entries", required=false)
+    //private RefEntries refEntries;
+    @ElementList(name="ref_entries", required=false)
+    private List<RefEntries> listRefEntries;
 
     @Element(required=false)
     private String created;
@@ -209,12 +211,12 @@ public class Event {
         this.note = note;
     }
 
-    public RefEntries getRefEntries() {
-        return refEntries;
+    public List<RefEntries> getListRefEntries() {
+        return listRefEntries;
     }
 
-    public void setRefEntries(RefEntries refEntries) {
-        this.refEntries = refEntries;
+    public void setListRefEntries(List<RefEntries> listRefEntries) {
+        this.listRefEntries = listRefEntries;
     }
 
     public String getCreated() {

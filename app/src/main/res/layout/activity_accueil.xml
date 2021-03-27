@@ -36,13 +36,87 @@
             />
 
         <Button
-            android:id="@+id/entriesButton"
+            android:id="@+id/entriesSortieButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entries button"
+            android:text="Sorties button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntries"
+            android:onClick="afficherEntriesSortie"
             />
+
+        <Button
+            android:id="@+id/entriesRestaurantButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restaurants button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesRestaurant"
+            />
+
+        <Button
+            android:id="@+id/entriesTransportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transports button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesTransport"
+            />
+
+        <Button
+            android:id="@+id/entriesHotelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotels button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesHotel"
+            />
+
+        <Button
+            android:id="@+id/entriesBoutiqueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boutiques button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesBoutique"
+            />
+
+        <Button
+            android:id="@+id/entriesHebergementButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hebergements button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesHebergement"
+            />
+
+        <Button
+            android:id="@+id/entriesShoppingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shoppings button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesShopping"
+            />
+
+        <Button
+            android:id="@+id/entriesVisiteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visites button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesVisite"
+            />
+
+        <Button
+            android:id="@+id/entriesUtileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Utiles button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEntriesUtile"
+            />
+
+
 
     </LinearLayout>
 

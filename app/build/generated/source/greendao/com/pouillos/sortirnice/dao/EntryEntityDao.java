@@ -12,9 +12,11 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
 
+import com.pouillos.sortirnice.entities.entry.EntryEntity.EntriesTypeConverter;
 import com.pouillos.sortirnice.entities.entry.detail.EntryAddressEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryCapacityEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLivingEntity;
+import com.pouillos.sortirnice.enumeration.EntriesType;
 
 import com.pouillos.sortirnice.entities.entry.EntryEntity;
 
@@ -33,34 +35,36 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property EntryEntityId = new Property(1, Long.class, "entryEntityId", false, "ENTRY_ENTITY_ID");
-        public final static Property NameFr = new Property(2, String.class, "nameFr", false, "NAME_FR");
-        public final static Property NameFrShort = new Property(3, String.class, "nameFrShort", false, "NAME_FR_SHORT");
-        public final static Property EntryAddressEntityId = new Property(4, long.class, "entryAddressEntityId", false, "ENTRY_ADDRESS_ENTITY_ID");
-        public final static Property Phone = new Property(5, String.class, "phone", false, "PHONE");
-        public final static Property Fax = new Property(6, String.class, "fax", false, "FAX");
-        public final static Property Email = new Property(7, String.class, "email", false, "EMAIL");
-        public final static Property Website = new Property(8, String.class, "website", false, "WEBSITE");
-        public final static Property WebsiteReservation = new Property(9, String.class, "websiteReservation", false, "WEBSITE_RESERVATION");
-        public final static Property Facebook = new Property(10, String.class, "facebook", false, "FACEBOOK");
-        public final static Property Twitter = new Property(11, String.class, "twitter", false, "TWITTER");
-        public final static Property EntryLivingEntityId = new Property(12, long.class, "entryLivingEntityId", false, "ENTRY_LIVING_ENTITY_ID");
-        public final static Property EntryCapacityEntityId = new Property(13, long.class, "entryCapacityEntityId", false, "ENTRY_CAPACITY_ENTITY_ID");
-        public final static Property Opening = new Property(14, String.class, "opening", false, "OPENING");
-        public final static Property Commercial = new Property(15, String.class, "commercial", false, "COMMERCIAL");
-        public final static Property Closing = new Property(16, String.class, "closing", false, "CLOSING");
-        public final static Property Latitude = new Property(17, double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(18, double.class, "longitude", false, "LONGITUDE");
-        public final static Property Location_map = new Property(19, String.class, "location_map", false, "LOCATION_MAP");
-        public final static Property Note = new Property(20, String.class, "note", false, "NOTE");
-        public final static Property Start = new Property(21, String.class, "start", false, "START");
-        public final static Property NiceresAvailability = new Property(22, boolean.class, "niceresAvailability", false, "NICERES_AVAILABILITY");
-        public final static Property NiceresId = new Property(23, int.class, "niceresId", false, "NICERES_ID");
-        public final static Property Created = new Property(24, String.class, "created", false, "CREATED");
-        public final static Property Updated = new Property(25, String.class, "updated", false, "UPDATED");
+        public final static Property EntryType = new Property(2, String.class, "entryType", false, "ENTRY_TYPE");
+        public final static Property NameFr = new Property(3, String.class, "nameFr", false, "NAME_FR");
+        public final static Property NameFrShort = new Property(4, String.class, "nameFrShort", false, "NAME_FR_SHORT");
+        public final static Property EntryAddressEntityId = new Property(5, long.class, "entryAddressEntityId", false, "ENTRY_ADDRESS_ENTITY_ID");
+        public final static Property Phone = new Property(6, String.class, "phone", false, "PHONE");
+        public final static Property Fax = new Property(7, String.class, "fax", false, "FAX");
+        public final static Property Email = new Property(8, String.class, "email", false, "EMAIL");
+        public final static Property Website = new Property(9, String.class, "website", false, "WEBSITE");
+        public final static Property WebsiteReservation = new Property(10, String.class, "websiteReservation", false, "WEBSITE_RESERVATION");
+        public final static Property Facebook = new Property(11, String.class, "facebook", false, "FACEBOOK");
+        public final static Property Twitter = new Property(12, String.class, "twitter", false, "TWITTER");
+        public final static Property EntryLivingEntityId = new Property(13, long.class, "entryLivingEntityId", false, "ENTRY_LIVING_ENTITY_ID");
+        public final static Property EntryCapacityEntityId = new Property(14, long.class, "entryCapacityEntityId", false, "ENTRY_CAPACITY_ENTITY_ID");
+        public final static Property Opening = new Property(15, String.class, "opening", false, "OPENING");
+        public final static Property Commercial = new Property(16, String.class, "commercial", false, "COMMERCIAL");
+        public final static Property Closing = new Property(17, String.class, "closing", false, "CLOSING");
+        public final static Property Latitude = new Property(18, double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(19, double.class, "longitude", false, "LONGITUDE");
+        public final static Property Location_map = new Property(20, String.class, "location_map", false, "LOCATION_MAP");
+        public final static Property Note = new Property(21, String.class, "note", false, "NOTE");
+        public final static Property Start = new Property(22, String.class, "start", false, "START");
+        public final static Property NiceresAvailability = new Property(23, boolean.class, "niceresAvailability", false, "NICERES_AVAILABILITY");
+        public final static Property NiceresId = new Property(24, int.class, "niceresId", false, "NICERES_ID");
+        public final static Property Created = new Property(25, String.class, "created", false, "CREATED");
+        public final static Property Updated = new Property(26, String.class, "updated", false, "UPDATED");
     }
 
     private DaoSession daoSession;
 
+    private final EntriesTypeConverter entryTypeConverter = new EntriesTypeConverter();
 
     public EntryEntityDao(DaoConfig config) {
         super(config);
@@ -77,30 +81,31 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"ENTRY_ENTITY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"ENTRY_ENTITY_ID\" INTEGER," + // 1: entryEntityId
-                "\"NAME_FR\" TEXT," + // 2: nameFr
-                "\"NAME_FR_SHORT\" TEXT," + // 3: nameFrShort
-                "\"ENTRY_ADDRESS_ENTITY_ID\" INTEGER NOT NULL ," + // 4: entryAddressEntityId
-                "\"PHONE\" TEXT," + // 5: phone
-                "\"FAX\" TEXT," + // 6: fax
-                "\"EMAIL\" TEXT," + // 7: email
-                "\"WEBSITE\" TEXT," + // 8: website
-                "\"WEBSITE_RESERVATION\" TEXT," + // 9: websiteReservation
-                "\"FACEBOOK\" TEXT," + // 10: facebook
-                "\"TWITTER\" TEXT," + // 11: twitter
-                "\"ENTRY_LIVING_ENTITY_ID\" INTEGER NOT NULL ," + // 12: entryLivingEntityId
-                "\"ENTRY_CAPACITY_ENTITY_ID\" INTEGER NOT NULL ," + // 13: entryCapacityEntityId
-                "\"OPENING\" TEXT," + // 14: opening
-                "\"COMMERCIAL\" TEXT," + // 15: commercial
-                "\"CLOSING\" TEXT," + // 16: closing
-                "\"LATITUDE\" REAL NOT NULL ," + // 17: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 18: longitude
-                "\"LOCATION_MAP\" TEXT," + // 19: location_map
-                "\"NOTE\" TEXT," + // 20: note
-                "\"START\" TEXT," + // 21: start
-                "\"NICERES_AVAILABILITY\" INTEGER NOT NULL ," + // 22: niceresAvailability
-                "\"NICERES_ID\" INTEGER NOT NULL ," + // 23: niceresId
-                "\"CREATED\" TEXT," + // 24: created
-                "\"UPDATED\" TEXT);"); // 25: updated
+                "\"ENTRY_TYPE\" TEXT," + // 2: entryType
+                "\"NAME_FR\" TEXT," + // 3: nameFr
+                "\"NAME_FR_SHORT\" TEXT," + // 4: nameFrShort
+                "\"ENTRY_ADDRESS_ENTITY_ID\" INTEGER NOT NULL ," + // 5: entryAddressEntityId
+                "\"PHONE\" TEXT," + // 6: phone
+                "\"FAX\" TEXT," + // 7: fax
+                "\"EMAIL\" TEXT," + // 8: email
+                "\"WEBSITE\" TEXT," + // 9: website
+                "\"WEBSITE_RESERVATION\" TEXT," + // 10: websiteReservation
+                "\"FACEBOOK\" TEXT," + // 11: facebook
+                "\"TWITTER\" TEXT," + // 12: twitter
+                "\"ENTRY_LIVING_ENTITY_ID\" INTEGER NOT NULL ," + // 13: entryLivingEntityId
+                "\"ENTRY_CAPACITY_ENTITY_ID\" INTEGER NOT NULL ," + // 14: entryCapacityEntityId
+                "\"OPENING\" TEXT," + // 15: opening
+                "\"COMMERCIAL\" TEXT," + // 16: commercial
+                "\"CLOSING\" TEXT," + // 17: closing
+                "\"LATITUDE\" REAL NOT NULL ," + // 18: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 19: longitude
+                "\"LOCATION_MAP\" TEXT," + // 20: location_map
+                "\"NOTE\" TEXT," + // 21: note
+                "\"START\" TEXT," + // 22: start
+                "\"NICERES_AVAILABILITY\" INTEGER NOT NULL ," + // 23: niceresAvailability
+                "\"NICERES_ID\" INTEGER NOT NULL ," + // 24: niceresId
+                "\"CREATED\" TEXT," + // 25: created
+                "\"UPDATED\" TEXT);"); // 26: updated
     }
 
     /** Drops the underlying database table. */
@@ -123,96 +128,101 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             stmt.bindLong(2, entryEntityId);
         }
  
+        EntriesType entryType = entity.getEntryType();
+        if (entryType != null) {
+            stmt.bindString(3, entryTypeConverter.convertToDatabaseValue(entryType));
+        }
+ 
         String nameFr = entity.getNameFr();
         if (nameFr != null) {
-            stmt.bindString(3, nameFr);
+            stmt.bindString(4, nameFr);
         }
  
         String nameFrShort = entity.getNameFrShort();
         if (nameFrShort != null) {
-            stmt.bindString(4, nameFrShort);
+            stmt.bindString(5, nameFrShort);
         }
-        stmt.bindLong(5, entity.getEntryAddressEntityId());
+        stmt.bindLong(6, entity.getEntryAddressEntityId());
  
         String phone = entity.getPhone();
         if (phone != null) {
-            stmt.bindString(6, phone);
+            stmt.bindString(7, phone);
         }
  
         String fax = entity.getFax();
         if (fax != null) {
-            stmt.bindString(7, fax);
+            stmt.bindString(8, fax);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(8, email);
+            stmt.bindString(9, email);
         }
  
         String website = entity.getWebsite();
         if (website != null) {
-            stmt.bindString(9, website);
+            stmt.bindString(10, website);
         }
  
         String websiteReservation = entity.getWebsiteReservation();
         if (websiteReservation != null) {
-            stmt.bindString(10, websiteReservation);
+            stmt.bindString(11, websiteReservation);
         }
  
         String facebook = entity.getFacebook();
         if (facebook != null) {
-            stmt.bindString(11, facebook);
+            stmt.bindString(12, facebook);
         }
  
         String twitter = entity.getTwitter();
         if (twitter != null) {
-            stmt.bindString(12, twitter);
+            stmt.bindString(13, twitter);
         }
-        stmt.bindLong(13, entity.getEntryLivingEntityId());
-        stmt.bindLong(14, entity.getEntryCapacityEntityId());
+        stmt.bindLong(14, entity.getEntryLivingEntityId());
+        stmt.bindLong(15, entity.getEntryCapacityEntityId());
  
         String opening = entity.getOpening();
         if (opening != null) {
-            stmt.bindString(15, opening);
+            stmt.bindString(16, opening);
         }
  
         String commercial = entity.getCommercial();
         if (commercial != null) {
-            stmt.bindString(16, commercial);
+            stmt.bindString(17, commercial);
         }
  
         String closing = entity.getClosing();
         if (closing != null) {
-            stmt.bindString(17, closing);
+            stmt.bindString(18, closing);
         }
-        stmt.bindDouble(18, entity.getLatitude());
-        stmt.bindDouble(19, entity.getLongitude());
+        stmt.bindDouble(19, entity.getLatitude());
+        stmt.bindDouble(20, entity.getLongitude());
  
         String location_map = entity.getLocation_map();
         if (location_map != null) {
-            stmt.bindString(20, location_map);
+            stmt.bindString(21, location_map);
         }
  
         String note = entity.getNote();
         if (note != null) {
-            stmt.bindString(21, note);
+            stmt.bindString(22, note);
         }
  
         String start = entity.getStart();
         if (start != null) {
-            stmt.bindString(22, start);
+            stmt.bindString(23, start);
         }
-        stmt.bindLong(23, entity.getNiceresAvailability() ? 1L: 0L);
-        stmt.bindLong(24, entity.getNiceresId());
+        stmt.bindLong(24, entity.getNiceresAvailability() ? 1L: 0L);
+        stmt.bindLong(25, entity.getNiceresId());
  
         String created = entity.getCreated();
         if (created != null) {
-            stmt.bindString(25, created);
+            stmt.bindString(26, created);
         }
  
         String updated = entity.getUpdated();
         if (updated != null) {
-            stmt.bindString(26, updated);
+            stmt.bindString(27, updated);
         }
     }
 
@@ -230,96 +240,101 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             stmt.bindLong(2, entryEntityId);
         }
  
+        EntriesType entryType = entity.getEntryType();
+        if (entryType != null) {
+            stmt.bindString(3, entryTypeConverter.convertToDatabaseValue(entryType));
+        }
+ 
         String nameFr = entity.getNameFr();
         if (nameFr != null) {
-            stmt.bindString(3, nameFr);
+            stmt.bindString(4, nameFr);
         }
  
         String nameFrShort = entity.getNameFrShort();
         if (nameFrShort != null) {
-            stmt.bindString(4, nameFrShort);
+            stmt.bindString(5, nameFrShort);
         }
-        stmt.bindLong(5, entity.getEntryAddressEntityId());
+        stmt.bindLong(6, entity.getEntryAddressEntityId());
  
         String phone = entity.getPhone();
         if (phone != null) {
-            stmt.bindString(6, phone);
+            stmt.bindString(7, phone);
         }
  
         String fax = entity.getFax();
         if (fax != null) {
-            stmt.bindString(7, fax);
+            stmt.bindString(8, fax);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(8, email);
+            stmt.bindString(9, email);
         }
  
         String website = entity.getWebsite();
         if (website != null) {
-            stmt.bindString(9, website);
+            stmt.bindString(10, website);
         }
  
         String websiteReservation = entity.getWebsiteReservation();
         if (websiteReservation != null) {
-            stmt.bindString(10, websiteReservation);
+            stmt.bindString(11, websiteReservation);
         }
  
         String facebook = entity.getFacebook();
         if (facebook != null) {
-            stmt.bindString(11, facebook);
+            stmt.bindString(12, facebook);
         }
  
         String twitter = entity.getTwitter();
         if (twitter != null) {
-            stmt.bindString(12, twitter);
+            stmt.bindString(13, twitter);
         }
-        stmt.bindLong(13, entity.getEntryLivingEntityId());
-        stmt.bindLong(14, entity.getEntryCapacityEntityId());
+        stmt.bindLong(14, entity.getEntryLivingEntityId());
+        stmt.bindLong(15, entity.getEntryCapacityEntityId());
  
         String opening = entity.getOpening();
         if (opening != null) {
-            stmt.bindString(15, opening);
+            stmt.bindString(16, opening);
         }
  
         String commercial = entity.getCommercial();
         if (commercial != null) {
-            stmt.bindString(16, commercial);
+            stmt.bindString(17, commercial);
         }
  
         String closing = entity.getClosing();
         if (closing != null) {
-            stmt.bindString(17, closing);
+            stmt.bindString(18, closing);
         }
-        stmt.bindDouble(18, entity.getLatitude());
-        stmt.bindDouble(19, entity.getLongitude());
+        stmt.bindDouble(19, entity.getLatitude());
+        stmt.bindDouble(20, entity.getLongitude());
  
         String location_map = entity.getLocation_map();
         if (location_map != null) {
-            stmt.bindString(20, location_map);
+            stmt.bindString(21, location_map);
         }
  
         String note = entity.getNote();
         if (note != null) {
-            stmt.bindString(21, note);
+            stmt.bindString(22, note);
         }
  
         String start = entity.getStart();
         if (start != null) {
-            stmt.bindString(22, start);
+            stmt.bindString(23, start);
         }
-        stmt.bindLong(23, entity.getNiceresAvailability() ? 1L: 0L);
-        stmt.bindLong(24, entity.getNiceresId());
+        stmt.bindLong(24, entity.getNiceresAvailability() ? 1L: 0L);
+        stmt.bindLong(25, entity.getNiceresId());
  
         String created = entity.getCreated();
         if (created != null) {
-            stmt.bindString(25, created);
+            stmt.bindString(26, created);
         }
  
         String updated = entity.getUpdated();
         if (updated != null) {
-            stmt.bindString(26, updated);
+            stmt.bindString(27, updated);
         }
     }
 
@@ -339,30 +354,31 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         EntryEntity entity = new EntryEntity( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1), // entryEntityId
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // nameFr
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // nameFrShort
-            cursor.getLong(offset + 4), // entryAddressEntityId
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // phone
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // fax
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // email
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // website
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // websiteReservation
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // facebook
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // twitter
-            cursor.getLong(offset + 12), // entryLivingEntityId
-            cursor.getLong(offset + 13), // entryCapacityEntityId
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // opening
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // commercial
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // closing
-            cursor.getDouble(offset + 17), // latitude
-            cursor.getDouble(offset + 18), // longitude
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // location_map
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // note
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // start
-            cursor.getShort(offset + 22) != 0, // niceresAvailability
-            cursor.getInt(offset + 23), // niceresId
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // created
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25) // updated
+            cursor.isNull(offset + 2) ? null : entryTypeConverter.convertToEntityProperty(cursor.getString(offset + 2)), // entryType
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // nameFr
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // nameFrShort
+            cursor.getLong(offset + 5), // entryAddressEntityId
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // phone
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // fax
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // email
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // website
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // websiteReservation
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // facebook
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // twitter
+            cursor.getLong(offset + 13), // entryLivingEntityId
+            cursor.getLong(offset + 14), // entryCapacityEntityId
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // opening
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // commercial
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // closing
+            cursor.getDouble(offset + 18), // latitude
+            cursor.getDouble(offset + 19), // longitude
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // location_map
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // note
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // start
+            cursor.getShort(offset + 23) != 0, // niceresAvailability
+            cursor.getInt(offset + 24), // niceresId
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // created
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26) // updated
         );
         return entity;
     }
@@ -371,30 +387,31 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
     public void readEntity(Cursor cursor, EntryEntity entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setEntryEntityId(cursor.isNull(offset + 1) ? null : cursor.getLong(offset + 1));
-        entity.setNameFr(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setNameFrShort(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setEntryAddressEntityId(cursor.getLong(offset + 4));
-        entity.setPhone(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setFax(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setEmail(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setWebsite(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setWebsiteReservation(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setFacebook(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setTwitter(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setEntryLivingEntityId(cursor.getLong(offset + 12));
-        entity.setEntryCapacityEntityId(cursor.getLong(offset + 13));
-        entity.setOpening(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setCommercial(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setClosing(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setLatitude(cursor.getDouble(offset + 17));
-        entity.setLongitude(cursor.getDouble(offset + 18));
-        entity.setLocation_map(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setNote(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setStart(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setNiceresAvailability(cursor.getShort(offset + 22) != 0);
-        entity.setNiceresId(cursor.getInt(offset + 23));
-        entity.setCreated(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setUpdated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setEntryType(cursor.isNull(offset + 2) ? null : entryTypeConverter.convertToEntityProperty(cursor.getString(offset + 2)));
+        entity.setNameFr(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setNameFrShort(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setEntryAddressEntityId(cursor.getLong(offset + 5));
+        entity.setPhone(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setFax(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setEmail(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setWebsite(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setWebsiteReservation(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setFacebook(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setTwitter(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setEntryLivingEntityId(cursor.getLong(offset + 13));
+        entity.setEntryCapacityEntityId(cursor.getLong(offset + 14));
+        entity.setOpening(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setCommercial(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setClosing(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setLatitude(cursor.getDouble(offset + 18));
+        entity.setLongitude(cursor.getDouble(offset + 19));
+        entity.setLocation_map(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setNote(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setStart(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setNiceresAvailability(cursor.getShort(offset + 23) != 0);
+        entity.setNiceresId(cursor.getInt(offset + 24));
+        entity.setCreated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setUpdated(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
      }
     
     @Override

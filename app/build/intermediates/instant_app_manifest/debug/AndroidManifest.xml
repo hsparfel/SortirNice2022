@@ -45,10 +45,58 @@
             android:name="com.pouillos.sortirnice.activities.AfficherEventDetailActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.pouillos.sortirnice.activities.AfficherEntriesActivity"
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesSortieActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.pouillos.sortirnice.activities.AfficherEntryDetailActivity"
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesUtileActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesShoppingActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesVisiteActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesHotelActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesHebergementActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesBoutiqueActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesTransportActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntriesRestaurantActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntrySortieDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryRestaurantDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryTransportDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryHotelDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryBoutiqueDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryHebergementDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryVisiteDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryShoppingDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="com.pouillos.sortirnice.activities.AfficherEntryUtileDetailActivity"
             android:windowSoftInputMode="stateHidden" />
     </application>
 
