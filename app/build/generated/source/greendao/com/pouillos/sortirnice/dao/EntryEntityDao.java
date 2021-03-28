@@ -49,17 +49,16 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         public final static Property EntryLivingEntityId = new Property(13, long.class, "entryLivingEntityId", false, "ENTRY_LIVING_ENTITY_ID");
         public final static Property EntryCapacityEntityId = new Property(14, long.class, "entryCapacityEntityId", false, "ENTRY_CAPACITY_ENTITY_ID");
         public final static Property Opening = new Property(15, String.class, "opening", false, "OPENING");
-        public final static Property Commercial = new Property(16, String.class, "commercial", false, "COMMERCIAL");
-        public final static Property Closing = new Property(17, String.class, "closing", false, "CLOSING");
-        public final static Property Latitude = new Property(18, double.class, "latitude", false, "LATITUDE");
-        public final static Property Longitude = new Property(19, double.class, "longitude", false, "LONGITUDE");
-        public final static Property Location_map = new Property(20, String.class, "location_map", false, "LOCATION_MAP");
-        public final static Property Note = new Property(21, String.class, "note", false, "NOTE");
-        public final static Property Start = new Property(22, String.class, "start", false, "START");
-        public final static Property NiceresAvailability = new Property(23, boolean.class, "niceresAvailability", false, "NICERES_AVAILABILITY");
-        public final static Property NiceresId = new Property(24, int.class, "niceresId", false, "NICERES_ID");
-        public final static Property Created = new Property(25, String.class, "created", false, "CREATED");
-        public final static Property Updated = new Property(26, String.class, "updated", false, "UPDATED");
+        public final static Property Closing = new Property(16, String.class, "closing", false, "CLOSING");
+        public final static Property Latitude = new Property(17, double.class, "latitude", false, "LATITUDE");
+        public final static Property Longitude = new Property(18, double.class, "longitude", false, "LONGITUDE");
+        public final static Property Location_map = new Property(19, String.class, "location_map", false, "LOCATION_MAP");
+        public final static Property Note = new Property(20, String.class, "note", false, "NOTE");
+        public final static Property Start = new Property(21, String.class, "start", false, "START");
+        public final static Property NiceresAvailability = new Property(22, boolean.class, "niceresAvailability", false, "NICERES_AVAILABILITY");
+        public final static Property NiceresId = new Property(23, int.class, "niceresId", false, "NICERES_ID");
+        public final static Property Created = new Property(24, String.class, "created", false, "CREATED");
+        public final static Property Updated = new Property(25, String.class, "updated", false, "UPDATED");
     }
 
     private DaoSession daoSession;
@@ -95,17 +94,16 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
                 "\"ENTRY_LIVING_ENTITY_ID\" INTEGER NOT NULL ," + // 13: entryLivingEntityId
                 "\"ENTRY_CAPACITY_ENTITY_ID\" INTEGER NOT NULL ," + // 14: entryCapacityEntityId
                 "\"OPENING\" TEXT," + // 15: opening
-                "\"COMMERCIAL\" TEXT," + // 16: commercial
-                "\"CLOSING\" TEXT," + // 17: closing
-                "\"LATITUDE\" REAL NOT NULL ," + // 18: latitude
-                "\"LONGITUDE\" REAL NOT NULL ," + // 19: longitude
-                "\"LOCATION_MAP\" TEXT," + // 20: location_map
-                "\"NOTE\" TEXT," + // 21: note
-                "\"START\" TEXT," + // 22: start
-                "\"NICERES_AVAILABILITY\" INTEGER NOT NULL ," + // 23: niceresAvailability
-                "\"NICERES_ID\" INTEGER NOT NULL ," + // 24: niceresId
-                "\"CREATED\" TEXT," + // 25: created
-                "\"UPDATED\" TEXT);"); // 26: updated
+                "\"CLOSING\" TEXT," + // 16: closing
+                "\"LATITUDE\" REAL NOT NULL ," + // 17: latitude
+                "\"LONGITUDE\" REAL NOT NULL ," + // 18: longitude
+                "\"LOCATION_MAP\" TEXT," + // 19: location_map
+                "\"NOTE\" TEXT," + // 20: note
+                "\"START\" TEXT," + // 21: start
+                "\"NICERES_AVAILABILITY\" INTEGER NOT NULL ," + // 22: niceresAvailability
+                "\"NICERES_ID\" INTEGER NOT NULL ," + // 23: niceresId
+                "\"CREATED\" TEXT," + // 24: created
+                "\"UPDATED\" TEXT);"); // 25: updated
     }
 
     /** Drops the underlying database table. */
@@ -186,43 +184,38 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             stmt.bindString(16, opening);
         }
  
-        String commercial = entity.getCommercial();
-        if (commercial != null) {
-            stmt.bindString(17, commercial);
-        }
- 
         String closing = entity.getClosing();
         if (closing != null) {
-            stmt.bindString(18, closing);
+            stmt.bindString(17, closing);
         }
-        stmt.bindDouble(19, entity.getLatitude());
-        stmt.bindDouble(20, entity.getLongitude());
+        stmt.bindDouble(18, entity.getLatitude());
+        stmt.bindDouble(19, entity.getLongitude());
  
         String location_map = entity.getLocation_map();
         if (location_map != null) {
-            stmt.bindString(21, location_map);
+            stmt.bindString(20, location_map);
         }
  
         String note = entity.getNote();
         if (note != null) {
-            stmt.bindString(22, note);
+            stmt.bindString(21, note);
         }
  
         String start = entity.getStart();
         if (start != null) {
-            stmt.bindString(23, start);
+            stmt.bindString(22, start);
         }
-        stmt.bindLong(24, entity.getNiceresAvailability() ? 1L: 0L);
-        stmt.bindLong(25, entity.getNiceresId());
+        stmt.bindLong(23, entity.getNiceresAvailability() ? 1L: 0L);
+        stmt.bindLong(24, entity.getNiceresId());
  
         String created = entity.getCreated();
         if (created != null) {
-            stmt.bindString(26, created);
+            stmt.bindString(25, created);
         }
  
         String updated = entity.getUpdated();
         if (updated != null) {
-            stmt.bindString(27, updated);
+            stmt.bindString(26, updated);
         }
     }
 
@@ -298,43 +291,38 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             stmt.bindString(16, opening);
         }
  
-        String commercial = entity.getCommercial();
-        if (commercial != null) {
-            stmt.bindString(17, commercial);
-        }
- 
         String closing = entity.getClosing();
         if (closing != null) {
-            stmt.bindString(18, closing);
+            stmt.bindString(17, closing);
         }
-        stmt.bindDouble(19, entity.getLatitude());
-        stmt.bindDouble(20, entity.getLongitude());
+        stmt.bindDouble(18, entity.getLatitude());
+        stmt.bindDouble(19, entity.getLongitude());
  
         String location_map = entity.getLocation_map();
         if (location_map != null) {
-            stmt.bindString(21, location_map);
+            stmt.bindString(20, location_map);
         }
  
         String note = entity.getNote();
         if (note != null) {
-            stmt.bindString(22, note);
+            stmt.bindString(21, note);
         }
  
         String start = entity.getStart();
         if (start != null) {
-            stmt.bindString(23, start);
+            stmt.bindString(22, start);
         }
-        stmt.bindLong(24, entity.getNiceresAvailability() ? 1L: 0L);
-        stmt.bindLong(25, entity.getNiceresId());
+        stmt.bindLong(23, entity.getNiceresAvailability() ? 1L: 0L);
+        stmt.bindLong(24, entity.getNiceresId());
  
         String created = entity.getCreated();
         if (created != null) {
-            stmt.bindString(26, created);
+            stmt.bindString(25, created);
         }
  
         String updated = entity.getUpdated();
         if (updated != null) {
-            stmt.bindString(27, updated);
+            stmt.bindString(26, updated);
         }
     }
 
@@ -368,17 +356,16 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             cursor.getLong(offset + 13), // entryLivingEntityId
             cursor.getLong(offset + 14), // entryCapacityEntityId
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // opening
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // commercial
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // closing
-            cursor.getDouble(offset + 18), // latitude
-            cursor.getDouble(offset + 19), // longitude
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // location_map
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // note
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // start
-            cursor.getShort(offset + 23) != 0, // niceresAvailability
-            cursor.getInt(offset + 24), // niceresId
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // created
-            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26) // updated
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // closing
+            cursor.getDouble(offset + 17), // latitude
+            cursor.getDouble(offset + 18), // longitude
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // location_map
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // note
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // start
+            cursor.getShort(offset + 22) != 0, // niceresAvailability
+            cursor.getInt(offset + 23), // niceresId
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // created
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25) // updated
         );
         return entity;
     }
@@ -401,17 +388,16 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         entity.setEntryLivingEntityId(cursor.getLong(offset + 13));
         entity.setEntryCapacityEntityId(cursor.getLong(offset + 14));
         entity.setOpening(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setCommercial(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setClosing(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setLatitude(cursor.getDouble(offset + 18));
-        entity.setLongitude(cursor.getDouble(offset + 19));
-        entity.setLocation_map(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setNote(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setStart(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setNiceresAvailability(cursor.getShort(offset + 23) != 0);
-        entity.setNiceresId(cursor.getInt(offset + 24));
-        entity.setCreated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setUpdated(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setClosing(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setLatitude(cursor.getDouble(offset + 17));
+        entity.setLongitude(cursor.getDouble(offset + 18));
+        entity.setLocation_map(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setNote(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setStart(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setNiceresAvailability(cursor.getShort(offset + 22) != 0);
+        entity.setNiceresId(cursor.getInt(offset + 23));
+        entity.setCreated(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setUpdated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
      }
     
     @Override

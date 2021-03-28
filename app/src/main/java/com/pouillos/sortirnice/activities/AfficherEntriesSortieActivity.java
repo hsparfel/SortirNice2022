@@ -1,17 +1,29 @@
 package com.pouillos.sortirnice.activities;
 
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pouillos.sortirnice.App;
 import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.entities.entry.EntryEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryActivityEntity;
@@ -84,7 +96,7 @@ import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryStati
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryTariffEntity;
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryOpeningEntityWithEntryGridEntity;
 import com.pouillos.sortirnice.enumeration.EntriesType;
-import com.pouillos.sortirnice.interfaces.EntriesApiService;
+import com.pouillos.sortirnice.interfaces.EntriesSortieApiService;
 
 
 import com.pouillos.sortirnice.modelentries.Activity;
@@ -96,6 +108,7 @@ import com.pouillos.sortirnice.modelentries.Category;
 import com.pouillos.sortirnice.modelentries.Chain;
 import com.pouillos.sortirnice.modelentries.Closing;
 import com.pouillos.sortirnice.modelentries.Closure;
+import com.pouillos.sortirnice.modelentries.Closures;
 import com.pouillos.sortirnice.modelentries.CommonTag;
 import com.pouillos.sortirnice.modelentries.Contact;
 import com.pouillos.sortirnice.modelentries.Description;
@@ -122,16 +135,22 @@ import com.pouillos.sortirnice.modelentries.Space;
 import com.pouillos.sortirnice.modelentries.StandingLevel;
 import com.pouillos.sortirnice.modelentries.Station;
 import com.pouillos.sortirnice.modelentries.Tariff;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesSortie;
 import com.pouillos.sortirnice.utils.DateUtils;
 import com.pouillos.sortirnice.utils.ItemClickSupport;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import icepick.Icepick;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -140,7 +159,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesSortieActivity extends NavDrawerActivity implements RecyclerAdapterEntries.Listener {
+public class AfficherEntriesSortieActivity extends NavDrawerActivity implements RecyclerAdapterEntriesSortie.Listener {
 
     int nbEntries;
     List<Entry> listEntries;
@@ -152,7 +171,9 @@ public class AfficherEntriesSortieActivity extends NavDrawerActivity implements 
     @BindView(R.id.simpleProgressBar)
     ProgressBar progressBar;
 
-    private RecyclerAdapterEntries adapterEntries;
+
+
+    private RecyclerAdapterEntriesSortie adapterEntries;
 
     private static final String TAG = AfficherEntriesSortieActivity.class.getSimpleName();
     public static final String BASE_URL = "http://opendata.nicecotedazur.org/data/storage/f/DIRECTORY/talend/";
@@ -167,12 +188,113 @@ public class AfficherEntriesSortieActivity extends NavDrawerActivity implements 
 
     boolean isResponded = false;
 
+
+
+
+
+    @BindView(R.id.image)
+    ImageView image;
+    @BindView(R.id.name_fr)
+    TextView nameFr;
+    @BindView(R.id.category)
+    TextView category;
+    @BindView(R.id.address_line1)
+    TextView addressLine1;
+    @BindView(R.id.address_line2)
+    TextView addressLine2;
+    @BindView(R.id.address_line3)
+    TextView addressLine3;
+    @BindView(R.id.address_zip)
+    TextView addressZip;
+    @BindView(R.id.address_city)
+    TextView addressCity;
+    @BindView(R.id.phone)
+    TextView phone;
+    @BindView(R.id.fax)
+    TextView fax;
+    @BindView(R.id.email)
+    TextView email;
+    @BindView(R.id.website)
+    TextView website;
+    @BindView(R.id.facebook)
+    TextView facebook;
+    @BindView(R.id.twitter)
+    TextView twitter;
+    @BindView(R.id.station)
+    TextView station;
+    @BindView(R.id.option)
+    TextView option;
+    @BindView(R.id.payment)
+    TextView payment;
+    @BindView(R.id.amenity)
+    TextView amenity;
+    @BindView(R.id.location)
+    TextView location;
+    @BindView(R.id.closure)
+    TextView closure;
+    @BindView(R.id.label)
+    TextView label;
+    @BindView(R.id.service)
+    TextView service;
+    @BindView(R.id.opening)
+    TextView opening;
+    @BindView(R.id.closing)
+    TextView closing;
+    @BindView(R.id.openings)
+    TextView openings;
+    @BindView(R.id.closings)
+    TextView closings;
+    @BindView(R.id.animation)
+    TextView animation;
+    @BindView(R.id.atmosphere)
+    TextView atmosphere;
+    @BindView(R.id.capacity_total)
+    TextView capacityTotal;
+    @BindView(R.id.capacity_interieur)
+    TextView capacityInterieur;
+    @BindView(R.id.capacity_exterieur)
+    TextView capacityExterieur;
+    @BindView(R.id.capacity_assis)
+    TextView capacityAssis;
+    @BindView(R.id.capacity_debout)
+    TextView capacityDebout;
+    @BindView(R.id.capacity_group)
+    TextView capacityGroup;
+    @BindView(R.id.capacity_salle)
+    TextView capacitySalle;
+    @BindView(R.id.layout_address)
+    LinearLayout layoutAddress;
+    @BindView(R.id.boutons_map_waze)
+    LinearLayout boutonsMapWaze;
+    @BindView(R.id.ouvert)
+    LinearLayout ouvert;
+    @BindView(R.id.ferme)
+    LinearLayout ferme;
+    @BindView(R.id.layout_payment)
+    LinearLayout layoutPayment;
+    @BindView(R.id.layout_label)
+    LinearLayout layoutLabel;
+    @BindView(R.id.layout_animation)
+    LinearLayout layoutAnimation;
+
+    Bitmap bitmap = null;
+    String newLine = System.getProperty("line.separator");
+
+    Entry selectedEntry;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    @BindView(R.id.fabExit)
+    FloatingActionButton fabExit;
+    @BindView(R.id.fabSave)
+    FloatingActionButton fabSave;
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
-        setContentView(R.layout.activity_afficher_event);
+        setContentView(R.layout.activity_afficher_entry_sortie);
 
         this.configureToolBar();
         this.configureBottomView();
@@ -185,791 +307,44 @@ public class AfficherEntriesSortieActivity extends NavDrawerActivity implements 
         setTitle("Liste des Sorties");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
-
         dateDemande = new Date();
         dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
-        //dateVeille = DateUtils.calculerVeille(dateDemande);
-        //dateVeilleString = DateUtils.formatDateYYYY_MM_DD(dateVeille);
         myUrl += dateDemandeString+"/";
-        //while (!isResponded) {
             connectAndGetApiData(myUrl);
-            /*dateDemande = DateUtils.calculerVeille(dateDemande);
-            dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
-            myUrl = BASE_URL+dateDemandeString+"/";*/
-       // }
-        //connectAndGetApiData(dateJourString);
     }
 
     public void connectAndGetApiData(String url) {
-        //if (retrofit == null) {
-            //BASE_URL +=
             retrofit = new Retrofit.Builder()
                    // .baseUrl(BASE_URL+"/"+dateString)
                     .baseUrl(url)
                     .client(new OkHttpClient())
                     .addConverterFactory(SimpleXmlConverterFactory.create())
                     .build();
-       // }
-        EntriesApiService entriesApiService = retrofit.create(EntriesApiService.class);
-        //Call<Entries> call = eventApiService.getEntries(API_KEY);
-        Call<Entries> call = entriesApiService.getEntries();
+        EntriesSortieApiService entriesSortieApiService = retrofit.create(EntriesSortieApiService.class);
+        Call<Entries> call = entriesSortieApiService.getEntries();
         call.enqueue(new Callback<Entries>() {
             @Override
             public void onResponse(Call<Entries> call, Response<Entries> response) {
                 if (response.code()==200) {
-
-
                     listEntries = response.body().getListEntries();
                     configureRecyclerView();
-                    //recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
-                    saveListEntries();
                     isResponded = true;
                     Log.d(TAG, "Number of entries received: " + listEntries.size());
                     progressBar.setVisibility(View.GONE);
                 } else {
-
                     dateDemande = DateUtils.calculerVeille(dateDemande);
                     dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
+                    Log.e("TAG", "date rch : "+dateDemandeString);
                     myUrl = BASE_URL+dateDemandeString+"/";
                     connectAndGetApiData(myUrl);
-                    //Log.d(TAG, dateDemandeString + " : " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Entries> call, Throwable throwable) {
-
                 Log.e(TAG, throwable.toString());
             }
         });
-    }
-
-    private void saveListEntries() {
-        //entryEntityDao.deleteAll();
-        for (Entry current : listEntries) {
-            List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ?",""+current.getId());
-            if (listEntriesFound.size()==0) {
-                EntryEntity entryToSave = new EntryEntity();
-                entryToSave.setEntryEntityId(Long.valueOf(current.getId()));
-                entryToSave.setEntryType(EntriesType.Sortie);
-                entryToSave.setNameFr(current.getNameFr());
-                entryToSave.setNameFrShort(current.getNameFrShort());
-
-                //enregistrer address
-                EntryAddressEntity entryAddressEntity = new EntryAddressEntity();
-                entryAddressEntity.setAddressLine1(current.getAddress().getAddressLine1());
-                entryAddressEntity.setAddressLine2(current.getAddress().getAddressLine2());
-                entryAddressEntity.setAddressLine3(current.getAddress().getAddressLine3());
-                entryAddressEntity.setZip(current.getAddress().getZip());
-                entryAddressEntity.setCity(current.getAddress().getCity());
-                entryAddressEntity.setId(entryAddressEntityDao.insert(entryAddressEntity));
-                entryToSave.setEntryAddressEntityId(entryAddressEntity.getId());
-
-                entryToSave.setPhone(current.getPhone());
-                entryToSave.setFax(current.getFax());
-                entryToSave.setEmail(current.getEmail());
-                entryToSave.setWebsite(current.getWebsite());
-                entryToSave.setWebsiteReservation(current.getWebsiteReservation());
-                entryToSave.setFacebook(current.getFacebook());
-                entryToSave.setTwitter(current.getTwitter());
-
-                //enregistrer living
-                EntryLivingEntity entryLivingEntity = new EntryLivingEntity();
-                entryLivingEntity.setRoomCount(current.getLiving().getRoomCount());
-                entryLivingEntity.setRoomBathCount(current.getLiving().getRoomBathCount());
-                entryLivingEntity.setRoomShowerCount(current.getLiving().getRoomShowerCount());
-                entryLivingEntity.setRoomNoSmokingCount(current.getLiving().getRoomNoSmokingCount());
-                entryLivingEntity.setSuiteCount(current.getLiving().getSuiteCount());
-                entryLivingEntity.setStudioCount(current.getLiving().getStudioCount());
-                entryLivingEntity.setApartmentCount(current.getLiving().getApartmentCount());
-                entryLivingEntity.setRoomAccessibleCount(current.getLiving().getRoomAccessibleCount());
-                entryLivingEntity.setSingleCount(current.getLiving().getSingleCount());
-                entryLivingEntity.setDoubleCount(current.getLiving().getDoubleCount());
-                entryLivingEntity.setTripleCount(current.getLiving().getTripleCount());
-                entryLivingEntity.setTwinsCount(current.getLiving().getTwinsCount());
-                entryLivingEntity.setFamilyCount(current.getLiving().getFamilyCount());
-                entryLivingEntity.setArea(current.getLiving().getArea());
-                entryLivingEntity.setType(current.getLiving().getType());
-                entryLivingEntity.setFloor(current.getLiving().getFloor());
-                entryLivingEntity.setBedroomCount(current.getLiving().getBedroomCount());
-                entryLivingEntity.setSleepsCount(current.getLiving().getSleepsCount());
-                entryLivingEntity.setFurnishedRoomCount(current.getLiving().getFurnishedRoomCount());
-                entryLivingEntity.setId(entryLivingEntityDao.insert(entryLivingEntity));
-                entryToSave.setEntryLivingEntityId(entryLivingEntity.getId());
-
-                //enregistrer Capacity
-                EntryCapacityEntity entryCapacityEntity = new EntryCapacityEntity();
-                entryCapacityEntity.setTotal(current.getCapacity().getTotal());
-                entryCapacityEntity.setIndoor(current.getCapacity().getIndoor());
-                entryCapacityEntity.setOutdoor(current.getCapacity().getOutdoor());
-                entryCapacityEntity.setSeated(current.getCapacity().getSeated());
-                entryCapacityEntity.setCocktail(current.getCapacity().getCocktail());
-                entryCapacityEntity.setGroup(current.getCapacity().getGroup());
-                entryCapacityEntity.setRoomCount(current.getCapacity().getRoomCount());
-                entryCapacityEntity.setDisabledCount(current.getCapacity().getDisabledCount());
-                entryCapacityEntity.setId(entryCapacityEntityDao.insert(entryCapacityEntity));
-                entryToSave.setEntryCapacityEntityId(entryCapacityEntity.getId());
-
-                entryToSave.setOpening(current.getOpening());
-                entryToSave.setCommercial(current.getCommercial());
-                entryToSave.setClosing(current.getClosing());
-                entryToSave.setLatitude(current.getLatitude());
-                entryToSave.setLongitude(current.getLongitude());
-                entryToSave.setLocation_map(current.getLocationMap());
-                entryToSave.setNote(current.getNote());
-                entryToSave.setStart(current.getStart());
-                entryToSave.setNiceresId(current.getNiceresId());
-                entryToSave.setNiceresAvailability(current.isNiceresAvailability());
-                entryToSave.setCreated(current.getCreated());
-                entryToSave.setUpdated(current.getUpdated());
-
-                //enregistrer Entry pour recup id pour join + plus tard
-                entryToSave.setId(entryEntityDao.insert(entryToSave));
-
-                //enregistrer list contacts
-                if (current.getListContacts() != null) {
-                    for (Contact contact : current.getListContacts()) {
-                        List<EntryContactEntity> list = entryContactEntityDao.queryRaw("where civility = ? and name = ? and title = ?" +
-                                        "and function = ? and phone = ? and email = ?", contact.getCivility(),
-                                contact.getName(), contact.getTitle(), contact.getFunction(), contact.getPhone(),
-                                contact.getEmail());
-                        JoinEntryEntityWithEntryContactEntity join = new JoinEntryEntityWithEntryContactEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryContactEntityId(list.get(0).getId());
-                        } else {
-                            EntryContactEntity entryContactEntity = new EntryContactEntity();
-                            entryContactEntity.setCivility(contact.getCivility());
-                            entryContactEntity.setName(contact.getName());
-                            entryContactEntity.setTitle(contact.getTitle());
-                            entryContactEntity.setFunction(contact.getFunction());
-                            entryContactEntity.setPhone(contact.getPhone());
-                            entryContactEntity.setEmail(contact.getEmail());
-                            entryContactEntity.setId(entryContactEntityDao.insert(entryContactEntity));
-                            join.setEntryContactEntityId(entryContactEntity.getId());
-                        }
-                        joinEntryEntityWithEntryContactEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list payments
-                if (current.getListPayments() != null) {
-                    for (Payment payment : current.getListPayments()) {
-                        List<EntryPaymentEntity> list = entryPaymentEntityDao.queryRaw("where value = ?", payment.getValue());
-                        JoinEntryEntityWithEntryPaymentEntity join = new JoinEntryEntityWithEntryPaymentEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryPaymentEntityId(list.get(0).getId());
-                        } else {
-                            EntryPaymentEntity entryPaymentEntity = new EntryPaymentEntity();
-                            entryPaymentEntity.setValue(payment.getValue());
-                            entryPaymentEntity.setId(entryPaymentEntityDao.insert(entryPaymentEntity));
-                            join.setEntryPaymentEntityId(entryPaymentEntity.getId());
-                        }
-                        joinEntryEntityWithEntryPaymentEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list languages
-                if (current.getListLanguages() != null) {
-                    for (Language language : current.getListLanguages()) {
-                        List<EntryLanguageEntity> list = entryLanguageEntityDao.queryRaw("where value = ?", language.getValue());
-                        JoinEntryEntityWithEntryLanguageEntity join = new JoinEntryEntityWithEntryLanguageEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryLanguageEntityId(list.get(0).getId());
-                        } else {
-                            EntryLanguageEntity entryLanguageEntity = new EntryLanguageEntity();
-                            entryLanguageEntity.setValue(language.getValue());
-                            entryLanguageEntity.setId(entryLanguageEntityDao.insert(entryLanguageEntity));
-                            join.setEntryLanguageEntityId(entryLanguageEntity.getId());
-                        }
-                        joinEntryEntityWithEntryLanguageEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list labels
-                if (current.getListLabels() != null) {
-                    for (Label label : current.getListLabels()) {
-                        List<EntryLabelEntity> list = entryLabelEntityDao.queryRaw("where value = ?", label.getValue());
-                        JoinEntryEntityWithEntryLabelEntity join = new JoinEntryEntityWithEntryLabelEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryLabelEntityId(list.get(0).getId());
-                        } else {
-                            EntryLabelEntity entryLabelEntity = new EntryLabelEntity();
-                            entryLabelEntity.setValue(label.getValue());
-                            entryLabelEntity.setId(entryLabelEntityDao.insert(entryLabelEntity));
-                            join.setEntryLabelEntityId(entryLabelEntity.getId());
-                        }
-                        joinEntryEntityWithEntryLabelEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list amenities
-                if (current.getListAmenities() != null) {
-                    for (Amenity amenity : current.getListAmenities()) {
-                        List<EntryAmenityEntity> list = entryAmenityEntityDao.queryRaw("where value = ?", amenity.getValue());
-                        JoinEntryEntityWithEntryAmenityEntity join = new JoinEntryEntityWithEntryAmenityEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryAmenityEntityId(list.get(0).getId());
-                        } else {
-                            EntryAmenityEntity entryAmenityEntity = new EntryAmenityEntity();
-                            entryAmenityEntity.setValue(amenity.getValue());
-                            entryAmenityEntity.setId(entryAmenityEntityDao.insert(entryAmenityEntity));
-                            join.setEntryAmenityEntityId(entryAmenityEntity.getId());
-                        }
-                        joinEntryEntityWithEntryAmenityEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list profiles
-                if (current.getListProfiles() != null) {
-                    for (Profile profile : current.getListProfiles()) {
-                        List<EntryProfileEntity> list = entryProfileEntityDao.queryRaw("where value = ?", profile.getValue());
-                        JoinEntryEntityWithEntryProfileEntity join = new JoinEntryEntityWithEntryProfileEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryProfileEntityId(list.get(0).getId());
-                        } else {
-                            EntryProfileEntity entryProfileEntity = new EntryProfileEntity();
-                            entryProfileEntity.setValue(profile.getValue());
-                            entryProfileEntity.setId(entryProfileEntityDao.insert(entryProfileEntity));
-                            join.setEntryProfileEntityId(entryProfileEntity.getId());
-                        }
-                        joinEntryEntityWithEntryProfileEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list locations
-                if (current.getListLocations() != null) {
-                    for (Location location : current.getListLocations()) {
-                        List<EntryLocationEntity> list = entryLocationEntityDao.queryRaw("where value = ?", location.getValue());
-                        JoinEntryEntityWithEntryLocationEntity join = new JoinEntryEntityWithEntryLocationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryLocationEntityId(list.get(0).getId());
-                        } else {
-                            EntryLocationEntity entryLocationEntity = new EntryLocationEntity();
-                            entryLocationEntity.setValue(location.getValue());
-                            entryLocationEntity.setId(entryLocationEntityDao.insert(entryLocationEntity));
-                            join.setEntryLocationEntityId(entryLocationEntity.getId());
-                        }
-                        joinEntryEntityWithEntryLocationEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list activities
-
-                if (current.getListActivities() != null) {
-                    for (Activity activity : current.getListActivities()) {
-                        List<EntryActivityEntity> list = entryActivityEntityDao.queryRaw("where value = ?", activity.getValue());
-                        JoinEntryEntityWithEntryActivityEntity join = new JoinEntryEntityWithEntryActivityEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryActivityEntityId(list.get(0).getId());
-                        } else {
-                            EntryActivityEntity entryActivityEntity = new EntryActivityEntity();
-                            entryActivityEntity.setValue(activity.getValue());
-                            entryActivityEntity.setId(entryActivityEntityDao.insert(entryActivityEntity));
-                            join.setEntryActivityEntityId(entryActivityEntity.getId());
-                        }
-                        joinEntryEntityWithEntryActivityEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list categories
-                if (current.getListCategories() != null) {
-                    for (Category category : current.getListCategories()) {
-                        List<EntryCategoryEntity> list = entryCategoryEntityDao.queryRaw("where value = ?", category.getValue());
-                        JoinEntryEntityWithEntryCategoryEntity join = new JoinEntryEntityWithEntryCategoryEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryCategoryEntityId(list.get(0).getId());
-                        } else {
-                            EntryCategoryEntity entryCategoryEntity = new EntryCategoryEntity();
-                            entryCategoryEntity.setValue(category.getValue());
-                            entryCategoryEntity.setId(entryCategoryEntityDao.insert(entryCategoryEntity));
-                            join.setEntryCategoryEntityId(entryCategoryEntity.getId());
-                        }
-                        joinEntryEntityWithEntryCategoryEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list atmospheres
-                if (current.getListAtmosphere() != null) {
-                    for (Atmospher atmospher : current.getListAtmosphere()) {
-                        List<EntryAtmospherEntity> list = entryAtmospherEntityDao.queryRaw("where value = ?", atmospher.getValue());
-                        JoinEntryEntityWithEntryAtmospherEntity join = new JoinEntryEntityWithEntryAtmospherEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryAtmospherEntityId(list.get(0).getId());
-                        } else {
-                            EntryAtmospherEntity entryAtmospherEntity = new EntryAtmospherEntity();
-                            entryAtmospherEntity.setValue(atmospher.getValue());
-                            entryAtmospherEntity.setId(entryAtmospherEntityDao.insert(entryAtmospherEntity));
-                            join.setEntryAtmospherEntityId(entryAtmospherEntity.getId());
-                        }
-                        joinEntryEntityWithEntryAtmospherEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list animations
-                if (current.getListAnimations() != null) {
-                    for (Animation animation : current.getListAnimations()) {
-                        List<EntryAnimationEntity> list = entryAnimationEntityDao.queryRaw("where value = ?", animation.getValue());
-                        JoinEntryEntityWithEntryAnimationEntity join = new JoinEntryEntityWithEntryAnimationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryAnimationEntityId(list.get(0).getId());
-                        } else {
-                            EntryAnimationEntity entryAnimationEntity = new EntryAnimationEntity();
-                            entryAnimationEntity.setValue(animation.getValue());
-                            entryAnimationEntity.setId(entryAnimationEntityDao.insert(entryAnimationEntity));
-                            join.setEntryAnimationEntityId(entryAnimationEntity.getId());
-                        }
-                        joinEntryEntityWithEntryAnimationEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list affiliations
-                if (current.getListAffiliations() != null) {
-                    for (Affiliation affiliation : current.getListAffiliations()) {
-                        List<EntryAffiliationEntity> list = entryAffiliationEntityDao.queryRaw("where value = ?", affiliation.getValue());
-                        JoinEntryEntityWithEntryAffiliationEntity join = new JoinEntryEntityWithEntryAffiliationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryAffiliationEntityId(list.get(0).getId());
-                        } else {
-                            EntryAffiliationEntity entryAffiliationEntity = new EntryAffiliationEntity();
-                            entryAffiliationEntity.setValue(affiliation.getValue());
-                            entryAffiliationEntity.setId(entryAffiliationEntityDao.insert(entryAffiliationEntity));
-                            join.setEntryAffiliationEntityId(entryAffiliationEntity.getId());
-                        }
-                        joinEntryEntityWithEntryAffiliationEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list stations
-                if (current.getListStations() != null) {
-                    for (Station station : current.getListStations()) {
-                        List<EntryStationEntity> list = entryStationEntityDao.queryRaw("where value = ?", station.getValue());
-                        JoinEntryEntityWithEntryStationEntity join = new JoinEntryEntityWithEntryStationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryStationEntityId(list.get(0).getId());
-                        } else {
-                            EntryStationEntity entryStationEntity = new EntryStationEntity();
-                            entryStationEntity.setValue(station.getValue());
-                            entryStationEntity.setId(entryStationEntityDao.insert(entryStationEntity));
-                            join.setEntryStationEntityId(entryStationEntity.getId());
-                        }
-                        joinEntryEntityWithEntryStationEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list standing levels
-                if (current.getListStandingLevels() != null) {
-                    for (StandingLevel standingLevel : current.getListStandingLevels()) {
-                        List<EntryStandingLevelEntity> list = entryStandingLevelEntityDao.queryRaw("where value = ?", standingLevel.getValue());
-                        JoinEntryEntityWithEntryStandingLevelEntity join = new JoinEntryEntityWithEntryStandingLevelEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryStandingLevelEntityId(list.get(0).getId());
-                        } else {
-                            EntryStandingLevelEntity entryStandingLevelEntity = new EntryStandingLevelEntity();
-                            entryStandingLevelEntity.setValue(standingLevel.getValue());
-                            entryStandingLevelEntity.setId(entryStandingLevelEntityDao.insert(entryStandingLevelEntity));
-                            join.setEntryStandingLevelEntityId(entryStandingLevelEntity.getId());
-                        }
-                        joinEntryEntityWithEntryStandingLevelEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list chains
-                if (current.getListChains() != null) {
-                    for (Chain chain : current.getListChains()) {
-                        List<EntryChainEntity> list = entryChainEntityDao.queryRaw("where value = ?", chain.getValue());
-                        JoinEntryEntityWithEntryChainEntity join = new JoinEntryEntityWithEntryChainEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryChainEntityId(list.get(0).getId());
-                        } else {
-                            EntryChainEntity entryChainEntity = new EntryChainEntity();
-                            entryChainEntity.setValue(chain.getValue());
-                            entryChainEntity.setId(entryChainEntityDao.insert(entryChainEntity));
-                            join.setEntryChainEntityId(entryChainEntity.getId());
-                        }
-                        joinEntryEntityWithEntryChainEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list services
-                if (current.getListServices() != null) {
-                    for (Service service : current.getListServices()) {
-                        List<EntryServiceEntity> list = entryServiceEntityDao.queryRaw("where value = ?", service.getValue());
-                        JoinEntryEntityWithEntryServiceEntity join = new JoinEntryEntityWithEntryServiceEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryServiceEntityId(list.get(0).getId());
-                        } else {
-                            EntryServiceEntity entryServiceEntity = new EntryServiceEntity();
-                            entryServiceEntity.setValue(service.getValue());
-                            entryServiceEntity.setId(entryServiceEntityDao.insert(entryServiceEntity));
-                            join.setEntryServiceEntityId(entryServiceEntity.getId());
-                        }
-                        joinEntryEntityWithEntryServiceEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list options
-                if (current.getListOptions() != null) {
-                    for (Option option : current.getListOptions()) {
-                        List<EntryOptionEntity> list = entryOptionEntityDao.queryRaw("where value = ?", option.getValue());
-                        JoinEntryEntityWithEntryOptionEntity join = new JoinEntryEntityWithEntryOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryOptionEntity entryOptionEntity = new EntryOptionEntity();
-                            entryOptionEntity.setValue(option.getValue());
-                            entryOptionEntity.setId(entryOptionEntityDao.insert(entryOptionEntity));
-                            join.setEntryOptionEntityId(entryOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list disabled options
-                if (current.getListDisabledOptions() != null) {
-                    for (DisabledOption disabledOption : current.getListDisabledOptions()) {
-                        List<EntryDisabledOptionEntity> list = entryDisabledOptionEntityDao.queryRaw("where value = ?", disabledOption.getValue());
-                        JoinEntryEntityWithEntryDisabledOptionEntity join = new JoinEntryEntityWithEntryDisabledOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryDisabledOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryDisabledOptionEntity entryDisabledOptionEntity = new EntryDisabledOptionEntity();
-                            entryDisabledOptionEntity.setValue(disabledOption.getValue());
-                            entryDisabledOptionEntity.setId(entryDisabledOptionEntityDao.insert(entryDisabledOptionEntity));
-                            join.setEntryDisabledOptionEntityId(entryDisabledOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryDisabledOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list frp options
-                if (current.getListFrpOptions() != null) {
-                    for (FrpOption frpOption : current.getListFrpOptions()) {
-                        List<EntryFrpOptionEntity> list = entryFrpOptionEntityDao.queryRaw("where value = ?", frpOption.getValue());
-                        JoinEntryEntityWithEntryFrpOptionEntity join = new JoinEntryEntityWithEntryFrpOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryFrpOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryFrpOptionEntity entryFrpOptionEntity = new EntryFrpOptionEntity();
-                            entryFrpOptionEntity.setValue(frpOption.getValue());
-                            entryFrpOptionEntity.setId(entryFrpOptionEntityDao.insert(entryFrpOptionEntity));
-                            join.setEntryFrpOptionEntityId(entryFrpOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryFrpOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list poi options
-                if (current.getListPoiOptions() != null) {
-                    for (PoiOption poiOption : current.getListPoiOptions()) {
-                        List<EntryPoiOptionEntity> list = entryPoiOptionEntityDao.queryRaw("where value = ?", poiOption.getValue());
-                        JoinEntryEntityWithEntryPoiOptionEntity join = new JoinEntryEntityWithEntryPoiOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryPoiOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryPoiOptionEntity entryPoiOptionEntity = new EntryPoiOptionEntity();
-                            entryPoiOptionEntity.setValue(poiOption.getValue());
-                            entryPoiOptionEntity.setId(entryPoiOptionEntityDao.insert(entryPoiOptionEntity));
-                            join.setEntryPoiOptionEntityId(entryPoiOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryPoiOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list publications
-                if (current.getListPublications() != null) {
-                    for (Publication publication : current.getListPublications()) {
-                        List<EntryPublicationEntity> list = entryPublicationEntityDao.queryRaw("where value = ?", publication.getValue());
-                        JoinEntryEntityWithEntryPublicationEntity join = new JoinEntryEntityWithEntryPublicationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryPublicationEntityId(list.get(0).getId());
-                        } else {
-                            EntryPublicationEntity entryPublicationEntity = new EntryPublicationEntity();
-                            entryPublicationEntity.setValue(publication.getValue());
-                            entryPublicationEntity.setId(entryPublicationEntityDao.insert(entryPublicationEntity));
-                            join.setEntryPublicationEntityId(entryPublicationEntity.getId());
-                        }
-                        joinEntryEntityWithEntryPublicationEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list common tags
-                if (current.getListCommonTags() != null) {
-                    for (CommonTag commonTag : current.getListCommonTags()) {
-                        List<EntryCommonTagEntity> list = entryCommonTagEntityDao.queryRaw("where value = ?", commonTag.getValue());
-                        JoinEntryEntityWithEntryCommonTagEntity join = new JoinEntryEntityWithEntryCommonTagEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryCommonTagEntityId(list.get(0).getId());
-                        } else {
-                            EntryCommonTagEntity entryCommonTagEntity = new EntryCommonTagEntity();
-                            entryCommonTagEntity.setValue(commonTag.getValue());
-                            entryCommonTagEntity.setId(entryCommonTagEntityDao.insert(entryCommonTagEntity));
-                            join.setEntryCommonTagEntityId(entryCommonTagEntity.getId());
-                        }
-                        joinEntryEntityWithEntryCommonTagEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list sectors
-                if (current.getListSectors() != null) {
-                    for (Sector sector : current.getListSectors()) {
-                        List<EntrySectorEntity> list = entrySectorEntityDao.queryRaw("where value = ?", sector.getValue());
-                        JoinEntryEntityWithEntrySectorEntity join = new JoinEntryEntityWithEntrySectorEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntrySectorEntityId(list.get(0).getId());
-                        } else {
-                            EntrySectorEntity entrySectorEntity = new EntrySectorEntity();
-                            entrySectorEntity.setValue(sector.getValue());
-                            entrySectorEntity.setId(entrySectorEntityDao.insert(entrySectorEntity));
-                            join.setEntrySectorEntityId(entrySectorEntity.getId());
-                        }
-                        joinEntryEntityWithEntrySectorEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list descriptions
-                if (current.getListDescriptions() != null) {
-                    for (Description description : current.getListDescriptions()) {
-                        List<EntryDescriptionEntity> list = entryDescriptionEntityDao.queryRaw("where value = ?", description.getValue());
-                        JoinEntryEntityWithEntryDescriptionEntity join = new JoinEntryEntityWithEntryDescriptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryDescriptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryDescriptionEntity entryDescriptionEntity = new EntryDescriptionEntity();
-                            entryDescriptionEntity.setValue(description.getValue());
-                            entryDescriptionEntity.setId(entryDescriptionEntityDao.insert(entryDescriptionEntity));
-                            join.setEntryDescriptionEntityId(entryDescriptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryDescriptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list images
-                if (current.getListImages() != null) {
-                    for (Image image : current.getListImages()) {
-                        List<EntryImageEntity> list = entryImageEntityDao.queryRaw("where url = ?", image.getUrl());
-                        JoinEntryEntityWithEntryImageEntity join = new JoinEntryEntityWithEntryImageEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryImageEntityId(list.get(0).getId());
-                        } else {
-                            EntryImageEntity entryImageEntity = new EntryImageEntity();
-                            entryImageEntity.setUrl(image.getUrl());
-                            entryImageEntity.setId(entryImageEntityDao.insert(entryImageEntity));
-                            join.setEntryImageEntityId(entryImageEntity.getId());
-                        }
-                        joinEntryEntityWithEntryImageEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list contacts
-                if (current.getListTariffs() != null) {
-                    for (Tariff tariff : current.getListTariffs()) {
-                        List<EntryTariffEntity> list = entryTariffEntityDao.queryRaw("where name = ? and unique = ? and min = ?" +
-                                        "and max = ? and average = ? and fixed = ?", tariff.getName(),
-                                "" + tariff.getUnique(), "" + tariff.getMin(), "" + tariff.getMax(), "" + tariff.getAverage(),
-                                "" + tariff.getFixed());
-                        JoinEntryEntityWithEntryTariffEntity join = new JoinEntryEntityWithEntryTariffEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryTariffEntityId(list.get(0).getId());
-                        } else {
-                            EntryTariffEntity entryTariffEntity = new EntryTariffEntity();
-                            entryTariffEntity.setName(tariff.getName());
-                            entryTariffEntity.setUnique(tariff.getUnique());
-                            entryTariffEntity.setMin(tariff.getMin());
-                            entryTariffEntity.setMax(tariff.getMax());
-                            entryTariffEntity.setAverage(tariff.getAverage());
-                            entryTariffEntity.setFixed(tariff.getFixed());
-                            entryTariffEntity.setId(entryTariffEntityDao.insert(entryTariffEntity));
-                            join.setEntryTariffEntityId(entryTariffEntity.getId());
-                        }
-                        joinEntryEntityWithEntryTariffEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list closures
-                if (current.getListClosures() != null) {
-                    for (Closure closure : current.getListClosures()) {
-                        List<EntryClosureEntity> list = entryClosureEntityDao.queryRaw("where closure_day = ? and closure_span = ?"
-                                , closure.getClosureDay(),
-                                "" + closure.getClosureSpan());
-                        JoinEntryEntityWithEntryClosureEntity join = new JoinEntryEntityWithEntryClosureEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryClosureEntityId(list.get(0).getId());
-                        } else {
-                            EntryClosureEntity entryClosureEntity = new EntryClosureEntity();
-                            entryClosureEntity.setClosureDay(closure.getClosureDay());
-                            entryClosureEntity.setClosureSpan(closure.getClosureSpan());
-                            entryClosureEntity.setId(entryClosureEntityDao.insert(entryClosureEntity));
-                            join.setEntryClosureEntityId(entryClosureEntity.getId());
-                        }
-                        joinEntryEntityWithEntryClosureEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list spaces
-                if (current.getListSpaces() != null) {
-                    for (Space space : current.getListSpaces()) {
-                        List<EntrySpaceEntity> list = entrySpaceEntityDao.queryRaw("where name = ? and capacity_theater = ? and capacity_classroom = ?" +
-                                        "and capacity_u = ? and capacity_cocktail = ? and capacity_seatedmeal = ?" +
-                                        "and ceiling_height = ? and is_natural_light=?", space.getName(),
-                                "" + space.getCapacityTheater(), "" + space.getCapacityClassroom(), "" + space.getCapacityU(), "" + space.getCapacityCocktail(),
-                                "" + space.getCapacitySeatedmeal(), "" + space.getCeilingHeight(), "" + space.getIsNaturalLight());
-                        JoinEntryEntityWithEntrySpaceEntity join = new JoinEntryEntityWithEntrySpaceEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntrySpaceEntityId(list.get(0).getId());
-                        } else {
-                            EntrySpaceEntity entrySpaceEntity = new EntrySpaceEntity();
-                            entrySpaceEntity.setName(space.getName());
-                            entrySpaceEntity.setCapacityTheater(space.getCapacityTheater());
-                            entrySpaceEntity.setCapacityClassroom(space.getCapacityClassroom());
-                            entrySpaceEntity.setCapacityU(space.getCapacityU());
-                            entrySpaceEntity.setCapacityCocktail(space.getCapacityCocktail());
-                            entrySpaceEntity.setCapacitySeatedmeal(space.getCapacitySeatedmeal());
-                            entrySpaceEntity.setCeilingHeight(space.getCeilingHeight());
-                            entrySpaceEntity.setIsNaturalLight(space.getIsNaturalLight());
-                            entrySpaceEntity.setId(entrySpaceEntityDao.insert(entrySpaceEntity));
-                            join.setEntrySpaceEntityId(entrySpaceEntity.getId());
-                        }
-                        joinEntryEntityWithEntrySpaceEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list closings
-                if (current.getListClosings() != null) {
-                    for (Closing closing : current.getListClosings()) {
-                        List<EntryClosingEntity> list = entryClosingEntityDao.queryRaw("where value = ?", closing.getValue());
-                        JoinEntryEntityWithEntryClosingEntity join = new JoinEntryEntityWithEntryClosingEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryClosingEntityId(list.get(0).getId());
-                        } else {
-                            EntryClosingEntity entryClosingEntity = new EntryClosingEntity();
-                            entryClosingEntity.setValue(closing.getValue());
-                            entryClosingEntity.setId(entryClosingEntityDao.insert(entryClosingEntity));
-                            join.setEntryClosingEntityId(entryClosingEntity.getId());
-                        }
-                        joinEntryEntityWithEntryClosingEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list groupOptions
-                if (current.getListGroupOptions() != null) {
-                    for (GroupOption groupOption : current.getListGroupOptions()) {
-                        List<EntryGroupOptionEntity> list = entryGroupOptionEntityDao.queryRaw("where value = ?", groupOption.getValue());
-                        JoinEntryEntityWithEntryGroupOptionEntity join = new JoinEntryEntityWithEntryGroupOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryGroupOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryGroupOptionEntity entryGroupOptionEntity = new EntryGroupOptionEntity();
-                            entryGroupOptionEntity.setValue(groupOption.getValue());
-                            entryGroupOptionEntity.setId(entryGroupOptionEntityDao.insert(entryGroupOptionEntity));
-                            join.setEntryGroupOptionEntityId(entryGroupOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryGroupOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list familyOptions
-                if (current.getListFamilyOptions() != null) {
-                    for (FamilyOption familyOption : current.getListFamilyOptions()) {
-                        List<EntryFamilyOptionEntity> list = entryFamilyOptionEntityDao.queryRaw("where value = ?", familyOption.getValue());
-                        JoinEntryEntityWithEntryFamilyOptionEntity join = new JoinEntryEntityWithEntryFamilyOptionEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryFamilyOptionEntityId(list.get(0).getId());
-                        } else {
-                            EntryFamilyOptionEntity entryFamilyOptionEntity = new EntryFamilyOptionEntity();
-                            entryFamilyOptionEntity.setValue(familyOption.getValue());
-                            entryFamilyOptionEntity.setId(entryFamilyOptionEntityDao.insert(entryFamilyOptionEntity));
-                            join.setEntryFamilyOptionEntityId(entryFamilyOptionEntity.getId());
-                        }
-                        joinEntryEntityWithEntryFamilyOptionEntityDao.insert(join);
-                    }
-                }
-
-                //enregistrer list openings
-                if (current.getListOpenings() != null) {
-                    for (Opening opening : current.getListOpenings()) {
-                        EntryOpeningEntity openingTemp = new EntryOpeningEntity();
-                        List<EntryOpeningEntity> list = entryOpeningEntityDao.queryRaw("where opening_start = ? and opening_end = ? and opening_replay = ?",
-                                opening.getOpeningStart(),
-                                "" + opening.getOpeningEnd(),
-                                "" + opening.getOpeningReplay());
-                        JoinEntryEntityWithEntryOpeningEntity join = new JoinEntryEntityWithEntryOpeningEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryOpeningEntityId(list.get(0).getId());
-                        } else {
-                            EntryOpeningEntity entryOpeningEntity = new EntryOpeningEntity();
-                            entryOpeningEntity.setOpeningStart(opening.getOpeningStart());
-                            entryOpeningEntity.setOpeningEnd(opening.getOpeningEnd());
-                            entryOpeningEntity.setOpeningReplay(opening.getOpeningReplay());
-                            entryOpeningEntity.setId(entryOpeningEntityDao.insert(entryOpeningEntity));
-                            join.setEntryOpeningEntityId(entryOpeningEntity.getId());
-                            openingTemp = entryOpeningEntity;
-                        }
-                        joinEntryEntityWithEntryOpeningEntityDao.insert(join);
-
-                        //enregistrer list grids
-                        if (opening.getListGrids()!= null) {
-                            for (Grid grid : opening.getListGrids()) {
-                                List<EntryGridEntity> list2 = entryGridEntityDao.queryRaw("where opening_days = ? and opening_hours = ?",
-                                        grid.getOpeningDays(),
-                                        "" + grid.getOpeningHours());
-                                JoinEntryOpeningEntityWithEntryGridEntity join2 = new JoinEntryOpeningEntityWithEntryGridEntity();
-                                join2.setEntryOpeningEntityId(openingTemp.getId());
-                                if (list2.size() > 0) {
-                                    join2.setEntryGridEntityId(list2.get(0).getId());
-                                } else {
-                                    EntryGridEntity entryGridEntity = new EntryGridEntity();
-                                    entryGridEntity.setOpeningDays(grid.getOpeningDays());
-                                    entryGridEntity.setOpeningHours(grid.getOpeningHours());
-                                    entryGridEntity.setId(entryGridEntityDao.insert(entryGridEntity));
-                                    join2.setEntryGridEntityId(entryGridEntity.getId());
-                                }
-                                joinEntryOpeningEntityWithEntryGridEntityDao.insert(join2);
-                            }
-                        }
-
-                    }
-                }
-
-                //entryEntityDao.insert(entryToSave);
-                listEntryEntities.add(entryToSave);
-                Log.e("TAG", "Ajout : " + entryToSave.getNameFr());
-            } else {
-                listEntryEntities.add(listEntriesFound.get(0));
-                Log.e("TAG", "Recup : " + listEntriesFound.get(0).getNameFr());
-            }
-        }
     }
 
     private void configureOnClickRecyclerView(){
@@ -977,25 +352,562 @@ public class AfficherEntriesSortieActivity extends NavDrawerActivity implements 
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        ouvrirActiviteSuivante(AfficherEntriesSortieActivity.this, AfficherEntrySortieDetailActivity.class,"entryId",listEntryEntities.get(position).getId(),false);
+                        //ouvrirActiviteSuivante(AfficherEntriesSortieActivity.this, AfficherEntrySortieDetailActivity.class,"entryId",listEntryEntities.get(position).getId(),false);
                         Log.e("TAG", "Position : "+position);
+                        selectedEntry = listEntries.get(position);
+                        fillAllFields();
+                        hideFields();
+                        AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
+                        runnerImage.execute();
+                        afficherDetail(true);
                     }
                 });
     }
 
+    public void afficherDetail(boolean bool) {
+        if (bool) {
+            scrollView.setVisibility(View.VISIBLE);
+            fabExit.setVisibility(View.VISIBLE);
+            List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ?",""+selectedEntry.getId());
+            if (listEntriesFound.size() == 0) {
+                fabSave.setVisibility(View.VISIBLE);
+            } else {
+                fabSave.setVisibility(View.GONE);
+            }
+        } else {
+            scrollView.setVisibility(View.GONE);
+            fabExit.setVisibility(View.GONE);
+            fabSave.setVisibility(View.GONE);
+        }
+    }
+
     public void configureRecyclerView() {
-        adapterEntries = new RecyclerAdapterEntries(listEntries, this);
+        adapterEntries = new RecyclerAdapterEntriesSortie(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();
-    }
-
-    private void fillAllFields() {
-       // textName.setText(saisonTransmise.getSerie().toString()+" - Saison "+BasicUtils.afficherChiffre(saisonTransmise.getNumSaison()));
     }
 
     @Override
     public void onClickEntriesButton(int position) {
       //  ouvrirActiviteSuivante(this,AfficherEntryDetailActivity.class,"eventId",listEntryEntities.get(position).getId(),false);
     }
+
+    @OnClick(R.id.fabSave)
+    public void fabSaveClick() {
+        saveEntry(selectedEntry);
+        fabExit.performClick();
+    }
+
+    private void hideFields() {
+        if (selectedEntry.getNameFr() == null) {
+            nameFr.setVisibility(View.GONE);
+        } else {
+            nameFr.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListCategories() == null || selectedEntry.getListCategories().size() == 0) {
+            category.setVisibility(View.GONE);
+        } else {
+            category.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListLocations() == null || selectedEntry.getListLocations().size() == 0) {
+            location.setVisibility(View.GONE);
+        } else {
+            location.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListAtmosphere() == null || selectedEntry.getListAtmosphere().size() == 0) {
+            atmosphere.setVisibility(View.GONE);
+        } else {
+            atmosphere.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListServices() == null || selectedEntry.getListServices().size() == 0) {
+            service.setVisibility(View.GONE);
+        } else {
+            service.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress() == null && (selectedEntry.getListStations() == null || selectedEntry.getListStations().size() == 0)) {
+            layoutAddress.setVisibility(View.GONE);
+        } else {
+            layoutAddress.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress() == null) {
+            boutonsMapWaze.setVisibility(View.GONE);
+        } else {
+            boutonsMapWaze.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress().getAddressLine1() == null) {
+            addressLine1.setVisibility(View.GONE);
+        } else {
+            addressLine1.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress().getAddressLine2() == null) {
+            addressLine2.setVisibility(View.GONE);
+        } else {
+            addressLine2.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress().getAddressLine3() == null) {
+            addressLine3.setVisibility(View.GONE);
+        } else {
+            addressLine3.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress().getZip() == null) {
+            addressZip.setVisibility(View.GONE);
+        } else {
+            addressZip.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getAddress().getCity() == null) {
+            addressCity.setVisibility(View.GONE);
+        } else {
+            addressCity.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListStations() == null || selectedEntry.getListStations().size() == 0) {
+            station.setVisibility(View.GONE);
+        } else {
+            station.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getPhone() == null) {
+            phone.setVisibility(View.GONE);
+        } else {
+            phone.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getFax() == null) {
+            fax.setVisibility(View.GONE);
+        } else {
+            fax.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getEmail() == null) {
+            email.setVisibility(View.GONE);
+        } else {
+            email.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getWebsite() == null) {
+            website.setVisibility(View.GONE);
+        } else {
+            website.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getFacebook() == null) {
+            facebook.setVisibility(View.GONE);
+        } else {
+            facebook.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getTwitter() == null) {
+            twitter.setVisibility(View.GONE);
+        } else {
+            twitter.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListPayments() == null || selectedEntry.getListPayments().size() == 0) {
+            layoutPayment.setVisibility(View.GONE);
+        } else {
+            layoutPayment.setVisibility(View.VISIBLE);
+        }
+        if ((selectedEntry.getListOpenings() == null || selectedEntry.getListOpenings().size() == 0) && selectedEntry.getOpening() == null) {
+            ouvert.setVisibility(View.GONE);
+        } else {
+            ouvert.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListOpenings() == null|| selectedEntry.getListOpenings().size() == 0) {
+            openings.setVisibility(View.GONE);
+        } else {
+            openings.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getOpening() == null) {
+            opening.setVisibility(View.GONE);
+        } else {
+            opening.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListLabels() == null || selectedEntry.getListLabels().size() == 0) {
+            layoutLabel.setVisibility(View.GONE);
+        } else {
+            layoutLabel.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListAnimations() == null || selectedEntry.getListAnimations().size() == 0) {
+            layoutAnimation.setVisibility(View.GONE);
+        } else {
+            layoutAnimation.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListOptions() == null || selectedEntry.getListOptions().size() == 0) {
+            option.setVisibility(View.GONE);
+        } else {
+            option.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListAmenities() == null || selectedEntry.getListAmenities().size() == 0) {
+            amenity.setVisibility(View.GONE);
+        } else {
+            amenity.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getGroup() == 0) {
+            capacityGroup.setVisibility(View.GONE);
+        } else {
+            capacityGroup.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getCocktail() == 0) {
+            capacityDebout.setVisibility(View.GONE);
+        } else {
+            capacityDebout.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getSeated() == 0) {
+            capacityAssis.setVisibility(View.GONE);
+        } else {
+            capacityAssis.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getOutdoor() == 0) {
+            capacityExterieur.setVisibility(View.GONE);
+        } else {
+            capacityExterieur.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getIndoor() == 0) {
+            capacityInterieur.setVisibility(View.GONE);
+        } else {
+            capacityInterieur.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getTotal() == 0) {
+            capacityTotal.setVisibility(View.GONE);
+        } else {
+            capacityTotal.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getCapacity() == null || selectedEntry.getCapacity().getRoomCount() == 0) {
+            capacitySalle.setVisibility(View.GONE);
+        } else {
+            capacitySalle.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListClosings() == null || selectedEntry.getListClosings().size() == 0) {
+            closings.setVisibility(View.GONE);
+        } else {
+            closings.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getClosing() == null) {
+            closing.setVisibility(View.GONE);
+        } else {
+            closing.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListClosures() == null || selectedEntry.getListClosures().size() == 0) {
+            closure.setVisibility(View.GONE);
+        } else {
+            closure.setVisibility(View.VISIBLE);
+        }
+        if (selectedEntry.getListClosures() != null){
+            for (Closures closures : selectedEntry.getListClosures()){
+                if (closures.getListClosure() == null || closures.getListClosure().size() == 0) {
+                    closure.setVisibility(View.GONE);
+                } else {
+                    closure.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+        if (closings.getVisibility() == View.GONE && closing.getVisibility() == View.GONE
+        && closure.getVisibility() == View.GONE) {
+            ferme.setVisibility(View.GONE);
+        } else {
+            ferme.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void fillAllFields() {
+        nameFr.setText(selectedEntry.getNameFr());
+        addressLine1.setText(selectedEntry.getAddress().getAddressLine1());
+        addressLine2.setText(selectedEntry.getAddress().getAddressLine2());
+        addressLine3.setText(selectedEntry.getAddress().getAddressLine3());
+        addressZip.setText(selectedEntry.getAddress().getZip());
+        addressCity.setText(selectedEntry.getAddress().getCity());
+        phone.setText("Tel: "+selectedEntry.getPhone());
+        fax.setText("Fax: "+selectedEntry.getFax());
+        email.setText("Email: "+selectedEntry.getEmail());
+        website.setText("Site: "+selectedEntry.getWebsite());
+        facebook.setText("Fb: "+selectedEntry.getFacebook());
+        twitter.setText("Twitter: "+selectedEntry.getTwitter());
+        opening.setText(selectedEntry.getOpening());
+        closing.setText(selectedEntry.getClosing());
+        capacityTotal.setText("Cap. Total: "+selectedEntry.getCapacity().getTotal()+" pers");
+        capacityInterieur.setText("Cap. Intérieur: "+selectedEntry.getCapacity().getIndoor()+" pers");
+        capacityExterieur.setText("Cap. Extérieur: "+selectedEntry.getCapacity().getOutdoor()+" pers");
+        capacityAssis.setText("Cap. Assis: "+selectedEntry.getCapacity().getSeated()+" pers");
+        capacityDebout.setText("Cap. Debout: "+selectedEntry.getCapacity().getCocktail()+" pers");
+        capacityGroup.setText("Cap. Group: "+selectedEntry.getCapacity().getGroup()+" pers");
+        capacitySalle.setText("Nb Salle: "+selectedEntry.getCapacity().getRoomCount());
+
+        String paymentString = "";
+        if (selectedEntry.getListPayments()!=null) {
+            int i = 1;
+            for (Payment current : selectedEntry.getListPayments()) {
+                paymentString += current.getValue();
+                if (i < selectedEntry.getListPayments().size()) {
+                    paymentString += " / ";
+                }
+                i++;
+            }
+        }
+        payment.setText(paymentString);
+
+        String amenityString = "";
+        if (selectedEntry.getListAmenities()!=null) {
+            int i = 1;
+            for (Amenity current : selectedEntry.getListAmenities()) {
+                amenityString += current.getValue();
+                if (i < selectedEntry.getListAmenities().size()) {
+                    amenityString += " / ";
+                }
+                i++;
+            }
+        }
+        amenity.setText(amenityString);
+
+        String locationString = "";
+        if (selectedEntry.getListLocations()!=null) {
+            int i = 1;
+            for (Location current : selectedEntry.getListLocations()) {
+                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
+                    locationString += current.getValue();
+                    if (i < selectedEntry.getListLocations().size()) {
+                        locationString += " / ";
+                    }
+                }
+                i++;
+            }
+        }
+        location.setText(locationString);
+
+        String closureString = "";
+        if (selectedEntry.getListClosures()!=null) {
+            int i = 1;
+            for (Closures closures : selectedEntry.getListClosures()) {
+                if (closures.getListClosure() != null) {
+                    for (Closure current : closures.getListClosure()) {
+                        closureString += current.getClosureDay() + " - " + current.getClosureSpan();
+                        if (i < closures.getListClosure().size()) {
+                            closureString += newLine;
+                        }
+                        i++;
+                    }
+                }
+            }
+        }
+        closure.setText(closureString);
+
+        String labelString = "";
+        if (selectedEntry.getListLabels()!=null) {
+            int i = 1;
+            for (Label current : selectedEntry.getListLabels()) {
+                labelString += current.getValue();
+                if (i < selectedEntry.getListLabels().size()) {
+                    labelString += " / ";
+                }
+                i++;
+            }
+        }
+        label.setText(labelString);
+
+        String optionString = "";
+        if (selectedEntry.getListOptions()!=null) {
+            int i = 1;
+            for (Option current : selectedEntry.getListOptions()) {
+                optionString += current.getValue();
+                if (i < selectedEntry.getListOptions().size()) {
+                    optionString += " / ";
+                }
+                i++;
+            }
+        }
+        option.setText(optionString);
+
+        String openingString = "";
+        if (selectedEntry.getListOpenings()!=null) {
+            int i = 1;
+            int j = 1;
+            for (Opening current : selectedEntry.getListOpenings()) {
+                openingString += current.getOpeningStart() + " - "+current.getOpeningEnd()+newLine;
+                if (current.getListGrids() != null) {
+                    for (Grid currentGrid : current.getListGrids()) {
+                        openingString += currentGrid.getOpeningDays() + " - " + currentGrid.getOpeningHours();
+                        if (j < current.getListGrids().size()) {
+                            openingString += " / ";
+                        }
+                        j++;
+                    }
+                }
+                if (i < selectedEntry.getListOpenings().size()) {
+                    openingString += " / ";
+                }
+                i++;
+            }
+        }
+        openings.setText(openingString);
+
+        String closingString = "";
+        if (selectedEntry.getListClosings()!=null) {
+            int i = 1;
+            for (Closing current : selectedEntry.getListClosings()) {
+                closingString += current.getValue();
+                if (i < selectedEntry.getListClosings().size()) {
+                    closingString += " / ";
+                }
+                i++;
+            }
+        }
+        closings.setText(closingString);
+
+        String serviceString = "";
+        if (selectedEntry.getListServices()!=null) {
+            int i = 1;
+            for (Service current : selectedEntry.getListServices()) {
+                serviceString += current.getValue();
+                if (i < selectedEntry.getListServices().size()) {
+                    serviceString += " / ";
+                }
+                i++;
+            }
+        }
+        service.setText(serviceString);
+
+        String stationString = "";
+        if (selectedEntry.getListStations()!=null) {
+            int i = 1;
+            for (Station current : selectedEntry.getListStations()) {
+                stationString += current.getValue();
+                if (i < selectedEntry.getListStations().size()) {
+                    stationString += " / ";
+                }
+                i++;
+            }
+        }
+        station.setText(stationString);
+
+        String animationString = "";
+        if (selectedEntry.getListAnimations()!=null) {
+            int i = 1;
+            for (Animation current : selectedEntry.getListAnimations()) {
+                animationString += current.getValue();
+                if (i < selectedEntry.getListAnimations().size()) {
+                    animationString += " / ";
+                }
+                i++;
+            }
+        }
+        animation.setText(animationString);
+
+        String categoryString = "";
+        if (selectedEntry.getListCategories()!=null) {
+            int i = 1;
+            for (Category current : selectedEntry.getListCategories()) {
+                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))) {
+                    categoryString += current.getValue();
+                    if (i < selectedEntry.getListCategories().size()) {
+                        categoryString += " / ";
+                    }
+                }
+                i++;
+            }
+        }
+        category.setText(categoryString);
+
+        String atmosphereString = "";
+        if (selectedEntry.getListAtmosphere()!=null) {
+            int i = 1;
+            for (Atmospher current : selectedEntry.getListAtmosphere()) {
+                atmosphereString += current.getValue();
+                if (i < selectedEntry.getListAtmosphere().size()) {
+                    atmosphereString += " / ";
+                }
+                i++;
+            }
+        }
+        atmosphere.setText(atmosphereString);
+    }
+
+    private class AsyncTaskRunnerImage extends AsyncTask<Void, Integer, Void> {
+
+        protected Void doInBackground(Void...voids) {
+            URL url = null;
+            bitmap = null;
+            if (selectedEntry.getListImages()!= null) {
+                if (selectedEntry.getListImages().size()>0 && selectedEntry.getListImages().get(0).getUrl().length() > 0) {
+                    try {
+                        url = new URL(selectedEntry.getListImages().get(0).getUrl());
+                        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                        httpConn.connect();
+                        int resCode = httpConn.getResponseCode();
+                        if (resCode == HttpURLConnection.HTTP_OK) {
+                            InputStream in = httpConn.getInputStream();
+                            bitmap = BitmapFactory.decodeStream(in);
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            if (bitmap != null) {
+                image.setImageBitmap(bitmap);
+            } else {
+                image.setImageResource(R.drawable.outline_camera);
+                image.setVisibility(View.GONE);
+            }
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        protected void onProgressUpdate(Integer... integer) {
+            //progressBar.setProgress(integer[0],true);
+        }
+    }
+
+    public void exit(View view) {
+        afficherDetail(false);
+    }
+
+    public void launchGoogleMap(View view) {
+        String url = "geo:";
+        String addr = "";
+        if (selectedEntry.getLatitude() != 0 && selectedEntry.getLongitude() != 0) {
+            url += selectedEntry.getLatitude()+","+selectedEntry.getLongitude();
+            url += "?q="+selectedEntry.getLatitude()+","+selectedEntry.getLongitude();
+        } else if (selectedEntry.getAddress().getAddressLine1() != null
+                || selectedEntry.getAddress().getAddressLine2() != null
+                || selectedEntry.getAddress().getAddressLine3() != null
+                || selectedEntry.getAddress().getZip() != null
+                || selectedEntry.getAddress().getCity() != null) {
+            url += "0,0?q=";
+            addr += Uri.parse(selectedEntry.getAddress().getAddressLine1()
+                    +" "+selectedEntry.getAddress().getAddressLine2()
+                    +" "+selectedEntry.getAddress().getAddressLine3()
+                    +" "+selectedEntry.getAddress().getZip()
+                    +" "+selectedEntry.getAddress().getCity());
+            url += addr;
+        }
+        Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+        intent.setPackage("com.google.android.apps.maps");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    public void launchWaze(View view) {
+        try
+        {
+            String url = "";
+            if (selectedEntry.getLatitude() !=0d && selectedEntry.getLongitude()!=0d) {
+                url = "https://waze.com/ul?ll=";
+                url += selectedEntry.getLatitude()+","+selectedEntry.getLongitude()+"&navigate=yes";
+            } else {
+                url = "https://waze.com/ul?q=";
+                url += selectedEntry.getAddress().getAddressLine1()
+                        +" " +selectedEntry.getAddress().getAddressLine2()
+                        +" " +selectedEntry.getAddress().getAddressLine3()
+                        +" " +selectedEntry.getAddress().getZip()
+                        +" " + selectedEntry.getAddress().getCity();
+            }
+            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
+            startActivity( intent );
+        }
+        catch ( ActivityNotFoundException ex  )
+        {
+            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+            startActivity(intent);
+        }
+    }
+
+
 }

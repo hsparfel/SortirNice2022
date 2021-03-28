@@ -1161,6 +1161,7 @@ color test_mtrl_calendar_day
 color test_mtrl_calendar_day_selected
 color tooltip_background_dark
 color tooltip_background_light
+color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -1996,6 +1997,7 @@ id layoutNbEpisode
 id layoutNumSaison
 id layout_address
 id layout_animation
+id layout_fab
 id layout_label
 id layout_payment
 id left
@@ -2403,7 +2405,15 @@ layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout recycler_list_entry
-layout recycler_list_entry_card
+layout recycler_list_entry_card_boutique
+layout recycler_list_entry_card_hebergement
+layout recycler_list_entry_card_hotel
+layout recycler_list_entry_card_restaurant
+layout recycler_list_entry_card_shopping
+layout recycler_list_entry_card_sortie
+layout recycler_list_entry_card_transport
+layout recycler_list_entry_card_utile
+layout recycler_list_entry_card_visite
 layout recycler_list_event
 layout recycler_list_event_card
 layout recycler_list_saison

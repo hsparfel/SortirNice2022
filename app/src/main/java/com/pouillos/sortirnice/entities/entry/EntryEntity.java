@@ -2,8 +2,11 @@ package com.pouillos.sortirnice.entities.entry;
 
 
 
+import com.pouillos.sortirnice.entities.entry.detail.EntryAllianceOptionEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryCommerciaEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryFamilyOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryFrpOptionEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryFurnishedRentalEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryGroupOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryImageEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLabelEntity;
@@ -16,12 +19,19 @@ import com.pouillos.sortirnice.entities.entry.detail.EntryPaymentEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryPoiOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryProfileEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryPublicationEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntryRentalMonthEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntrySectorEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryServiceEntity;
+import com.pouillos.sortirnice.entities.entry.detail.EntrySleepingEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntrySpaceEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryStandingLevelEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryStationEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryTariffEntity;
+import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryAllianceOptionEntity;
+import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryCommerciaEntity;
+import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryFurnishedRentalEntity;
+import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryRentalMonthEntity;
+import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntrySleepingEntity;
 import com.pouillos.sortirnice.entities.event.EventEntity;
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryActivityEntity;
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryAffiliationEntity;
@@ -122,6 +132,11 @@ import com.pouillos.sortirnice.entities.entry.detail.EntryContactEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryDescriptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryDisabledOptionEntity;
 import com.pouillos.sortirnice.enumeration.EntriesType;
+import com.pouillos.sortirnice.dao.EntryAllianceOptionEntityDao;
+import com.pouillos.sortirnice.dao.EntryFurnishedRentalEntityDao;
+import com.pouillos.sortirnice.dao.EntryRentalMonthEntityDao;
+import com.pouillos.sortirnice.dao.EntrySleepingEntityDao;
+import com.pouillos.sortirnice.dao.EntryCommerciaEntityDao;
 
 @Entity
 public class EntryEntity implements Comparable<EventEntity> {
@@ -327,6 +342,12 @@ public class EntryEntity implements Comparable<EventEntity> {
     private List<EntryClosureEntity> listClosures;
 
     @ToMany
+    @JoinEntity(entity = JoinEntryEntityWithEntryCommerciaEntity.class,
+            sourceProperty = "entryEntityId",
+            targetProperty = "entryCommerciaEntityId")
+    private List<EntryCommerciaEntity> listCommercia;
+
+    @ToMany
     @JoinEntity(entity = JoinEntryEntityWithEntrySpaceEntity.class,
             sourceProperty = "entryEntityId",
             targetProperty = "entrySpaceEntityId")
@@ -356,9 +377,33 @@ public class EntryEntity implements Comparable<EventEntity> {
             targetProperty = "entryFamilyOptionEntityId")
     private List<EntryFamilyOptionEntity> listFamilyOptions;
 
+    @ToMany
+    @JoinEntity(entity = JoinEntryEntityWithEntryAllianceOptionEntity.class,
+            sourceProperty = "entryEntityId",
+            targetProperty = "entryAllianceOptionEntityId")
+    private List<EntryAllianceOptionEntity> listAllianceOptions;
+
+    @ToMany
+    @JoinEntity(entity = JoinEntryEntityWithEntryFurnishedRentalEntity.class,
+            sourceProperty = "entryEntityId",
+            targetProperty = "entryFurnishedRentalEntityId")
+    private List<EntryFurnishedRentalEntity> listFurnishedRentals;
+
+    @ToMany
+    @JoinEntity(entity = JoinEntryEntityWithEntryRentalMonthEntity.class,
+            sourceProperty = "entryEntityId",
+            targetProperty = "entryRentalMonthEntityId")
+    private List<EntryRentalMonthEntity> listRentalMonths;
+
+    @ToMany
+    @JoinEntity(entity = JoinEntryEntityWithEntrySleepingEntity.class,
+            sourceProperty = "entryEntityId",
+            targetProperty = "entrySleepingEntityId")
+    private List<EntrySleepingEntity> listSleepings;
+
     private String opening;
 
-    private String commercial;
+    //private String commercial;
 
     private String closing;
 
@@ -388,13 +433,16 @@ private transient DaoSession daoSession;
 @Generated(hash = 767631628)
 private transient EntryEntityDao myDao;
 
-@Generated(hash = 1507862954)
-public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr, String nameFrShort,
-        long entryAddressEntityId, String phone, String fax, String email, String website,
-        String websiteReservation, String facebook, String twitter, long entryLivingEntityId,
-        long entryCapacityEntityId, String opening, String commercial, String closing, double latitude,
-        double longitude, String location_map, String note, String start, boolean niceresAvailability,
-        int niceresId, String created, String updated) {
+
+
+
+@Generated(hash = 1962411818)
+public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr,
+        String nameFrShort, long entryAddressEntityId, String phone, String fax, String email,
+        String website, String websiteReservation, String facebook, String twitter,
+        long entryLivingEntityId, long entryCapacityEntityId, String opening, String closing,
+        double latitude, double longitude, String location_map, String note, String start,
+        boolean niceresAvailability, int niceresId, String created, String updated) {
     this.id = id;
     this.entryEntityId = entryEntityId;
     this.entryType = entryType;
@@ -411,7 +459,6 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
     this.entryLivingEntityId = entryLivingEntityId;
     this.entryCapacityEntityId = entryCapacityEntityId;
     this.opening = opening;
-    this.commercial = commercial;
     this.closing = closing;
     this.latitude = latitude;
     this.longitude = longitude;
@@ -424,9 +471,17 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
     this.updated = updated;
 }
 
+
+
+
+
 @Generated(hash = 681417959)
 public EntryEntity() {
 }
+
+
+
+
 
 @Generated(hash = 1156467801)
 private transient Long address__resolvedKey;
@@ -437,46 +492,105 @@ private transient Long living__resolvedKey;
 @Generated(hash = 1745046551)
 private transient Long capacity__resolvedKey;
 
+
+
+
     @Override
     public int compareTo(EventEntity o) {
         return this.getId().compareTo(o.getId());
     }
 
+
+
+
+
 public Long getId() {
     return this.id;
 }
+
+
+
+
 
 public void setId(Long id) {
     this.id = id;
 }
 
+
+
+
+
 public Long getEntryEntityId() {
     return this.entryEntityId;
 }
+
+
+
+
 
 public void setEntryEntityId(Long entryEntityId) {
     this.entryEntityId = entryEntityId;
 }
 
+
+
+
+
+public EntriesType getEntryType() {
+    return this.entryType;
+}
+
+
+
+
+
+public void setEntryType(EntriesType entryType) {
+    this.entryType = entryType;
+}
+
+
+
+
+
 public String getNameFr() {
     return this.nameFr;
 }
+
+
+
+
 
 public void setNameFr(String nameFr) {
     this.nameFr = nameFr;
 }
 
+
+
+
+
 public String getNameFrShort() {
     return this.nameFrShort;
 }
+
+
+
+
 
 public void setNameFrShort(String nameFrShort) {
     this.nameFrShort = nameFrShort;
 }
 
+
+
+
+
 public long getEntryAddressEntityId() {
     return this.entryAddressEntityId;
 }
+
+
+
+
 
 public void setEntryAddressEntityId(long entryAddressEntityId) {
     this.entryAddressEntityId = entryAddressEntityId;
@@ -484,173 +598,327 @@ public void setEntryAddressEntityId(long entryAddressEntityId) {
 
 
 
+
+
 public String getPhone() {
     return this.phone;
 }
+
+
+
+
 
 public void setPhone(String phone) {
     this.phone = phone;
 }
 
+
+
+
+
 public String getFax() {
     return this.fax;
 }
+
+
+
+
 
 public void setFax(String fax) {
     this.fax = fax;
 }
 
+
+
+
+
 public String getEmail() {
     return this.email;
 }
+
+
+
+
 
 public void setEmail(String email) {
     this.email = email;
 }
 
+
+
+
+
 public String getWebsite() {
     return this.website;
 }
+
+
+
+
 
 public void setWebsite(String website) {
     this.website = website;
 }
 
+
+
+
+
 public String getWebsiteReservation() {
     return this.websiteReservation;
 }
+
+
+
+
 
 public void setWebsiteReservation(String websiteReservation) {
     this.websiteReservation = websiteReservation;
 }
 
+
+
+
+
 public String getFacebook() {
     return this.facebook;
 }
+
+
+
+
 
 public void setFacebook(String facebook) {
     this.facebook = facebook;
 }
 
+
+
+
+
 public String getTwitter() {
     return this.twitter;
 }
+
+
+
+
 
 public void setTwitter(String twitter) {
     this.twitter = twitter;
 }
 
+
+
+
+
 public long getEntryLivingEntityId() {
     return this.entryLivingEntityId;
 }
+
+
+
+
 
 public void setEntryLivingEntityId(long entryLivingEntityId) {
     this.entryLivingEntityId = entryLivingEntityId;
 }
 
+
+
+
+
 public long getEntryCapacityEntityId() {
     return this.entryCapacityEntityId;
 }
+
+
+
+
 
 public void setEntryCapacityEntityId(long entryCapacityEntityId) {
     this.entryCapacityEntityId = entryCapacityEntityId;
 }
 
+
+
+
+
 public String getOpening() {
     return this.opening;
 }
+
+
+
+
 
 public void setOpening(String opening) {
     this.opening = opening;
 }
 
-public String getCommercial() {
-    return this.commercial;
-}
 
-public void setCommercial(String commercial) {
-    this.commercial = commercial;
-}
+
+
 
 public String getClosing() {
     return this.closing;
 }
 
+
+
+
+
 public void setClosing(String closing) {
     this.closing = closing;
 }
+
+
+
+
 
 public double getLatitude() {
     return this.latitude;
 }
 
+
+
+
+
 public void setLatitude(double latitude) {
     this.latitude = latitude;
 }
+
+
+
+
 
 public double getLongitude() {
     return this.longitude;
 }
 
+
+
+
+
 public void setLongitude(double longitude) {
     this.longitude = longitude;
 }
+
+
+
+
 
 public String getLocation_map() {
     return this.location_map;
 }
 
+
+
+
+
 public void setLocation_map(String location_map) {
     this.location_map = location_map;
 }
+
+
+
+
 
 public String getNote() {
     return this.note;
 }
 
+
+
+
+
 public void setNote(String note) {
     this.note = note;
 }
+
+
+
+
 
 public String getStart() {
     return this.start;
 }
 
+
+
+
+
 public void setStart(String start) {
     this.start = start;
 }
+
+
+
+
 
 public boolean getNiceresAvailability() {
     return this.niceresAvailability;
 }
 
+
+
+
+
 public void setNiceresAvailability(boolean niceresAvailability) {
     this.niceresAvailability = niceresAvailability;
 }
+
+
+
+
 
 public int getNiceresId() {
     return this.niceresId;
 }
 
+
+
+
+
 public void setNiceresId(int niceresId) {
     this.niceresId = niceresId;
 }
+
+
+
+
 
 public String getCreated() {
     return this.created;
 }
 
+
+
+
+
 public void setCreated(String created) {
     this.created = created;
 }
+
+
+
+
 
 public String getUpdated() {
     return this.updated;
 }
 
+
+
+
+
 public void setUpdated(String updated) {
     this.updated = updated;
 }
+
+
+
+
 
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 92551804)
@@ -671,6 +939,10 @@ public EntryAddressEntity getAddress() {
     return address;
 }
 
+
+
+
+
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 2073852951)
 public void setAddress(@NotNull EntryAddressEntity address) {
@@ -684,6 +956,10 @@ public void setAddress(@NotNull EntryAddressEntity address) {
         address__resolvedKey = entryAddressEntityId;
     }
 }
+
+
+
+
 
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 1481372099)
@@ -704,6 +980,10 @@ public EntryLivingEntity getLiving() {
     return living;
 }
 
+
+
+
+
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 1333870138)
 public void setLiving(@NotNull EntryLivingEntity living) {
@@ -718,6 +998,10 @@ public void setLiving(@NotNull EntryLivingEntity living) {
     }
 }
 
+
+
+
+
 /** To-one relationship, resolved on first access. */
 @Generated(hash = 1365333349)
 public EntryCapacityEntity getCapacity() {
@@ -727,8 +1011,7 @@ public EntryCapacityEntity getCapacity() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryCapacityEntityDao targetDao = daoSession
-                .getEntryCapacityEntityDao();
+        EntryCapacityEntityDao targetDao = daoSession.getEntryCapacityEntityDao();
         EntryCapacityEntity capacityNew = targetDao.load(__key);
         synchronized (this) {
             capacity = capacityNew;
@@ -737,6 +1020,10 @@ public EntryCapacityEntity getCapacity() {
     }
     return capacity;
 }
+
+
+
+
 
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 270503314)
@@ -752,6 +1039,10 @@ public void setCapacity(@NotNull EntryCapacityEntity capacity) {
     }
 }
 
+
+
+
+
 /**
  * To-many relationship, resolved on first access (and after reset).
  * Changes to to-many relations are not persisted, make changes to the target entity.
@@ -764,8 +1055,7 @@ public List<EntryContactEntity> getListContacts() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryContactEntityDao targetDao = daoSession.getEntryContactEntityDao();
-        List<EntryContactEntity> listContactsNew = targetDao
-                ._queryEntryEntity_ListContacts(id);
+        List<EntryContactEntity> listContactsNew = targetDao._queryEntryEntity_ListContacts(id);
         synchronized (this) {
             if (listContacts == null) {
                 listContacts = listContactsNew;
@@ -775,11 +1065,19 @@ public List<EntryContactEntity> getListContacts() {
     return listContacts;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 303154076)
 public synchronized void resetListContacts() {
     listContacts = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -793,8 +1091,7 @@ public List<EntryPaymentEntity> getListPayments() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryPaymentEntityDao targetDao = daoSession.getEntryPaymentEntityDao();
-        List<EntryPaymentEntity> listPaymentsNew = targetDao
-                ._queryEntryEntity_ListPayments(id);
+        List<EntryPaymentEntity> listPaymentsNew = targetDao._queryEntryEntity_ListPayments(id);
         synchronized (this) {
             if (listPayments == null) {
                 listPayments = listPaymentsNew;
@@ -804,11 +1101,19 @@ public List<EntryPaymentEntity> getListPayments() {
     return listPayments;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1058174086)
 public synchronized void resetListPayments() {
     listPayments = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -821,10 +1126,8 @@ public List<EntryLanguageEntity> getListLanguages() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryLanguageEntityDao targetDao = daoSession
-                .getEntryLanguageEntityDao();
-        List<EntryLanguageEntity> listLanguagesNew = targetDao
-                ._queryEntryEntity_ListLanguages(id);
+        EntryLanguageEntityDao targetDao = daoSession.getEntryLanguageEntityDao();
+        List<EntryLanguageEntity> listLanguagesNew = targetDao._queryEntryEntity_ListLanguages(id);
         synchronized (this) {
             if (listLanguages == null) {
                 listLanguages = listLanguagesNew;
@@ -834,11 +1137,19 @@ public List<EntryLanguageEntity> getListLanguages() {
     return listLanguages;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1712906547)
 public synchronized void resetListLanguages() {
     listLanguages = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -852,8 +1163,7 @@ public List<EntryLabelEntity> getListLabels() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryLabelEntityDao targetDao = daoSession.getEntryLabelEntityDao();
-        List<EntryLabelEntity> listLabelsNew = targetDao
-                ._queryEntryEntity_ListLabels(id);
+        List<EntryLabelEntity> listLabelsNew = targetDao._queryEntryEntity_ListLabels(id);
         synchronized (this) {
             if (listLabels == null) {
                 listLabels = listLabelsNew;
@@ -863,11 +1173,19 @@ public List<EntryLabelEntity> getListLabels() {
     return listLabels;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1934233956)
 public synchronized void resetListLabels() {
     listLabels = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -881,8 +1199,7 @@ public List<EntryAmenityEntity> getListAmenities() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryAmenityEntityDao targetDao = daoSession.getEntryAmenityEntityDao();
-        List<EntryAmenityEntity> listAmenitiesNew = targetDao
-                ._queryEntryEntity_ListAmenities(id);
+        List<EntryAmenityEntity> listAmenitiesNew = targetDao._queryEntryEntity_ListAmenities(id);
         synchronized (this) {
             if (listAmenities == null) {
                 listAmenities = listAmenitiesNew;
@@ -892,11 +1209,19 @@ public List<EntryAmenityEntity> getListAmenities() {
     return listAmenities;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 751763565)
 public synchronized void resetListAmenities() {
     listAmenities = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -910,8 +1235,7 @@ public List<EntryProfileEntity> getListProfiles() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryProfileEntityDao targetDao = daoSession.getEntryProfileEntityDao();
-        List<EntryProfileEntity> listProfilesNew = targetDao
-                ._queryEntryEntity_ListProfiles(id);
+        List<EntryProfileEntity> listProfilesNew = targetDao._queryEntryEntity_ListProfiles(id);
         synchronized (this) {
             if (listProfiles == null) {
                 listProfiles = listProfilesNew;
@@ -921,11 +1245,19 @@ public List<EntryProfileEntity> getListProfiles() {
     return listProfiles;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1135385566)
 public synchronized void resetListProfiles() {
     listProfiles = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -938,10 +1270,8 @@ public List<EntryLocationEntity> getListLocations() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryLocationEntityDao targetDao = daoSession
-                .getEntryLocationEntityDao();
-        List<EntryLocationEntity> listLocationsNew = targetDao
-                ._queryEntryEntity_ListLocations(id);
+        EntryLocationEntityDao targetDao = daoSession.getEntryLocationEntityDao();
+        List<EntryLocationEntity> listLocationsNew = targetDao._queryEntryEntity_ListLocations(id);
         synchronized (this) {
             if (listLocations == null) {
                 listLocations = listLocationsNew;
@@ -951,11 +1281,19 @@ public List<EntryLocationEntity> getListLocations() {
     return listLocations;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 904590150)
 public synchronized void resetListLocations() {
     listLocations = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -968,8 +1306,7 @@ public List<EntryActivityEntity> getListActivities() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryActivityEntityDao targetDao = daoSession
-                .getEntryActivityEntityDao();
+        EntryActivityEntityDao targetDao = daoSession.getEntryActivityEntityDao();
         List<EntryActivityEntity> listActivitiesNew = targetDao
                 ._queryEntryEntity_ListActivities(id);
         synchronized (this) {
@@ -981,11 +1318,19 @@ public List<EntryActivityEntity> getListActivities() {
     return listActivities;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1346110965)
 public synchronized void resetListActivities() {
     listActivities = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -998,8 +1343,7 @@ public List<EntryCategoryEntity> getListCategories() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryCategoryEntityDao targetDao = daoSession
-                .getEntryCategoryEntityDao();
+        EntryCategoryEntityDao targetDao = daoSession.getEntryCategoryEntityDao();
         List<EntryCategoryEntity> listCategoriesNew = targetDao
                 ._queryEntryEntity_ListCategories(id);
         synchronized (this) {
@@ -1011,11 +1355,19 @@ public List<EntryCategoryEntity> getListCategories() {
     return listCategories;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1090176073)
 public synchronized void resetListCategories() {
     listCategories = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1028,8 +1380,7 @@ public List<EntryAtmospherEntity> getListAtmosphere() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryAtmospherEntityDao targetDao = daoSession
-                .getEntryAtmospherEntityDao();
+        EntryAtmospherEntityDao targetDao = daoSession.getEntryAtmospherEntityDao();
         List<EntryAtmospherEntity> listAtmosphereNew = targetDao
                 ._queryEntryEntity_ListAtmosphere(id);
         synchronized (this) {
@@ -1041,11 +1392,19 @@ public List<EntryAtmospherEntity> getListAtmosphere() {
     return listAtmosphere;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 398917539)
 public synchronized void resetListAtmosphere() {
     listAtmosphere = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1058,8 +1417,7 @@ public List<EntryAnimationEntity> getListAnimations() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryAnimationEntityDao targetDao = daoSession
-                .getEntryAnimationEntityDao();
+        EntryAnimationEntityDao targetDao = daoSession.getEntryAnimationEntityDao();
         List<EntryAnimationEntity> listAnimationsNew = targetDao
                 ._queryEntryEntity_ListAnimations(id);
         synchronized (this) {
@@ -1071,11 +1429,19 @@ public List<EntryAnimationEntity> getListAnimations() {
     return listAnimations;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1105122505)
 public synchronized void resetListAnimations() {
     listAnimations = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1088,8 +1454,7 @@ public List<EntryAffiliationEntity> getListAffiliations() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryAffiliationEntityDao targetDao = daoSession
-                .getEntryAffiliationEntityDao();
+        EntryAffiliationEntityDao targetDao = daoSession.getEntryAffiliationEntityDao();
         List<EntryAffiliationEntity> listAffiliationsNew = targetDao
                 ._queryEntryEntity_ListAffiliations(id);
         synchronized (this) {
@@ -1101,11 +1466,19 @@ public List<EntryAffiliationEntity> getListAffiliations() {
     return listAffiliations;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1610585846)
 public synchronized void resetListAffiliations() {
     listAffiliations = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1119,8 +1492,7 @@ public List<EntryStationEntity> getListStations() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryStationEntityDao targetDao = daoSession.getEntryStationEntityDao();
-        List<EntryStationEntity> listStationsNew = targetDao
-                ._queryEntryEntity_ListStations(id);
+        List<EntryStationEntity> listStationsNew = targetDao._queryEntryEntity_ListStations(id);
         synchronized (this) {
             if (listStations == null) {
                 listStations = listStationsNew;
@@ -1130,11 +1502,19 @@ public List<EntryStationEntity> getListStations() {
     return listStations;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 804437585)
 public synchronized void resetListStations() {
     listStations = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1147,8 +1527,7 @@ public List<EntryStandingLevelEntity> getListStandingLevels() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryStandingLevelEntityDao targetDao = daoSession
-                .getEntryStandingLevelEntityDao();
+        EntryStandingLevelEntityDao targetDao = daoSession.getEntryStandingLevelEntityDao();
         List<EntryStandingLevelEntity> listStandingLevelsNew = targetDao
                 ._queryEntryEntity_ListStandingLevels(id);
         synchronized (this) {
@@ -1160,11 +1539,19 @@ public List<EntryStandingLevelEntity> getListStandingLevels() {
     return listStandingLevels;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1337331632)
 public synchronized void resetListStandingLevels() {
     listStandingLevels = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1178,8 +1565,7 @@ public List<EntryChainEntity> getListChains() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryChainEntityDao targetDao = daoSession.getEntryChainEntityDao();
-        List<EntryChainEntity> listChainsNew = targetDao
-                ._queryEntryEntity_ListChains(id);
+        List<EntryChainEntity> listChainsNew = targetDao._queryEntryEntity_ListChains(id);
         synchronized (this) {
             if (listChains == null) {
                 listChains = listChainsNew;
@@ -1189,11 +1575,19 @@ public List<EntryChainEntity> getListChains() {
     return listChains;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1274970052)
 public synchronized void resetListChains() {
     listChains = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1207,8 +1601,7 @@ public List<EntryServiceEntity> getListServices() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryServiceEntityDao targetDao = daoSession.getEntryServiceEntityDao();
-        List<EntryServiceEntity> listServicesNew = targetDao
-                ._queryEntryEntity_ListServices(id);
+        List<EntryServiceEntity> listServicesNew = targetDao._queryEntryEntity_ListServices(id);
         synchronized (this) {
             if (listServices == null) {
                 listServices = listServicesNew;
@@ -1218,11 +1611,19 @@ public List<EntryServiceEntity> getListServices() {
     return listServices;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1612690718)
 public synchronized void resetListServices() {
     listServices = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1236,8 +1637,7 @@ public List<EntryOptionEntity> getListOptions() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryOptionEntityDao targetDao = daoSession.getEntryOptionEntityDao();
-        List<EntryOptionEntity> listOptionsNew = targetDao
-                ._queryEntryEntity_ListOptions(id);
+        List<EntryOptionEntity> listOptionsNew = targetDao._queryEntryEntity_ListOptions(id);
         synchronized (this) {
             if (listOptions == null) {
                 listOptions = listOptionsNew;
@@ -1247,11 +1647,19 @@ public List<EntryOptionEntity> getListOptions() {
     return listOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 515900939)
 public synchronized void resetListOptions() {
     listOptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1264,8 +1672,7 @@ public List<EntryDisabledOptionEntity> getListDisabledOptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryDisabledOptionEntityDao targetDao = daoSession
-                .getEntryDisabledOptionEntityDao();
+        EntryDisabledOptionEntityDao targetDao = daoSession.getEntryDisabledOptionEntityDao();
         List<EntryDisabledOptionEntity> listDisabledOptionsNew = targetDao
                 ._queryEntryEntity_ListDisabledOptions(id);
         synchronized (this) {
@@ -1277,11 +1684,19 @@ public List<EntryDisabledOptionEntity> getListDisabledOptions() {
     return listDisabledOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 125968042)
 public synchronized void resetListDisabledOptions() {
     listDisabledOptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1294,8 +1709,7 @@ public List<EntryFrpOptionEntity> getListFrpOptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryFrpOptionEntityDao targetDao = daoSession
-                .getEntryFrpOptionEntityDao();
+        EntryFrpOptionEntityDao targetDao = daoSession.getEntryFrpOptionEntityDao();
         List<EntryFrpOptionEntity> listFrpOptionsNew = targetDao
                 ._queryEntryEntity_ListFrpOptions(id);
         synchronized (this) {
@@ -1307,11 +1721,19 @@ public List<EntryFrpOptionEntity> getListFrpOptions() {
     return listFrpOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1484766393)
 public synchronized void resetListFrpOptions() {
     listFrpOptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1324,8 +1746,7 @@ public List<EntryPoiOptionEntity> getListPoiOptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryPoiOptionEntityDao targetDao = daoSession
-                .getEntryPoiOptionEntityDao();
+        EntryPoiOptionEntityDao targetDao = daoSession.getEntryPoiOptionEntityDao();
         List<EntryPoiOptionEntity> listPoiOptionsNew = targetDao
                 ._queryEntryEntity_ListPoiOptions(id);
         synchronized (this) {
@@ -1337,11 +1758,19 @@ public List<EntryPoiOptionEntity> getListPoiOptions() {
     return listPoiOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 208436416)
 public synchronized void resetListPoiOptions() {
     listPoiOptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1354,8 +1783,7 @@ public List<EntryPublicationEntity> getListPublications() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryPublicationEntityDao targetDao = daoSession
-                .getEntryPublicationEntityDao();
+        EntryPublicationEntityDao targetDao = daoSession.getEntryPublicationEntityDao();
         List<EntryPublicationEntity> listPublicationsNew = targetDao
                 ._queryEntryEntity_ListPublications(id);
         synchronized (this) {
@@ -1367,11 +1795,19 @@ public List<EntryPublicationEntity> getListPublications() {
     return listPublications;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 195492706)
 public synchronized void resetListPublications() {
     listPublications = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1384,8 +1820,7 @@ public List<EntryCommonTagEntity> getListCommonTags() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryCommonTagEntityDao targetDao = daoSession
-                .getEntryCommonTagEntityDao();
+        EntryCommonTagEntityDao targetDao = daoSession.getEntryCommonTagEntityDao();
         List<EntryCommonTagEntity> listCommonTagsNew = targetDao
                 ._queryEntryEntity_ListCommonTags(id);
         synchronized (this) {
@@ -1397,11 +1832,19 @@ public List<EntryCommonTagEntity> getListCommonTags() {
     return listCommonTags;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 467164386)
 public synchronized void resetListCommonTags() {
     listCommonTags = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1415,8 +1858,7 @@ public List<EntrySectorEntity> getListSectors() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntrySectorEntityDao targetDao = daoSession.getEntrySectorEntityDao();
-        List<EntrySectorEntity> listSectorsNew = targetDao
-                ._queryEntryEntity_ListSectors(id);
+        List<EntrySectorEntity> listSectorsNew = targetDao._queryEntryEntity_ListSectors(id);
         synchronized (this) {
             if (listSectors == null) {
                 listSectors = listSectorsNew;
@@ -1426,11 +1868,19 @@ public List<EntrySectorEntity> getListSectors() {
     return listSectors;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1483554254)
 public synchronized void resetListSectors() {
     listSectors = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1443,8 +1893,7 @@ public List<EntryDescriptionEntity> getListDescriptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryDescriptionEntityDao targetDao = daoSession
-                .getEntryDescriptionEntityDao();
+        EntryDescriptionEntityDao targetDao = daoSession.getEntryDescriptionEntityDao();
         List<EntryDescriptionEntity> listDescriptionsNew = targetDao
                 ._queryEntryEntity_ListDescriptions(id);
         synchronized (this) {
@@ -1456,11 +1905,19 @@ public List<EntryDescriptionEntity> getListDescriptions() {
     return listDescriptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1925387837)
 public synchronized void resetListDescriptions() {
     listDescriptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1474,8 +1931,7 @@ public List<EntryImageEntity> getListImages() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryImageEntityDao targetDao = daoSession.getEntryImageEntityDao();
-        List<EntryImageEntity> listImagesNew = targetDao
-                ._queryEntryEntity_ListImages(id);
+        List<EntryImageEntity> listImagesNew = targetDao._queryEntryEntity_ListImages(id);
         synchronized (this) {
             if (listImages == null) {
                 listImages = listImagesNew;
@@ -1485,11 +1941,19 @@ public List<EntryImageEntity> getListImages() {
     return listImages;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1152877506)
 public synchronized void resetListImages() {
     listImages = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1503,8 +1967,7 @@ public List<EntryTariffEntity> getListTariffs() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryTariffEntityDao targetDao = daoSession.getEntryTariffEntityDao();
-        List<EntryTariffEntity> listTariffsNew = targetDao
-                ._queryEntryEntity_ListTariffs(id);
+        List<EntryTariffEntity> listTariffsNew = targetDao._queryEntryEntity_ListTariffs(id);
         synchronized (this) {
             if (listTariffs == null) {
                 listTariffs = listTariffsNew;
@@ -1514,11 +1977,19 @@ public List<EntryTariffEntity> getListTariffs() {
     return listTariffs;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 2062339290)
 public synchronized void resetListTariffs() {
     listTariffs = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1532,8 +2003,7 @@ public List<EntryClosureEntity> getListClosures() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryClosureEntityDao targetDao = daoSession.getEntryClosureEntityDao();
-        List<EntryClosureEntity> listClosuresNew = targetDao
-                ._queryEntryEntity_ListClosures(id);
+        List<EntryClosureEntity> listClosuresNew = targetDao._queryEntryEntity_ListClosures(id);
         synchronized (this) {
             if (listClosures == null) {
                 listClosures = listClosuresNew;
@@ -1543,11 +2013,55 @@ public List<EntryClosureEntity> getListClosures() {
     return listClosures;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 1466156789)
 public synchronized void resetListClosures() {
     listClosures = null;
 }
+
+
+
+
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 1573089525)
+public List<EntryCommerciaEntity> getListCommercia() {
+    if (listCommercia == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        EntryCommerciaEntityDao targetDao = daoSession.getEntryCommerciaEntityDao();
+        List<EntryCommerciaEntity> listCommerciaNew = targetDao._queryEntryEntity_ListCommercia(id);
+        synchronized (this) {
+            if (listCommercia == null) {
+                listCommercia = listCommerciaNew;
+            }
+        }
+    }
+    return listCommercia;
+}
+
+
+
+
+
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 635576947)
+public synchronized void resetListCommercia() {
+    listCommercia = null;
+}
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1561,8 +2075,7 @@ public List<EntrySpaceEntity> getListSpaces() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntrySpaceEntityDao targetDao = daoSession.getEntrySpaceEntityDao();
-        List<EntrySpaceEntity> listSpacesNew = targetDao
-                ._queryEntryEntity_ListSpaces(id);
+        List<EntrySpaceEntity> listSpacesNew = targetDao._queryEntryEntity_ListSpaces(id);
         synchronized (this) {
             if (listSpaces == null) {
                 listSpaces = listSpacesNew;
@@ -1572,11 +2085,19 @@ public List<EntrySpaceEntity> getListSpaces() {
     return listSpaces;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 84673251)
 public synchronized void resetListSpaces() {
     listSpaces = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1590,8 +2111,7 @@ public List<EntryOpeningEntity> getListOpenings() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryOpeningEntityDao targetDao = daoSession.getEntryOpeningEntityDao();
-        List<EntryOpeningEntity> listOpeningsNew = targetDao
-                ._queryEntryEntity_ListOpenings(id);
+        List<EntryOpeningEntity> listOpeningsNew = targetDao._queryEntryEntity_ListOpenings(id);
         synchronized (this) {
             if (listOpenings == null) {
                 listOpenings = listOpeningsNew;
@@ -1601,11 +2121,19 @@ public List<EntryOpeningEntity> getListOpenings() {
     return listOpenings;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 401760413)
 public synchronized void resetListOpenings() {
     listOpenings = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1619,8 +2147,7 @@ public List<EntryClosingEntity> getListClosings() {
             throw new DaoException("Entity is detached from DAO context");
         }
         EntryClosingEntityDao targetDao = daoSession.getEntryClosingEntityDao();
-        List<EntryClosingEntity> listClosingsNew = targetDao
-                ._queryEntryEntity_ListClosings(id);
+        List<EntryClosingEntity> listClosingsNew = targetDao._queryEntryEntity_ListClosings(id);
         synchronized (this) {
             if (listClosings == null) {
                 listClosings = listClosingsNew;
@@ -1630,11 +2157,19 @@ public List<EntryClosingEntity> getListClosings() {
     return listClosings;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 258037397)
 public synchronized void resetListClosings() {
     listClosings = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1647,8 +2182,7 @@ public List<EntryGroupOptionEntity> getListGroupOptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryGroupOptionEntityDao targetDao = daoSession
-                .getEntryGroupOptionEntityDao();
+        EntryGroupOptionEntityDao targetDao = daoSession.getEntryGroupOptionEntityDao();
         List<EntryGroupOptionEntity> listGroupOptionsNew = targetDao
                 ._queryEntryEntity_ListGroupOptions(id);
         synchronized (this) {
@@ -1660,11 +2194,19 @@ public List<EntryGroupOptionEntity> getListGroupOptions() {
     return listGroupOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 965514078)
 public synchronized void resetListGroupOptions() {
     listGroupOptions = null;
 }
+
+
+
+
 
 /**
  * To-many relationship, resolved on first access (and after reset).
@@ -1677,8 +2219,7 @@ public List<EntryFamilyOptionEntity> getListFamilyOptions() {
         if (daoSession == null) {
             throw new DaoException("Entity is detached from DAO context");
         }
-        EntryFamilyOptionEntityDao targetDao = daoSession
-                .getEntryFamilyOptionEntityDao();
+        EntryFamilyOptionEntityDao targetDao = daoSession.getEntryFamilyOptionEntityDao();
         List<EntryFamilyOptionEntity> listFamilyOptionsNew = targetDao
                 ._queryEntryEntity_ListFamilyOptions(id);
         synchronized (this) {
@@ -1690,11 +2231,166 @@ public List<EntryFamilyOptionEntity> getListFamilyOptions() {
     return listFamilyOptions;
 }
 
+
+
+
+
 /** Resets a to-many relationship, making the next get call to query for a fresh result. */
 @Generated(hash = 677514775)
 public synchronized void resetListFamilyOptions() {
     listFamilyOptions = null;
 }
+
+
+
+
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 173990776)
+public List<EntryAllianceOptionEntity> getListAllianceOptions() {
+    if (listAllianceOptions == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        EntryAllianceOptionEntityDao targetDao = daoSession.getEntryAllianceOptionEntityDao();
+        List<EntryAllianceOptionEntity> listAllianceOptionsNew = targetDao
+                ._queryEntryEntity_ListAllianceOptions(id);
+        synchronized (this) {
+            if (listAllianceOptions == null) {
+                listAllianceOptions = listAllianceOptionsNew;
+            }
+        }
+    }
+    return listAllianceOptions;
+}
+
+
+
+
+
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 362650387)
+public synchronized void resetListAllianceOptions() {
+    listAllianceOptions = null;
+}
+
+
+
+
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 1347438571)
+public List<EntryFurnishedRentalEntity> getListFurnishedRentals() {
+    if (listFurnishedRentals == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        EntryFurnishedRentalEntityDao targetDao = daoSession.getEntryFurnishedRentalEntityDao();
+        List<EntryFurnishedRentalEntity> listFurnishedRentalsNew = targetDao
+                ._queryEntryEntity_ListFurnishedRentals(id);
+        synchronized (this) {
+            if (listFurnishedRentals == null) {
+                listFurnishedRentals = listFurnishedRentalsNew;
+            }
+        }
+    }
+    return listFurnishedRentals;
+}
+
+
+
+
+
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 316224779)
+public synchronized void resetListFurnishedRentals() {
+    listFurnishedRentals = null;
+}
+
+
+
+
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 490963333)
+public List<EntryRentalMonthEntity> getListRentalMonths() {
+    if (listRentalMonths == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        EntryRentalMonthEntityDao targetDao = daoSession.getEntryRentalMonthEntityDao();
+        List<EntryRentalMonthEntity> listRentalMonthsNew = targetDao
+                ._queryEntryEntity_ListRentalMonths(id);
+        synchronized (this) {
+            if (listRentalMonths == null) {
+                listRentalMonths = listRentalMonthsNew;
+            }
+        }
+    }
+    return listRentalMonths;
+}
+
+
+
+
+
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 1677146486)
+public synchronized void resetListRentalMonths() {
+    listRentalMonths = null;
+}
+
+
+
+
+
+/**
+ * To-many relationship, resolved on first access (and after reset).
+ * Changes to to-many relations are not persisted, make changes to the target entity.
+ */
+@Generated(hash = 1849478505)
+public List<EntrySleepingEntity> getListSleepings() {
+    if (listSleepings == null) {
+        final DaoSession daoSession = this.daoSession;
+        if (daoSession == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        EntrySleepingEntityDao targetDao = daoSession.getEntrySleepingEntityDao();
+        List<EntrySleepingEntity> listSleepingsNew = targetDao._queryEntryEntity_ListSleepings(id);
+        synchronized (this) {
+            if (listSleepings == null) {
+                listSleepings = listSleepingsNew;
+            }
+        }
+    }
+    return listSleepings;
+}
+
+
+
+
+
+/** Resets a to-many relationship, making the next get call to query for a fresh result. */
+@Generated(hash = 289613639)
+public synchronized void resetListSleepings() {
+    listSleepings = null;
+}
+
+
+
+
 
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
@@ -1708,6 +2404,10 @@ public void delete() {
     myDao.delete(this);
 }
 
+
+
+
+
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
  * Entity must attached to an entity context.
@@ -1719,6 +2419,10 @@ public void refresh() {
     }
     myDao.refresh(this);
 }
+
+
+
+
 
 /**
  * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
@@ -1732,6 +2436,10 @@ public void update() {
     myDao.update(this);
 }
 
+
+
+
+
 /** called by internal mechanisms, do not call yourself. */
 @Generated(hash = 1579925774)
 public void __setDaoSession(DaoSession daoSession) {
@@ -1739,13 +2447,9 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getEntryEntityDao() : null;
 }
 
-public EntriesType getEntryType() {
-    return this.entryType;
-}
 
-public void setEntryType(EntriesType entryType) {
-    this.entryType = entryType;
-}
+
+
 
     public static class EntriesTypeConverter implements PropertyConverter<EntriesType, String> {
         @Override

@@ -127,11 +127,23 @@ public class Entry {
     @ElementList(name="tariffs", required=false)
     private List<Tariff> listTariffs;
 
+    @ElementList(name="alliance_options", required=false)
+    private List<AllianceOption> listAllianceOptions;
+
+    @ElementList(name="furnished_rentals", required=false)
+    private List<FurnishedRental> listFurnishedRentals;
+
+    @ElementList(name="rental_monthes", required=false)
+    private List<RentalMonth> listRentalMonthes;
+
+    @ElementList(name="sleepings", required=false)
+    private List<Sleeping> listSleepings;
+
     @Element(required=false)
     private Capacity capacity;
 
-    @ElementList(name="closures", required=false)
-    private List<Closure> listClosures;
+    @ElementList(entry="closures", required=false, inline=true)
+    private List<Closures> listClosures;
 
     @ElementList(name="spaces", required=false)
     private List<Space> listSpaces;
@@ -151,8 +163,11 @@ public class Entry {
     @Element(required=false)
     private String opening;
 
-    @Element(required=false)
-    private String commercial;
+    //@Element(required=false)
+    //private String commercial;
+
+    @ElementList(name="commercial", required=false)
+    private List<Commercia> listCommercial;
 
     @Element(required=false)
     private String closing;
@@ -188,6 +203,10 @@ public class Entry {
     public Entry() {
     }
 
+    public List<FurnishedRental> getListFurnishedRentals() {
+        return listFurnishedRentals;
+    }
+
     public List<Language> getListLanguages() {
         return listLanguages;
     }
@@ -208,7 +227,7 @@ public class Entry {
         return listSectors;
     }
 
-    public List<Closure> getListClosures() {
+    public List<Closures> getListClosures() {
         return listClosures;
     }
 
@@ -224,8 +243,20 @@ public class Entry {
         return opening;
     }
 
-    public String getCommercial() {
-        return commercial;
+    public List<AllianceOption> getListAllianceOptions() {
+        return listAllianceOptions;
+    }
+
+    public List<RentalMonth> getListRentalMonthes() {
+        return listRentalMonthes;
+    }
+
+    public List<Sleeping> getListSleepings() {
+        return listSleepings;
+    }
+
+    public List<Commercia> getListCommercial() {
+        return listCommercial;
     }
 
     public String getClosing() {
@@ -379,6 +410,8 @@ public class Entry {
     public List<Closing> getListClosings() {
         return listClosings;
     }
+
+
 
     public double getLatitude() {
         return latitude;

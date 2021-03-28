@@ -14,11 +14,15 @@ public class EntryClosureEntity implements Comparable<EntryClosureEntity> {
 
     private String closureSpan;
 
-    @Generated(hash = 2046590143)
-    public EntryClosureEntity(Long id, String closureDay, String closureSpan) {
+    private String date;
+
+    @Generated(hash = 1495037074)
+    public EntryClosureEntity(Long id, String closureDay, String closureSpan,
+            String date) {
         this.id = id;
         this.closureDay = closureDay;
         this.closureSpan = closureSpan;
+        this.date = date;
     }
 
     @Generated(hash = 582055885)
@@ -52,6 +56,14 @@ public class EntryClosureEntity implements Comparable<EntryClosureEntity> {
 
     public void setClosureSpan(String closureSpan) {
         this.closureSpan = closureSpan;
+    }
+
+    public String getDate() {
+        return this.date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

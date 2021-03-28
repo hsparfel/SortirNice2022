@@ -32,6 +32,7 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property ClosureDay = new Property(1, String.class, "closureDay", false, "CLOSURE_DAY");
         public final static Property ClosureSpan = new Property(2, String.class, "closureSpan", false, "CLOSURE_SPAN");
+        public final static Property Date = new Property(3, String.class, "date", false, "DATE");
     }
 
     private Query<EntryClosureEntity> entryEntity_ListClosuresQuery;
@@ -50,7 +51,8 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         db.execSQL("CREATE TABLE " + constraint + "\"ENTRY_CLOSURE_ENTITY\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"CLOSURE_DAY\" TEXT," + // 1: closureDay
-                "\"CLOSURE_SPAN\" TEXT);"); // 2: closureSpan
+                "\"CLOSURE_SPAN\" TEXT," + // 2: closureSpan
+                "\"DATE\" TEXT);"); // 3: date
     }
 
     /** Drops the underlying database table. */
@@ -77,6 +79,11 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         if (closureSpan != null) {
             stmt.bindString(3, closureSpan);
         }
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(4, date);
+        }
     }
 
     @Override
@@ -97,6 +104,11 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         if (closureSpan != null) {
             stmt.bindString(3, closureSpan);
         }
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(4, date);
+        }
     }
 
     @Override
@@ -109,7 +121,8 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         EntryClosureEntity entity = new EntryClosureEntity( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // closureDay
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // closureSpan
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // closureSpan
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // date
         );
         return entity;
     }
@@ -119,6 +132,7 @@ public class EntryClosureEntityDao extends AbstractDao<EntryClosureEntity, Long>
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setClosureDay(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setClosureSpan(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setDate(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override
