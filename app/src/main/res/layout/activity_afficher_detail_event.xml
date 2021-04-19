@@ -202,7 +202,6 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/text_view_detail_middle">
             <ImageButton
-                android:id="@+id/imageButtonMap"
                 app:srcCompat="@drawable/outline_explore_black_18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -211,7 +210,6 @@
              />
 
             <ImageButton
-                android:id="@+id/imageButtonCar"
                 app:srcCompat="@drawable/outline_directions_car_black_18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

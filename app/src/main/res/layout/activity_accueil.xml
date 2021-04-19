@@ -27,7 +27,6 @@
             android:layout_height="30dp" />
 
         <Button
-            android:id="@+id/eventsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Events button"
@@ -36,7 +35,6 @@
             />
 
         <Button
-            android:id="@+id/entriesSortieButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sorties button"
@@ -45,7 +43,6 @@
             />
 
         <Button
-            android:id="@+id/entriesRestaurantButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Restaurants button"
@@ -54,7 +51,6 @@
             />
 
         <Button
-            android:id="@+id/entriesTransportButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Transports button"
@@ -63,7 +59,6 @@
             />
 
         <Button
-            android:id="@+id/entriesHotelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hotels button"
@@ -72,7 +67,6 @@
             />
 
         <Button
-            android:id="@+id/entriesBoutiqueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Boutiques button"
@@ -81,7 +75,6 @@
             />
 
         <Button
-            android:id="@+id/entriesHebergementButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hebergements button"
@@ -90,7 +83,6 @@
             />
 
         <Button
-            android:id="@+id/entriesShoppingButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shoppings button"
@@ -99,7 +91,6 @@
             />
 
         <Button
-            android:id="@+id/entriesVisiteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Visites button"
@@ -108,7 +99,6 @@
             />
 
         <Button
-            android:id="@+id/entriesUtileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Utiles button"

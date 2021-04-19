@@ -66,7 +66,7 @@ import com.pouillos.sortirnice.dao.EntrySpaceEntityDao;
 import com.pouillos.sortirnice.dao.EntryStandingLevelEntityDao;
 import com.pouillos.sortirnice.dao.EntryStationEntityDao;
 import com.pouillos.sortirnice.dao.EntryTariffEntityDao;
-import com.pouillos.sortirnice.dao.EpisodeDao;
+
 import com.pouillos.sortirnice.dao.EventEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryActivityEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryAffiliationEntityDao;
@@ -106,8 +106,7 @@ import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryStandingLevelEntityDa
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryStationEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryTariffEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryOpeningEntityWithEntryGridEntityDao;
-import com.pouillos.sortirnice.dao.SaisonDao;
-import com.pouillos.sortirnice.dao.SerieDao;
+
 import com.pouillos.sortirnice.entities.entry.EntryEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryActivityEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryAddressEntity;
@@ -238,9 +237,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected BottomNavigationView bottomNavigationView;
     protected DaoSession daoSession;
-    protected SerieDao serieDao;
-    protected SaisonDao saisonDao;
-    protected EpisodeDao episodeDao;
+
     protected EventEntityDao eventEntityDao;
     protected EntryEntityDao entryEntityDao;
     protected EntryActivityEntityDao entryActivityEntityDao;
@@ -331,9 +328,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initialiserDao();
-        serieDao = daoSession.getSerieDao();
-        saisonDao = daoSession.getSaisonDao();
-        episodeDao = daoSession.getEpisodeDao();
+
         eventEntityDao = daoSession.getEventEntityDao();
         entryEntityDao = daoSession.getEntryEntityDao();
         entryActivityEntityDao = daoSession.getEntryActivityEntityDao();
@@ -453,7 +448,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                                 ouvrirActiviteSuivante(NavDrawerActivity.this, AccueilActivity.class, true);
                                 break;
                             case R.id.bottom_navigation_add_serie:
-                                ouvrirActiviteSuivante(NavDrawerActivity.this, EnregistrerSerieActivity.class, true);
+                                //ouvrirActiviteSuivante(NavDrawerActivity.this, EnregistrerSerieActivity.class, true);
                                 break;
 
                         }

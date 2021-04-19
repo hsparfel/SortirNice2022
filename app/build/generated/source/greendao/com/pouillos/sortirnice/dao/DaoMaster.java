@@ -101,10 +101,7 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryStationEntityDao.createTable(db, ifNotExists);
         JoinEntryEntityWithEntryTariffEntityDao.createTable(db, ifNotExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.createTable(db, ifNotExists);
-        EpisodeDao.createTable(db, ifNotExists);
         EventEntityDao.createTable(db, ifNotExists);
-        SaisonDao.createTable(db, ifNotExists);
-        SerieDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -189,10 +186,7 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryStationEntityDao.dropTable(db, ifExists);
         JoinEntryEntityWithEntryTariffEntityDao.dropTable(db, ifExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.dropTable(db, ifExists);
-        EpisodeDao.dropTable(db, ifExists);
         EventEntityDao.dropTable(db, ifExists);
-        SaisonDao.dropTable(db, ifExists);
-        SerieDao.dropTable(db, ifExists);
     }
 
     /**
@@ -291,10 +285,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(JoinEntryEntityWithEntryStationEntityDao.class);
         registerDaoClass(JoinEntryEntityWithEntryTariffEntityDao.class);
         registerDaoClass(JoinEntryOpeningEntityWithEntryGridEntityDao.class);
-        registerDaoClass(EpisodeDao.class);
         registerDaoClass(EventEntityDao.class);
-        registerDaoClass(SaisonDao.class);
-        registerDaoClass(SerieDao.class);
     }
 
     public DaoSession newSession() {
