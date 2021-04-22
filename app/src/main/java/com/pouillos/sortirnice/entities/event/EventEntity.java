@@ -67,8 +67,6 @@ public class EventEntity implements Comparable<EventEntity> {
     
     private String updated;
 
-
-
     @Generated(hash = 1408705657)
     public EventEntity(Long id, Long eventId, String nameFr, String start,
             String end, String adressContent, String adressZip, String adressCity,
@@ -110,366 +108,245 @@ public class EventEntity implements Comparable<EventEntity> {
         this.updated = updated;
     }
 
-
-
     @Generated(hash = 893269617)
     public EventEntity() {
     }
-
-
 
     @Override
     public int compareTo(EventEntity o) {
         return this.getId().compareTo(o.getId());
     }
 
-
-
     public Long getId() {
         return this.id;
     }
-
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-
-
     public Long getEventId() {
         return this.eventId;
     }
-
-
 
     public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
-
-
     public String getNameFr() {
         return this.nameFr;
     }
-
-
 
     public void setNameFr(String nameFr) {
         this.nameFr = nameFr;
     }
 
-
-
     public String getStart() {
         return this.start;
     }
-
-
 
     public void setStart(String start) {
         this.start = start;
     }
 
-
-
     public String getEnd() {
         return this.end;
     }
-
-
 
     public void setEnd(String end) {
         this.end = end;
     }
 
-
-
     public String getAdressContent() {
         return this.adressContent;
     }
-
-
 
     public void setAdressContent(String adressContent) {
         this.adressContent = adressContent;
     }
 
-
-
     public String getAdressZip() {
         return this.adressZip;
     }
-
-
 
     public void setAdressZip(String adressZip) {
         this.adressZip = adressZip;
     }
 
-
-
     public String getAdressCity() {
         return this.adressCity;
     }
-
-
 
     public void setAdressCity(String adressCity) {
         this.adressCity = adressCity;
     }
 
-
-
     public String getPhone() {
         return this.phone;
     }
-
-
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-
-
     public String getEmail() {
         return this.email;
     }
-
-
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-
-
     public String getWebsiteSituation() {
         return this.websiteSituation;
     }
-
-
 
     public void setWebsiteSituation(String websiteSituation) {
         this.websiteSituation = websiteSituation;
     }
 
-
-
     public String getWebsitePrincipal() {
         return this.websitePrincipal;
     }
-
-
 
     public void setWebsitePrincipal(String websitePrincipal) {
         this.websitePrincipal = websitePrincipal;
     }
 
-
-
     public String getProfile() {
         return this.profile;
     }
-
-
 
     public void setProfile(String profile) {
         this.profile = profile;
     }
 
-
-
     public String getStation() {
         return this.station;
     }
-
-
 
     public void setStation(String station) {
         this.station = station;
     }
 
-
-
     public String getCategory() {
         return this.category;
     }
-
-
 
     public void setCategory(String category) {
         this.category = category;
     }
 
-
-
     public String getOption() {
         return this.option;
     }
-
-
 
     public void setOption(String option) {
         this.option = option;
     }
 
-
-
     public String getSecto() {
         return this.secto;
     }
-
-
 
     public void setSecto(String secto) {
         this.secto = secto;
     }
 
-
-
     public String getDescriptionSituation() {
         return this.descriptionSituation;
     }
-
-
 
     public void setDescriptionSituation(String descriptionSituation) {
         this.descriptionSituation = descriptionSituation;
     }
 
-
-
     public String getDescriptionHoraires() {
         return this.descriptionHoraires;
     }
-
-
 
     public void setDescriptionHoraires(String descriptionHoraires) {
         this.descriptionHoraires = descriptionHoraires;
     }
 
-
-
     public String getDescriptionTarification() {
         return this.descriptionTarification;
     }
-
-
 
     public void setDescriptionTarification(String descriptionTarification) {
         this.descriptionTarification = descriptionTarification;
     }
 
-
-
     public String getDescriptionDescription() {
         return this.descriptionDescription;
     }
-
-
 
     public void setDescriptionDescription(String descriptionDescription) {
         this.descriptionDescription = descriptionDescription;
     }
 
-
-
     public String getImage() {
         return this.image;
     }
-
-
 
     public void setImage(String image) {
         this.image = image;
     }
 
-
-
     public double getLatitude() {
         return this.latitude;
     }
-
-
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-
-
     public double getLongitude() {
         return this.longitude;
     }
-
-
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-
-
     public int getNote() {
         return this.note;
     }
-
-
 
     public void setNote(int note) {
         this.note = note;
     }
 
-
-
     public String getEntryId() {
         return this.entryId;
     }
-
-
 
     public void setEntryId(String entryId) {
         this.entryId = entryId;
     }
 
-
-
     public String getEntryName() {
         return this.entryName;
     }
-
-
 
     public void setEntryName(String entryName) {
         this.entryName = entryName;
     }
 
-
-
     public String getCreated() {
         return this.created;
     }
-
-
 
     public void setCreated(String created) {
         this.created = created;
     }
 
-
-
     public String getUpdated() {
         return this.updated;
     }
 
-
-
     public void setUpdated(String updated) {
         this.updated = updated;
     }
-
 
 }

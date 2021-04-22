@@ -395,7 +395,7 @@ public class AfficherEntriesUtileActivity extends NavDrawerActivity implements R
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Utile);
         fabExit.performClick();
     }
 

@@ -8,6 +8,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
 import butterknife.Unbinder;
 import butterknife.internal.Utils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pouillos.sortirnice.R;
 import java.lang.IllegalStateException;
 import java.lang.Override;
@@ -44,6 +45,8 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
     target.descriptionSituation = Utils.findRequiredViewAsType(source, R.id.description_situation, "field 'descriptionSituation'", TextView.class);
     target.descriptionTarification = Utils.findRequiredViewAsType(source, R.id.description_tarification, "field 'descriptionTarification'", TextView.class);
     target.descriptionHoraires = Utils.findRequiredViewAsType(source, R.id.description_horaires, "field 'descriptionHoraires'", TextView.class);
+    target.fabExit = Utils.findRequiredViewAsType(source, R.id.fabExit, "field 'fabExit'", FloatingActionButton.class);
+    target.fabSave = Utils.findRequiredViewAsType(source, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
   }
 
   @Override
@@ -73,5 +76,7 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
     target.descriptionSituation = null;
     target.descriptionTarification = null;
     target.descriptionHoraires = null;
+    target.fabExit = null;
+    target.fabSave = null;
   }
 }

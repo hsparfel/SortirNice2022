@@ -395,7 +395,7 @@ public class AfficherEntriesHotelActivity extends NavDrawerActivity implements R
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Hotel);
         fabExit.performClick();
     }
 

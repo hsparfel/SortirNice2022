@@ -102,6 +102,7 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryTariffEntityDao.createTable(db, ifNotExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.createTable(db, ifNotExists);
         EventEntityDao.createTable(db, ifNotExists);
+        EventSauvegardeEntityDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -187,6 +188,7 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryTariffEntityDao.dropTable(db, ifExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.dropTable(db, ifExists);
         EventEntityDao.dropTable(db, ifExists);
+        EventSauvegardeEntityDao.dropTable(db, ifExists);
     }
 
     /**
@@ -286,6 +288,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(JoinEntryEntityWithEntryTariffEntityDao.class);
         registerDaoClass(JoinEntryOpeningEntityWithEntryGridEntityDao.class);
         registerDaoClass(EventEntityDao.class);
+        registerDaoClass(EventSauvegardeEntityDao.class);
     }
 
     public DaoSession newSession() {

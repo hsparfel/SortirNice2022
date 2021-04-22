@@ -395,7 +395,7 @@ public class AfficherEntriesHebergementActivity extends NavDrawerActivity implem
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Hebergement);
         fabExit.performClick();
     }
 

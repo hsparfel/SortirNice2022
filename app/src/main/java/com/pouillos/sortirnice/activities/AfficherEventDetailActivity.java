@@ -17,8 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.entities.event.EventEntity;
+import com.pouillos.sortirnice.entities.event.EventSauvegardeEntity;
 import com.pouillos.sortirnice.utils.DateUtils;
 
 import java.io.IOException;
@@ -80,6 +82,11 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
 
     Bitmap bitmap = null;
 
+    @BindView(R.id.fabExit)
+    FloatingActionButton fabExit;
+    @BindView(R.id.fabSave)
+    FloatingActionButton fabSave;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +103,6 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         setTitle("Detail");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
-        //linkSetup();
     }
 
 
@@ -114,11 +120,9 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
     }
 
     private void hideFields() {
-
         if (eventTransmis.getImage() == null) {
             image.setVisibility(View.GONE);
         }
-
         if (eventTransmis.getNameFr() == null) {
             nameFr.setVisibility(View.GONE);
         }
@@ -176,6 +180,9 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         if (eventTransmis.getSecto() == null) {
             secto.setVisibility(View.GONE);
         }
+        if (isEventAlreadySaved(eventTransmis)) {
+            fabSave.hide();
+        }
     }
 
     private void fillAllFields() {
@@ -200,33 +207,10 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         secto.setText(eventTransmis.getSecto());
     }
 
-    /*private void linkSetup() {
-            websitePrincipal.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String url = eventTransmis.getWebsitePrincipal();
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                }
-            });
-
-        websiteSituation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = eventTransmis.getWebsiteSituation();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-
-    }*/
-
     private class AsyncTaskRunnerImage extends AsyncTask<Void, Integer, Void> {
 
         protected Void doInBackground(Void...voids) {
-            URL url = null;
+            URL url;
             bitmap = null;
             if (eventTransmis.getImage()!= null && eventTransmis.getImage().length()>0) {
                 try {
@@ -237,17 +221,11 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
                     if (resCode == HttpURLConnection.HTTP_OK) {
                         InputStream in = httpConn.getInputStream();
                         bitmap = BitmapFactory.decodeStream(in);
-                        //this.image.setImageBitmap(bitmap);
-                        //RecyclerViewHolderEvents.this.image.setImageBitmap(bitmap);
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
-                    //this.image.setImageResource(R.drawable.outline_camera);
-                    //RecyclerViewHolderEvents.this.image.setImageResource(R.drawable.outline_camera);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    //this.image.setImageResource(R.drawable.outline_camera);
-                    //RecyclerViewHolderEvents.this.image.setImageResource(R.drawable.outline_camera);
                 }
             }
             return null;
@@ -263,12 +241,45 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         protected void onProgressUpdate(Integer... integer) {
-            //progressBar.setProgress(integer[0],true);
         }
     }
 
     public void exit(View view) {
         finish();
+    }
+
+    public void save(View view) {
+        EventSauvegardeEntity current = new EventSauvegardeEntity();
+        current.setEventId(eventTransmis.getEventId() != null ? eventTransmis.getEventId() : null);
+        current.setNameFr(eventTransmis.getNameFr() != null ? eventTransmis.getNameFr() : null);
+        current.setStart(eventTransmis.getStart() != null ? eventTransmis.getStart() : null);
+        current.setEnd(eventTransmis.getEnd() != null ? eventTransmis.getEnd() : null);
+        current.setAdressContent(eventTransmis.getAdressContent() != null ? eventTransmis.getAdressContent() : null);
+        current.setAdressZip(eventTransmis.getAdressZip() != null ? eventTransmis.getAdressZip() : null);
+        current.setAdressCity(eventTransmis.getAdressCity() != null ? eventTransmis.getAdressCity() : null);
+        current.setPhone(eventTransmis.getPhone() != null ? eventTransmis.getPhone() : null);
+        current.setEmail(eventTransmis.getEmail() != null ? eventTransmis.getEmail() : null);
+        current.setWebsiteSituation(eventTransmis.getWebsiteSituation() != null ? eventTransmis.getWebsiteSituation() : null);
+        current.setWebsitePrincipal(eventTransmis.getWebsitePrincipal() != null ? eventTransmis.getWebsitePrincipal() : null);
+        current.setProfile(eventTransmis.getProfile() != null ? eventTransmis.getProfile() : null);
+        current.setStation(eventTransmis.getStation() != null ? eventTransmis.getStation() : null);
+        current.setCategory(eventTransmis.getCategory() != null ? eventTransmis.getCategory() : null);
+        current.setOption(eventTransmis.getOption() != null ? eventTransmis.getOption() : null);
+        current.setSecto(eventTransmis.getSecto() != null ? eventTransmis.getSecto() : null);
+        current.setDescriptionSituation(eventTransmis.getDescriptionSituation() != null ? eventTransmis.getDescriptionSituation() : null);
+        current.setDescriptionHoraires(eventTransmis.getDescriptionHoraires() != null ? eventTransmis.getDescriptionHoraires() : null);
+        current.setDescriptionTarification(eventTransmis.getDescriptionTarification() != null ? eventTransmis.getDescriptionTarification() : null);
+        current.setDescriptionDescription(eventTransmis.getDescriptionDescription() != null ? eventTransmis.getDescriptionDescription() : null);
+        current.setImage(eventTransmis.getImage() != null ? eventTransmis.getImage() : null);
+        current.setLatitude(eventTransmis.getLatitude());
+        current.setLongitude(eventTransmis.getLongitude());
+        current.setNote(eventTransmis.getNote());
+        current.setEntryId(eventTransmis.getEntryId() != null ? eventTransmis.getEntryId() : null);
+        current.setEntryName(eventTransmis.getEntryName() != null ? eventTransmis.getEntryName() : null);
+        current.setCreated(eventTransmis.getCreated() != null ? eventTransmis.getCreated() : null);
+        current.setUpdated(eventTransmis.getUpdated() != null ? eventTransmis.getUpdated() : null);
+        eventSauvegardeEntityDao.insert(current);
+        fabSave.hide();
     }
 
     public void launchGoogleMap(View view) {
@@ -301,7 +312,6 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
                 url = "https://waze.com/ul?q=";
                 url += eventTransmis.getAdressContent()+" " +eventTransmis.getAdressZip()+" " + eventTransmis.getAdressCity();
             }
-
             Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
             startActivity( intent );
         }

@@ -65,7 +65,9 @@ public class AccueilActivity extends NavDrawerActivity {
     public void afficherEntriesUtile(View view) {
         ouvrirActiviteSuivante(this, AfficherEntriesUtileActivity.class,false);
     }
-
+    public void afficherChoixEnregistrement(View view) {
+        ouvrirActiviteSuivante(this, AfficherChoixEnregistrementActivity.class,false);
+    }
 
 
 

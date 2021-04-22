@@ -395,7 +395,7 @@ public class AfficherEntriesSortieActivity extends NavDrawerActivity implements 
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Sortie);
         fabExit.performClick();
     }
 

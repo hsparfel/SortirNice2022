@@ -395,7 +395,7 @@ public class AfficherEntriesShoppingActivity extends NavDrawerActivity implement
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Shopping);
         fabExit.performClick();
     }
 

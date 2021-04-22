@@ -15,7 +15,7 @@
 11-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:5:22-64
 12
 13    <application
-13-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:7:5-45:19
+13-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:7:5-66:19
 14        android:name="com.pouillos.sortirnice.App"
 14-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:8:9-28
 15        android:allowBackup="true"
@@ -118,6 +118,66 @@
 65-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:43:19-102
 66            android:windowSoftInputMode="stateHidden" />
 66-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:44:13-54
-67    </application>
-68
-69</manifest>
+67        <activity
+67-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:45:9-46:56
+68            android:name="com.pouillos.sortirnice.activities.AfficherChoixEnregistrementActivity"
+68-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:45:19-104
+69            android:windowSoftInputMode="stateHidden" />
+69-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:46:13-54
+70        <activity
+70-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:48:9-49:56
+71            android:name="com.pouillos.sortirnice.activities.AfficherEntrySortieDetailActivity"
+71-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:48:19-102
+72            android:windowSoftInputMode="stateHidden" />
+72-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:49:13-54
+73        <activity
+73-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:50:9-51:56
+74            android:name="com.pouillos.sortirnice.activities.AfficherEntryTransportDetailActivity"
+74-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:50:19-105
+75            android:windowSoftInputMode="stateHidden" />
+75-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:51:13-54
+76        <activity
+76-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:52:9-53:56
+77            android:name="com.pouillos.sortirnice.activities.AfficherEntryUtileDetailActivity"
+77-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:52:19-101
+78            android:windowSoftInputMode="stateHidden" />
+78-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:53:13-54
+79        <activity
+79-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:54:9-55:56
+80            android:name="com.pouillos.sortirnice.activities.AfficherEntryVisiteDetailActivity"
+80-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:54:19-102
+81            android:windowSoftInputMode="stateHidden" />
+81-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:55:13-54
+82        <activity
+82-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:56:9-57:56
+83            android:name="com.pouillos.sortirnice.activities.AfficherEntryShoppingDetailActivity"
+83-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:56:19-104
+84            android:windowSoftInputMode="stateHidden" />
+84-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:57:13-54
+85        <activity
+85-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:58:9-59:56
+86            android:name="com.pouillos.sortirnice.activities.AfficherEntryRestaurantDetailActivity"
+86-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:58:19-106
+87            android:windowSoftInputMode="stateHidden" />
+87-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:59:13-54
+88        <activity
+88-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:60:9-61:56
+89            android:name="com.pouillos.sortirnice.activities.AfficherEntryHotelDetailActivity"
+89-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:60:19-101
+90            android:windowSoftInputMode="stateHidden" />
+90-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:61:13-54
+91        <activity
+91-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:62:9-63:56
+92            android:name="com.pouillos.sortirnice.activities.AfficherEntryHebergementDetailActivity"
+92-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:62:19-107
+93            android:windowSoftInputMode="stateHidden" />
+93-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:63:13-54
+94        <activity
+94-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:64:9-65:56
+95            android:name="com.pouillos.sortirnice.activities.AfficherEntryBoutiqueDetailActivity"
+95-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:64:19-104
+96            android:windowSoftInputMode="stateHidden" />
+96-->C:\Users\TNH\AndroidStudioProjects\SortirNice2021\app\src\main\AndroidManifest.xml:65:13-54
+97    </application>
+98
+99</manifest>

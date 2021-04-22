@@ -395,7 +395,7 @@ public class AfficherEntriesRestaurantActivity extends NavDrawerActivity impleme
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Restaurant);
         fabExit.performClick();
     }
 

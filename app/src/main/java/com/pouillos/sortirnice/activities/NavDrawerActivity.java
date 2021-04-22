@@ -68,6 +68,7 @@ import com.pouillos.sortirnice.dao.EntryStationEntityDao;
 import com.pouillos.sortirnice.dao.EntryTariffEntityDao;
 
 import com.pouillos.sortirnice.dao.EventEntityDao;
+import com.pouillos.sortirnice.dao.EventSauvegardeEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryActivityEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryAffiliationEntityDao;
 import com.pouillos.sortirnice.dao.JoinEntryEntityWithEntryAllianceOptionEntityDao;
@@ -183,6 +184,8 @@ import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryStand
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryStationEntity;
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryEntityWithEntryTariffEntity;
 import com.pouillos.sortirnice.entities.entry.join.JoinEntryOpeningEntityWithEntryGridEntity;
+import com.pouillos.sortirnice.entities.event.EventEntity;
+import com.pouillos.sortirnice.entities.event.EventSauvegardeEntity;
 import com.pouillos.sortirnice.enumeration.EntriesType;
 import com.pouillos.sortirnice.modelentries.Activity;
 import com.pouillos.sortirnice.modelentries.Affiliation;
@@ -227,6 +230,7 @@ import org.greenrobot.greendao.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 import icepick.Icepick;
@@ -239,6 +243,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected DaoSession daoSession;
 
     protected EventEntityDao eventEntityDao;
+    protected EventSauvegardeEntityDao eventSauvegardeEntityDao;
     protected EntryEntityDao entryEntityDao;
     protected EntryActivityEntityDao entryActivityEntityDao;
     protected EntryAddressEntityDao entryAddressEntityDao;
@@ -330,6 +335,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         initialiserDao();
 
         eventEntityDao = daoSession.getEventEntityDao();
+        eventSauvegardeEntityDao = daoSession.getEventSauvegardeEntityDao();
         entryEntityDao = daoSession.getEntryEntityDao();
         entryActivityEntityDao = daoSession.getEntryActivityEntityDao();
         entryAddressEntityDao = daoSession.getEntryAddressEntityDao();
@@ -450,7 +456,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                             case R.id.bottom_navigation_add_serie:
                                 //ouvrirActiviteSuivante(NavDrawerActivity.this, EnregistrerSerieActivity.class, true);
                                 break;
-
                         }
                         return true;
                     }
@@ -1320,14 +1325,14 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         return listEntryEntities;
     }
 
-    public void saveEntry(Entry entry) {
+    public void saveEntry(Entry entry, EntriesType type) {
             List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ?",""+entry.getId());
         EntryEntity entryToSave = new EntryEntity();
             if (listEntriesFound.size() != 0) {
                 entryToSave = listEntriesFound.get(0);
         }
                 entryToSave.setEntryEntityId(Long.valueOf(entry.getId()));
-                entryToSave.setEntryType(EntriesType.Sortie);
+                entryToSave.setEntryType(type);
                 entryToSave.setNameFr(entry.getNameFr());
                 entryToSave.setNameFrShort(entry.getNameFrShort());
 
@@ -2083,6 +2088,163 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
                     }
                 }
+    }
+
+    public boolean isEventAlreadySaved(EventEntity event) {
+        boolean bool = false;
+        List<EventSauvegardeEntity> listEventSauvegarde = eventSauvegardeEntityDao.loadAll();
+        for (EventSauvegardeEntity current : listEventSauvegarde) {
+            if (comparer(event,current)) {
+                bool = true;
+                return bool;
+            }
+        }
+        return bool;
+    }
+
+    public boolean comparer(EventEntity event, EventSauvegardeEntity eventSauvegarde) {
+        boolean bool = true;
+        if (event.getEventId().equals(eventSauvegarde.getEventId())) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getNameFr() != null ? event.getNameFr() : null,eventSauvegarde.getNameFr() != null ? eventSauvegarde.getNameFr() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getStart() != null ? event.getStart() : null,eventSauvegarde.getStart() != null ? eventSauvegarde.getStart() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getEnd() != null ? event.getEnd() : null,eventSauvegarde.getEnd() != null ? eventSauvegarde.getEnd() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getAdressContent() != null ? event.getAdressContent() : null,eventSauvegarde.getAdressContent() != null ? eventSauvegarde.getAdressContent() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getAdressZip() != null ? event.getAdressZip() : null,eventSauvegarde.getAdressZip() != null ? eventSauvegarde.getAdressZip() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getAdressCity() != null ? event.getAdressCity() : null,eventSauvegarde.getAdressCity() != null ? eventSauvegarde.getAdressCity() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getPhone() != null ? event.getPhone() : null,eventSauvegarde.getPhone() != null ? eventSauvegarde.getPhone() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getEmail() != null ? event.getEmail() : null,eventSauvegarde.getEmail() != null ? eventSauvegarde.getEmail() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getWebsitePrincipal() != null ? event.getWebsitePrincipal() : null,eventSauvegarde.getWebsitePrincipal() != null ? eventSauvegarde.getWebsitePrincipal() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getWebsiteSituation() != null ? event.getWebsiteSituation() : null,eventSauvegarde.getWebsiteSituation() != null ? eventSauvegarde.getWebsiteSituation() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getProfile() != null ? event.getProfile() : null,eventSauvegarde.getProfile() != null ? eventSauvegarde.getProfile() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getStation() != null ? event.getStation() : null,eventSauvegarde.getStation() != null ? eventSauvegarde.getStation() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getCategory() != null ? event.getCategory() : null,eventSauvegarde.getCategory() != null ? eventSauvegarde.getCategory() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getOption() != null ? event.getOption() : null,eventSauvegarde.getOption() != null ? eventSauvegarde.getOption() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getSecto() != null ? event.getSecto() : null,eventSauvegarde.getSecto() != null ? eventSauvegarde.getSecto() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getDescriptionDescription() != null ? event.getDescriptionDescription() : null,eventSauvegarde.getDescriptionDescription() != null ? eventSauvegarde.getDescriptionDescription() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getDescriptionHoraires() != null ? event.getDescriptionHoraires() : null,eventSauvegarde.getDescriptionHoraires() != null ? eventSauvegarde.getDescriptionHoraires() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getDescriptionSituation() != null ? event.getDescriptionSituation() : null,eventSauvegarde.getDescriptionSituation() != null ? eventSauvegarde.getDescriptionSituation() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getDescriptionTarification() != null ? event.getDescriptionTarification() : null,eventSauvegarde.getDescriptionTarification() != null ? eventSauvegarde.getDescriptionTarification() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getImage() != null ? event.getImage() : null,eventSauvegarde.getImage() != null ? eventSauvegarde.getImage() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (event.getLatitude() == eventSauvegarde.getLatitude()) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (event.getLongitude() == eventSauvegarde.getLongitude()) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (event.getNote() == eventSauvegarde.getNote()) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getEntryId() != null ? event.getEntryId() : null,eventSauvegarde.getEntryId() != null ? eventSauvegarde.getEntryId() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getEntryName() != null ? event.getEntryName() : null,eventSauvegarde.getEntryName() != null ? eventSauvegarde.getEntryName() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getCreated() != null ? event.getCreated() : null,eventSauvegarde.getCreated() != null ? eventSauvegarde.getCreated() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        if (Objects.equals(event.getUpdated() != null ? event.getUpdated() : null,eventSauvegarde.getUpdated() != null ? eventSauvegarde.getUpdated() : null)) {
+            bool = bool && true;
+        } else {
+            return false;
+        }
+        return bool;
     }
 
 }

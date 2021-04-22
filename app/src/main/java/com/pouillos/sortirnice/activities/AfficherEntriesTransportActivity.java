@@ -395,7 +395,7 @@ public class AfficherEntriesTransportActivity extends NavDrawerActivity implemen
 
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
-        saveEntry(selectedEntry);
+        saveEntry(selectedEntry,EntriesType.Transport);
         fabExit.performClick();
     }
 
