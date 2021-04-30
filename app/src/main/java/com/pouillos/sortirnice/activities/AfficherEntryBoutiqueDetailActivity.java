@@ -34,6 +34,7 @@ import com.pouillos.sortirnice.entities.entry.detail.EntryOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryPaymentEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryServiceEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryStationEntity;
+import com.pouillos.sortirnice.enumeration.EntriesType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -135,7 +136,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
     LinearLayout layoutAnimation;
 
     Bitmap bitmap = null;
-    String newLine = System.getProperty("line.separator");
+    //String newLine = System.getProperty("line.separator");
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -326,7 +327,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             for (EntryAmenityEntity current : entryTransmis.getListAmenities()) {
                 amenityString += current.getValue();
                 if (i < entryTransmis.getListAmenities().size()) {
-                    amenityString += " / ";
+                    amenityString += newLine;
                 }
                 i++;
             }
@@ -352,9 +353,13 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
         if (entryTransmis.getListClosures()!=null) {
             int i = 1;
             for (EntryClosureEntity current : entryTransmis.getListClosures()) {
-                closureString += current.getClosureDay() + " - "+current.getClosureSpan();
+                if (current.getClosureDay() != null && current.getClosureSpan() != null) {
+                    closureString += current.getClosureDay() + " - " + current.getClosureSpan();
+                } else if (current.getDate() != null) {
+                    closureString += current.getDate();
+                }
                 if (i < entryTransmis.getListClosures().size()) {
-                    closureString += " / ";
+                    closureString += newLine;
                 }
                 i++;
             }
@@ -367,7 +372,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             for (EntryLabelEntity current : entryTransmis.getListLabels()) {
                 labelString += current.getValue();
                 if (i < entryTransmis.getListLabels().size()) {
-                    labelString += " / ";
+                    labelString += newLine;
                 }
                 i++;
             }
@@ -392,16 +397,16 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             int i = 1;
             int j = 1;
             for (EntryOpeningEntity current : entryTransmis.getListOpenings()) {
-                openingString += current.getOpeningStart() + " - "+current.getOpeningEnd()+ " - "+current.getOpeningReplay()+newLine;
+                openingString += current.getOpeningStart() + " au "+current.getOpeningEnd()+newLine;
                 for (EntryGridEntity currentGrid : current.getListGrids()) {
-                    openingString+= currentGrid.getOpeningDays()+" - "+currentGrid.getOpeningHours();
+                    openingString+= currentGrid.getOpeningDays()+newLine+currentGrid.getOpeningHours();
                     if (j<current.getListGrids().size()){
-                        openingString += " / ";
+                        openingString += newLine+newLine;
                     }
                     j++;
                 }
                 if (i < entryTransmis.getListOpenings().size()) {
-                    openingString += " / ";
+                    openingString += newLine+newLine;
                 }
                 i++;
             }
@@ -414,7 +419,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             for (EntryClosingEntity current : entryTransmis.getListClosings()) {
                 closingString += current.getValue();
                 if (i < entryTransmis.getListClosings().size()) {
-                    closingString += " / ";
+                    closingString += newLine;
                 }
                 i++;
             }
@@ -427,7 +432,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             for (EntryServiceEntity current : entryTransmis.getListServices()) {
                 serviceString += current.getValue();
                 if (i < entryTransmis.getListServices().size()) {
-                    serviceString += " / ";
+                    serviceString += newLine;
                 }
                 i++;
             }
@@ -440,7 +445,7 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
             for (EntryStationEntity current : entryTransmis.getListStations()) {
                 stationString += current.getValue();
                 if (i < entryTransmis.getListStations().size()) {
-                    stationString += " / ";
+                    stationString += newLine;
                 }
                 i++;
             }
@@ -532,6 +537,13 @@ public class AfficherEntryBoutiqueDetailActivity extends NavDrawerActivity {
 
     public void exit(View view) {
         finish();
+    }
+
+    public void delete(View view) {
+        entryEntityDao.delete(entryTransmis);
+        AfficherChoixEnregistrementActivity.getInstance().finish();
+        ouvrirActiviteSuivante(this, AfficherChoixEnregistrementActivity.class,true, EntriesType.Boutique);
+        //AfficherChoixEnregistrementActivity.getInstance().chipBoutique.setChecked(true);
     }
 
     public void launchGoogleMap(View view) {

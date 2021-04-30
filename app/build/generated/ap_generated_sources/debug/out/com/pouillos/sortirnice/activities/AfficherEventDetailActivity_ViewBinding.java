@@ -47,6 +47,7 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
     target.descriptionHoraires = Utils.findRequiredViewAsType(source, R.id.description_horaires, "field 'descriptionHoraires'", TextView.class);
     target.fabExit = Utils.findRequiredViewAsType(source, R.id.fabExit, "field 'fabExit'", FloatingActionButton.class);
     target.fabSave = Utils.findRequiredViewAsType(source, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
+    target.fabDelete = Utils.findRequiredViewAsType(source, R.id.fabDelete, "field 'fabDelete'", FloatingActionButton.class);
   }
 
   @Override
@@ -78,5 +79,6 @@ public class AfficherEventDetailActivity_ViewBinding implements Unbinder {
     target.descriptionHoraires = null;
     target.fabExit = null;
     target.fabSave = null;
+    target.fabDelete = null;
   }
 }

@@ -335,6 +335,19 @@
             app:srcCompat="@drawable/outline_save_black_24dp"
             app:tint="@android:color/white"
             android:onClick="save"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDelete"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="10dip"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/outline_delete_black_24dp"
+            app:tint="@android:color/white"
+            android:onClick="delete"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

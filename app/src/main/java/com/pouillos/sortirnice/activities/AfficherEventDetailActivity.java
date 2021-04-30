@@ -36,6 +36,7 @@ import icepick.Icepick;
 public class AfficherEventDetailActivity extends NavDrawerActivity {
 
     EventEntity eventTransmis;
+    EventSauvegardeEntity eventSauvegardeTransmis;
 
     @BindView(R.id.image)
     ImageView image;
@@ -86,6 +87,10 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
     FloatingActionButton fabExit;
     @BindView(R.id.fabSave)
     FloatingActionButton fabSave;
+    @BindView(R.id.fabDelete)
+    FloatingActionButton fabDelete;
+
+    boolean isSauvegarde;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -110,8 +115,17 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
     public void traiterIntent() {
         Intent intent = getIntent();
         if (intent.hasExtra("eventId")) {
+            isSauvegarde = false;
             Long eventId = intent.getLongExtra("eventId", 0);
             eventTransmis = eventEntityDao.load(eventId);
+            fillAllFields();
+            hideFields();
+            AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
+            runnerImage.execute();
+        } else if (intent.hasExtra("eventSauvegardeId")) {
+            isSauvegarde = true;
+            Long eventSauvegardeId = intent.getLongExtra("eventSauvegardeId", 0);
+            eventSauvegardeTransmis = eventSauvegardeEntityDao.load(eventSauvegardeId);
             fillAllFields();
             hideFields();
             AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
@@ -120,91 +134,181 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
     }
 
     private void hideFields() {
-        if (eventTransmis.getImage() == null) {
-            image.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getNameFr() == null) {
-            nameFr.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getCategory() == null) {
-            category.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getDescriptionDescription() == null) {
-            descriptionDescription.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getDescriptionHoraires() == null) {
-            descriptionHoraires.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getDescriptionSituation() == null) {
-            descriptionSituation.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getDescriptionTarification() == null) {
-            descriptionTarification.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getStart() == null) {
-            start.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getEnd() == null || eventTransmis.getEnd().equalsIgnoreCase(eventTransmis.getStart())) {
-            end.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getAdressContent() == null) {
-            adressContent.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getAdressZip() == null) {
-            adressZip.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getAdressCity() == null) {
-            adressCity.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getPhone() == null) {
-            phone.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getEmail() == null) {
-            email.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getWebsiteSituation() == null) {
-            websiteSituation.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getWebsitePrincipal() == null) {
-            websitePrincipal.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getProfile() == null) {
-            profile.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getStation() == null) {
-            station.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getOption() == null) {
-            option.setVisibility(View.GONE);
-        }
-        if (eventTransmis.getSecto() == null) {
-            secto.setVisibility(View.GONE);
-        }
-        if (isEventAlreadySaved(eventTransmis)) {
+        if (!isSauvegarde) {
+            if (eventTransmis.getImage() == null) {
+                image.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getNameFr() == null) {
+                nameFr.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getCategory() == null) {
+                category.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getDescriptionDescription() == null) {
+                descriptionDescription.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getDescriptionHoraires() == null) {
+                descriptionHoraires.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getDescriptionSituation() == null) {
+                descriptionSituation.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getDescriptionTarification() == null) {
+                descriptionTarification.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getStart() == null) {
+                start.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getEnd() == null || eventTransmis.getEnd().equalsIgnoreCase(eventTransmis.getStart())) {
+                end.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getAdressContent() == null) {
+                adressContent.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getAdressZip() == null) {
+                adressZip.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getAdressCity() == null) {
+                adressCity.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getPhone() == null) {
+                phone.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getEmail() == null) {
+                email.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getWebsiteSituation() == null) {
+                websiteSituation.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getWebsitePrincipal() == null) {
+                websitePrincipal.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getProfile() == null) {
+                profile.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getStation() == null) {
+                station.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getOption() == null) {
+                option.setVisibility(View.GONE);
+            }
+            if (eventTransmis.getSecto() == null) {
+                secto.setVisibility(View.GONE);
+            }
+            if (isEventAlreadySaved(eventTransmis)) {
+                fabSave.hide();
+            }
+            fabDelete.hide();
+        } else {
+            if (eventSauvegardeTransmis.getImage() == null) {
+                image.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getNameFr() == null) {
+                nameFr.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getCategory() == null) {
+                category.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getDescriptionDescription() == null) {
+                descriptionDescription.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getDescriptionHoraires() == null) {
+                descriptionHoraires.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getDescriptionSituation() == null) {
+                descriptionSituation.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getDescriptionTarification() == null) {
+                descriptionTarification.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getStart() == null) {
+                start.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getEnd() == null || eventSauvegardeTransmis.getEnd().equalsIgnoreCase(eventSauvegardeTransmis.getStart())) {
+                end.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getAdressContent() == null) {
+                adressContent.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getAdressZip() == null) {
+                adressZip.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getAdressCity() == null) {
+                adressCity.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getPhone() == null) {
+                phone.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getEmail() == null) {
+                email.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getWebsiteSituation() == null) {
+                websiteSituation.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getWebsitePrincipal() == null) {
+                websitePrincipal.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getProfile() == null) {
+                profile.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getStation() == null) {
+                station.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getOption() == null) {
+                option.setVisibility(View.GONE);
+            }
+            if (eventSauvegardeTransmis.getSecto() == null) {
+                secto.setVisibility(View.GONE);
+            }
+            fabDelete.show();
             fabSave.hide();
         }
+
     }
 
     private void fillAllFields() {
-        nameFr.setText(eventTransmis.getNameFr());
-        category.setText(eventTransmis.getCategory());
-        descriptionDescription.setText(eventTransmis.getDescriptionDescription());
-        descriptionHoraires.setText("Horaires: "+eventTransmis.getDescriptionHoraires());
-        descriptionSituation.setText(eventTransmis.getDescriptionSituation());
-        descriptionTarification.setText("Tarif: "+eventTransmis.getDescriptionTarification());
-        start.setText("Date: "+ DateUtils.formatDateDD_MM_YYYY(eventTransmis.getStart()));
-        end.setText(" au "+DateUtils.formatDateDD_MM_YYYY(eventTransmis.getEnd()));
-        adressContent.setText(eventTransmis.getAdressContent());
-        adressZip.setText(eventTransmis.getAdressZip());
-        adressCity.setText(eventTransmis.getAdressCity());
-        phone.setText("Tel: "+eventTransmis.getPhone());
-        email.setText("Email: "+eventTransmis.getEmail());
-        websiteSituation.setText("Site: "+eventTransmis.getWebsiteSituation());
-        websitePrincipal.setText("Site: "+eventTransmis.getWebsitePrincipal());
-        profile.setText(" - "+eventTransmis.getProfile());
-        station.setText(eventTransmis.getStation());
-        option.setText(eventTransmis.getOption());
-        secto.setText(eventTransmis.getSecto());
+        if (!isSauvegarde) {
+            nameFr.setText(eventTransmis.getNameFr());
+            category.setText(eventTransmis.getCategory());
+            descriptionDescription.setText(eventTransmis.getDescriptionDescription());
+            descriptionHoraires.setText("Horaires: "+eventTransmis.getDescriptionHoraires());
+            descriptionSituation.setText(eventTransmis.getDescriptionSituation());
+            descriptionTarification.setText("Tarif: "+eventTransmis.getDescriptionTarification());
+            start.setText("Date: "+ DateUtils.formatDateDD_MM_YYYY(eventTransmis.getStart()));
+            end.setText(" au "+DateUtils.formatDateDD_MM_YYYY(eventTransmis.getEnd()));
+            adressContent.setText(eventTransmis.getAdressContent());
+            adressZip.setText(eventTransmis.getAdressZip());
+            adressCity.setText(eventTransmis.getAdressCity());
+            phone.setText("Tel: "+eventTransmis.getPhone());
+            email.setText("Email: "+eventTransmis.getEmail());
+            websiteSituation.setText("Site: "+eventTransmis.getWebsiteSituation());
+            websitePrincipal.setText("Site: "+eventTransmis.getWebsitePrincipal());
+            profile.setText(" - "+eventTransmis.getProfile());
+            station.setText(eventTransmis.getStation());
+            option.setText(eventTransmis.getOption());
+            secto.setText(eventTransmis.getSecto());
+        } else {
+            nameFr.setText(eventSauvegardeTransmis.getNameFr());
+            category.setText(eventSauvegardeTransmis.getCategory());
+            descriptionDescription.setText(eventSauvegardeTransmis.getDescriptionDescription());
+            descriptionHoraires.setText("Horaires: "+eventSauvegardeTransmis.getDescriptionHoraires());
+            descriptionSituation.setText(eventSauvegardeTransmis.getDescriptionSituation());
+            descriptionTarification.setText("Tarif: "+eventSauvegardeTransmis.getDescriptionTarification());
+            start.setText("Date: "+ DateUtils.formatDateDD_MM_YYYY(eventSauvegardeTransmis.getStart()));
+            end.setText(" au "+DateUtils.formatDateDD_MM_YYYY(eventSauvegardeTransmis.getEnd()));
+            adressContent.setText(eventSauvegardeTransmis.getAdressContent());
+            adressZip.setText(eventSauvegardeTransmis.getAdressZip());
+            adressCity.setText(eventSauvegardeTransmis.getAdressCity());
+            phone.setText("Tel: "+eventSauvegardeTransmis.getPhone());
+            email.setText("Email: "+eventSauvegardeTransmis.getEmail());
+            websiteSituation.setText("Site: "+eventSauvegardeTransmis.getWebsiteSituation());
+            websitePrincipal.setText("Site: "+eventSauvegardeTransmis.getWebsitePrincipal());
+            profile.setText(" - "+eventSauvegardeTransmis.getProfile());
+            station.setText(eventSauvegardeTransmis.getStation());
+            option.setText(eventSauvegardeTransmis.getOption());
+            secto.setText(eventSauvegardeTransmis.getSecto());
+        }
+
     }
 
     private class AsyncTaskRunnerImage extends AsyncTask<Void, Integer, Void> {
@@ -212,22 +316,42 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         protected Void doInBackground(Void...voids) {
             URL url;
             bitmap = null;
-            if (eventTransmis.getImage()!= null && eventTransmis.getImage().length()>0) {
-                try {
-                    url = new URL(eventTransmis.getImage());
-                    HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-                    httpConn.connect();
-                    int resCode = httpConn.getResponseCode();
-                    if (resCode == HttpURLConnection.HTTP_OK) {
-                        InputStream in = httpConn.getInputStream();
-                        bitmap = BitmapFactory.decodeStream(in);
+            if (!isSauvegarde) {
+                if (eventTransmis.getImage()!= null && eventTransmis.getImage().length()>0) {
+                    try {
+                        url = new URL(eventTransmis.getImage());
+                        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                        httpConn.connect();
+                        int resCode = httpConn.getResponseCode();
+                        if (resCode == HttpURLConnection.HTTP_OK) {
+                            InputStream in = httpConn.getInputStream();
+                            bitmap = BitmapFactory.decodeStream(in);
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                }
+            } else {
+                if (eventSauvegardeTransmis.getImage()!= null && eventSauvegardeTransmis.getImage().length()>0) {
+                    try {
+                        url = new URL(eventSauvegardeTransmis.getImage());
+                        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                        httpConn.connect();
+                        int resCode = httpConn.getResponseCode();
+                        if (resCode == HttpURLConnection.HTTP_OK) {
+                            InputStream in = httpConn.getInputStream();
+                            bitmap = BitmapFactory.decodeStream(in);
+                        }
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
             return null;
         }
 
@@ -246,6 +370,13 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
 
     public void exit(View view) {
         finish();
+    }
+
+    public void delete(View view) {
+        eventSauvegardeEntityDao.delete(eventSauvegardeTransmis);
+        AfficherChoixEnregistrementActivity.getInstance().finish();
+        ouvrirActiviteSuivante(this, AfficherChoixEnregistrementActivity.class,true,null);
+        //AfficherChoixEnregistrementActivity.getInstance().chipEvent.setChecked(true);
     }
 
     public void save(View view) {

@@ -1726,6 +1726,9 @@ drawable notify_panel_notification_icon_bg
 drawable outline_add_circle_outline_black_18dp
 drawable outline_camera
 drawable outline_cancel_black_18dp
+drawable outline_delete_black_24dp
+drawable outline_directions_bus_filled_black_18
+drawable outline_directions_bus_filled_black_24
 drawable outline_directions_car_black_18dp
 drawable outline_explore_black_18dp
 drawable outline_home_black_24dp
@@ -1819,7 +1822,9 @@ id amenity
 id animateToEnd
 id animateToStart
 id animation
+id apartment_count
 id arc
+id area
 id asConfigured
 id async
 id atmosphere
@@ -1829,6 +1834,7 @@ id autoCompleteToEnd
 id autoCompleteToStart
 id barrier
 id baseline
+id bedroom_count
 id beginOnFirstDraw
 id beginning
 id blocking
@@ -1890,6 +1896,7 @@ id contentPanel
 id contiguous
 id coordinator
 id cos
+id couchage
 id counterclockwise
 id custom
 id customPanel
@@ -1901,6 +1908,7 @@ id decor_content_parent
 id default_activity_button
 id deltaRelative
 id dependency_ordering
+id description
 id description_description
 id description_horaires
 id description_situation
@@ -1917,6 +1925,7 @@ id disableHome
 id disablePostScroll
 id disableScroll
 id disjoint
+id double_count
 id dragDown
 id dragEnd
 id dragLeft
@@ -1938,10 +1947,12 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
+id fabDelete
 id fabExit
 id fabSave
 id facebook
 id fade
+id family_count
 id fax
 id ferme
 id fill
@@ -1952,7 +1963,9 @@ id fitToContents
 id fixed
 id flip
 id floating
+id floor
 id forever
+id furnished_room_count
 id ghost_view
 id ghost_view_holder
 id gone
@@ -1973,6 +1986,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageBus
 id imageButtonCar
 id imageButtonMap
 id info
@@ -1987,9 +2001,16 @@ id labeled
 id layout
 id layout_address
 id layout_animation
+id layout_capacites
 id layout_fab
 id layout_label
+id layout_living
+id layout_meuble
 id layout_payment
+id layout_periode
+id layout_pratique
+id layout_standing
+id layout_station
 id left
 id leftToRight
 id line1
@@ -2021,6 +2042,7 @@ id material_timepicker_view
 id material_value_index
 id media_actions
 id message
+id meuble
 id middle
 id mini
 id month_grid
@@ -2087,6 +2109,7 @@ id pathRelative
 id payment
 id peekHeight
 id percent
+id periode
 id phone
 id pin
 id position
@@ -2102,6 +2125,10 @@ id right
 id rightToLeft
 id right_icon
 id right_side
+id room_accessible_count
+id room_bath_count
+id room_count
+id room_shower_count
 id rounded
 id row_index_key
 id save_non_transition_alpha
@@ -2135,7 +2162,9 @@ id showHome
 id showTitle
 id simpleProgressBar
 id sin
+id single_count
 id skipCollapsed
+id sleeps_count
 id slide
 id snackbar_action
 id snackbar_text
@@ -2151,6 +2180,7 @@ id src_atop
 id src_in
 id src_over
 id standard
+id standing
 id start
 id startHorizontal
 id startToEnd
@@ -2161,8 +2191,10 @@ id station
 id status_bar_latest_event_content
 id stop
 id stretch
+id studio_count
 id submenuarrow
 id submit_area
+id suite_count
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -2214,7 +2246,10 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id triple_count
+id twins_count
 id twitter
+id type
 id unchecked
 id uniform
 id unlabeled
@@ -2319,6 +2354,7 @@ layout activity_afficher_entry_transport
 layout activity_afficher_entry_utile
 layout activity_afficher_entry_visite
 layout activity_afficher_event
+layout afficher_detail_entry
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

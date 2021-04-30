@@ -46,7 +46,7 @@ public class Living {
     private int familyCount;
 
     @Element(required=false)
-    private int area;
+    private float area;
 
     @Element(required=false)
     private String type;
@@ -115,7 +115,7 @@ public class Living {
         return apartmentCount;
     }
 
-    public int getArea() {
+    public float getArea() {
         return area;
     }
 

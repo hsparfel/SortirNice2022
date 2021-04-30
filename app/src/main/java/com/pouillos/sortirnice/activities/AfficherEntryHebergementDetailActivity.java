@@ -34,6 +34,7 @@ import com.pouillos.sortirnice.entities.entry.detail.EntryOptionEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryPaymentEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryServiceEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryStationEntity;
+import com.pouillos.sortirnice.enumeration.EntriesType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -532,6 +533,13 @@ public class AfficherEntryHebergementDetailActivity extends NavDrawerActivity {
 
     public void exit(View view) {
         finish();
+    }
+
+    public void delete(View view) {
+        entryEntityDao.delete(entryTransmis);
+        AfficherChoixEnregistrementActivity.getInstance().finish();
+        ouvrirActiviteSuivante(this, AfficherChoixEnregistrementActivity.class,true, EntriesType.Hebergement);
+        //AfficherChoixEnregistrementActivity.getInstance().chipHebergement.setChecked(true);
     }
 
     public void launchGoogleMap(View view) {

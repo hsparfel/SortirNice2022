@@ -28,445 +28,52 @@
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/fabExit"
+        app:layout_constraintBottom_toTopOf="@+id/layout_fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
-            tools:layout_editor_absoluteX="-16dp">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:contentDescription="description"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/outline_camera" />
-
-            <TextView
-                android:id="@+id/name_fr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="name_fr"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
-
-            <TextView
-                android:id="@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_middle"
-                android:text="category"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="location"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/atmosphere"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="atmosphere"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="service"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <LinearLayout
-                android:id="@+id/layout_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_large">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lieu: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/address_line1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="address_line1"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <TextView
-                        android:id="@+id/address_line2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="address_line2"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <TextView
-                        android:id="@+id/address_line3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="address_line3"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/address_zip"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="address_zip"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary" />
-                        <TextView
-                            android:id="@+id/address_city"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/text_view_detail_short"
-                            android:text="address_city"
-                            android:textAppearance="?attr/textAppearanceBody2"
-                            android:textColor="?android:attr/textColorSecondary" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/boutons_map_waze"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/text_view_detail_middle">
-                        <ImageButton
-                            android:id="@+id/imageButtonMap"
-                            app:srcCompat="@drawable/outline_explore_black_18dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="launchGoogleMap"
-                            android:background="@null"
-                            />
-                        <ImageButton
-                            android:id="@+id/imageButtonCar"
-                            app:srcCompat="@drawable/outline_directions_car_black_18dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="launchWaze"
-                            android:background="@null"
-                            android:layout_marginLeft="@dimen/text_view_detail_middle"
-                            />
-                    </LinearLayout>
-                    <TextView
-                        android:id="@+id/station"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/text_view_detail_middle"
-                        android:text="station"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="phone"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:autoLink="phone"/>
-
-            <TextView
-                android:id="@+id/fax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_short"
-                android:text="fax"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:autoLink="phone"/>
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_middle"
-                android:text="email"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:autoLink="email"/>
-
-            <TextView
-                android:id="@+id/website"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_middle"
-                android:text="website"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
-                android:autoLink="web"/>
-
-            <TextView
-                android:id="@+id/facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="facebook"
-                android:autoLink="web"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/twitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="twitter"
-                android:autoLink="web"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <LinearLayout
-                android:id="@+id/layout_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_large">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Paiements: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <TextView
-                    android:id="@+id/payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="payment"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ouvert"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_large">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ouvert: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/opening"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="opening"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <TextView
-                        android:id="@+id/openings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="openings"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ferme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_short">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ferme: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/closure"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="closure"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <TextView
-                        android:id="@+id/closing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="closing"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                    <TextView
-                        android:id="@+id/closings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="closings"
-                        android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_large">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Label: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <TextView
-                    android:id="@+id/label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="label"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_animation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/text_view_detail_large">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Animation: "
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-                <TextView
-                    android:id="@+id/animation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="animation"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/option"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="option"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/amenity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="amenity"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-            <TextView
-                android:id="@+id/capacity_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_detail_large"
-                android:text="capacity_total"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_interieur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_interieur"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_exterieur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_exterieur"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_assis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_assis"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_debout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_debout"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_group"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-            <TextView
-                android:id="@+id/capacity_salle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="capacity_salle"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
-
-        </LinearLayout>
+        <include layout="@layout/afficher_detail_entry"/>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabExit"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_fab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="10dip"
-        app:backgroundTint="@color/colorPrimary"
-        app:fabSize="mini"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/outline_cancel_black_18dp"
-        app:tint="@android:color/white"
-        android:onClick="exit"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabExit"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="10dip"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/outline_cancel_black_18dp"
+            app:tint="@android:color/white"
+            android:onClick="exit"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabDelete"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="10dip"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/outline_delete_black_24dp"
+            app:tint="@android:color/white"
+            android:onClick="delete"/>
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

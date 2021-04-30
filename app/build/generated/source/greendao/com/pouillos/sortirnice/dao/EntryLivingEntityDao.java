@@ -38,7 +38,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
         public final static Property TripleCount = new Property(11, int.class, "tripleCount", false, "TRIPLE_COUNT");
         public final static Property TwinsCount = new Property(12, int.class, "twinsCount", false, "TWINS_COUNT");
         public final static Property FamilyCount = new Property(13, int.class, "familyCount", false, "FAMILY_COUNT");
-        public final static Property Area = new Property(14, int.class, "area", false, "AREA");
+        public final static Property Area = new Property(14, float.class, "area", false, "AREA");
         public final static Property Type = new Property(15, String.class, "type", false, "TYPE");
         public final static Property Floor = new Property(16, int.class, "floor", false, "FLOOR");
         public final static Property BedroomCount = new Property(17, int.class, "bedroomCount", false, "BEDROOM_COUNT");
@@ -73,7 +73,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
                 "\"TRIPLE_COUNT\" INTEGER NOT NULL ," + // 11: tripleCount
                 "\"TWINS_COUNT\" INTEGER NOT NULL ," + // 12: twinsCount
                 "\"FAMILY_COUNT\" INTEGER NOT NULL ," + // 13: familyCount
-                "\"AREA\" INTEGER NOT NULL ," + // 14: area
+                "\"AREA\" REAL NOT NULL ," + // 14: area
                 "\"TYPE\" TEXT," + // 15: type
                 "\"FLOOR\" INTEGER NOT NULL ," + // 16: floor
                 "\"BEDROOM_COUNT\" INTEGER NOT NULL ," + // 17: bedroomCount
@@ -108,7 +108,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
         stmt.bindLong(12, entity.getTripleCount());
         stmt.bindLong(13, entity.getTwinsCount());
         stmt.bindLong(14, entity.getFamilyCount());
-        stmt.bindLong(15, entity.getArea());
+        stmt.bindDouble(15, entity.getArea());
  
         String type = entity.getType();
         if (type != null) {
@@ -141,7 +141,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
         stmt.bindLong(12, entity.getTripleCount());
         stmt.bindLong(13, entity.getTwinsCount());
         stmt.bindLong(14, entity.getFamilyCount());
-        stmt.bindLong(15, entity.getArea());
+        stmt.bindDouble(15, entity.getArea());
  
         String type = entity.getType();
         if (type != null) {
@@ -175,7 +175,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
             cursor.getInt(offset + 11), // tripleCount
             cursor.getInt(offset + 12), // twinsCount
             cursor.getInt(offset + 13), // familyCount
-            cursor.getInt(offset + 14), // area
+            cursor.getFloat(offset + 14), // area
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // type
             cursor.getInt(offset + 16), // floor
             cursor.getInt(offset + 17), // bedroomCount
@@ -201,7 +201,7 @@ public class EntryLivingEntityDao extends AbstractDao<EntryLivingEntity, Long> {
         entity.setTripleCount(cursor.getInt(offset + 11));
         entity.setTwinsCount(cursor.getInt(offset + 12));
         entity.setFamilyCount(cursor.getInt(offset + 13));
-        entity.setArea(cursor.getInt(offset + 14));
+        entity.setArea(cursor.getFloat(offset + 14));
         entity.setType(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setFloor(cursor.getInt(offset + 16));
         entity.setBedroomCount(cursor.getInt(offset + 17));

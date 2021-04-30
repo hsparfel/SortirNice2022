@@ -329,6 +329,8 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected JoinEntryEntityWithEntryCommerciaEntityDao joinEntryEntityWithEntryCommerciaEntityDao;
 
 
+    protected String newLine = System.getProperty("line.separator");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -469,6 +471,15 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
     public void ouvrirActiviteSuivante(Context context, Class classe, boolean bool) {
         Intent intent = new Intent(context, classe);
+        startActivity(intent);
+        if (bool) {
+            finish();
+        }
+    }
+
+    public void ouvrirActiviteSuivante(Context context, Class classe, boolean bool,EntriesType type) {
+        Intent intent = new Intent(context, classe);
+        intent.putExtra("type",type.toString());
         startActivity(intent);
         if (bool) {
             finish();

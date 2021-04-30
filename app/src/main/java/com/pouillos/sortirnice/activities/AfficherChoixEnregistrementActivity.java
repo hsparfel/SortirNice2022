@@ -116,6 +116,8 @@ public class AfficherChoixEnregistrementActivity extends NavDrawerActivity imple
     @BindView(R.id.chipUtile)
     Chip chipUtile;
 
+    static AfficherChoixEnregistrementActivity AfficherChoixEnregistrementActivity;
+
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -123,10 +125,14 @@ public class AfficherChoixEnregistrementActivity extends NavDrawerActivity imple
             Icepick.restoreInstanceState(this, savedInstanceState);
             setContentView(R.layout.activity_afficher_choix_enregistrement);
 
+            AfficherChoixEnregistrementActivity = this;
+
             this.configureToolBar();
             this.configureBottomView();
 
             ButterKnife.bind(this);
+
+
 
             listEntries = new ArrayList<>();
             listEntriesFiltres = new ArrayList<>();
@@ -137,6 +143,36 @@ public class AfficherChoixEnregistrementActivity extends NavDrawerActivity imple
             Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
             bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
         }
+
+    public void traiterIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("type")) {
+            String type = intent.getStringExtra("type");
+            if (type.equalsIgnoreCase(EntriesType.Boutique.toString())) {
+                chipBoutique.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Shopping.toString())) {
+                chipShopping.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Sortie.toString())) {
+                chipSortie.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Restaurant.toString())) {
+                chipRestaurant.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Hebergement.toString())) {
+                chipHebergement.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Hotel.toString())) {
+                chipHotel.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Sortie.toString())) {
+                chipSortie.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Transport.toString())) {
+                chipTransport.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Utile.toString())) {
+                chipUtile.callOnClick();
+            } else if (type.equalsIgnoreCase(EntriesType.Visite.toString())) {
+                chipVisite.callOnClick();
+            } else {
+                chipEvent.callOnClick();
+            }
+        }
+    }
 
         private void configureOnClickRecyclerView(){
             ItemClickSupport.addTo(list_recycler_event, R.layout.recycler_list_event)
@@ -151,7 +187,7 @@ public class AfficherChoixEnregistrementActivity extends NavDrawerActivity imple
                                 selectedEvent = listEvents.get(position);
                             }
                             if (!isEntry) {
-                                ouvrirActiviteSuivante(AfficherChoixEnregistrementActivity.this, AfficherEventDetailActivity.class,"eventId",listEvents.get(position).getId(),false);
+                                ouvrirActiviteSuivante(AfficherChoixEnregistrementActivity.this, AfficherEventDetailActivity.class,"eventSauvegardeId",listEvents.get(position).getId(),false);
                             } else if (chipBoutique.isChecked()) {
                                 ouvrirActiviteSuivante(AfficherChoixEnregistrementActivity.this, AfficherEntryBoutiqueDetailActivity.class,"entryId",listEntriesFiltres.get(position).getId(),false);
                             } else if (chipHebergement.isChecked()) {
@@ -363,13 +399,16 @@ public class AfficherChoixEnregistrementActivity extends NavDrawerActivity imple
                 return null;
             }
 
-            /*protected void onPostExecute(Void result) {
-            }*/
+            protected void onPostExecute(Void result) {
+            traiterIntent();
+            }
 
             /*@RequiresApi(api = Build.VERSION_CODES.N)
             protected void onProgressUpdate(Integer... integer) {
                 //progressBar.setProgress(integer[0],true);
             }*/
         }
-
+    public static AfficherChoixEnregistrementActivity getInstance(){
+        return AfficherChoixEnregistrementActivity;
+    }
     }
