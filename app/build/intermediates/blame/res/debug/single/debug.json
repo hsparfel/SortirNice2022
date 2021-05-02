@@ -104,6 +104,10 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\src\\main\\res\\drawable\\outline_directions_bus_filled_black_24.png"
     },
     {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycler_list_entry_card.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\src\\main\\res\\layout\\recycler_list_entry_card.xml"
+    },
+    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_entry_sortie.xml.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\src\\main\\res\\layout\\activity_afficher_entry_sortie.xml"
     },

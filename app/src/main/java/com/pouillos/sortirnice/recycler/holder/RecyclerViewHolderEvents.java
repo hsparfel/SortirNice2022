@@ -17,6 +17,7 @@ import com.pouillos.sortirnice.modelevents.Description;
 import com.pouillos.sortirnice.modelevents.Event;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEvents;
 import com.pouillos.sortirnice.utils.BasicUtils;
+import com.pouillos.sortirnice.utils.DateUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,6 +42,9 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
     Event currentEvent;
 
     Bitmap bitmap = null;
+    String newLine = System.getProperty("line.separator");
+
+
 
     private WeakReference<RecyclerAdapterEvents.Listener> callbackWeakRef;
 
@@ -56,9 +60,26 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
         String category = event.getListCategories().get(0).getValue();
         String description="";
         for (Description current : event.getListDescriptions()) {
-            if (current.getLanguage().equalsIgnoreCase("fr")
-            && current.getType().equalsIgnoreCase("description")) {
-                description = current.getValue();
+            if (current.getLanguage().equalsIgnoreCase("fr")) {
+                if (current.getType().equalsIgnoreCase("description")) {
+                    description = current.getValue();
+                } else if (current.getType().equalsIgnoreCase("situation")) {
+                    category += newLine + current.getValue();
+                }
+            }
+        }
+        if (event.getStart() != null) {
+            //category += newLine;
+            category += newLine + DateUtils.formatDateDD_MM_YYYY(event.getStart());
+        }
+        if (event.getEnd() != null && !event.getEnd().equalsIgnoreCase(event.getStart())) {
+            category += " au "+DateUtils.formatDateDD_MM_YYYY(event.getEnd());
+        }
+        for (Description current : event.getListDescriptions()) {
+            if (current.getLanguage().equalsIgnoreCase("fr")) {
+                if (current.getType().equalsIgnoreCase("horaires")) {
+                    category += " - "+current.getValue();
+                }
             }
         }
 

@@ -2217,6 +2217,7 @@ id textStart
 id textTop
 id text_atmospheres
 id text_categories
+id text_description
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2430,6 +2431,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout recycler_list_entry_card
 layout recycler_list_entry_card_boutique
 layout recycler_list_entry_card_hebergement
 layout recycler_list_entry_card_hotel
@@ -2508,6 +2510,7 @@ string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string home
 string icon_content_description
+string infos_pratiques
 string item_view_role_description
 string material_clock_display_divider
 string material_clock_toggle_content_description
@@ -2570,9 +2573,11 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string sans_categorie
 string search_menu_title
 string sortir_a_nice
 string status_bar_notification_info_overflow
+string toute_boutique
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow

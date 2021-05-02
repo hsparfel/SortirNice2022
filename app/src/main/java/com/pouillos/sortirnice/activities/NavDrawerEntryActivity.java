@@ -2,6 +2,7 @@ package com.pouillos.sortirnice.activities;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -263,17 +264,21 @@ public class NavDrawerEntryActivity extends NavDrawerActivity {
                         //ouvrirActiviteSuivante(AfficherEntriesBoutiqueActivity.this, AfficherEntryBoutiqueDetailActivity.class,"entryId",listEntryEntities.get(position).getId(),false);
                         Log.e("TAG", "Position : "+position);
                         selectedEntry = listEntries.get(position);
+                        scrollView.fullScroll(View.FOCUS_UP);
                         fillAllFields();
                         hideFields();
                         AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
                         runnerImage.execute();
+
                         afficherDetail(true);
                     }
                 });
     }
 
     public void afficherDetail(boolean bool) {
+        scrollView.fullScroll(View.FOCUS_UP);
         if (bool) {
+            scrollView.fullScroll(View.FOCUS_UP);
             scrollView.setVisibility(View.VISIBLE);
             fabExit.setVisibility(View.VISIBLE);
             List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ?",""+selectedEntry.getId());
@@ -288,8 +293,6 @@ public class NavDrawerEntryActivity extends NavDrawerActivity {
             fabSave.setVisibility(View.GONE);
         }
     }
-
-
 
     private void hideFields() {
 
@@ -900,14 +903,25 @@ public class NavDrawerEntryActivity extends NavDrawerActivity {
         String categoryString = "";
         if (selectedEntry.getListCategories()!=null) {
             int i = 1;
+            int w = 0;
             for (Category current : selectedEntry.getListCategories()) {
-                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))) {
+                if (current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
+                        || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
+                        || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))) {
+                    w++;
+                }
+            }
+            for (Category current : selectedEntry.getListCategories()) {
+                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
+                    && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
+                        && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))) {
                     categoryString += current.getValue();
-                    if (i < selectedEntry.getListCategories().size()) {
+                    if (i < selectedEntry.getListCategories().size()-w) {
                         categoryString += " / ";
                     }
+                    i++;
                 }
-                i++;
+
             }
         }
         category.setText(categoryString);
@@ -968,6 +982,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity {
     }
 
     public void exit(View view) {
+        scrollView.fullScroll(View.FOCUS_UP);
         afficherDetail(false);
     }
 
@@ -1019,6 +1034,28 @@ public class NavDrawerEntryActivity extends NavDrawerActivity {
         {
             Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
             startActivity(intent);
+        }
+    }
+
+    public void launchMoovIt(View view) {
+        try {
+            PackageManager pm = App.getInstance().getApplicationContext().getPackageManager();
+            pm.getPackageInfo("com.tranzmate", PackageManager.GET_ACTIVITIES);
+
+
+            String uri ="moovit://directions?dest_lat="
+                            +selectedEntry.getLatitude()
+                            +"&dest_lon="
+                            +selectedEntry.getLongitude()
+                            +"&auto_run=true";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        } catch (PackageManager.NameNotFoundException e) {
+            String url = "http://app.appsflyer.com/com.tranzmate?pid=DL&c=";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         }
     }
 

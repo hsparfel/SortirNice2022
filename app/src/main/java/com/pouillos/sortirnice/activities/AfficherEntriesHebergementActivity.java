@@ -14,7 +14,7 @@ import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.enumeration.EntriesType;
 import com.pouillos.sortirnice.interfaces.EntriesHebergementApiService;
 import com.pouillos.sortirnice.modelentries.Entries;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesHebergement;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
 import com.pouillos.sortirnice.utils.DateUtils;
 
 import butterknife.ButterKnife;
@@ -27,10 +27,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesHebergementActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntriesHebergement.Listener {
+public class AfficherEntriesHebergementActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntries.Listener {
 
     private static final String TAG = AfficherEntriesHebergementActivity.class.getSimpleName();
-    private RecyclerAdapterEntriesHebergement adapterEntries;
+    private RecyclerAdapterEntries adapterEntries;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -86,7 +86,7 @@ public class AfficherEntriesHebergementActivity extends NavDrawerEntryActivity i
     }
 
     public void configureRecyclerView() {
-        adapterEntries = new RecyclerAdapterEntriesHebergement(listEntries, this);
+        adapterEntries = new RecyclerAdapterEntries(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();

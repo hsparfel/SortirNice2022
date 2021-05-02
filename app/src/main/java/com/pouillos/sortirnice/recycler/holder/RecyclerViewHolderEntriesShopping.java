@@ -48,10 +48,17 @@ public class RecyclerViewHolderEntriesShopping extends RecyclerView.ViewHolder i
 
         String category = "";
         int i = 1;
+        int w = 0;
         for (Category current : entry.getListCategories()) {
-            if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))) {
+            if (current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))) {
+                w++;
+            }
+        }
+        for (Category current : entry.getListCategories()) {
+            if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
+                    && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))) {
                 category += current.getValue();
-                if (i < entry.getListCategories().size()) {
+                if (i < entry.getListCategories().size()-w) {
                     category += " / ";
                 }
             }

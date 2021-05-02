@@ -49,7 +49,8 @@ public class RecyclerViewHolderEntriesHebergement extends RecyclerView.ViewHolde
         String category = "";
         int i = 1;
         for (Category current : entry.getListCategories()) {
-            if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))) {
+            if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
+                    && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))) {
                 category += current.getValue();
                 if (i < entry.getListCategories().size()) {
                     category += " / ";

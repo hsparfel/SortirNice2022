@@ -35,5 +35,12 @@ public class DateUtils {
         return reponse;
     }
 
+    public static Date calculerXJourPrecedent(Date date,int nbJour) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH,-nbJour);
+        Date reponse = calendar.getTime();
+        return reponse;
+    }
 
 }

@@ -134,8 +134,8 @@ import com.pouillos.sortirnice.modelentries.Space;
 import com.pouillos.sortirnice.modelentries.StandingLevel;
 import com.pouillos.sortirnice.modelentries.Station;
 import com.pouillos.sortirnice.modelentries.Tariff;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesUtile;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesUtile;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
 import com.pouillos.sortirnice.utils.DateUtils;
 import com.pouillos.sortirnice.utils.ItemClickSupport;
 
@@ -159,9 +159,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesUtileActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntriesUtile.Listener {
+public class AfficherEntriesUtileActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntries.Listener {
 
-    private RecyclerAdapterEntriesUtile adapterEntries;
+    private RecyclerAdapterEntries adapterEntries;
     private static final String TAG = AfficherEntriesUtileActivity.class.getSimpleName();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -218,7 +218,7 @@ public class AfficherEntriesUtileActivity extends NavDrawerEntryActivity impleme
     }
 
     public void configureRecyclerView() {
-        adapterEntries = new RecyclerAdapterEntriesUtile(listEntries, this);
+        adapterEntries = new RecyclerAdapterEntries(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();

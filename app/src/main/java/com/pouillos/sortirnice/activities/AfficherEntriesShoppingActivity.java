@@ -134,8 +134,8 @@ import com.pouillos.sortirnice.modelentries.Space;
 import com.pouillos.sortirnice.modelentries.StandingLevel;
 import com.pouillos.sortirnice.modelentries.Station;
 import com.pouillos.sortirnice.modelentries.Tariff;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesShopping;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesShopping;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
+import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
 import com.pouillos.sortirnice.utils.DateUtils;
 import com.pouillos.sortirnice.utils.ItemClickSupport;
 
@@ -159,10 +159,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntriesShopping.Listener {
+public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntries.Listener {
 
-    private RecyclerAdapterEntriesShopping adapterEntries;
+    private RecyclerAdapterEntries adapterEntries;
     private static final String TAG = AfficherEntriesShoppingActivity.class.getSimpleName();
+
+    int compteur = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -202,8 +204,16 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
                     Log.d(TAG, "Number of entries received: " + listEntries.size());
                     progressBar.setVisibility(View.GONE);
                 } else {
-                    dateDemande = DateUtils.calculerVeille(dateDemande);
-                    dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
+
+                    if (compteur < 15) {
+                        dateDemande = DateUtils.calculerVeille(dateDemande);
+                        //dateDemande = DateUtils.calculerXJourPrecedent(dateDemande,10);
+
+                        dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
+                        compteur++;
+                    } else {
+                        dateDemandeString = "20160726";
+                    }
                     Log.e("TAG", "date rch : "+dateDemandeString);
                     myUrl = BASE_URL+dateDemandeString+"/";
                     connectAndGetApiData(myUrl);
@@ -218,7 +228,7 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
     }
 
     public void configureRecyclerView() {
-        adapterEntries = new RecyclerAdapterEntriesShopping(listEntries, this);
+        adapterEntries = new RecyclerAdapterEntries(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();

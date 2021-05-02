@@ -4,4 +4,7 @@
 
     <string name="sortir_a_nice">Sortir à Nice</string>
     <string name="metropole">METROPOLE</string>
+    <string name="toute_boutique">Toutes les boutiques</string>
+    <string name="infos_pratiques">Infos pratiques</string>
+    <string name="sans_categorie">Sans catégorie</string>
 </resources>
