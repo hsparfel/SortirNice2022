@@ -126,7 +126,6 @@
         android:textColor="?android:attr/textColorSecondary" />
 
     <LinearLayout
-        android:id="@+id/layout_living"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -344,7 +343,6 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/text_view_detail_middle">
                 <ImageButton
-                    android:id="@+id/imageButtonMap"
                     app:srcCompat="@drawable/outline_explore_black_18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -352,7 +350,6 @@
                     android:background="@null"
                     />
                 <ImageButton
-                    android:id="@+id/imageButtonCar"
                     app:srcCompat="@drawable/outline_directions_car_black_18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -368,7 +365,6 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/text_view_detail_middle">
                 <ImageView
-                    android:id="@+id/imageBus"
                     app:srcCompat="@drawable/outline_directions_bus_filled_black_18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -615,7 +611,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_capacites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

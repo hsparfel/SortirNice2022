@@ -1,79 +1,34 @@
 package com.pouillos.sortirnice.activities;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.stetho.Stetho;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.pouillos.sortirnice.App;
 import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.entities.entry.EntryEntity;
-import com.pouillos.sortirnice.entities.event.EventEntity;
 import com.pouillos.sortirnice.entities.event.EventSauvegardeEntity;
 import com.pouillos.sortirnice.enumeration.EntriesType;
-import com.pouillos.sortirnice.interfaces.EntriesBoutiqueApiService;
-import com.pouillos.sortirnice.modelentries.Amenity;
-import com.pouillos.sortirnice.modelentries.Animation;
-import com.pouillos.sortirnice.modelentries.Atmospher;
-import com.pouillos.sortirnice.modelentries.Category;
-import com.pouillos.sortirnice.modelentries.Closing;
-import com.pouillos.sortirnice.modelentries.Closure;
-import com.pouillos.sortirnice.modelentries.Closures;
-import com.pouillos.sortirnice.modelentries.Entries;
-import com.pouillos.sortirnice.modelentries.Entry;
-import com.pouillos.sortirnice.modelentries.Grid;
-import com.pouillos.sortirnice.modelentries.Label;
-import com.pouillos.sortirnice.modelentries.Location;
-import com.pouillos.sortirnice.modelentries.Opening;
-import com.pouillos.sortirnice.modelentries.Option;
-import com.pouillos.sortirnice.modelentries.Payment;
-import com.pouillos.sortirnice.modelentries.Service;
-import com.pouillos.sortirnice.modelentries.Station;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesBoutique;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesSauvegarde;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEvents;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEventsSauvegarde;
-import com.pouillos.sortirnice.utils.DateUtils;
 import com.pouillos.sortirnice.utils.ItemClickSupport;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import icepick.Icepick;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class AfficherChoixEnregistrementActivity extends NavDrawerActivity implements RecyclerAdapterEntriesSauvegarde.Listener, RecyclerAdapterEventsSauvegarde.Listener {
 

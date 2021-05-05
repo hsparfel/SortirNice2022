@@ -11,11 +11,6 @@ import com.pouillos.sortirnice.entities.entry.EntryEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryAtmospherEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryCategoryEntity;
 import com.pouillos.sortirnice.entities.entry.detail.EntryLocationEntity;
-import com.pouillos.sortirnice.modelentries.Atmospher;
-import com.pouillos.sortirnice.modelentries.Category;
-import com.pouillos.sortirnice.modelentries.Entry;
-import com.pouillos.sortirnice.modelentries.Location;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesBoutique;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesSauvegarde;
 
 import java.lang.ref.WeakReference;

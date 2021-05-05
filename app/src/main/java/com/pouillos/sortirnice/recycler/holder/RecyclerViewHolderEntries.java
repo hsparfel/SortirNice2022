@@ -1,19 +1,12 @@
 package com.pouillos.sortirnice.recycler.holder;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillos.sortirnice.App;
 import com.pouillos.sortirnice.R;
-import com.pouillos.sortirnice.activities.AfficherEntriesShoppingActivity;
 import com.pouillos.sortirnice.modelentries.Atmospher;
 import com.pouillos.sortirnice.modelentries.Category;
 import com.pouillos.sortirnice.modelentries.Description;
@@ -21,15 +14,9 @@ import com.pouillos.sortirnice.modelentries.Entry;
 import com.pouillos.sortirnice.modelentries.Location;
 
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesShopping;
 import com.pouillos.sortirnice.utils.BasicUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

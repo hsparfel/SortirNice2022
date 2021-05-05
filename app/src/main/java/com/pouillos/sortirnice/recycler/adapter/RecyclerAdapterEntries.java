@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pouillos.sortirnice.R;
 import com.pouillos.sortirnice.modelentries.Entry;
 import com.pouillos.sortirnice.recycler.holder.RecyclerViewHolderEntries;
-import com.pouillos.sortirnice.recycler.holder.RecyclerViewHolderEntriesShopping;
+
 
 import java.util.List;
 

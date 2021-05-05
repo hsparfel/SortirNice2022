@@ -29,9 +29,9 @@ public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
   public NavDrawerEntryActivity_ViewBinding(NavDrawerEntryActivity target, View source) {
     this.target = target;
 
-    target.list_recycler_event = Utils.findRequiredViewAsType(source, R.id.list_recycler_event, "field 'list_recycler_event'", RecyclerView.class);
-    target.progressBar = Utils.findRequiredViewAsType(source, R.id.simpleProgressBar, "field 'progressBar'", ProgressBar.class);
-    target.image = Utils.findRequiredViewAsType(source, R.id.image, "field 'image'", ImageView.class);
+    target.list_recycler_event = Utils.findOptionalViewAsType(source, R.id.list_recycler_event, "field 'list_recycler_event'", RecyclerView.class);
+    target.progressBar = Utils.findOptionalViewAsType(source, R.id.simpleProgressBar, "field 'progressBar'", ProgressBar.class);
+    target.image = Utils.findOptionalViewAsType(source, R.id.image, "field 'image'", ImageView.class);
     target.nameFr = Utils.findRequiredViewAsType(source, R.id.name_fr, "field 'nameFr'", TextView.class);
     target.description = Utils.findRequiredViewAsType(source, R.id.description, "field 'description'", TextView.class);
     target.category = Utils.findRequiredViewAsType(source, R.id.category, "field 'category'", TextView.class);
@@ -101,9 +101,9 @@ public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
     target.bedroomCount = Utils.findRequiredViewAsType(source, R.id.bedroom_count, "field 'bedroomCount'", TextView.class);
     target.sleepsCount = Utils.findRequiredViewAsType(source, R.id.sleeps_count, "field 'sleepsCount'", TextView.class);
     target.furnishedRoomCount = Utils.findRequiredViewAsType(source, R.id.furnished_room_count, "field 'furnishedRoomCount'", TextView.class);
-    target.scrollView = Utils.findRequiredViewAsType(source, R.id.scrollView, "field 'scrollView'", ScrollView.class);
-    target.fabExit = Utils.findRequiredViewAsType(source, R.id.fabExit, "field 'fabExit'", FloatingActionButton.class);
-    target.fabSave = Utils.findRequiredViewAsType(source, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
+    target.scrollView = Utils.findOptionalViewAsType(source, R.id.scrollView, "field 'scrollView'", ScrollView.class);
+    target.fabExit = Utils.findOptionalViewAsType(source, R.id.fabExit, "field 'fabExit'", FloatingActionButton.class);
+    target.fabSave = Utils.findOptionalViewAsType(source, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
   }
 
   @Override

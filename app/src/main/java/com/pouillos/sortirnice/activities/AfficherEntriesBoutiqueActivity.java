@@ -15,7 +15,6 @@ import com.pouillos.sortirnice.enumeration.EntriesType;
 import com.pouillos.sortirnice.interfaces.EntriesBoutiqueApiService;
 import com.pouillos.sortirnice.modelentries.Entries;
 import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntries;
-import com.pouillos.sortirnice.recycler.adapter.RecyclerAdapterEntriesBoutique;
 import com.pouillos.sortirnice.utils.DateUtils;
 
 import butterknife.ButterKnife;
