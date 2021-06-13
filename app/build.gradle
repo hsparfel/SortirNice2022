@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.pouillos.sortirnice"
+        applicationId "com.pouillcorp.sortirnice"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
@@ -30,7 +30,7 @@ android {
 
 greendao {
     schemaVersion 2
-    daoPackage "com.pouillos.sortirnice.dao" // set package of generated classes
+    daoPackage "com.pouillcorp.sortirnice.dao" // set package of generated classes
 }
 
 dependencies {
