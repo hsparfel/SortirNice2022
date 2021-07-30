@@ -31,7 +31,7 @@ public class AfficherEntrySortieDetailActivity extends NavDrawerEntryActivity {
         traiterIntentDetail();
         setTitle("Detail Sortie");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
     }
 
     public void exit(View view) {

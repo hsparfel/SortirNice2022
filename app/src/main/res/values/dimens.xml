@@ -10,4 +10,7 @@
     <dimen name="text_view_detail_large">16dp</dimen>
     <dimen name="text_view_detail_middle">8dp</dimen>
     <dimen name="text_view_detail_short">3dp</dimen>
+
+    <dimen name="filtre_small">20dp</dimen>
+    <dimen name="filtre_large">40dp</dimen>
 </resources>

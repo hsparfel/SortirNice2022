@@ -7,4 +7,17 @@
     <string name="toute_boutique">Toutes les boutiques</string>
     <string name="infos_pratiques">Infos pratiques</string>
     <string name="sans_categorie">Sans catégorie</string>
+    <string name="evenements">Evenements</string>
+    <string name="visites">Visites</string>
+    <string name="sorties">Sorties</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="boutiques">Boutiques</string>
+    <string name="lieux_de_shopping">Lieux de Shopping</string>
+    <string name="hotels">Hotels</string>
+    <string name="hebergements">Hebergements</string>
+    <string name="transports">Transports</string>
+    <string name="adresses_utiles">Adresses Utiles</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="rechercher_entries">Rechercher divers</string>
+    <string name="mes_favoris">Mes Favoris</string>
 </resources>

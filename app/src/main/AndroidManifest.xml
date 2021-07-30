@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.SearchActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEventsActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEventDetailActivity"
@@ -62,6 +64,9 @@
         <activity android:name=".activities.AfficherEntryHebergementDetailActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEntryBoutiqueDetailActivity"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activities.RechercherAllEntriesActivity"
             android:windowSoftInputMode="stateHidden"/>
     </application>
 

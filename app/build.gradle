@@ -29,7 +29,7 @@ android {
 }
 
 greendao {
-    schemaVersion 2
+    schemaVersion 3
     daoPackage "com.pouillcorp.sortirnice.dao" // set package of generated classes
 }
 
@@ -38,6 +38,7 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -70,4 +71,9 @@ dependencies {
 
     //creer des links dans textview
     //implementation 'com.klinkerapps:link_builder:2.0.5'
+
+    //envoyer email
+    implementation files('libs/activation.jar')
+    implementation files('libs/additionnal.jar')
+    implementation files('libs/mail.jar')
 }

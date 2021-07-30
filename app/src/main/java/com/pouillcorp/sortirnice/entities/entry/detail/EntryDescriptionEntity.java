@@ -1,0 +1,46 @@
+package com.pouillcorp.sortirnice.entities.entry.detail;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
+public class EntryDescriptionEntity implements Comparable<EntryDescriptionEntity> {
+
+    @Id
+    private Long id;
+
+    private String value;
+
+    @Generated(hash = 1663771653)
+    public EntryDescriptionEntity(Long id, String value) {
+        this.id = id;
+        this.value = value;
+    }
+
+    @Generated(hash = 1122020176)
+    public EntryDescriptionEntity() {
+    }
+
+    @Override
+    public int compareTo(EntryDescriptionEntity o) {
+        return this.getId().compareTo(o.getId());
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+}

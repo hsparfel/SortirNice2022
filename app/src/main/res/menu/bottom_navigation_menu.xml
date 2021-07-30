@@ -5,9 +5,14 @@
         android:icon="@drawable/outline_home_black_24dp"
         android:title="@string/home"/>
     <item
-        android:id="@+id/bottom_navigation_add_serie"
+        android:id="@+id/bottom_navigation_search"
         android:enabled="true"
-        android:icon="@drawable/outline_add_circle_outline_black_18dp"
-        android:title="+ Serie"/>
+        android:icon="@drawable/outline_search_white_18"
+        android:title="@string/rechercher"/>
+    <item
+        android:id="@+id/bottom_navigation_my_datas"
+        android:enabled="true"
+        android:icon="@drawable/outline_favorite_white_18"
+        android:title="@string/mes_favoris"/>
 
 </menu>

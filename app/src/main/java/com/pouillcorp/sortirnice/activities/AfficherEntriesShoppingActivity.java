@@ -27,10 +27,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntries.Listener {
+public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity{
 
-    private RecyclerAdapterEntries adapterEntries;
-    private static final String TAG = AfficherEntriesShoppingActivity.class.getSimpleName();
+    //private RecyclerAdapterEntries adapterEntries;
+    //private static final String TAG = AfficherEntriesShoppingActivity.class.getSimpleName();
 
     int compteur = 0;
 
@@ -39,23 +39,23 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
-        setContentView(R.layout.activity_afficher_entry_shopping);
+        setContentView(R.layout.activity_afficher_entry_various);
 
         this.configureToolBar();
         this.configureBottomView();
 
         ButterKnife.bind(this);
 
-        setTitle("Liste des Shoppings");
+        setTitle(R.string.lieux_de_shopping);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
 
         connectAndGetApiData(myUrl);
+        entryType = EntriesType.Shopping;
     }
 
     public void connectAndGetApiData(String url) {
         retrofit = new Retrofit.Builder()
-                // .baseUrl(BASE_URL+"/"+dateString)
                 .baseUrl(url)
                 .client(new OkHttpClient())
                 .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -70,13 +70,17 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
                     configureRecyclerView();
                     isResponded = true;
                     Log.d(TAG, "Number of entries received: " + listEntries.size());
+                    listerFiltre();
+                    initListFiltres();
+                    afficherFiltreNonVide();
+                    initCheckboxesTitreClick();
+                    initCheckboxesSelectAllClick();
                     progressBar.setVisibility(View.GONE);
+                    item = menuItems.findItem(R.id.menu_activity_main_filter);
+                    item.setVisible(true);
                 } else {
-
                     if (compteur < 15) {
                         dateDemande = DateUtils.calculerVeille(dateDemande);
-                        //dateDemande = DateUtils.calculerXJourPrecedent(dateDemande,10);
-
                         dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
                         compteur++;
                     } else {
@@ -95,7 +99,7 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
         });
     }
 
-    public void configureRecyclerView() {
+    /*public void configureRecyclerView() {
         adapterEntries = new RecyclerAdapterEntries(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
@@ -112,6 +116,6 @@ public class AfficherEntriesShoppingActivity extends NavDrawerEntryActivity impl
         saveEntry(selectedEntry,EntriesType.Shopping);
         //fabExit.performClick();
         fabSave.hide();
-    }
+    }*/
 
 }

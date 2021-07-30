@@ -29,37 +29,39 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity implements RecyclerAdapterEntries.Listener {
+public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity {
 
-    private RecyclerAdapterEntries adapterEntries;
-    private static final String TAG = AfficherEntriesSortieActivity.class.getSimpleName();
+    //private RecyclerAdapterEntries adapterEntries;
+    //private static final String TAG = AfficherEntriesSortieActivity.class.getSimpleName();
+    //private EntriesType entryType = EntriesType.Sortie;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
-        setContentView(R.layout.activity_afficher_entry_sortie);
+        setContentView(R.layout.activity_afficher_entry_various);
 
         this.configureToolBar();
         this.configureBottomView();
 
         ButterKnife.bind(this);
 
-        setTitle("Liste des Sorties");
+        setTitle(R.string.sorties);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_add_serie).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
 
         connectAndGetApiData(myUrl);
+
+        entryType = EntriesType.Sortie;
     }
 
     public void connectAndGetApiData(String url) {
-            retrofit = new Retrofit.Builder()
-                   // .baseUrl(BASE_URL+"/"+dateString)
-                    .baseUrl(url)
-                    .client(new OkHttpClient())
-                    .addConverterFactory(SimpleXmlConverterFactory.create())
-                    .build();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(new OkHttpClient())
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
         EntriesSortieApiService entriesSortieApiService = retrofit.create(EntriesSortieApiService.class);
         Call<Entries> call = entriesSortieApiService.getEntries();
         call.enqueue(new Callback<Entries>() {
@@ -70,7 +72,14 @@ public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity implem
                     configureRecyclerView();
                     isResponded = true;
                     Log.d(TAG, "Number of entries received: " + listEntries.size());
+                    listerFiltre();
+                    initListFiltres();
+                    afficherFiltreNonVide();
+                    initCheckboxesTitreClick();
+                    initCheckboxesSelectAllClick();
                     progressBar.setVisibility(View.GONE);
+                    item = menuItems.findItem(R.id.menu_activity_main_filter);
+                    item.setVisible(true);
                 } else {
                     dateDemande = DateUtils.calculerVeille(dateDemande);
                     dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
@@ -87,14 +96,14 @@ public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity implem
         });
     }
 
-    public void configureRecyclerView() {
+    /*public void configureRecyclerView() {
         adapterEntries = new RecyclerAdapterEntries(listEntries, this);
         list_recycler_event.setAdapter(adapterEntries);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onClickEntriesButton(int position) {
       //  ouvrirActiviteSuivante(this,AfficherEntryDetailActivity.class,"eventId",listEntryEntities.get(position).getId(),false);
     }
@@ -104,6 +113,6 @@ public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity implem
         saveEntry(selectedEntry,EntriesType.Sortie);
         //fabExit.performClick();
         fabSave.hide();
-    }
+    }*/
 
 }

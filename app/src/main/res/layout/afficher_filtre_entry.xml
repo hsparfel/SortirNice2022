@@ -1,0 +1,626 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+     >
+
+
+
+
+
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+    tools:layout_editor_absoluteX="-16dp">
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAffiliation"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Affiliations"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAffiliationSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutAffiliation"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAllianceOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="AllianceOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAllianceOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutAllianceOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAmenities"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Amenities"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAmenitiesSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutAmenities"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAnimations"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Animations"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAnimationsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutAnimations"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAtmosphere"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Atmosphere"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreAtmosphereSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutAtmosphere"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCategory"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Categories"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCategorySelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutCategory"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreChains"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Chains"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreChainsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutChains"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCity"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Cities"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCitySelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutCity"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCommercia"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Commercia"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCommerciaSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutCommercia"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCommonTags"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="CommonTags"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreCommonTagsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutCommonTags"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreDisabledOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="DisabledOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreDisabledOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutDisabledOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFamilyOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="FamilyOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFamilyOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutFamilyOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFrpOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="FrpOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFrpOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutFrpOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFurnishedRentals"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="FurnishedRentals"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreFurnishedRentalsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutFurnishedRentals"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreGroupOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="GroupOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreGroupOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutGroupOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreLabels"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Labels"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreLabelsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutLabels"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreLocations"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Locations"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreLocationsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutLocations"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Options"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltrePoiOptions"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="PoiOptions"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltrePoiOptionsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutPoiOptions"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreProfiles"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Profiles"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreProfilesSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutProfiles"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltrePublications"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Publications"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltrePublicationsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutPublications"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreRentalMonthes"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="RentalMonthes"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreRentalMonthesSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutRentalMonthes"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreSectors"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Sectors"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreSectorsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutSectors"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreServices"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Services"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreServicesSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutServices"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreSleepings"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Sleepings"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreSleepingsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutSleepings"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreStandingLevels"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="StandingLevels"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreStandingLevelsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutStandingLevels"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreStations"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Stations"
+         android:visibility="gone"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+         android:id="@+id/checkboxFiltreStationsSelectAll"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:text="Selectionner Tout"
+         android:layout_marginLeft="@dimen/filtre_small"
+         android:visibility="gone"/>
+     <LinearLayout
+         android:id="@+id/linearLayoutStations"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="left"
+         android:orientation="vertical"
+         android:layout_marginLeft="@dimen/filtre_large"
+         android:visibility="gone"/>
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+</merge>
