@@ -1,6 +1,7 @@
 package com.pouillcorp.sortirnice.activities;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -28,9 +29,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pouillcorp.sortirnice.App;
 import com.pouillcorp.sortirnice.R;
+import com.pouillcorp.sortirnice.email.SendEmailService;
 import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryAmenityEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryAnimationEntity;
@@ -87,6 +90,7 @@ import com.pouillcorp.sortirnice.modelentries.Sleeping;
 import com.pouillcorp.sortirnice.modelentries.StandingLevel;
 import com.pouillcorp.sortirnice.modelentries.Station;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEntries;
+import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEntriesSauvegarde;
 import com.pouillcorp.sortirnice.utils.DateUtils;
 import com.pouillcorp.sortirnice.utils.ItemClickSupport;
 
@@ -105,6 +109,7 @@ import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Optional;
 import retrofit2.Retrofit;
 
 public class NavDrawerEntryActivity extends NavDrawerActivity implements RecyclerAdapterEntries.Listener {
@@ -118,6 +123,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
     protected int nbEntries;
     protected List<Entry> listEntries;
     protected List<EntryEntity> listEntryEntities = new ArrayList<>();
+    List<Entry> listEntryFiltre = new ArrayList<>();
 
     @Nullable
     @BindView(R.id.list_recycler_event)
@@ -576,7 +582,8 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
     List<MaterialCheckBox> listCheckboxService = new ArrayList<>();
     List<MaterialCheckBox> listCheckboxCity = new ArrayList<>();
 
-    private RecyclerAdapterEntries adapterEntries;
+    protected RecyclerAdapterEntries adapterEntries;
+    protected RecyclerAdapterEntriesSauvegarde adapterEntriesSauvegarde;
 
     @Nullable
     @BindView(R.id.fabFiltre)
@@ -588,7 +595,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
 
     protected EntriesType entryType;
 
-    MenuItem item;
+    protected MenuItem item;
 
     protected static final String TAG = NavDrawerEntryActivity.class.getSimpleName();
 
@@ -601,10 +608,47 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
         myUrl += dateDemandeString+"/";
 
-
+        Log.e("verif menuItem1", "menuItem : "+menuItems);
+        Log.e("verif item1", "item : "+item);
     }
 
+    protected void gererErreur(EntriesType entryType,String erreur){
+        envoyerEmailErreur(entryType,erreur);
+        progressBar.setVisibility(View.GONE);
+        afficherMessageErreur();
+    }
 
+    protected void afficherMessageErreur(){
+        new MaterialAlertDialogBuilder(NavDrawerEntryActivity.this)
+                .setTitle("Erreur")
+                .setMessage("Problème de recupération de données."+"\n"
+                + "L'erreur a été signalé à nos équipes."+"\n"
+                + "\n"+"Vous pouvez verifier le Play Store pour voir si une mise à jour de l'application a déjà corrigée le problème")
+                .setPositiveButton("Mise à Jour disponible ?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //todo gerer la mise à jour
+                        Log.e(TAG, "click MAJ");
+                    }
+                })
+                .setNegativeButton("Non Merci", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.e(TAG, "click Non Merci");
+                        ouvrirActiviteSuivante(App.getInstance(), AccueilActivity.class,true);
+                    }
+                })
+                .show();
+    }
+
+    protected void envoyerEmailErreur(EntriesType entryType,String erreur){
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                SendEmailService.getInstance(getApplicationContext()).sendEmailErreurSynchro(entryType,erreur);
+            }
+        });
+    }
 
     protected void afficherFiltreNonVide() {
 
@@ -751,7 +795,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
 
     }
 
-    private boolean verifFiltreActif(List<? extends DetailEntrySimple> list){
+    protected boolean verifFiltreActif(List<? extends DetailEntrySimple> list){
         boolean bool = false;
         for (DetailEntrySimple current : list){
             if(current.isChecked()){
@@ -761,19 +805,20 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         return bool;
     }
 
+    @Optional
     @OnClick(R.id.fabFiltre)
     public void fabFiltreClick() {
         scrollViewFiltre.setVisibility(View.GONE);
         fabFiltre.setVisibility(View.GONE);
         fabRazFiltre.setVisibility(View.GONE);
-        item = menuItems.findItem(R.id.menu_activity_main_filter);
+        item = menuItems.findItem(R.id.menu_activity_main_entry_filter);
         item.setVisible(true);
 
 
         //menu_activity_main_filter.setVisible(true);
         //Set<Entry> setEntryFiltre = new HashSet<>();
         //List<Entry> listEntryFiltre = new ArrayList<>();
-        List<Entry> listEntryFiltre = new ArrayList<>();
+        listEntryFiltre = new ArrayList<>();
         listEntryFiltre.addAll(listEntries);
 
         boolean boolAmenity = verifFiltreActif(listFiltresAmenity);
@@ -1077,15 +1122,17 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
 
     }
 
+    @Optional
     @OnClick(R.id.fabRazFiltre)
     public void fabRazFiltreClick() {
         scrollViewFiltre.setVisibility(View.GONE);
         fabFiltre.setVisibility(View.GONE);
         fabRazFiltre.setVisibility(View.GONE);
         //menu_activity_main_filter.setVisible(true);
-        item = menuItems.findItem(R.id.menu_activity_main_filter);
+        item = menuItems.findItem(R.id.menu_activity_main_entry_filter);
         item.setVisible(true);
         decocherTout();
+        listEntryFiltre = new ArrayList<>();
         configureRecyclerView();
 
     }
@@ -1208,6 +1255,8 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         configureOnClickRecyclerView();
     }
 
+
+
     protected void initCheckboxSelectAllClick(MaterialCheckBox cbSelectAll, List<MaterialCheckBox> list) {
         cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -1293,7 +1342,9 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         initFiltre(listFiltresCategory,linearLayoutCategory,listCheckboxCategory,checkboxFiltreCategorySelectAll);
         initFiltre(listFiltresChain,linearLayoutChains,listCheckboxChain,checkboxFiltreChainsSelectAll);
         //conserver car city n'est pas comme les autres
+        Collections.sort(listFiltresCity);
         for (Address current : listFiltresCity) {
+
             MaterialCheckBox checkBox = new MaterialCheckBox(this);
             checkBox.setText(current.getCity());
             checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -1347,7 +1398,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_activity_main_filter:
+            case R.id.menu_activity_main_entry_filter:
                 Log.d(TAG, "click sur filtre");
                 scrollViewFiltre.setVisibility(View.VISIBLE);
                 fabFiltre.setVisibility(View.VISIBLE);
@@ -1543,7 +1594,11 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         //ouvrirActiviteSuivante(AfficherEntriesBoutiqueActivity.this, AfficherEntryBoutiqueDetailActivity.class,"entryId",listEntryEntities.get(position).getId(),false);
                         Log.e("TAG", "Position : "+position);
-                        selectedEntry = listEntries.get(position);
+                        if (listEntryFiltre.size()>0){
+                            selectedEntry = listEntryFiltre.get(position);
+                        } else {
+                            selectedEntry = listEntries.get(position);
+                        }
                         scrollView.fullScroll(View.FOCUS_UP);
                         fillAllFields();
                         hideFields();
@@ -1741,32 +1796,36 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         } else {
             layoutAddress.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getAddressLine1() == null
+                && selectedEntry.getAddress().getAddressLine2() == null
+                && selectedEntry.getAddress().getAddressLine3() == null
+                && selectedEntry.getAddress().getZip() == null
+                && selectedEntry.getAddress().getCity() == null) {
             boutonsMapWaze.setVisibility(View.GONE);
         } else {
             boutonsMapWaze.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress().getAddressLine1() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getAddressLine1() == null) {
             addressLine1.setVisibility(View.GONE);
         } else {
             addressLine1.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress().getAddressLine2() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getAddressLine2() == null) {
             addressLine2.setVisibility(View.GONE);
         } else {
             addressLine2.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress().getAddressLine3() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getAddressLine3() == null) {
             addressLine3.setVisibility(View.GONE);
         } else {
             addressLine3.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress().getZip() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getZip() == null) {
             addressZip.setVisibility(View.GONE);
         } else {
             addressZip.setVisibility(View.VISIBLE);
         }
-        if (selectedEntry.getAddress().getCity() == null) {
+        if (selectedEntry.getAddress() != null && selectedEntry.getAddress().getCity() == null) {
             addressCity.setVisibility(View.GONE);
         } else {
             addressCity.setVisibility(View.VISIBLE);
@@ -3031,6 +3090,7 @@ public class NavDrawerEntryActivity extends NavDrawerActivity implements Recycle
         }
     }
 
+    @Optional
     @OnClick(R.id.fabSave)
     public void fabSaveClick() {
         saveEntry(selectedEntry, entryType);

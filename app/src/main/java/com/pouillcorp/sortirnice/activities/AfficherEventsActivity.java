@@ -82,7 +82,7 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
 
         setTitle(R.string.evenements);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_evenement).setChecked(true);
 
         dateDemande = new Date();
         dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
@@ -122,7 +122,7 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
                     //recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
                     saveListEvents();
                     isResponded = true;
-                    Log.d(TAG, "Number of events received: " + listEvents.size());
+                    Log.e(TAG, "Number of events received: " + listEvents.size());
                     progressBar.setVisibility(View.GONE);
                 } else {
 
@@ -130,7 +130,7 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
                     dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
                     myUrl = BASE_URL+dateDemandeString+"/";
                     connectAndGetApiData(myUrl);
-                    Log.d(TAG, dateDemandeString + " : " + response.code());
+                    Log.e(TAG, dateDemandeString + " : " + response.code());
                 }
             }
 
@@ -144,9 +144,104 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
         });
     }
 
+    private boolean isEventExistant(Event event){
+        List<EventEntity> listEventsNonFavoris = eventEntityDao.queryRaw("where event_id = ?"+event.getId());
+        if (listEventsNonFavoris.size()>0){
+            return true;
+        }
+        return false;
+    }
+
+    /*private boolean isEventAndEventEntityIdentique(Event event, EventEntity eventEntity){
+        //boolean reponse = true;
+        if (event.getId() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListAddresses() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getCreated().equalsIgnoreCase(eventEntity.getCreated())){
+            return false;
+        }
+        if (event.getEmail().equalsIgnoreCase(eventEntity.getEmail())){
+            return false;
+        }
+        if (event.getEnd().equalsIgnoreCase(eventEntity.getEnd())){
+            return false;
+        }
+        if (event.getLatitude() != eventEntity.getLatitude()){
+            return false;
+        }
+        if (event.getListCategories() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListDescriptions() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListImages() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListOptions() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListProfiles() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListRefEntries() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListSectors() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getListStations() != eventEntity.getEventId()){
+            return false;
+        }
+        if (event.getLongitude() != eventEntity.getLongitude()){
+            return false;
+        }
+        if (event.getNameFr().equalsIgnoreCase(eventEntity.getNameFr())){
+            return false;
+        }
+        if (event.getNote() != eventEntity.getNote()){
+            return false;
+        }
+        if (event.getPhone().equalsIgnoreCase(eventEntity.getPhone())){
+            return false;
+        }
+        if (event.getStart().equalsIgnoreCase(eventEntity.getStart())){
+            return false;
+        }
+        if (event.getUpdated().equalsIgnoreCase(eventEntity.getUpdated())){
+            return false;
+        }
+        if (event.getWebsiteMap() != eventEntity.getEventId()){
+            return false;
+        }
+
+
+
+
+    }*/
+
     private void saveListEvents() {
-        eventEntityDao.deleteAll();
+        //eventEntityDao.deleteAll();
+        List<EventEntity> listEventsNonFavoris = eventEntityDao.queryRaw("where favori = 0");
+        int nbTotalEvensNonFavoris = listEventsNonFavoris.size();
+        long nbTotalEvents = eventEntityDao.count();
+        for (EventEntity current : listEventsNonFavoris){
+            eventEntityDao.delete(current);
+
+        }
+
+        Log.e("TAG", "suppression event non favoris termine - "+nbTotalEvensNonFavoris+" sur "+nbTotalEvents);
+
+
         for (Event current : listEvents) {
+
+            //rechercher si un existant deja
+            //chercher à partir de l'id et verifier si parfaitmeent similaire sinon l'enregistrer quand même
+
+
             EventEntity eventToSave = new EventEntity();
             eventToSave.setEventId(Long.valueOf(current.getId()));
             eventToSave.setNameFr(current.getNameFr());
@@ -206,6 +301,7 @@ public class AfficherEventsActivity extends NavDrawerActivity implements Recycle
             eventToSave.setCreated(current.getCreated());
             eventToSave.setUpdated(current.getUpdated());
             eventEntityDao.insert(eventToSave);
+            Log.e(TAG, "Ajout "+eventToSave.getNameFr());
             listEventEntities.add(eventToSave);
         }
     }

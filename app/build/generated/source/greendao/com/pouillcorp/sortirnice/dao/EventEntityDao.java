@@ -56,6 +56,7 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
         public final static Property EntryName = new Property(29, String.class, "entryName", false, "ENTRY_NAME");
         public final static Property Created = new Property(30, String.class, "created", false, "CREATED");
         public final static Property Updated = new Property(31, String.class, "updated", false, "UPDATED");
+        public final static Property Favori = new Property(32, boolean.class, "favori", false, "FAVORI");
     }
 
 
@@ -102,7 +103,8 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
                 "\"ENTRY_ID\" TEXT," + // 28: entryId
                 "\"ENTRY_NAME\" TEXT," + // 29: entryName
                 "\"CREATED\" TEXT," + // 30: created
-                "\"UPDATED\" TEXT);"); // 31: updated
+                "\"UPDATED\" TEXT," + // 31: updated
+                "\"FAVORI\" INTEGER NOT NULL );"); // 32: favori
     }
 
     /** Drops the underlying database table. */
@@ -262,6 +264,7 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
         if (updated != null) {
             stmt.bindString(32, updated);
         }
+        stmt.bindLong(33, entity.getFavori() ? 1L: 0L);
     }
 
     @Override
@@ -415,6 +418,7 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
         if (updated != null) {
             stmt.bindString(32, updated);
         }
+        stmt.bindLong(33, entity.getFavori() ? 1L: 0L);
     }
 
     @Override
@@ -456,7 +460,8 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
             cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // entryId
             cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // entryName
             cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // created
-            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31) // updated
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // updated
+            cursor.getShort(offset + 32) != 0 // favori
         );
         return entity;
     }
@@ -495,6 +500,7 @@ public class EventEntityDao extends AbstractDao<EventEntity, Long> {
         entity.setEntryName(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
         entity.setCreated(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
         entity.setUpdated(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setFavori(cursor.getShort(offset + 32) != 0);
      }
     
     @Override

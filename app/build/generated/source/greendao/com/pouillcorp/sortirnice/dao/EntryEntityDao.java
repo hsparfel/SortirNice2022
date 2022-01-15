@@ -59,6 +59,8 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         public final static Property NiceresId = new Property(23, int.class, "niceresId", false, "NICERES_ID");
         public final static Property Created = new Property(24, String.class, "created", false, "CREATED");
         public final static Property Updated = new Property(25, String.class, "updated", false, "UPDATED");
+        public final static Property Favori = new Property(26, boolean.class, "favori", false, "FAVORI");
+        public final static Property ObsoleteNb = new Property(27, Integer.class, "obsoleteNb", false, "OBSOLETE_NB");
     }
 
     private DaoSession daoSession;
@@ -103,7 +105,9 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
                 "\"NICERES_AVAILABILITY\" INTEGER NOT NULL ," + // 22: niceresAvailability
                 "\"NICERES_ID\" INTEGER NOT NULL ," + // 23: niceresId
                 "\"CREATED\" TEXT," + // 24: created
-                "\"UPDATED\" TEXT);"); // 25: updated
+                "\"UPDATED\" TEXT," + // 25: updated
+                "\"FAVORI\" INTEGER NOT NULL ," + // 26: favori
+                "\"OBSOLETE_NB\" INTEGER);"); // 27: obsoleteNb
     }
 
     /** Drops the underlying database table. */
@@ -217,6 +221,12 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         if (updated != null) {
             stmt.bindString(26, updated);
         }
+        stmt.bindLong(27, entity.getFavori() ? 1L: 0L);
+ 
+        Integer obsoleteNb = entity.getObsoleteNb();
+        if (obsoleteNb != null) {
+            stmt.bindLong(28, obsoleteNb);
+        }
     }
 
     @Override
@@ -324,6 +334,12 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         if (updated != null) {
             stmt.bindString(26, updated);
         }
+        stmt.bindLong(27, entity.getFavori() ? 1L: 0L);
+ 
+        Integer obsoleteNb = entity.getObsoleteNb();
+        if (obsoleteNb != null) {
+            stmt.bindLong(28, obsoleteNb);
+        }
     }
 
     @Override
@@ -365,7 +381,9 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             cursor.getShort(offset + 22) != 0, // niceresAvailability
             cursor.getInt(offset + 23), // niceresId
             cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // created
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25) // updated
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // updated
+            cursor.getShort(offset + 26) != 0, // favori
+            cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27) // obsoleteNb
         );
         return entity;
     }
@@ -398,6 +416,8 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         entity.setNiceresId(cursor.getInt(offset + 23));
         entity.setCreated(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
         entity.setUpdated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setFavori(cursor.getShort(offset + 26) != 0);
+        entity.setObsoleteNb(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
      }
     
     @Override

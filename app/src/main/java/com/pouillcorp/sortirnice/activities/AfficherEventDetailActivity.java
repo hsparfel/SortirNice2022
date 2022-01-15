@@ -107,7 +107,7 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
         traiterIntent();
         setTitle("Detail");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_evenement).setChecked(true);
     }
 
 
@@ -122,6 +122,7 @@ public class AfficherEventDetailActivity extends NavDrawerActivity {
             hideFields();
             AsyncTaskRunnerImage runnerImage = new AsyncTaskRunnerImage();
             runnerImage.execute();
+
         } else if (intent.hasExtra("eventSauvegardeId")) {
             isSauvegarde = true;
             Long eventSauvegardeId = intent.getLongExtra("eventSauvegardeId", 0);

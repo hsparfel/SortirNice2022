@@ -139,7 +139,7 @@ import com.pouillcorp.sortirnice.dao.EntrySleepingEntityDao;
 import com.pouillcorp.sortirnice.dao.EntryCommerciaEntityDao;
 
 @Entity
-public class EntryEntity implements Comparable<EventEntity> {
+public class EntryEntity implements Comparable<EntryEntity> {
 
     @Id
     private Long id;
@@ -425,6 +425,10 @@ public class EntryEntity implements Comparable<EventEntity> {
 
     private String updated;
 
+    private boolean favori;
+
+    private Integer obsoleteNb;
+
 /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;
@@ -436,13 +440,17 @@ private transient EntryEntityDao myDao;
 
 
 
-@Generated(hash = 1962411818)
-public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr,
-        String nameFrShort, long entryAddressEntityId, String phone, String fax, String email,
-        String website, String websiteReservation, String facebook, String twitter,
-        long entryLivingEntityId, long entryCapacityEntityId, String opening, String closing,
-        double latitude, double longitude, String location_map, String note, String start,
-        boolean niceresAvailability, int niceresId, String created, String updated) {
+
+
+
+
+@Generated(hash = 1743506708)
+public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr, String nameFrShort,
+        long entryAddressEntityId, String phone, String fax, String email, String website,
+        String websiteReservation, String facebook, String twitter, long entryLivingEntityId,
+        long entryCapacityEntityId, String opening, String closing, double latitude, double longitude,
+        String location_map, String note, String start, boolean niceresAvailability, int niceresId,
+        String created, String updated, boolean favori, Integer obsoleteNb) {
     this.id = id;
     this.entryEntityId = entryEntityId;
     this.entryType = entryType;
@@ -469,6 +477,8 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
     this.niceresId = niceresId;
     this.created = created;
     this.updated = updated;
+    this.favori = favori;
+    this.obsoleteNb = obsoleteNb;
 }
 
 
@@ -478,6 +488,8 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
 @Generated(hash = 681417959)
 public EntryEntity() {
 }
+
+
 
 
 
@@ -495,8 +507,12 @@ private transient Long capacity__resolvedKey;
 
 
 
+
+
+
+
     @Override
-    public int compareTo(EventEntity o) {
+    public int compareTo(EntryEntity o) {
         return this.getId().compareTo(o.getId());
     }
 
@@ -917,10 +933,31 @@ public void setUpdated(String updated) {
 }
 
 
+    public boolean isFavori() {
+        return favori;
+    }
+
+    public void setFavori(boolean favori) {
+        this.favori = favori;
+    }
 
 
 
-/** To-one relationship, resolved on first access. */
+
+
+public boolean getFavori() {
+    return this.favori;
+}
+
+    public Integer getObsoleteNb() {
+        return obsoleteNb;
+    }
+
+    public void setObsoleteNb(Integer obsoleteNb) {
+        this.obsoleteNb = obsoleteNb;
+    }
+
+    /** To-one relationship, resolved on first access. */
 @Generated(hash = 92551804)
 public EntryAddressEntity getAddress() {
     long __key = this.entryAddressEntityId;
@@ -2446,6 +2483,8 @@ public void __setDaoSession(DaoSession daoSession) {
     this.daoSession = daoSession;
     myDao = daoSession != null ? daoSession.getEntryEntityDao() : null;
 }
+
+
 
 
 

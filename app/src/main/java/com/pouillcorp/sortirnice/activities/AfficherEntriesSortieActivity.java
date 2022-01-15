@@ -49,7 +49,7 @@ public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity {
 
         setTitle(R.string.sorties);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_entry).setChecked(true);
 
         connectAndGetApiData(myUrl);
 
@@ -78,7 +78,7 @@ public class AfficherEntriesSortieActivity extends NavDrawerEntryActivity {
                     initCheckboxesTitreClick();
                     initCheckboxesSelectAllClick();
                     progressBar.setVisibility(View.GONE);
-                    item = menuItems.findItem(R.id.menu_activity_main_filter);
+                    item = menuItems.findItem(R.id.menu_activity_main_entry_filter);
                     item.setVisible(true);
                 } else {
                     dateDemande = DateUtils.calculerVeille(dateDemande);

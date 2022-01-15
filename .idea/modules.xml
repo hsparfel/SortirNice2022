@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SortirNice.iml" filepath="$PROJECT_DIR$/.idea/modules/SortirNice.iml" group="SortirNice" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SortirNice/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SortirNice2022.iml" filepath="$PROJECT_DIR$/.idea/modules/SortirNice2022.iml" group="SortirNice2022" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SortirNice2022/app" />
     </modules>
   </component>
 </project>

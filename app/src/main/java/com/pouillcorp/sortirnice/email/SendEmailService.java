@@ -30,11 +30,11 @@ public class SendEmailService {
     private static SendEmailService instance = null;
     private static Context ctx;
 
-    final String username = "pouillcorp@gmail.com";
+    static final String username = "pouillcorp@gmail.com";
     final String password = "Bamb00l@";
 
     Properties prop;
-    Session session;
+    static Session session;
 
     private SendEmailService(Context context) {
         ctx = context;
@@ -60,7 +60,7 @@ public class SendEmailService {
         return instance;
     }
 
-    public void SendEmailErreurSynchro(EntriesType entryType) {
+    public static void sendEmailErreurSynchro(EntriesType entryType, String erreur) {
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
@@ -69,7 +69,8 @@ public class SendEmailService {
                     InternetAddress.parse("pouillcorp@gmail.com")
             );
             message.setSubject("APP - Sortir Nice - Erreur Modele : "+entryType.toString());
-            message.setText("l'app Sortir à Nice a bugué à cause d'un probleme dans le modele "+entryType.toString());
+            message.setText("l'app Sortir à Nice a bugué à cause d'un probleme dans le modele "+entryType.toString()+"\n"
+            + "\n" + "Exception:"+"\n"+erreur);
 
             Transport.send(message);
 

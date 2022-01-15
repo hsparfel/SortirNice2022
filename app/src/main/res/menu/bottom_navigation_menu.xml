@@ -3,12 +3,17 @@
         android:id="@+id/bottom_navigation_home"
         android:enabled="true"
         android:icon="@drawable/outline_home_black_24dp"
-        android:title="@string/home"/>
+        android:title="Accueil"/>
     <item
-        android:id="@+id/bottom_navigation_search"
+        android:id="@+id/bottom_navigation_evenement"
         android:enabled="true"
         android:icon="@drawable/outline_search_white_18"
-        android:title="@string/rechercher"/>
+        android:title="Evenements"/>
+    <item
+        android:id="@+id/bottom_navigation_entry"
+        android:enabled="true"
+        android:icon="@drawable/outline_search_white_18"
+        android:title="Autres"/>
     <item
         android:id="@+id/bottom_navigation_my_datas"
         android:enabled="true"

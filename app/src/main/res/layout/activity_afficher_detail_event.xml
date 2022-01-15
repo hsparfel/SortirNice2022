@@ -19,6 +19,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/ToolBarStyle" />
 
+
+
+
+
+
+
+
+
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -37,46 +46,65 @@
             app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
             tools:layout_editor_absoluteX="-16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/name_fr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="name_fr"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="category"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+
+                    <TextView
+                        android:id="@+id/profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+
+                        android:text="profile"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary" />
+                </LinearLayout>
+            </LinearLayout>
+
+
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:contentDescription="description"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/outline_camera" />
-
-            <!-- Title, secondary and supporting text -->
-            <TextView
-                android:id="@+id/name_fr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="name_fr"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="category"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-
-                <TextView
-                    android:id="@+id/profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:text="profile"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
-            </LinearLayout>
+                app:srcCompat="@drawable/outline_camera"
+                />
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/description_description"
@@ -290,6 +318,8 @@
                 android:text="secto"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary" />
+
+
 
         </LinearLayout>
     </ScrollView>

@@ -66,6 +66,8 @@ public class RechercherAllEntriesActivity extends NavDrawerEntryActivity impleme
     List<Entry> listEntriesSortie;
     List<Entry> listEntriesTransport;
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class RechercherAllEntriesActivity extends NavDrawerEntryActivity impleme
 
         setTitle(R.string.rechercher_entries);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_entry).setChecked(true);
         progressBar.setVisibility(View.GONE);
 
     }
@@ -108,7 +110,7 @@ public class RechercherAllEntriesActivity extends NavDrawerEntryActivity impleme
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                SendEmailService.getInstance(getApplicationContext()).SendEmailErreurSynchro(entryType);
+                //SendEmailService.getInstance(getApplicationContext()).sendEmailErreurSynchro(entryType);
             }
         });
     }

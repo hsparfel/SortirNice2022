@@ -72,6 +72,7 @@ public class Entry implements Comparable<Entry>{
     @ElementList(name="activities", required=false)
     private List<Activity> listActivities;
 
+
     @ElementList(name="categories", required=false)
     private List<Category> listCategories;
 
@@ -87,6 +88,7 @@ public class Entry implements Comparable<Entry>{
     @ElementList(name="stations", required=false)
     private List<Station> listStations;
 
+    //pr failure test passer à true
     @ElementList(name="standings_levels", required=false)
     private List<StandingLevel> listStandingLevels;
 

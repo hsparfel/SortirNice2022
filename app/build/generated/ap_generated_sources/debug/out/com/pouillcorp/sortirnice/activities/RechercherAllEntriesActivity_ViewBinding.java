@@ -11,7 +11,7 @@ import java.lang.Override;
 public class RechercherAllEntriesActivity_ViewBinding extends NavDrawerEntryActivity_ViewBinding {
   private RechercherAllEntriesActivity target;
 
-  private View view7f08010f;
+  private View view7f080118;
 
   @UiThread
   public RechercherAllEntriesActivity_ViewBinding(RechercherAllEntriesActivity target) {
@@ -28,7 +28,7 @@ public class RechercherAllEntriesActivity_ViewBinding extends NavDrawerEntryActi
     View view;
     view = source.findViewById(R.id.fabSave);
     if (view != null) {
-      view7f08010f = view;
+      view7f080118 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -44,9 +44,9 @@ public class RechercherAllEntriesActivity_ViewBinding extends NavDrawerEntryActi
     target = null;
 
 
-    if (view7f08010f != null) {
-      view7f08010f.setOnClickListener(null);
-      view7f08010f = null;
+    if (view7f080118 != null) {
+      view7f080118.setOnClickListener(null);
+      view7f080118 = null;
     }
 
     super.unbind();

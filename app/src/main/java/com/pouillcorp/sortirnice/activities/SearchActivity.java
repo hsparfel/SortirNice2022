@@ -25,7 +25,7 @@ public class SearchActivity extends NavDrawerActivity {
         ButterKnife.bind(this);
         setTitle("Recherche");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_home).setChecked(true);
 
     }
 

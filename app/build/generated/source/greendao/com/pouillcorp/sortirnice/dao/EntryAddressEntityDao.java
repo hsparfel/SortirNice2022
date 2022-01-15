@@ -30,6 +30,7 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
         public final static Property AddressLine3 = new Property(3, String.class, "addressLine3", false, "ADDRESS_LINE3");
         public final static Property Zip = new Property(4, String.class, "zip", false, "ZIP");
         public final static Property City = new Property(5, String.class, "city", false, "CITY");
+        public final static Property IsChecked = new Property(6, boolean.class, "isChecked", false, "IS_CHECKED");
     }
 
 
@@ -50,7 +51,8 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
                 "\"ADDRESS_LINE2\" TEXT," + // 2: addressLine2
                 "\"ADDRESS_LINE3\" TEXT," + // 3: addressLine3
                 "\"ZIP\" TEXT," + // 4: zip
-                "\"CITY\" TEXT);"); // 5: city
+                "\"CITY\" TEXT," + // 5: city
+                "\"IS_CHECKED\" INTEGER NOT NULL );"); // 6: isChecked
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,7 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
         if (city != null) {
             stmt.bindString(6, city);
         }
+        stmt.bindLong(7, entity.getIsChecked() ? 1L: 0L);
     }
 
     @Override
@@ -127,6 +130,7 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
         if (city != null) {
             stmt.bindString(6, city);
         }
+        stmt.bindLong(7, entity.getIsChecked() ? 1L: 0L);
     }
 
     @Override
@@ -142,7 +146,8 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // addressLine2
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // addressLine3
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // zip
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // city
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // city
+            cursor.getShort(offset + 6) != 0 // isChecked
         );
         return entity;
     }
@@ -155,6 +160,7 @@ public class EntryAddressEntityDao extends AbstractDao<EntryAddressEntity, Long>
         entity.setAddressLine3(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setZip(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setCity(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setIsChecked(cursor.getShort(offset + 6) != 0);
      }
     
     @Override

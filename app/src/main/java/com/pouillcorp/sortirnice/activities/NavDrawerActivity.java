@@ -119,6 +119,7 @@ import com.pouillcorp.sortirnice.modelentries.CommonTag;
 import com.pouillcorp.sortirnice.modelentries.Contact;
 import com.pouillcorp.sortirnice.modelentries.Description;
 import com.pouillcorp.sortirnice.modelentries.DisabledOption;
+import com.pouillcorp.sortirnice.modelentries.Entries;
 import com.pouillcorp.sortirnice.modelentries.Entry;
 import com.pouillcorp.sortirnice.modelentries.FamilyOption;
 import com.pouillcorp.sortirnice.modelentries.FrpOption;
@@ -158,8 +159,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected BottomNavigationView bottomNavigationView;
     protected DaoSession daoSession;
+    protected MenuItem itemEvenementFiltre;
+    protected MenuItem itemEvenementTri;
 
     protected EventEntityDao eventEntityDao;
+
     protected EventSauvegardeEntityDao eventSauvegardeEntityDao;
     protected EntryEntityDao entryEntityDao;
     protected EntryActivityEntityDao entryActivityEntityDao;
@@ -249,7 +253,23 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
     protected Menu menuItems;
 
-
+    protected EvenementEntityDao evenementEntityDao;
+    protected EvenementAddressEntityDao evenementAddressEntityDao;
+    protected EvenementDescriptionEntityDao evenementDescriptionEntityDao;
+    protected EvenementOptionEntityDao evenementOptionEntityDao;
+    protected EvenementProfileEntityDao evenementProfileEntityDao;
+    protected EvenementRefEntriesEntityDao evenementRefEntriesEntityDao;
+    protected EvenementSectoEntityDao evenementSectoEntityDao;
+    protected EvenementCategoryEntityDao evenementCategoryEntityDao;
+    protected EvenementStationEntityDao evenementStationEntityDao;
+    protected JoinEvenementEntityWithEvenementAddressEntityDao joinEvenementEntityWithEvenementAddressEntityDao;
+    protected JoinEvenementEntityWithEvenementDescriptionEntityDao joinEvenementEntityWithEvenementDescriptionEntityDao;
+    protected JoinEvenementEntityWithEvenementOptionEntityDao joinEvenementEntityWithEvenementOptionEntityDao;
+    protected JoinEvenementEntityWithEvenementStationEntityDao joinEvenementEntityWithEvenementStationEntityDao;
+    protected JoinEvenementEntityWithEvenementProfileEntityDao joinEvenementEntityWithEvenementProfileEntityDao;
+    protected JoinEvenementEntityWithEvenementRefEntriesEntityDao joinEvenementEntityWithEvenementRefEntriesEntityDao;
+    protected JoinEvenementEntityWithEvenementSectoEntityDao joinEvenementEntityWithEvenementSectoEntityDao;
+    protected JoinEvenementEntityWithEvenementCategoryEntityDao joinEvenementEntityWithEvenementCategoryEntityDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -342,13 +362,31 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         joinEntryEntityWithEntryCommerciaEntityDao = daoSession.getJoinEntryEntityWithEntryCommerciaEntityDao();
 
 
-
+        evenementEntityDao = daoSession.getEvenementEntityDao();
+        evenementAddressEntityDao = daoSession.getEvenementAddressEntityDao();
+        evenementDescriptionEntityDao = daoSession.getEvenementDescriptionEntityDao();
+        evenementOptionEntityDao = daoSession.getEvenementOptionEntityDao();
+        evenementProfileEntityDao = daoSession.getEvenementProfileEntityDao();
+        evenementRefEntriesEntityDao = daoSession.getEvenementRefEntriesEntityDao();
+        evenementSectoEntityDao = daoSession.getEvenementSectoEntityDao();
+        evenementCategoryEntityDao = daoSession.getEvenementCategoryEntityDao();
+        evenementStationEntityDao = daoSession.getEvenementStationEntityDao();
+        joinEvenementEntityWithEvenementAddressEntityDao = daoSession.getJoinEvenementEntityWithEvenementAddressEntityDao();
+        joinEvenementEntityWithEvenementDescriptionEntityDao = daoSession.getJoinEvenementEntityWithEvenementDescriptionEntityDao();
+        joinEvenementEntityWithEvenementOptionEntityDao = daoSession.getJoinEvenementEntityWithEvenementOptionEntityDao();
+        joinEvenementEntityWithEvenementStationEntityDao = daoSession.getJoinEvenementEntityWithEvenementStationEntityDao();
+        joinEvenementEntityWithEvenementProfileEntityDao = daoSession.getJoinEvenementEntityWithEvenementProfileEntityDao();
+        joinEvenementEntityWithEvenementRefEntriesEntityDao = daoSession.getJoinEvenementEntityWithEvenementRefEntriesEntityDao();
+        joinEvenementEntityWithEvenementSectoEntityDao = daoSession.getJoinEvenementEntityWithEvenementSectoEntityDao();
+        joinEvenementEntityWithEvenementCategoryEntityDao = daoSession.getJoinEvenementEntityWithEvenementCategoryEntityDao();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         menuItems = menu;
+        Log.e("verif menuItem0", "menuItem : "+menuItems);
+
         return true;
     }
 
@@ -360,6 +398,8 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -386,7 +426,10 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                             case R.id.bottom_navigation_home:
                                 ouvrirActiviteSuivante(NavDrawerActivity.this, AccueilActivity.class, true);
                                 break;
-                            case R.id.bottom_navigation_search:
+                            case R.id.bottom_navigation_evenement:
+                                ouvrirActiviteSuivante(NavDrawerActivity.this, AfficherEvenementsActivity.class, true);
+                                break;
+                            case R.id.bottom_navigation_entry:
                                 ouvrirActiviteSuivante(NavDrawerActivity.this, RechercherAllEntriesActivity.class, true);
                                 break;
                             case R.id.bottom_navigation_my_datas:
@@ -457,7 +500,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     }
 
     public void initialiserDao() {
-        AppOpenHelper helper = new AppOpenHelper(this, "sortir_nice_db", null);
+        AppOpenHelper helper = new AppOpenHelper(this, "sortir_nice_2022_db", null);
         Database db = helper.getWritableDb();
         DaoMaster daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
@@ -477,15 +520,68 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         return super.dispatchTouchEvent(ev);
     }
 
-    public List<EntryEntity> saveListEntries(List<Entry> listEntries) {
+    public void deleteEntryObsolete(){
+        int limiteMaxObsolete = 10;
+        List<EntryEntity> listEntriesObsoletes = entryEntityDao.queryRaw("where obsolete_nb > ?",""+limiteMaxObsolete);
+
+        for (EntryEntity current : listEntriesObsoletes) {
+            if (!current.isFavori()){
+                current.delete();
+                Log.e("TAG", "suppression obsolete: "+current.getNameFr()+" - "+current.getEntryType().toString());
+            } else {
+                Log.e("TAG", "pas suppression obsolete car favori: "+current.getNameFr()+" - "+current.getEntryType().toString());
+            }
+
+        }
+        Log.e("TAG", "suppression obsolete terminee");
+    }
+
+    /*public void deleteEntryObsolete(List<EntryEntity> listEntries){
+        List<EntryEntity> listEntriesSaved = entryEntityDao.loadAll();
+
+        for (EntryEntity current : listEntriesSaved) {
+            if (!listEntries.contains(current)){
+                current.delete();
+                Log.e("TAG", "suppression obsolete: "+current.getNameFr()+" - "+current.getEntryType().toString());
+            }
+
+        }
+        Log.e("TAG", "suppression obsolete terminee");
+    }*/
+
+    public void majEntryObsolete(List<EntryEntity> listEntries){
+        List<EntryEntity> listEntriesSaved = entryEntityDao.loadAll();
+
+        for (EntryEntity current : listEntriesSaved) {
+            if (!listEntries.contains(current)){
+                //current.delete();
+                current.setObsoleteNb(current.getObsoleteNb()+1);
+                entryEntityDao.save(current);
+                Log.e("TAG", "maj obsolete: "+current.getNameFr()+" - "+current.getEntryType().toString()+" - iteration = "+current.getObsoleteNb());
+            } else {
+                if (current.getObsoleteNb()>0){
+                    current.setObsoleteNb(0);
+                    entryEntityDao.save(current);
+                    Log.e("TAG", "raz obsolete: "+current.getNameFr()+" - "+current.getEntryType().toString());
+                }
+            }
+
+        }
+        Log.e("TAG", "maj obsolete terminee");
+    }
+
+
+    public List<EntryEntity> saveListEntries(List<Entry> listEntries,EntriesType entryType) {
         //entryEntityDao.deleteAll();
         List<EntryEntity> listEntryEntities = new ArrayList<>();
         for (Entry current : listEntries) {
-            List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ?",""+current.getId());
+            //trouver le type d'entry dans la condition
+            //List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ? and entry_type = ?",""+current.getId(),""+current.getEntryType().toString());
+            List<EntryEntity> listEntriesFound = entryEntityDao.queryRaw("where entry_entity_id = ? and entry_type = ?",""+current.getId(), ""+current.getEntryType().toString());
             if (listEntriesFound.size()==0) {
                 EntryEntity entryToSave = new EntryEntity();
                 entryToSave.setEntryEntityId(Long.valueOf(current.getId()));
-                entryToSave.setEntryType(EntriesType.Sortie);
+                entryToSave.setEntryType(entryType);
                 entryToSave.setNameFr(current.getNameFr());
                 entryToSave.setNameFrShort(current.getNameFrShort());
 
@@ -1217,7 +1313,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     for (Opening opening : current.getListOpenings()) {
                         EntryOpeningEntity openingTemp = new EntryOpeningEntity();
                         List<EntryOpeningEntity> list = entryOpeningEntityDao.queryRaw("where opening_start = ? and opening_end = ? and opening_replay = ?",
-                                opening.getOpeningStart(),
+                                "" + opening.getOpeningStart(),
                                 "" + opening.getOpeningEnd(),
                                 "" + opening.getOpeningReplay());
                         JoinEntryEntityWithEntryOpeningEntity join = new JoinEntryEntityWithEntryOpeningEntity();
@@ -2191,5 +2287,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         }
         return bool;
     }
+
 
 }

@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 @Root
-public class Address {
+public class Address implements Comparable<Address>{
 
     @Element (name="address_line1",required=false)
     private String addressLine1;
@@ -49,5 +49,10 @@ public class Address {
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+    }
+
+    @Override
+    public int compareTo(Address o) {
+        return this.getCity().compareTo(o.getCity());
     }
 }

@@ -1,11 +1,14 @@
 package com.pouillcorp.sortirnice.entities.entry.detail;
 
+import com.pouillcorp.sortirnice.modelentries.DetailEntrySimple;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class EntryAnimationEntity implements Comparable<EntryAnimationEntity> {
+public class EntryAnimationEntity extends DetailEntryEntitySimple  {
+//public class EntryAnimationEntity implements Comparable<EntryAnimationEntity> {
 
     @Id
     private Long id;
@@ -22,10 +25,10 @@ public class EntryAnimationEntity implements Comparable<EntryAnimationEntity> {
     public EntryAnimationEntity() {
     }
 
-    @Override
+    /*@Override
     public int compareTo(EntryAnimationEntity o) {
         return this.getId().compareTo(o.getId());
-    }
+    }*/
 
     public Long getId() {
         return this.id;

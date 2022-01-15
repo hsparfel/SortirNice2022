@@ -5,7 +5,8 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class EntryLabelEntity implements Comparable<EntryLabelEntity> {
+public class EntryLabelEntity extends DetailEntryEntitySimple  {
+//public class EntryLabelEntity implements Comparable<EntryLabelEntity> {
 
     @Id
     private Long id;
@@ -22,10 +23,10 @@ public class EntryLabelEntity implements Comparable<EntryLabelEntity> {
     public EntryLabelEntity() {
     }
 
-    @Override
+    /*@Override
     public int compareTo(EntryLabelEntity o) {
         return this.getId().compareTo(o.getId());
-    }
+    }*/
 
     public Long getId() {
         return this.id;

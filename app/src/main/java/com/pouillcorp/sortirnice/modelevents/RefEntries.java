@@ -5,7 +5,7 @@ import org.simpleframework.xml.Root;
 
 @Root
 public class RefEntries {
-//bug car il peut y en avoir plusieurs
+
     @Element (name="ref_entry_id", required=false)
     private String refEntryId;
 

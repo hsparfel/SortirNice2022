@@ -9,7 +9,9 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.pouillcorp.sortirnice.App;
 import com.pouillcorp.sortirnice.R;
+import com.pouillcorp.sortirnice.email.SendEmailService;
 import com.pouillcorp.sortirnice.enumeration.EntriesType;
 import com.pouillcorp.sortirnice.interfaces.EntriesBoutiqueApiService;
 import com.pouillcorp.sortirnice.modelentries.Affiliation;
@@ -70,8 +72,9 @@ public class AfficherEntriesBoutiqueActivity extends NavDrawerEntryActivity  {
 
         setTitle(R.string.boutiques);
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_search).setChecked(true);
-
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_entry).setChecked(true);
+        Log.e("verif menuItemB1", "menuItem : "+menuItems);
+        Log.e("verif itemB1", "item : "+item);
         connectAndGetApiData(myUrl);
 
         entryType = EntriesType.Boutique;
@@ -101,8 +104,11 @@ public class AfficherEntriesBoutiqueActivity extends NavDrawerEntryActivity  {
                     initCheckboxesTitreClick();
                     initCheckboxesSelectAllClick();
                     progressBar.setVisibility(View.GONE);
-                    item = menuItems.findItem(R.id.menu_activity_main_filter);
+                    Log.e("verif menuItemB2", "menuItem : "+menuItems);
+                    Log.e("verif itemB2", "item : "+item);
+                    item = menuItems.findItem(R.id.menu_activity_main_entry_filter);
                     item.setVisible(true);
+
                 } else {
                     dateDemande = DateUtils.calculerVeille(dateDemande);
                     dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
@@ -115,7 +121,10 @@ public class AfficherEntriesBoutiqueActivity extends NavDrawerEntryActivity  {
             @Override
             public void onFailure(Call<Entries> call, Throwable throwable) {
                 Log.e(TAG, throwable.toString());
+                gererErreur(EntriesType.Boutique,throwable.toString());
             }
         });
     }
+
+
 }

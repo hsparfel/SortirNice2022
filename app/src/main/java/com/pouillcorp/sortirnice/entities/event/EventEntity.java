@@ -1,9 +1,22 @@
 package com.pouillcorp.sortirnice.entities.event;
 
 
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryCategoryEntity;
+import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryCategoryEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementCategoryEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementOptionEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementSectoEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementCategoryEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementOptionEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementSectoEntity;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.JoinEntity;
+import org.greenrobot.greendao.annotation.ToMany;
+
+import java.util.List;
 
 @Entity
 public class EventEntity implements Comparable<EventEntity> {
@@ -75,7 +88,11 @@ public class EventEntity implements Comparable<EventEntity> {
 
 
 
-    @Generated(hash = 525322740)
+
+    private boolean favori;
+
+
+    @Generated(hash = 1674426062)
     public EventEntity(Long id, Long eventId, String nameFr, String start,
             String end, String adressSituationContent, String adressSituationZip,
             String adressSituationCity, String adressPrincipalContent,
@@ -85,7 +102,8 @@ public class EventEntity implements Comparable<EventEntity> {
             String secto, String descriptionSituation, String descriptionHoraires,
             String descriptionTarification, String descriptionDescription,
             String image, double latitude, double longitude, int note,
-            String entryId, String entryName, String created, String updated) {
+            String entryId, String entryName, String created, String updated,
+            boolean favori) {
         this.id = id;
         this.eventId = eventId;
         this.nameFr = nameFr;
@@ -118,12 +136,12 @@ public class EventEntity implements Comparable<EventEntity> {
         this.entryName = entryName;
         this.created = created;
         this.updated = updated;
+        this.favori = favori;
     }
 
     @Generated(hash = 893269617)
     public EventEntity() {
     }
-
 
 
     @Override
@@ -385,5 +403,17 @@ public class EventEntity implements Comparable<EventEntity> {
 
     public void setAdressPrincipalCity(String adressPrincipalCity) {
         this.adressPrincipalCity = adressPrincipalCity;
+    }
+
+    public boolean isFavori() {
+        return favori;
+    }
+
+    public void setFavori(boolean favori) {
+        this.favori = favori;
+    }
+
+    public boolean getFavori() {
+        return this.favori;
     }
 }

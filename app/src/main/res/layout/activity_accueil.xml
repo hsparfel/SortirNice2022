@@ -37,6 +37,22 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Evenements button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="afficherEvenements"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test tous"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="chargerTous"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Sorties button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:onClick="afficherEntriesSortie"
@@ -106,12 +122,14 @@
             android:onClick="afficherEntriesUtile"
             />
 
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mes Enregistrements"
+            android:text="Mes Favoris"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherChoixEnregistrement"
+            android:onClick="afficherMesFavoris"
             />
 
 

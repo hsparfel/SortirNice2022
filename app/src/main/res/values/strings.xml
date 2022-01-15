@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SortirNice</string>
+    <string name="app_name">SortirNice2022</string>
     <string name="home">Accueil</string>
 
     <string name="sortir_a_nice">Sortir à Nice</string>
@@ -20,4 +20,18 @@
     <string name="rechercher">Rechercher</string>
     <string name="rechercher_entries">Rechercher divers</string>
     <string name="mes_favoris">Mes Favoris</string>
+    <string name="services">Services</string>
+    <string name="selectionner_tout">Selectionner Tout</string>
+    <string name="couchage">Couchage</string>
+    <string name="stations">Station</string>
+    <string name="pratique">Pratique</string>
+    <string name="animation">Animation</string>
+    <string name="ambiance">Ambiance</string>
+    <string name="categorie">Categorie</string>
+    <string name="chaine">Chaîne</string>
+    <string name="ville">Ville</string>
+    <string name="option_famille">Option Famille</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

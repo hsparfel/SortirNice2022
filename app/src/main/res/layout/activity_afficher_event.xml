@@ -20,6 +20,177 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/ToolBarStyle" />
 
+    <FrameLayout
+        android:id="@+id/layout_fragment_evenement_filtre"
+        android:layout_width="wrap_content"
+        android:layout_height="500dip"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:background="#E5E7E9"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            >
+
+            <LinearLayout
+                android:id="@+id/linear_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/filtre_textView"
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_view_detail_middle"
+                    android:layout_marginTop="@dimen/text_view_detail_middle"
+                    android:layout_marginRight="10dip"
+                    android:text="Filtrer selon:" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEvenementValiderFiltre"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_playlist_add_check_white_24"
+                    app:tint="@android:color/white" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEvenementRazFiltre"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_remove_done_white_24"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/evenement_filtre_scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/buttonEvenementFiltreCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/categorie"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEvenementFiltreCategory"
+                    />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEvenementFiltreCategorySelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEvenementFiltreCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+                    <Button
+                        android:id="@+id/buttonEvenementFiltreVille"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ville"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEvenementFiltreVille"
+                        />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEvenementFiltreVilleSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEvenementFiltreVille"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_fragment_evenement_tri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        android:elevation="1dp"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#E5E7E9"
+            android:layout_marginRight="10dip"
+            >
+            <TextView
+                android:id="@+id/tri_textView"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:text="Trier selon:"
+                android:layout_marginTop="@dimen/text_view_detail_middle"
+                android:layout_marginLeft="@dimen/text_view_detail_middle"/>
+
+            <RadioGroup
+                android:id="@+id/radioEvenementTriGroup"
+                android:checkedButton="@+id/radio_button_evenement_tri_nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_detail_large"
+                android:layout_marginLeft="50dip">
+                <RadioButton
+                    android:id="@+id/radio_button_evenement_tri_nom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tri1"/>
+                <RadioButton
+                    android:id="@+id/radio_button_evenement_tri_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tri2"/>
+            </RadioGroup>
+        </LinearLayout>
+    </FrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_recycler_event"
         android:layout_width="match_parent"

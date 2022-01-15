@@ -65,9 +65,9 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
         for (Description current : event.getListDescriptions()) {
             if (current.getLanguage().equalsIgnoreCase("fr")) {
                 if (current.getType().equalsIgnoreCase("description")) {
-                    category += current.getValue();
+                    description += (description == "" ? "" : newLine) + current.getValue();
                 } else if (current.getType().equalsIgnoreCase("situation")) {
-                    category += newLine + current.getValue();
+                    description += (description == "" ? "" : newLine) + current.getValue();
                 }
             }
         }
@@ -94,7 +94,7 @@ public class RecyclerViewHolderEvents extends RecyclerView.ViewHolder implements
 
         // this.image.setImageURI(Uri.parse(event.getListImages().get(0).getUrl()));
         this.titre.setText(event.getNameFr());
-        this.textSecondaire.setText(category);
+        this.textSecondaire.setText(BasicUtils.stringRaccourci(category,100));
         this.textSupport.setText(BasicUtils.stringRaccourci(description,100));
 
         hideFields();

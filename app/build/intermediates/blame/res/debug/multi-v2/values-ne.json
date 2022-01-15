@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2021\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ne\\values-ne.xml",
+            "outputFile": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ne\\values-ne.xml",
             "map": [
                 {
                     "source": "C:\\Users\\TNH\\.gradle\\caches\\transforms-2\\files-2.1\\77f5691e3e3ba536b55da1d498c00a96\\material-1.4.0-alpha01\\res\\values-ne\\values-ne.xml",

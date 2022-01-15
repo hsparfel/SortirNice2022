@@ -24,7 +24,11 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEventsActivity"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activities.AfficherEvenementsActivity"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEventDetailActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activities.AfficherEvenementDetailActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEntriesSortieActivity"
             android:windowSoftInputMode="stateHidden"/>
@@ -46,24 +50,7 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherChoixEnregistrementActivity"
             android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".activities.AfficherEntrySortieDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryTransportDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryUtileDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryVisiteDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryShoppingDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryRestaurantDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryHotelDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryHebergementDetailActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntryBoutiqueDetailActivity"
+        <activity android:name=".activities.AfficherMesFavorisActivity"
             android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".activities.RechercherAllEntriesActivity"

@@ -20,20 +20,33 @@ public class EntryAddressEntity implements Comparable<EntryAddressEntity> {
 
     private String city;
 
-    @Generated(hash = 2006805834)
+    private boolean isChecked;
+
+    @Generated(hash = 658608255)
     public EntryAddressEntity(Long id, String addressLine1, String addressLine2,
-            String addressLine3, String zip, String city) {
+            String addressLine3, String zip, String city, boolean isChecked) {
         this.id = id;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.addressLine3 = addressLine3;
         this.zip = zip;
         this.city = city;
+        this.isChecked = isChecked;
     }
 
     @Generated(hash = 1346410377)
     public EntryAddressEntity() {
     }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    
 
     @Override
     public int compareTo(EntryAddressEntity o) {
@@ -86,6 +99,14 @@ public class EntryAddressEntity implements Comparable<EntryAddressEntity> {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public boolean getIsChecked() {
+        return this.isChecked;
+    }
+
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
 }

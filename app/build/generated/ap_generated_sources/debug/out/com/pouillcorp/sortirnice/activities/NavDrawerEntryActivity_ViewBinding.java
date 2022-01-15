@@ -22,11 +22,11 @@ import java.lang.Override;
 public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
   private NavDrawerEntryActivity target;
 
-  private View view7f08010f;
+  private View view7f080118;
 
-  private View view7f08010d;
+  private View view7f080116;
 
-  private View view7f08010e;
+  private View view7f080117;
 
   @UiThread
   public NavDrawerEntryActivity_ViewBinding(NavDrawerEntryActivity target) {
@@ -112,15 +112,17 @@ public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
     target.furnishedRoomCount = Utils.findOptionalViewAsType(source, R.id.furnished_room_count, "field 'furnishedRoomCount'", TextView.class);
     target.scrollView = Utils.findOptionalViewAsType(source, R.id.scrollView, "field 'scrollView'", ScrollView.class);
     target.fabExit = Utils.findOptionalViewAsType(source, R.id.fabExit, "field 'fabExit'", FloatingActionButton.class);
-    view = Utils.findRequiredView(source, R.id.fabSave, "method 'fabSaveClick'");
+    view = source.findViewById(R.id.fabSave);
     target.fabSave = Utils.castView(view, R.id.fabSave, "field 'fabSave'", FloatingActionButton.class);
-    view7f08010f = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.fabSaveClick();
-      }
-    });
+    if (view != null) {
+      view7f080118 = view;
+      view.setOnClickListener(new DebouncingOnClickListener() {
+        @Override
+        public void doClick(View p0) {
+          target.fabSaveClick();
+        }
+      });
+    }
     target.scrollViewFiltre = Utils.findOptionalViewAsType(source, R.id.scrollView_filtre, "field 'scrollViewFiltre'", ScrollView.class);
     target.linearLayoutAmenities = Utils.findOptionalViewAsType(source, R.id.linearLayoutAmenities, "field 'linearLayoutAmenities'", LinearLayout.class);
     target.checkboxFiltreAmenities = Utils.findOptionalViewAsType(source, R.id.checkboxFiltreAmenities, "field 'checkboxFiltreAmenities'", MaterialCheckBox.class);
@@ -170,24 +172,28 @@ public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
     target.checkboxFiltreSleepingsSelectAll = Utils.findOptionalViewAsType(source, R.id.checkboxFiltreSleepingsSelectAll, "field 'checkboxFiltreSleepingsSelectAll'", MaterialCheckBox.class);
     target.checkboxFiltreStandingLevelsSelectAll = Utils.findOptionalViewAsType(source, R.id.checkboxFiltreStandingLevelsSelectAll, "field 'checkboxFiltreStandingLevelsSelectAll'", MaterialCheckBox.class);
     target.checkboxFiltreStationsSelectAll = Utils.findOptionalViewAsType(source, R.id.checkboxFiltreStationsSelectAll, "field 'checkboxFiltreStationsSelectAll'", MaterialCheckBox.class);
-    view = Utils.findRequiredView(source, R.id.fabFiltre, "method 'fabFiltreClick'");
+    view = source.findViewById(R.id.fabFiltre);
     target.fabFiltre = Utils.castView(view, R.id.fabFiltre, "field 'fabFiltre'", FloatingActionButton.class);
-    view7f08010d = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.fabFiltreClick();
-      }
-    });
-    view = Utils.findRequiredView(source, R.id.fabRazFiltre, "method 'fabRazFiltreClick'");
+    if (view != null) {
+      view7f080116 = view;
+      view.setOnClickListener(new DebouncingOnClickListener() {
+        @Override
+        public void doClick(View p0) {
+          target.fabFiltreClick();
+        }
+      });
+    }
+    view = source.findViewById(R.id.fabRazFiltre);
     target.fabRazFiltre = Utils.castView(view, R.id.fabRazFiltre, "field 'fabRazFiltre'", FloatingActionButton.class);
-    view7f08010e = view;
-    view.setOnClickListener(new DebouncingOnClickListener() {
-      @Override
-      public void doClick(View p0) {
-        target.fabRazFiltreClick();
-      }
-    });
+    if (view != null) {
+      view7f080117 = view;
+      view.setOnClickListener(new DebouncingOnClickListener() {
+        @Override
+        public void doClick(View p0) {
+          target.fabRazFiltreClick();
+        }
+      });
+    }
   }
 
   @Override
@@ -324,11 +330,17 @@ public class NavDrawerEntryActivity_ViewBinding implements Unbinder {
     target.fabFiltre = null;
     target.fabRazFiltre = null;
 
-    view7f08010f.setOnClickListener(null);
-    view7f08010f = null;
-    view7f08010d.setOnClickListener(null);
-    view7f08010d = null;
-    view7f08010e.setOnClickListener(null);
-    view7f08010e = null;
+    if (view7f080118 != null) {
+      view7f080118.setOnClickListener(null);
+      view7f080118 = null;
+    }
+    if (view7f080116 != null) {
+      view7f080116.setOnClickListener(null);
+      view7f080116 = null;
+    }
+    if (view7f080117 != null) {
+      view7f080117.setOnClickListener(null);
+      view7f080117 = null;
+    }
   }
 }
