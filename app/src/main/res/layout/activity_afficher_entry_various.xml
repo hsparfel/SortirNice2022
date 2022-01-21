@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.NavDrawerEntryActivity">
+        tools:context=".activities.NavDrawerActivity">
 
         <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -20,8 +20,545 @@
         app:layout_constraintTop_toTopOf="parent"
         app:theme="@style/ToolBarStyle" />
 
+    <FrameLayout
+        android:id="@+id/layout_fragment_entry_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:background="#E5E7E9"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            >
+
+            <LinearLayout
+                android:id="@+id/linear_top_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/type_textView"
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_view_detail_middle"
+                    android:layout_marginTop="@dimen/text_view_detail_middle"
+                    android:layout_marginRight="10dip"
+                    android:text="Selectionner:" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEntryValiderType"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_playlist_add_check_white_24"
+                    app:tint="@android:color/white" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEntryRazType"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_remove_done_white_24"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/entry_type_scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        />
+
+
+
+
+
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_fragment_entry_filtre"
+        android:layout_width="wrap_content"
+        android:layout_height="500dip"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dip"
+            android:background="#E5E7E9"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            >
+
+            <LinearLayout
+                android:id="@+id/linear_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/filtre_textView"
+                    android:layout_width="100dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_view_detail_middle"
+                    android:layout_marginTop="@dimen/text_view_detail_middle"
+                    android:layout_marginRight="10dip"
+                    android:text="Filtrer selon:" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEntryValiderFiltre"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_playlist_add_check_white_24"
+                    app:tint="@android:color/white" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEntryRazFiltre"
+                    style="@style/Widget.MaterialComponents.FloatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/outline_remove_done_white_24"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/entry_filtre_scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/buttonEntryFiltreLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreLocation"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreLocationSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/buttonEntryFiltreCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/categorie"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreCategory"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreCategorySelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+              <!--      <Button
+                        android:id="@+id/buttonEntryFiltreVille"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ville"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreVille"
+                        />
+
+                     <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreVilleSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreVille"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone" /> -->
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreActivity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreActivity"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreActivitySelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreActivity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreAmenity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreAmenity"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreAmenitySelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreAmenity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreAnimation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/animation"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreAnimation"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreAnimationSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreAnimation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreAtmospher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/atmospher"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreAtmospher"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreAtmospherSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreAtmospher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreChain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chaine"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreChain"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreChainSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreChain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreFurnishedRental"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/furnishedRental"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreFurnishedRental"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreFurnishedRentalSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreFurnishedRental"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreLabel"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreLabelSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreService"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreServiceSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreStandingLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/standingLevel"
+                        app:icon="@drawable/outline_arrow_right_black_18"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:onClick="afficherListCbEntryFiltreStandingLevel"
+                        />
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreStandingLevelSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreStandingLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- <FrameLayout
+        android:id="@+id/layout_fragment_entry_tri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        android:elevation="1dp"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#E5E7E9"
+            android:layout_marginRight="10dip"
+            >
+            <TextView
+                android:id="@+id/tri_textView"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:text="Trier selon:"
+                android:layout_marginTop="@dimen/text_view_detail_middle"
+                android:layout_marginLeft="@dimen/text_view_detail_middle"/>
+
+            <RadioGroup
+                android:id="@+id/radioEntryTriGroup"
+                android:checkedButton="@+id/radio_button_evenement_tri_nom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_detail_large"
+                android:layout_marginLeft="50dip">
+                <RadioButton
+                    android:id="@+id/radio_button_entry_tri_nom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tri1"/>
+                <RadioButton
+                    android:id="@+id/radio_button_entry_tri_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tri2"/>
+            </RadioGroup>
+        </LinearLayout>
+    </FrameLayout> -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_recycler_event"
+        android:id="@+id/list_recycler_entry"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
@@ -45,45 +582,13 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"
-
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabFiltre"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_margin="10dip"
-        android:visibility="gone"
-        app:backgroundTint="@color/colorPrimary"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
-
-        app:srcCompat="@drawable/outline_playlist_add_check_white_24"
-
-        app:tint="@android:color/white" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabRazFiltre"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_margin="10dip"
-
-        app:backgroundTint="@color/colorPrimary"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fabFiltre"
-
-        app:srcCompat="@drawable/outline_remove_done_white_24"
-        android:visibility="gone"
-        app:tint="@android:color/white" />
 
 
 
@@ -91,45 +596,15 @@
 
 
 
-    <!-- afficher filtre -->
-
-    <ScrollView
-        android:id="@+id/scrollView_filtre"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar">
-
-        <include layout="@layout/afficher_filtre_entry"/>
 
 
-    </ScrollView>
+
 
 
 
 
     <!-- afficher detail -->
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/layout_fab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar">
 
-        <include layout="@layout/afficher_detail_entry"/>
-
-
-    </ScrollView>
-
-    <include layout="@layout/fab_save_exit"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

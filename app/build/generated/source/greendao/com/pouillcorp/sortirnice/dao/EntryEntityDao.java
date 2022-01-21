@@ -61,6 +61,7 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         public final static Property Updated = new Property(25, String.class, "updated", false, "UPDATED");
         public final static Property Favori = new Property(26, boolean.class, "favori", false, "FAVORI");
         public final static Property ObsoleteNb = new Property(27, Integer.class, "obsoleteNb", false, "OBSOLETE_NB");
+        public final static Property Image = new Property(28, String.class, "image", false, "IMAGE");
     }
 
     private DaoSession daoSession;
@@ -107,7 +108,8 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
                 "\"CREATED\" TEXT," + // 24: created
                 "\"UPDATED\" TEXT," + // 25: updated
                 "\"FAVORI\" INTEGER NOT NULL ," + // 26: favori
-                "\"OBSOLETE_NB\" INTEGER);"); // 27: obsoleteNb
+                "\"OBSOLETE_NB\" INTEGER," + // 27: obsoleteNb
+                "\"IMAGE\" TEXT);"); // 28: image
     }
 
     /** Drops the underlying database table. */
@@ -227,6 +229,11 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         if (obsoleteNb != null) {
             stmt.bindLong(28, obsoleteNb);
         }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(29, image);
+        }
     }
 
     @Override
@@ -340,6 +347,11 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         if (obsoleteNb != null) {
             stmt.bindLong(28, obsoleteNb);
         }
+ 
+        String image = entity.getImage();
+        if (image != null) {
+            stmt.bindString(29, image);
+        }
     }
 
     @Override
@@ -383,7 +395,8 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
             cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // created
             cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // updated
             cursor.getShort(offset + 26) != 0, // favori
-            cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27) // obsoleteNb
+            cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // obsoleteNb
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28) // image
         );
         return entity;
     }
@@ -418,6 +431,7 @@ public class EntryEntityDao extends AbstractDao<EntryEntity, Long> {
         entity.setUpdated(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
         entity.setFavori(cursor.getShort(offset + 26) != 0);
         entity.setObsoleteNb(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
+        entity.setImage(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
      }
     
     @Override

@@ -5,8 +5,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.pouillcorp.sortirnice.App;
 import com.pouillcorp.sortirnice.R;
+import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryAtmospherEntity;
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryCategoryEntity;
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryDescriptionEntity;
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryLocationEntity;
 import com.pouillcorp.sortirnice.modelentries.Atmospher;
 import com.pouillcorp.sortirnice.modelentries.Category;
 import com.pouillcorp.sortirnice.modelentries.Description;
@@ -35,7 +41,12 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
     TextView textDescription;
     //@BindView(R.id.image)
     //ImageView image;
-    Entry currentEntry;
+    EntryEntity currentEntry;
+
+    @BindView(R.id.cardEntry)
+    MaterialCardView cardEntry;
+
+    String newLine = System.getProperty("line.separator");
 
     //Bitmap bitmap = null;
 
@@ -46,24 +57,26 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
         ButterKnife.bind(this, itemView);
     }
 
-    public void updateWithEntries(Entry entry, RecyclerAdapterEntries.Listener callback)  {
+    public void updateWithEntries(EntryEntity entry, RecyclerAdapterEntries.Listener callback)  {
         //this.detail.setText(event.getNameFr());
         //this.detail.setOnClickListener(this);
         currentEntry = entry;
 
         String description="";
-        for (Description current : entry.getListDescriptions()) {
-            if (current.getLanguage().equalsIgnoreCase("fr")) {
-                if (current.getType().equalsIgnoreCase("publique")) {
+        int cptr = 0;
+        for (EntryDescriptionEntity current : entry.getListDescriptions()) {
+            if (cptr == 0) {
                     description = current.getValue();
-                }
+                    cptr++;
+            } else {
+                description = newLine + current.getValue();
             }
         }
 
         String category = "";
         int i = 1;
         int w = 0;
-        for (Category current : entry.getListCategories()) {
+        for (EntryCategoryEntity current : entry.getListCategories()) {
             if (current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
             || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
             || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))
@@ -72,7 +85,7 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
                 w++;
             }
         }
-        for (Category current : entry.getListCategories()) {
+        for (EntryCategoryEntity current : entry.getListCategories()) {
             if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
                     && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
                     && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))
@@ -89,7 +102,7 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
         String location = "";
         if (entry.getListLocations() != null) {
             int j = 1;
-            for (Location current : entry.getListLocations()) {
+            for (EntryLocationEntity current : entry.getListLocations()) {
                 if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
                     location += current.getValue();
                     if (j < entry.getListLocations().size()) {
@@ -102,7 +115,7 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
         String atmosphere = "";
         if (entry.getListAtmosphere() != null) {
             int k = 1;
-            for (Atmospher current : entry.getListAtmosphere()) {
+            for (EntryAtmospherEntity current : entry.getListAtmosphere()) {
                 //if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
                     atmosphere += current.getValue();
                     if (k < entry.getListAtmosphere().size()) {
@@ -135,7 +148,7 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
         this.textAtmospheres.setText(atmosphere);
 
         hideFields();
-
+        changerCouleur();
 
         this.callbackWeakRef = new WeakReference<RecyclerAdapterEntries.Listener>(callback);
         /*if (callback.getClass() == AfficherEntriesShoppingActivity.class) {
@@ -217,4 +230,12 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
             //progressBar.setProgress(integer[0],true);
         }
     }*/
+
+    public void changerCouleur() {
+        if (currentEntry.getFavori()) {
+            cardEntry.setBackgroundColor(App.getRes().getColor(R.color.favori));
+        } else {
+            cardEntry.setBackgroundColor(App.getRes().getColor(R.color.white));
+        }
+    }
 }

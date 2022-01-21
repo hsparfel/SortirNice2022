@@ -31,14 +31,13 @@ public class SendEmailService {
     private static Context ctx;
 
     static final String username = "pouillcorp@gmail.com";
-    final String password = "Bamb00l@";
+    final String password = "pouillos1416";
 
     Properties prop;
     static Session session;
 
     private SendEmailService(Context context) {
         ctx = context;
-
         prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -68,27 +67,19 @@ public class SendEmailService {
                     Message.RecipientType.TO,
                     InternetAddress.parse("pouillcorp@gmail.com")
             );
-            message.setSubject("APP - Sortir Nice - Erreur Modele : "+entryType.toString());
-            message.setText("l'app Sortir à Nice a bugué à cause d'un probleme dans le modele "+entryType.toString()+"\n"
-            + "\n" + "Exception:"+"\n"+erreur);
-
-            Transport.send(message);
-
+            String model = "";
+            if (entryType != null) {
+                model += entryType.toString();
+            } else {
+                model += "Evenement";
+            }
+                message.setSubject("APP - Sortir Nice - Erreur Modele : " + model);
+                message.setText("l'app Sortir à Nice a bugué à cause d'un probleme dans le modele " + model + "\n"
+                        + "\n" + "Exception:" + "\n" + erreur);
+                Transport.send(message);
         }
         catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
-
-
-
-
-
-
-
-
 }

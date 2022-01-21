@@ -50,7 +50,7 @@ public class EntryAddressEntity implements Comparable<EntryAddressEntity> {
 
     @Override
     public int compareTo(EntryAddressEntity o) {
-        return this.getId().compareTo(o.getId());
+        return this.getCity().compareTo(o.getCity());
     }
 
     public Long getId() {

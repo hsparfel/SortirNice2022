@@ -15,7 +15,7 @@
 11-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:5:22-64
 12
 13    <application
-13-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:7:5-58:19
+13-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:7:5-37:19
 14        android:name="com.pouillcorp.sortirnice.App"
 14-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:8:9-28
 15        android:allowBackup="true"
@@ -32,128 +32,67 @@
 21-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:12:9-45
 22        android:supportsRtl="true"
 22-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:13:9-35
-23        android:testOnly="true"
-24        android:theme="@style/AppTheme" >
-24-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:14:9-40
-25        <activity
-25-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:9-22:20
-26            android:name="com.pouillcorp.sortirnice.activities.AccueilActivity"
-26-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:19-61
-27            android:windowSoftInputMode="stateHidden" >
-27-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:16:13-54
-28            <intent-filter>
-28-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:17:13-21:29
-29                <action android:name="android.intent.action.MAIN" />
-29-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:17-69
-29-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:25-66
-30
-31                <category android:name="android.intent.category.LAUNCHER" />
-31-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:17-77
-31-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:27-74
-32            </intent-filter>
-33        </activity>
-34        <activity
-34-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:9-24:56
-35            android:name="com.pouillcorp.sortirnice.activities.SearchActivity"
-35-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:19-60
-36            android:windowSoftInputMode="stateHidden" />
-36-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:24:13-54
-37        <activity
-37-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:9-26:56
-38            android:name="com.pouillcorp.sortirnice.activities.AfficherEventsActivity"
-38-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:19-68
-39            android:windowSoftInputMode="stateHidden" />
-39-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:26:13-54
-40        <activity
-40-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:9-28:56
-41            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsActivity"
-41-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:19-72
-42            android:windowSoftInputMode="stateHidden" />
-42-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:28:13-54
-43        <activity
-43-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:9-30:56
-44            android:name="com.pouillcorp.sortirnice.activities.AfficherEventDetailActivity"
-44-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:19-73
-45            android:windowSoftInputMode="stateHidden" />
-45-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:30:13-54
-46        <activity
-46-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:9-32:56
-47            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementDetailActivity"
-47-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:19-77
-48            android:windowSoftInputMode="stateHidden" />
-48-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:32:13-54
-49        <activity
-49-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:9-34:56
-50            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesSortieActivity"
-50-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:19-75
-51            android:windowSoftInputMode="stateHidden" />
-51-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:34:13-54
-52        <activity
-52-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:9-36:56
-53            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesUtileActivity"
-53-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:19-74
-54            android:windowSoftInputMode="stateHidden" />
-54-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:36:13-54
-55        <activity
-55-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:37:9-38:56
-56            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesShoppingActivity"
-56-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:37:19-77
-57            android:windowSoftInputMode="stateHidden" />
-57-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:38:13-54
-58        <activity
-58-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:39:9-40:56
-59            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesVisiteActivity"
-59-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:39:19-75
-60            android:windowSoftInputMode="stateHidden" />
-60-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:40:13-54
-61        <activity
-61-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:41:9-42:56
-62            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesHotelActivity"
-62-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:41:19-74
-63            android:windowSoftInputMode="stateHidden" />
-63-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:42:13-54
-64        <activity
-64-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:43:9-44:56
-65            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesHebergementActivity"
-65-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:43:19-80
-66            android:windowSoftInputMode="stateHidden" />
-66-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:44:13-54
-67        <activity
-67-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:45:9-46:56
-68            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesBoutiqueActivity"
-68-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:45:19-77
-69            android:windowSoftInputMode="stateHidden" />
-69-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:46:13-54
-70        <activity
-70-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:47:9-48:56
-71            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesTransportActivity"
-71-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:47:19-78
-72            android:windowSoftInputMode="stateHidden" />
-72-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:48:13-54
-73        <activity
-73-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:49:9-50:56
-74            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesRestaurantActivity"
-74-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:49:19-79
-75            android:windowSoftInputMode="stateHidden" />
-75-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:50:13-54
-76        <activity
-76-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:51:9-52:56
-77            android:name="com.pouillcorp.sortirnice.activities.AfficherChoixEnregistrementActivity"
-77-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:51:19-81
-78            android:windowSoftInputMode="stateHidden" />
-78-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:52:13-54
-79        <activity
-79-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:53:9-54:56
-80            android:name="com.pouillcorp.sortirnice.activities.AfficherMesFavorisActivity"
-80-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:53:19-72
-81            android:windowSoftInputMode="stateHidden" />
-81-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:54:13-54
-82        <activity
-82-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:56:9-57:56
-83            android:name="com.pouillcorp.sortirnice.activities.RechercherAllEntriesActivity"
-83-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:56:19-74
-84            android:windowSoftInputMode="stateHidden" />
-84-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:57:13-54
-85    </application>
-86
-87</manifest>
+23        android:theme="@style/AppTheme" >
+23-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:14:9-40
+24        <activity
+24-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:9-22:20
+25            android:name="com.pouillcorp.sortirnice.activities.AccueilActivity"
+25-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:19-61
+26            android:windowSoftInputMode="stateHidden" >
+26-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:16:13-54
+27            <intent-filter>
+27-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:17:13-21:29
+28                <action android:name="android.intent.action.MAIN" />
+28-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:17-69
+28-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:25-66
+29
+30                <category android:name="android.intent.category.LAUNCHER" />
+30-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:17-77
+30-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:27-74
+31            </intent-filter>
+32        </activity>
+33        <activity
+33-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:9-24:56
+34            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsActivity"
+34-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:19-72
+35            android:windowSoftInputMode="stateHidden" />
+35-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:24:13-54
+36        <activity
+36-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:9-26:56
+37            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesDiversActivity"
+37-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:19-75
+38            android:windowSoftInputMode="stateHidden" />
+38-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:26:13-54
+39        <activity
+39-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:9-28:56
+40            android:name="com.pouillcorp.sortirnice.activities.AfficherEntryDetailActivity"
+40-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:19-73
+41            android:windowSoftInputMode="stateHidden" />
+41-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:28:13-54
+42        <activity
+42-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:9-30:56
+43            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementDetailActivity"
+43-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:19-77
+44            android:windowSoftInputMode="stateHidden" />
+44-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:30:13-54
+45        <activity
+45-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:9-32:56
+46            android:name="com.pouillcorp.sortirnice.activities.AfficherFavorisActivity"
+46-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:19-69
+47            android:windowSoftInputMode="stateHidden" />
+47-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:32:13-54
+48        <activity
+48-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:9-34:56
+49            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsFavorisActivity"
+49-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:19-79
+50            android:windowSoftInputMode="stateHidden" />
+50-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:34:13-54
+51        <activity
+51-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:9-36:56
+52            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesFavorisActivity"
+52-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:19-76
+53            android:windowSoftInputMode="stateHidden" />
+53-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:36:13-54
+54    </application>
+55
+56</manifest>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillcorp.sortirnice.R;
+import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
 import com.pouillcorp.sortirnice.modelentries.Entry;
 import com.pouillcorp.sortirnice.recycler.holder.RecyclerViewHolderEntries;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class RecyclerAdapterEntries extends RecyclerView.Adapter<RecyclerViewHolderEntries> {
 
-        private List<Entry> listEntries;
+        private List<EntryEntity> listEntries;
 
     public interface Listener {
         void onClickEntriesButton(int position);
@@ -24,7 +25,7 @@ public class RecyclerAdapterEntries extends RecyclerView.Adapter<RecyclerViewHol
 
     private final Listener callback;
 
-    public RecyclerAdapterEntries(List<Entry> listEntries, Listener callback) {
+    public RecyclerAdapterEntries(List<EntryEntity> listEntries, Listener callback) {
         this.listEntries = listEntries;
         this.callback = callback;
     }
@@ -48,7 +49,7 @@ public class RecyclerAdapterEntries extends RecyclerView.Adapter<RecyclerViewHol
             return this.listEntries.size();
         }
 
-    public Entry getEntry(int position){
+    public EntryEntity getEntry(int position){
         return this.listEntries.get(position);
     }
 }

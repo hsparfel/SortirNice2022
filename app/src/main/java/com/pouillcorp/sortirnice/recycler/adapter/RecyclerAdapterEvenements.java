@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
-import com.pouillcorp.sortirnice.modelevents.Event;
 import com.pouillcorp.sortirnice.recycler.holder.RecyclerViewHolderEvenements;
-import com.pouillcorp.sortirnice.recycler.holder.RecyclerViewHolderEvents;
 
 import java.util.List;
 

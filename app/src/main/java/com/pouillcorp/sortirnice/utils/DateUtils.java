@@ -14,6 +14,13 @@ public class DateUtils {
         return reponse;
     }
 
+    public static String formatDateDD_MM_YYYY(Date date) {
+        String reponse = "";
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
+        reponse += dt1.format(date);
+        return reponse;
+    }
+
     public static String formatDateDD_MM_YYYY(String date) {
         //creer date depuis string en premier
        /* Date tradeDate = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).parse(date);

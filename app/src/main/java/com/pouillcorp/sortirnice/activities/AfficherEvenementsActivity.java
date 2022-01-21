@@ -1,6 +1,5 @@
 package com.pouillcorp.sortirnice.activities;
 
-
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -108,9 +107,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
     private final static String API_KEY = "dae3988a-a667-40a6-a74c-42df34b5aff9";
 
     private String dateDemandeString;
-    private String dateVeilleString;
     private Date dateDemande;
-    private Date dateVeille;
 
     boolean isResponded = false;
 
@@ -180,9 +177,9 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         dateDemande = new Date();
         dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
 
-        myUrl += dateDemandeString+"/";
+        myUrl += dateDemandeString + "/";
 
-            connectAndGetApiData(myUrl);
+        connectAndGetApiData(myUrl);
 
         masquerFragmentTri();
         masquerFragmentFiltre();
@@ -196,6 +193,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         configureRecyclerView();
         masquerFragmentTri();
     }
+
     @OnClick(R.id.radio_button_evenement_tri_date)
     public void rbEvenementTriDateClick() {
         Log.e("TAG", "click sur Tri Date");
@@ -205,37 +203,38 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         masquerFragmentTri();
     }
 
-    private void loadAllEvenementFromDB(){
+    private void loadAllEvenementFromDB() {
         evenementEntityDao.detachAll();
         listEventEntities = evenementEntityDao.loadAll();
         triSelonParametre(listEventEntities);
     }
 
-    private void masquerFragmentTri(){
+    private void masquerFragmentTri() {
         layoutFragmentEvenementTri.setVisibility(View.GONE);
         layoutTriAffiche = false;
     }
-    private void afficherFragmentTri(){
+
+    private void afficherFragmentTri() {
         layoutFragmentEvenementTri.setVisibility(View.VISIBLE);
         layoutTriAffiche = true;
         rbEvenementTriNom.setText(EvenementTri.Nom.getNom());
         rbEvenementTridDate.setText(EvenementTri.Date.getNom());
     }
-    private void masquerFragmentFiltre(){
+
+    private void masquerFragmentFiltre() {
         layoutFragmentEvenementFiltre.setVisibility(View.GONE);
         layoutFiltreAffiche = false;
     }
-    private void afficherFragmentFiltre(){
+
+    private void afficherFragmentFiltre() {
         layoutFragmentEvenementFiltre.setVisibility(View.VISIBLE);
         layoutFiltreAffiche = true;
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        //loadAllEvenementFromDB();
-        for (EvenementEntity current : listEventEntities){
+        for (EvenementEntity current : listEventEntities) {
             current.refresh();
         }
         configureRecyclerView();
@@ -269,32 +268,24 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
     }
 
     public void connectAndGetApiData(String url) {
-        //if (retrofit == null) {
-            //BASE_URL +=
-            retrofit = new Retrofit.Builder()
-                   // .baseUrl(BASE_URL+"/"+dateString)
-                    .baseUrl(url)
-                    .client(new OkHttpClient())
-                    .addConverterFactory(SimpleXmlConverterFactory.create())
-                    .build();
-       // }
+
+        retrofit = new Retrofit.Builder()
+                // .baseUrl(BASE_URL+"/"+dateString)
+                .baseUrl(url)
+                .client(new OkHttpClient())
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+
         EventsApiService eventApiService = retrofit.create(EventsApiService.class);
-        //Call<Events> call = eventApiService.getEvents(API_KEY);
         Call<Events> call = eventApiService.getEvents();
         call.enqueue(new Callback<Events>() {
             @Override
             public void onResponse(Call<Events> call, Response<Events> response) {
-                if (response.code()==200) {
-
-
+                if (response.code() == 200) {
                     listEvents = response.body().getListEvents();
-
-                    //recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
                     saveListEvents();
                     isResponded = true;
-                    Log.e(TAG, "Number of events received: " + listEvents.size());
-                    /*listEventEntities = evenementEntityDao.loadAll();
-                    listEventEntities.sort(EvenementEntity::compareTo);*/
+                    //Log.e(TAG, "Number of events received: " + listEvents.size());
                     loadAllEvenementFromDB();
                     listEventEntitiesBasique.addAll(listEventEntities);
                     configureRecyclerView();
@@ -305,8 +296,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
 
                     listerFiltre();
                     initListFiltres();
-                    //afficherFiltreNonVide();
-                    //initCheckboxesTitreClick();
                     initCheckboxesSelectAllClick();
 
                     progressBar.setVisibility(View.GONE);
@@ -314,7 +303,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
 
                     dateDemande = DateUtils.calculerVeille(dateDemande);
                     dateDemandeString = DateUtils.formatDateYYYY_MM_DD(dateDemande);
-                    myUrl = BASE_URL+dateDemandeString+"/";
+                    myUrl = BASE_URL + dateDemandeString + "/";
                     connectAndGetApiData(myUrl);
                     Log.e(TAG, dateDemandeString + " : " + response.code());
                 }
@@ -322,42 +311,28 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
 
             @Override
             public void onFailure(Call<Events> call, Throwable throwable) {
-
                 Log.e(TAG, throwable.toString());
                 progressBar.setVisibility(View.GONE);
                 Snackbar.make(bottomNavigationView, "Erreur de modele", Snackbar.LENGTH_LONG).show();
+                gererErreur(null, throwable.toString());
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
 
-    private boolean isEventExistant(Event event){
-        List<EvenementEntity> listEventsNonFavoris = evenementEntityDao.queryRaw("where event_id = ?"+event.getId());
-        if (listEventsNonFavoris.size()>0){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isEvenementEntityToujoursExistant(EvenementEntity evenementEntity){
+    private boolean isEvenementEntityToujoursExistant(EvenementEntity evenementEntity) {
         for (Event current : listEvents) {
             if (isEventAndEvenementEntityIdentique(current, evenementEntity)) {
                 return true;
             }
         }
-        /*if (listEventsNonFavoris.size()>0){
-            return true;
-        }*/
         return false;
     }
 
-    private boolean isEventAndEvenementEntityIdentique(Event event, EvenementEntity eventEntity){
-        //boolean reponse = true;
-        if (event.getId() != eventEntity.getEvenementEntityId()){
+    private boolean isEventAndEvenementEntityIdentique(Event event, EvenementEntity eventEntity) {
+        if (event.getId() != eventEntity.getEvenementEntityId()) {
             return false;
         }
-        /*if (event.getListAddresses() != null && eventEntity.getListAddresses() != null && (!event.getListAddresses().containsAll(eventEntity.getListAddresses()) || !eventEntity.getListAddresses().containsAll(event.getListAddresses()))){
-            return false;
-        }*/
 
         //verif ListAdress
         boolean boolAdress1 = false;
@@ -386,12 +361,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             }
         }
 
-
-
-        /*if (event.getListCategories() != null && eventEntity.getListCategories() != null && (!event.getListCategories().containsAll(eventEntity.getListCategories()) || !eventEntity.getListCategories().containsAll(event.getListCategories()))){
-            return false;
-        }*/
-
         //verif ListCategories
         boolean boolCategories1 = false;
         boolean boolCategories2 = false;
@@ -414,13 +383,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 return false;
             }
         }
-
-
-
-
-        /*if (event.getListDescriptions() != null && eventEntity.getListDescriptions() != null && (!event.getListDescriptions().containsAll(eventEntity.getListDescriptions()) || !eventEntity.getListDescriptions().containsAll(event.getListDescriptions()))){
-            return false;
-        }*/
 
         //verif ListDescriptions
         boolean boolDescriptions1 = false;
@@ -445,13 +407,10 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             }
         }
 
-
-
-
-        if (event.getListImages() != null && event.getListImages().size()>0){
+        if (event.getListImages() != null && event.getListImages().size() > 0) {
             boolean bool = false;
             for (Image current : event.getListImages()) {
-                if (current.getUrl().equalsIgnoreCase(eventEntity.getImage())){
+                if (current.getUrl().equalsIgnoreCase(eventEntity.getImage())) {
                     bool = true;
                 }
             }
@@ -459,13 +418,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 return false;
             }
         }
-
-
-        /*if (event.getListOptions() != null && eventEntity.getListOptions() != null && (!event.getListOptions().containsAll(eventEntity.getListOptions()) || !eventEntity.getListOptions().containsAll(event.getListOptions()))){
-            return false;
-        }*/
-
-
 
         //verif ListOptions
         boolean boolOptions1 = false;
@@ -490,12 +442,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             }
         }
 
-
-
-        /*if (event.getListProfiles() != null && eventEntity.getListProfiles() != null && (!event.getListProfiles().containsAll(eventEntity.getListProfiles()) || !eventEntity.getListProfiles().containsAll(event.getListProfiles()))){
-            return false;
-        }*/
-
         //verif ListProfiles
         boolean boolProfiles1 = false;
         boolean boolProfiles2 = false;
@@ -518,39 +464,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 return false;
             }
         }
-
-        /*if (event.getListRefEntries() != null && eventEntity.getListRefEntries() != null && (!event.getListRefEntries().containsAll(eventEntity.getListRefEntries()) || !eventEntity.getListRefEntries().containsAll(event.getListRefEntries()))){
-            return false;
-        }*/
-
-        //verif ListRefEntries
-        /*boolean boolRefEntries1 = false;
-        boolean boolRefEntries2 = false;
-        if (event.getListRefEntries() != null && eventEntity.getListRefEntries() != null) {
-            for (RefEntries current : event.getListRefEntries()) {
-                if (current.getRefEntryId() != null && current.getRefEntryName() != null) {
-                    for (EvenementRefEntriesEntity current2 : eventEntity.getListRefEntries()) {
-                        if (current.getRefEntryName().equalsIgnoreCase(current2.getRefEntryName()) && current.getRefEntryId().equalsIgnoreCase(current2.getRefEntryId())) {
-                            boolRefEntries1 = true;
-                        }
-                    }
-                }
-            }
-            for (EvenementRefEntriesEntity current : eventEntity.getListRefEntries()) {
-                for (RefEntries current2 : event.getListRefEntries()) {
-                    if (current.getRefEntryId().equalsIgnoreCase(current2.getRefEntryId()) && current.getRefEntryId().equalsIgnoreCase(current2.getRefEntryId())) {
-                        boolRefEntries2 = true;
-                    }
-                }
-            }
-            if (!boolRefEntries1 || !boolRefEntries2) {
-                return false;
-            }
-        }*/
-
-        /*if (event.getListSectors() != null && eventEntity.getListSectos() != null && (!event.getListSectors().containsAll(eventEntity.getListSectos()) || !eventEntity.getListSectos().containsAll(event.getListSectors()))){
-            return false;
-        }*/
 
         //verif ListSectors
         boolean boolSectors1 = false;
@@ -575,10 +488,6 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             }
         }
 
-        /*if (event.getListStations() != null && eventEntity.getListStations() != null && (!event.getListStations().containsAll(eventEntity.getListStations()) || !eventEntity.getListStations().containsAll(event.getListStations()))){
-            return false;
-        }*/
-
         //verif ListStations
         boolean boolStations1 = false;
         boolean boolStations2 = false;
@@ -602,44 +511,44 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             }
         }
 
-        if (event.getWebsiteMap() != null && event.getWebsiteMap().get("situation") != null && event.getWebsiteMap().get("principal") != null){
+        if (event.getWebsiteMap() != null && event.getWebsiteMap().get("situation") != null && event.getWebsiteMap().get("principal") != null) {
             if (!event.getWebsiteMap().get("situation").equalsIgnoreCase(eventEntity.getWebsiteSituation()) || !event.getWebsiteMap().get("principal").equalsIgnoreCase(eventEntity.getWebsitePrincipal())) {
                 return false;
             }
 
         }
-        if (event.getCreated() != null && eventEntity.getCreated() != null && !event.getCreated().equalsIgnoreCase(eventEntity.getCreated())){
+        if (event.getCreated() != null && eventEntity.getCreated() != null && !event.getCreated().equalsIgnoreCase(eventEntity.getCreated())) {
             return false;
         }
-        if (event.getEmail() != null && eventEntity.getEmail() != null && !event.getEmail().equalsIgnoreCase(eventEntity.getEmail())){
+        if (event.getEmail() != null && eventEntity.getEmail() != null && !event.getEmail().equalsIgnoreCase(eventEntity.getEmail())) {
             return false;
         }
-        if (event.getEnd() != null && eventEntity.getEnd() != null && !event.getEnd().equalsIgnoreCase(eventEntity.getEnd())){
+        if (event.getEnd() != null && eventEntity.getEnd() != null && !event.getEnd().equalsIgnoreCase(eventEntity.getEnd())) {
             return false;
         }
-        if (event.getLatitude() != eventEntity.getLatitude()){
+        if (event.getLatitude() != eventEntity.getLatitude()) {
             return false;
         }
-        
-        if (event.getLongitude() != eventEntity.getLongitude()){
+
+        if (event.getLongitude() != eventEntity.getLongitude()) {
             return false;
         }
-        if (event.getNameFr() != null && eventEntity.getNameFr() != null && !event.getNameFr().equalsIgnoreCase(eventEntity.getNameFr())){
+        if (event.getNameFr() != null && eventEntity.getNameFr() != null && !event.getNameFr().equalsIgnoreCase(eventEntity.getNameFr())) {
             return false;
         }
-        if (event.getNote() != eventEntity.getNote()){
+        if (event.getNote() != eventEntity.getNote()) {
             return false;
         }
-        if (event.getPhone() != null && eventEntity.getPhone() != null && !event.getPhone().equalsIgnoreCase(eventEntity.getPhone())){
+        if (event.getPhone() != null && eventEntity.getPhone() != null && !event.getPhone().equalsIgnoreCase(eventEntity.getPhone())) {
             return false;
         }
-        if (event.getStart() != null && eventEntity.getStart() != null && !event.getStart().equalsIgnoreCase(eventEntity.getStart())){
+        if (event.getStart() != null && eventEntity.getStart() != null && !event.getStart().equalsIgnoreCase(eventEntity.getStart())) {
             return false;
         }
-        if (event.getUpdated() != null && eventEntity.getUpdated() != null && !event.getUpdated().equalsIgnoreCase(eventEntity.getUpdated())){
+        if (event.getUpdated() != null && eventEntity.getUpdated() != null && !event.getUpdated().equalsIgnoreCase(eventEntity.getUpdated())) {
             return false;
         }
-       return true;
+        return true;
     }
 
     private void saveListEvents() {
@@ -649,15 +558,12 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         long nbTotalEvents = eventEntityDao.count();
 
 
-        for (EvenementEntity current : listEventsNonFavoris){
-            if (!isEvenementEntityToujoursExistant(current)){
+        for (EvenementEntity current : listEventsNonFavoris) {
+            if (!isEvenementEntityToujoursExistant(current)) {
                 evenementEntityDao.delete(current);
-                Log.e("TAG", "suppression evenement obsolete - "+current.getNameFr());
+                Log.e("TAG", "suppression evenement obsolete - " + current.getNameFr());
             }
         }
-
-        //Log.e("TAG", "suppression event non favoris termine - "+nbTotalEvensNonFavoris+" sur "+nbTotalEvents);
-
 
         for (Event current : listEvents) {
 
@@ -665,8 +571,8 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             //chercher à partir de l'id et verifier si parfaitmeent similaire sinon l'enregistrer quand même
             List<EvenementEntity> listEvenemenEntity = evenementEntityDao.loadAll();
             boolean isPresentEnBaseDonnees = false;
-            for (EvenementEntity evenementEntity : listEvenemenEntity){
-                if (evenementEntity.getEvenementEntityId()==current.getId()){
+            for (EvenementEntity evenementEntity : listEvenemenEntity) {
+                if (evenementEntity.getEvenementEntityId() == current.getId()) {
                     isPresentEnBaseDonnees = true;
                 }
             }
@@ -677,57 +583,14 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 evenementToSave.setNameFr(current.getNameFr());
                 evenementToSave.setStart(current.getStart());
                 evenementToSave.setEnd(current.getEnd());
-
-                //remplacer par boucle pour 2 types
-                //evenementToSave.setAdressSituationContent(current.getAddress()!=null ? current.getAddress().getAddressContent() : null);
-                //evenementToSave.setAdressSituationZip(current.getAddress()!=null ? current.getAddress().getZip() : null);
-                //evenementToSave.setAdressSituationCity(current.getAddress()!=null ? current.getAddress().getCity() : null);
-            /*if (current.getListAddresses() != null && current.getListAddresses().size()>0) {
-                for (Address currentAddress : current.getListAddresses()) {
-                    if (currentAddress.getType().equalsIgnoreCase("situation")) {
-                        evenementToSave.setAdressSituationContent(currentAddress.getAddressContent());
-                        evenementToSave.setAdressPrincipalZip(currentAddress.getZip());
-                        evenementToSave.setAdressSituationCity(currentAddress.getCity());
-                    } else if (currentAddress.getType().equalsIgnoreCase("principal")) {
-                        evenementToSave.setAdressSituationContent(currentAddress.getAddressContent());
-                        evenementToSave.setAdressPrincipalZip(currentAddress.getZip());
-                        evenementToSave.setAdressSituationCity(currentAddress.getCity());
-                    }
-                }
-            }*/
-
-
-
                 evenementToSave.setPhone(current.getPhone());
                 evenementToSave.setEmail(current.getEmail());
                 evenementToSave.setWebsiteSituation(current.getWebsiteMap().get("situation"));
                 evenementToSave.setWebsitePrincipal(current.getWebsiteMap().get("principal"));
-                //evenementToSave.setProfile((current.getListProfiles()!=null &&current.getListProfiles().size()>0) ? current.getListProfiles().get(0).getValue() : null);
-                //evenementToSave.setStation((current.getListStations()!=null && current.getListStations().size()>0) ? current.getListStations().get(0).getValue() : null);
-                //evenementToSave.setCategory((current.getListCategories()!=null && current.getListCategories().size()>0) ? current.getListCategories().get(0).getValue() : null);
-                //evenementToSave.setOption((current.getListOptions()!=null && current.getListOptions().size()>0) ? current.getListOptions().get(0).getValue() : null);
-                //evenementToSave.setSecto((current.getListSectors()!=null && current.getListSectors().size()>0) ? current.getListSectors().get(0).getValue() : null);
-            /*for (Description currentDescription : current.getListDescriptions()) {
-                if (currentDescription.getLanguage().equalsIgnoreCase("fr")) {
-                    if (currentDescription.getType().equalsIgnoreCase("Situation")) {
-                        evenementToSave.setDescriptionSituation(currentDescription.getValue());
-                    } else if (currentDescription.getType().equalsIgnoreCase("Horaires")) {
-                        evenementToSave.setDescriptionHoraires(currentDescription.getValue());
-                    } else if (currentDescription.getType().equalsIgnoreCase("Tarification")) {
-                        evenementToSave.setDescriptionTarification(currentDescription.getValue());
-                    } else if (currentDescription.getType().equalsIgnoreCase("Description")) {
-                        evenementToSave.setDescriptionDescription(currentDescription.getValue());
-                    }
-                }
-            }*/
                 evenementToSave.setImage((current.getListImages() != null && current.getListImages().size() > 0) ? current.getListImages().get(0).getUrl() : null);
                 evenementToSave.setLatitude(current.getLatitude());
                 evenementToSave.setLongitude(current.getLongitude());
                 evenementToSave.setNote(current.getNote());
-                //evenementToSave.setEntryId(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryId() : null);
-                //evenementToSave.setEntryName(current.getRefEntries()!=null ? current.getRefEntries().getRefEntryName() : null);
-                //evenementToSave.setEntryId((current.getListRefEntries() != null && current.getListRefEntries().size() > 0) ? current.getListRefEntries().get(0).getRefEntryId() : null);
-                //evenementToSave.setEntryName((current.getListRefEntries() != null && current.getListRefEntries().size() > 0) ? current.getListRefEntries().get(0).getRefEntryName() : null);
                 evenementToSave.setCreated(current.getCreated());
                 evenementToSave.setUpdated(current.getUpdated());
                 evenementToSave.setId(evenementEntityDao.insert(evenementToSave));
@@ -880,20 +743,20 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 Log.e(TAG, "Ajout " + evenementToSave.getNameFr());
                 listEventEntities.add(evenementToSave);
             } else {
-                Log.e(TAG, "Recup " + current.getNameFr());
+                //Log.e(TAG, "Recup " + current.getNameFr());
             }
         }
     }
 
-    private void configureOnClickRecyclerView(){
+    private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(list_recycler_event, R.layout.recycler_list_event)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         positionScroll = position;
                         masquerFragmentTri();
-                        ouvrirActiviteSuivante(AfficherEvenementsActivity.this,AfficherEvenementDetailActivity.class,"eventId",listEventEntities.get(position).getId(),false);
-                        Log.e("TAG", "Position : "+position);
+                        ouvrirActiviteSuivante(AfficherEvenementsActivity.this, AfficherEvenementDetailActivity.class, "eventId", listEventEntities.get(position).getId(), false);
+                        //Log.e("TAG", "Position : " + position);
                     }
                 });
     }
@@ -905,23 +768,12 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         configureOnClickRecyclerView();
     }
 
-    public void configureRecyclerView(List<EvenementEntity> list) {
-        adapterEvents = new RecyclerAdapterEvenements(list, this);
-        list_recycler_event.setAdapter(adapterEvents);
-        list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
-        configureOnClickRecyclerView();
-    }
-
-    private void fillAllFields() {
-       // textName.setText(saisonTransmise.getSerie().toString()+" - Saison "+BasicUtils.afficherChiffre(saisonTransmise.getNumSaison()));
-    }
-
     @Override
     public void onClickEventsButton(int position) {
-      //  ouvrirActiviteSuivante(this,AfficherEventDetailActivity.class,"eventId",listEventEntities.get(position).getId(),false);
+        //  ouvrirActiviteSuivante(this,AfficherEventDetailActivity.class,"eventId",listEventEntities.get(position).getId(),false);
     }
 
-    public void afficherListCbEvenementFiltreCategory(View view){
+    public void afficherListCbEvenementFiltreCategory(View view) {
         if (!filtreCategoryDeplie) {
             filtreCategoryDeplie = true;
             checkboxEvenementFiltreCategorySelectAll.setVisibility(View.VISIBLE);
@@ -935,7 +787,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    public void afficherListCbEvenementFiltreVille(View view){
+    public void afficherListCbEvenementFiltreVille(View view) {
         if (!filtreVilleDeplie) {
             filtreVilleDeplie = true;
             checkboxEvenementFiltreVilleSelectAll.setVisibility(View.VISIBLE);
@@ -949,26 +801,27 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    protected boolean verifFiltreActif(List<? extends DetailEvenementEntitySimple> list){
+    protected boolean verifFiltreActif(List<? extends DetailEvenementEntitySimple> list) {
         boolean bool = false;
-        for (DetailEvenementEntitySimple current : list){
-            if(current.isChecked()){
-                bool = true;
-            }
-        }
-        return bool;
-    }
-    protected boolean verifFiltreAdresseActif(List<EvenementAddressEntity> list){
-        boolean bool = false;
-        for (EvenementAddressEntity current : list){
-            if(current.isChecked()){
+        for (DetailEvenementEntitySimple current : list) {
+            if (current.isChecked()) {
                 bool = true;
             }
         }
         return bool;
     }
 
-    protected void reinitListeEvents(){
+    protected boolean verifFiltreAdresseActif(List<EvenementAddressEntity> list) {
+        boolean bool = false;
+        for (EvenementAddressEntity current : list) {
+            if (current.isChecked()) {
+                bool = true;
+            }
+        }
+        return bool;
+    }
+
+    protected void reinitListeEvents() {
         listEventEntities.clear();
         listEventEntities.addAll(listEventEntitiesBasique);
     }
@@ -987,9 +840,9 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             if (boolEvenementCategory && listEvenementEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
                 for (EvenementCategoryEntity filtre : listFiltreEvenementCategory) {
-                    if (filtre.isChecked() && current.getListCategories()!=null){
-                        for (EvenementCategoryEntity current2 : current.getListCategories()){
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())){
+                    if (filtre.isChecked() && current.getListCategories() != null) {
+                        for (EvenementCategoryEntity current2 : current.getListCategories()) {
+                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
                                 isFiltered = true;
                             }
                         }
@@ -1005,9 +858,9 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
             if (boolEvenementVille && listEvenementEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
                 for (EvenementAddressEntity filtre : listFiltreEvenementAdresse) {
-                    if (filtre.isChecked() && current.getListAddresses()!=null){
-                        for (EvenementAddressEntity current2 : current.getListAddresses()){
-                            if (current2.getCity().equalsIgnoreCase(filtre.getCity())){
+                    if (filtre.isChecked() && current.getListAddresses() != null) {
+                        for (EvenementAddressEntity current2 : current.getListAddresses()) {
+                            if (current2.getCity().equalsIgnoreCase(filtre.getCity())) {
                                 isFiltered = true;
                             }
                         }
@@ -1024,11 +877,11 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         configureRecyclerView();
     }
 
-    protected void triSelonParametre(List<EvenementEntity> list){
+    protected void triSelonParametre(List<EvenementEntity> list) {
         if (triEnCours == EvenementTri.Nom) {
             Collections.sort(list);
         } else if (triEnCours == EvenementTri.Date) {
-            Collections.sort(list,EvenementEntity.ComparatorDate);
+            Collections.sort(list, EvenementEntity.ComparatorDate);
         }
     }
 
@@ -1044,29 +897,29 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         configureRecyclerView();
     }
 
-    public void decocherFiltre(List<? extends DetailEvenementEntitySimple> list){
+    public void decocherFiltre(List<? extends DetailEvenementEntitySimple> list) {
         for (DetailEvenementEntitySimple current : list) {
             current.setChecked(false);
         }
     }
 
-    public void decocherFiltreAdresse(List<EvenementAddressEntity> list){
+    public void decocherFiltreAdresse(List<EvenementAddressEntity> list) {
         for (EvenementAddressEntity current : list) {
             current.setChecked(false);
         }
     }
 
-    public void decocherCheckbox(List<MaterialCheckBox> list){
-        for (MaterialCheckBox current : list){
+    public void decocherCheckbox(List<MaterialCheckBox> list) {
+        for (MaterialCheckBox current : list) {
             current.setChecked(false);
         }
     }
 
-    public void decocherCheckbox(MaterialCheckBox cb){
+    public void decocherCheckbox(MaterialCheckBox cb) {
         cb.setChecked(false);
     }
 
-    public void decocherTout(){
+    public void decocherTout() {
         decocherFiltre(listFiltreEvenementCategory);
         decocherFiltreAdresse(listFiltreEvenementAdresse);
         for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
@@ -1078,7 +931,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         decocherCheckbox(checkboxEvenementFiltreVilleSelectAll);
     }
 
-    protected void initFiltre(List<? extends DetailEvenementEntitySimple> list, LinearLayout ll, List<MaterialCheckBox> listCb,MaterialCheckBox cb) {
+    protected void initFiltre(List<? extends DetailEvenementEntitySimple> list, LinearLayout ll, List<MaterialCheckBox> listCb, MaterialCheckBox cb) {
         Collections.sort(list);
         for (DetailEvenementEntitySimple current : list) {
             MaterialCheckBox checkBox = new MaterialCheckBox(this);
@@ -1091,7 +944,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                         current.setChecked(true);
                     } else {
                         current.setChecked(false);
-                        if (!verifSiUnFiltreMinimum(list)){
+                        if (!verifSiUnFiltreMinimum(list)) {
                             cb.setChecked(false);
                         }
                     }
@@ -1104,13 +957,13 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    protected List<EvenementAddressEntity> supprimerDoublonVille(List<EvenementAddressEntity>list){
+    protected List<EvenementAddressEntity> supprimerDoublonVille(List<EvenementAddressEntity> list) {
         List<EvenementAddressEntity> listTemp = new ArrayList<>();
         EvenementAddressEntity previous = null;
         for (EvenementAddressEntity current : list) {
             if (previous == null) {
                 listTemp.add(current);
-            } else if (!current.getCity().equalsIgnoreCase(previous.getCity())){
+            } else if (!current.getCity().equalsIgnoreCase(previous.getCity())) {
                 listTemp.add(current);
             }
             previous = current;
@@ -1119,7 +972,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
     }
 
     protected void initListFiltres() {
-        initFiltre(listFiltreEvenementCategory,linearLayoutEvenementFiltreCategory,listCheckboxEvenementCategory,checkboxEvenementFiltreCategorySelectAll);
+        initFiltre(listFiltreEvenementCategory, linearLayoutEvenementFiltreCategory, listCheckboxEvenementCategory, checkboxEvenementFiltreCategorySelectAll);
         Collections.sort(listFiltreEvenementAdresse);
         listFiltreEvenementAdresse = supprimerDoublonVille(listFiltreEvenementAdresse);
         for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
@@ -1135,11 +988,11 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                         current.setChecked(false);
                         boolean bool = false;
                         for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
-                            if (current.isChecked()){
+                            if (current.isChecked()) {
                                 bool = true;
                             }
                         }
-                        if (!bool){
+                        if (!bool) {
                             checkboxEvenementFiltreVilleSelectAll.setChecked(false);
                         }
                     }
@@ -1152,10 +1005,10 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    protected boolean verifSiUnFiltreMinimum(List<? extends DetailEvenementEntitySimple> list){
+    protected boolean verifSiUnFiltreMinimum(List<? extends DetailEvenementEntitySimple> list) {
         boolean bool = false;
         for (DetailEvenementEntitySimple current : list) {
-            if (current.isChecked()){
+            if (current.isChecked()) {
                 bool = true;
             }
         }
@@ -1165,13 +1018,13 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
     public void listerFiltre() {
         listFiltreEvenementCategory = evenementCategoryEntityDao.loadAll();
         listFiltreEvenementAdresse = evenementAddressEntityDao.loadAll();
-        Log.d(TAG, "Number of Category received: " + listFiltreEvenementCategory.size());
-        Log.d(TAG, "Number of City received: " + listFiltreEvenementAdresse.size());
+        //Log.d(TAG, "Number of Category received: " + listFiltreEvenementCategory.size());
+        //Log.d(TAG, "Number of City received: " + listFiltreEvenementAdresse.size());
     }
 
-    protected void initCheckboxesSelectAllClick(){
-        initCheckboxSelectAllClick(checkboxEvenementFiltreCategorySelectAll,listCheckboxEvenementCategory);
-        initCheckboxSelectAllClick(checkboxEvenementFiltreVilleSelectAll,listCheckboxEvenementVille);
+    protected void initCheckboxesSelectAllClick() {
+        initCheckboxSelectAllClick(checkboxEvenementFiltreCategorySelectAll, listCheckboxEvenementCategory);
+        initCheckboxSelectAllClick(checkboxEvenementFiltreVilleSelectAll, listCheckboxEvenementVille);
     }
 
     protected void initCheckboxSelectAllClick(MaterialCheckBox cbSelectAll, List<MaterialCheckBox> list) {

@@ -7,6 +7,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
 import butterknife.Unbinder;
 import butterknife.internal.Utils;
+import com.google.android.material.card.MaterialCardView;
 import com.pouillcorp.sortirnice.R;
 import java.lang.IllegalStateException;
 import java.lang.Override;
@@ -23,6 +24,7 @@ public class RecyclerViewHolderEntries_ViewBinding implements Unbinder {
     target.textLocations = Utils.findRequiredViewAsType(source, R.id.text_locations, "field 'textLocations'", TextView.class);
     target.textAtmospheres = Utils.findRequiredViewAsType(source, R.id.text_atmospheres, "field 'textAtmospheres'", TextView.class);
     target.textDescription = Utils.findRequiredViewAsType(source, R.id.text_description, "field 'textDescription'", TextView.class);
+    target.cardEntry = Utils.findRequiredViewAsType(source, R.id.cardEntry, "field 'cardEntry'", MaterialCardView.class);
   }
 
   @Override
@@ -37,5 +39,6 @@ public class RecyclerViewHolderEntries_ViewBinding implements Unbinder {
     target.textLocations = null;
     target.textAtmospheres = null;
     target.textDescription = null;
+    target.cardEntry = null;
   }
 }

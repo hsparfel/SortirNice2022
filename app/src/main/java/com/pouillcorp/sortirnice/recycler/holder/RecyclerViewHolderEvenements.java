@@ -17,10 +17,7 @@ import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
 import com.pouillcorp.sortirnice.entities.event.detail.DetailEvenementEntitySimple;
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementDescriptionEntity;
-import com.pouillcorp.sortirnice.modelevents.Description;
-import com.pouillcorp.sortirnice.modelevents.Event;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEvenements;
-import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEvents;
 import com.pouillcorp.sortirnice.utils.BasicUtils;
 import com.pouillcorp.sortirnice.utils.DateUtils;
 

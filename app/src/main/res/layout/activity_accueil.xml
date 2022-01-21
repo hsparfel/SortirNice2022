@@ -29,14 +29,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Events button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEvents"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Evenements button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:onClick="afficherEvenements"
@@ -45,84 +37,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test tous"
+            android:text="Entries tous Button"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="chargerTous"
+            android:onClick="afficherEntriesDivers"
             />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sorties button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesSortie"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Restaurants button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesRestaurant"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Transports button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesTransport"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hotels button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesHotel"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Boutiques button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesBoutique"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hebergements button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesHebergement"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shoppings button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesShopping"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Visites button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesVisite"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Utiles button"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:onClick="afficherEntriesUtile"
-            />
-
-
 
         <Button
             android:layout_width="wrap_content"
@@ -131,8 +49,6 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:onClick="afficherMesFavoris"
             />
-
-
 
     </LinearLayout>
 

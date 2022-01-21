@@ -32,6 +32,7 @@ import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryCom
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryFurnishedRentalEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryRentalMonthEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntrySleepingEntity;
+import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
 import com.pouillcorp.sortirnice.entities.event.EventEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryActivityEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryAffiliationEntity;
@@ -71,6 +72,7 @@ import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
+import java.util.Comparator;
 import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.JoinEntity;
@@ -429,6 +431,8 @@ public class EntryEntity implements Comparable<EntryEntity> {
 
     private Integer obsoleteNb;
 
+    private String image;
+
 /** Used to resolve relations */
 @Generated(hash = 2040040024)
 private transient DaoSession daoSession;
@@ -444,13 +448,25 @@ private transient EntryEntityDao myDao;
 
 
 
-@Generated(hash = 1743506708)
-public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr, String nameFrShort,
-        long entryAddressEntityId, String phone, String fax, String email, String website,
-        String websiteReservation, String facebook, String twitter, long entryLivingEntityId,
-        long entryCapacityEntityId, String opening, String closing, double latitude, double longitude,
-        String location_map, String note, String start, boolean niceresAvailability, int niceresId,
-        String created, String updated, boolean favori, Integer obsoleteNb) {
+
+
+
+
+
+
+
+
+
+
+
+@Generated(hash = 1570201854)
+public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String nameFr,
+        String nameFrShort, long entryAddressEntityId, String phone, String fax, String email,
+        String website, String websiteReservation, String facebook, String twitter,
+        long entryLivingEntityId, long entryCapacityEntityId, String opening, String closing,
+        double latitude, double longitude, String location_map, String note, String start,
+        boolean niceresAvailability, int niceresId, String created, String updated, boolean favori,
+        Integer obsoleteNb, String image) {
     this.id = id;
     this.entryEntityId = entryEntityId;
     this.entryType = entryType;
@@ -479,6 +495,7 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
     this.updated = updated;
     this.favori = favori;
     this.obsoleteNb = obsoleteNb;
+    this.image = image;
 }
 
 
@@ -488,10 +505,6 @@ public EntryEntity(Long id, Long entryEntityId, EntriesType entryType, String na
 @Generated(hash = 681417959)
 public EntryEntity() {
 }
-
-
-
-
 
 
 
@@ -511,13 +524,23 @@ private transient Long capacity__resolvedKey;
 
 
 
+
+
     @Override
     public int compareTo(EntryEntity o) {
-        return this.getId().compareTo(o.getId());
+        return this.getNameFr().compareTo(o.getNameFr());
     }
 
 
-
+    /*
+     * Comparator pour le tri des employés par nom
+     */
+    /*public static Comparator<EntryEntity> ComparatorDate = new Comparator<EntryEntity>() {
+        @Override
+        public int compare(EntryEntity e1, EntryEntity e2) {
+            return e1.getStart().compareTo(e2.getStart());
+        }
+    };*/
 
 
 public Long getId() {
@@ -957,7 +980,20 @@ public boolean getFavori() {
         this.obsoleteNb = obsoleteNb;
     }
 
-    /** To-one relationship, resolved on first access. */
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+
+
+
+/** To-one relationship, resolved on first access. */
 @Generated(hash = 92551804)
 public EntryAddressEntity getAddress() {
     long __key = this.entryAddressEntityId;
@@ -2484,11 +2520,7 @@ public void __setDaoSession(DaoSession daoSession) {
     myDao = daoSession != null ? daoSession.getEntryEntityDao() : null;
 }
 
-
-
-
-
-
+  
 
     public static class EntriesTypeConverter implements PropertyConverter<EntriesType, String> {
         @Override

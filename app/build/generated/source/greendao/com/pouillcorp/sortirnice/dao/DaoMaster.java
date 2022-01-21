@@ -62,6 +62,7 @@ public class DaoMaster extends AbstractDaoMaster {
         EntryStandingLevelEntityDao.createTable(db, ifNotExists);
         EntryStationEntityDao.createTable(db, ifNotExists);
         EntryTariffEntityDao.createTable(db, ifNotExists);
+        EntryTypeEntityDao.createTable(db, ifNotExists);
         EntryEntityDao.createTable(db, ifNotExists);
         JoinEntryEntityWithEntryActivityEntityDao.createTable(db, ifNotExists);
         JoinEntryEntityWithEntryAffiliationEntityDao.createTable(db, ifNotExists);
@@ -101,9 +102,6 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryStationEntityDao.createTable(db, ifNotExists);
         JoinEntryEntityWithEntryTariffEntityDao.createTable(db, ifNotExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.createTable(db, ifNotExists);
-        EventEntityDao.createTable(db, ifNotExists);
-        EventSauvegardeEntityDao.createTable(db, ifNotExists);
-        EvenementEntityDao.createTable(db, ifNotExists);
         EvenementAddressEntityDao.createTable(db, ifNotExists);
         EvenementCategoryEntityDao.createTable(db, ifNotExists);
         EvenementDescriptionEntityDao.createTable(db, ifNotExists);
@@ -112,6 +110,8 @@ public class DaoMaster extends AbstractDaoMaster {
         EvenementRefEntriesEntityDao.createTable(db, ifNotExists);
         EvenementSectoEntityDao.createTable(db, ifNotExists);
         EvenementStationEntityDao.createTable(db, ifNotExists);
+        EvenementEntityDao.createTable(db, ifNotExists);
+        EventEntityDao.createTable(db, ifNotExists);
         JoinEvenementEntityWithEvenementAddressEntityDao.createTable(db, ifNotExists);
         JoinEvenementEntityWithEvenementCategoryEntityDao.createTable(db, ifNotExists);
         JoinEvenementEntityWithEvenementDescriptionEntityDao.createTable(db, ifNotExists);
@@ -165,6 +165,7 @@ public class DaoMaster extends AbstractDaoMaster {
         EntryStandingLevelEntityDao.dropTable(db, ifExists);
         EntryStationEntityDao.dropTable(db, ifExists);
         EntryTariffEntityDao.dropTable(db, ifExists);
+        EntryTypeEntityDao.dropTable(db, ifExists);
         EntryEntityDao.dropTable(db, ifExists);
         JoinEntryEntityWithEntryActivityEntityDao.dropTable(db, ifExists);
         JoinEntryEntityWithEntryAffiliationEntityDao.dropTable(db, ifExists);
@@ -204,9 +205,6 @@ public class DaoMaster extends AbstractDaoMaster {
         JoinEntryEntityWithEntryStationEntityDao.dropTable(db, ifExists);
         JoinEntryEntityWithEntryTariffEntityDao.dropTable(db, ifExists);
         JoinEntryOpeningEntityWithEntryGridEntityDao.dropTable(db, ifExists);
-        EventEntityDao.dropTable(db, ifExists);
-        EventSauvegardeEntityDao.dropTable(db, ifExists);
-        EvenementEntityDao.dropTable(db, ifExists);
         EvenementAddressEntityDao.dropTable(db, ifExists);
         EvenementCategoryEntityDao.dropTable(db, ifExists);
         EvenementDescriptionEntityDao.dropTable(db, ifExists);
@@ -215,6 +213,8 @@ public class DaoMaster extends AbstractDaoMaster {
         EvenementRefEntriesEntityDao.dropTable(db, ifExists);
         EvenementSectoEntityDao.dropTable(db, ifExists);
         EvenementStationEntityDao.dropTable(db, ifExists);
+        EvenementEntityDao.dropTable(db, ifExists);
+        EventEntityDao.dropTable(db, ifExists);
         JoinEvenementEntityWithEvenementAddressEntityDao.dropTable(db, ifExists);
         JoinEvenementEntityWithEvenementCategoryEntityDao.dropTable(db, ifExists);
         JoinEvenementEntityWithEvenementDescriptionEntityDao.dropTable(db, ifExists);
@@ -282,6 +282,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(EntryStandingLevelEntityDao.class);
         registerDaoClass(EntryStationEntityDao.class);
         registerDaoClass(EntryTariffEntityDao.class);
+        registerDaoClass(EntryTypeEntityDao.class);
         registerDaoClass(EntryEntityDao.class);
         registerDaoClass(JoinEntryEntityWithEntryActivityEntityDao.class);
         registerDaoClass(JoinEntryEntityWithEntryAffiliationEntityDao.class);
@@ -321,9 +322,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(JoinEntryEntityWithEntryStationEntityDao.class);
         registerDaoClass(JoinEntryEntityWithEntryTariffEntityDao.class);
         registerDaoClass(JoinEntryOpeningEntityWithEntryGridEntityDao.class);
-        registerDaoClass(EventEntityDao.class);
-        registerDaoClass(EventSauvegardeEntityDao.class);
-        registerDaoClass(EvenementEntityDao.class);
         registerDaoClass(EvenementAddressEntityDao.class);
         registerDaoClass(EvenementCategoryEntityDao.class);
         registerDaoClass(EvenementDescriptionEntityDao.class);
@@ -332,6 +330,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(EvenementRefEntriesEntityDao.class);
         registerDaoClass(EvenementSectoEntityDao.class);
         registerDaoClass(EvenementStationEntityDao.class);
+        registerDaoClass(EvenementEntityDao.class);
+        registerDaoClass(EventEntityDao.class);
         registerDaoClass(JoinEvenementEntityWithEvenementAddressEntityDao.class);
         registerDaoClass(JoinEvenementEntityWithEvenementCategoryEntityDao.class);
         registerDaoClass(JoinEvenementEntityWithEvenementDescriptionEntityDao.class);

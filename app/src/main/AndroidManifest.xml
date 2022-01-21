@@ -20,40 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SearchActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEventsActivity"
-            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEvenementsActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEventDetailActivity"
+        <activity android:name=".activities.AfficherEntriesDiversActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activities.AfficherEntryDetailActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEvenementDetailActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesSortieActivity"
+        <activity android:name=".activities.AfficherFavorisActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesUtileActivity"
+        <activity android:name=".activities.AfficherEvenementsFavorisActivity"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesShoppingActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesVisiteActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesHotelActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesHebergementActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesBoutiqueActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesTransportActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherEntriesRestaurantActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherChoixEnregistrementActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AfficherMesFavorisActivity"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".activities.RechercherAllEntriesActivity"
+        <activity android:name=".activities.AfficherEntriesFavorisActivity"
             android:windowSoftInputMode="stateHidden"/>
     </application>
 

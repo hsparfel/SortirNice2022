@@ -8,6 +8,10 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_nightlife_white_18.png"
     },
     {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icons8_twitter_24.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\icons8_twitter_24.png"
+    },
+    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_hotel_white_24.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_hotel_white_24.png"
     },
@@ -60,6 +64,10 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_camera.png"
     },
     {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycler_list_entry.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_entry.xml"
+    },
+    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_arrow_drop_down_black_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_arrow_drop_down_black_18.png"
     },
@@ -76,24 +84,16 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_commute_black_18.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_event.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_event.xml"
-    },
-    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_favorite_border_black_24.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_favorite_border_black_24.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycler_list_entry_card_sauvegarde.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_entry_card_sauvegarde.xml"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_event.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_event.xml"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_storefront_black_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_storefront_black_18.png"
-    },
-    {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_afficher_detail_entry.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\afficher_detail_entry.xml"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_directions_bus_filled_black_18.png.flat",
@@ -124,12 +124,12 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_remove_done_white_24.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycler_list_event_card.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_event_card.xml"
-    },
-    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_filter_list_white_36.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_filter_list_white_36.png"
+    },
+    {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_recycler_list_event_card.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_event_card.xml"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_hotel_black_18.png.flat",
@@ -144,6 +144,10 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_theater_comedy_white_24.png"
     },
     {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_favoris.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_favoris.xml"
+    },
+    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_accueil.xml.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_accueil.xml"
     },
@@ -152,12 +156,8 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_arrow_drop_up_black_24.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_fab_save_exit.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\fab_save_exit.xml"
-    },
-    {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_rechercher_all_entries.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_rechercher_all_entries.xml"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_list_white_36.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_list_white_36.png"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_add_circle_outline_black_18dp.png.flat",
@@ -170,10 +170,6 @@
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_cancel_black_18dp.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_cancel_black_18dp.png"
-    },
-    {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_detail_event.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_detail_event.xml"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_playlist_add_check_white_24.png.flat",
@@ -192,10 +188,6 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_explore_black_18dp.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_search.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_search.xml"
-    },
-    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_museum_black_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_museum_black_18.png"
     },
@@ -208,12 +200,12 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_event.xml"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_storefront_white_18.png.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_storefront_white_18.png"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icons8_facebook_24.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\icons8_facebook_24.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_mes_favoris.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_mes_favoris.xml"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_storefront_white_18.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_storefront_white_18.png"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_not_listed_location_black_18.png.flat",
@@ -256,12 +248,12 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\list_item.xml"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_not_listed_location_white_24.png.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_not_listed_location_white_24.png"
-    },
-    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_favorite_border_black_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_favorite_border_black_18.png"
+    },
+    {
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_not_listed_location_white_24.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_not_listed_location_white_24.png"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_home_black_24dp.png.flat",
@@ -280,20 +272,16 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\recycler_list_entry_card.xml"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_choix_enregistrement.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_choix_enregistrement.xml"
-    },
-    {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_museum_white_24.png.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_museum_white_24.png"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_detail_entry.xml.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\activity_afficher_detail_entry.xml"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable_outline_arrow_right_black_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable\\outline_arrow_right_black_18.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_afficher_filtre_entry.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\afficher_filtre_entry.xml"
+        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_museum_white_24.png.flat",
+        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_museum_white_24.png"
     },
     {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_afficher_entry_various.xml.flat",
@@ -304,15 +292,7 @@
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_night_shelter_black_18.png"
     },
     {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_checkbox.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\list_checkbox.xml"
-    },
-    {
         "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_outline_museum_white_18.png.flat",
         "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\drawable-v24\\outline_museum_white_18.png"
-    },
-    {
-        "merged": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_evenement_tri.xml.flat",
-        "source": "C:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\src\\main\\res\\layout\\fragment_evenement_tri.xml"
     }
 ]
