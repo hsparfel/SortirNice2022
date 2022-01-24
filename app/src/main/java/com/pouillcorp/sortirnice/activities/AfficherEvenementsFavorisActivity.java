@@ -21,46 +21,18 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
 import com.pouillcorp.sortirnice.entities.event.detail.DetailEvenementEntitySimple;
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementAddressEntity;
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementCategoryEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementDescriptionEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementOptionEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementProfileEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementRefEntriesEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementSectoEntity;
-import com.pouillcorp.sortirnice.entities.event.detail.EvenementStationEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementAddressEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementCategoryEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementDescriptionEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementOptionEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementProfileEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementRefEntriesEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementSectoEntity;
-import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementStationEntity;
 import com.pouillcorp.sortirnice.enumeration.EvenementTri;
-import com.pouillcorp.sortirnice.interfaces.EventsApiService;
-import com.pouillcorp.sortirnice.modelevents.Address;
-import com.pouillcorp.sortirnice.modelevents.Category;
-import com.pouillcorp.sortirnice.modelevents.Description;
 import com.pouillcorp.sortirnice.modelevents.Event;
-import com.pouillcorp.sortirnice.modelevents.Events;
-import com.pouillcorp.sortirnice.modelevents.Image;
-import com.pouillcorp.sortirnice.modelevents.Option;
-import com.pouillcorp.sortirnice.modelevents.Profile;
-import com.pouillcorp.sortirnice.modelevents.RefEntries;
-import com.pouillcorp.sortirnice.modelevents.Secto;
-import com.pouillcorp.sortirnice.modelevents.Station;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEvenements;
-import com.pouillcorp.sortirnice.utils.DateUtils;
 import com.pouillcorp.sortirnice.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,12 +40,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
 import icepick.Icepick;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class AfficherEvenementsFavorisActivity extends NavDrawerActivity implements RecyclerAdapterEvenements.Listener {
 
@@ -186,6 +152,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
 
         masquerFragmentTri();
         masquerFragmentFiltre();
+
     }
 
     @Override
@@ -235,7 +202,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         rbEvenementTridDate.setText(EvenementTri.Date.getNom());
     }
 
-    private void masquerFragmentFiltre() {
+    /*private void masquerFragmentFiltre() {
         layoutFragmentEvenementFiltre.setVisibility(View.GONE);
         layoutFiltreAffiche = false;
     }
@@ -243,7 +210,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
     private void afficherFragmentFiltre() {
         layoutFragmentEvenementFiltre.setVisibility(View.VISIBLE);
         layoutFiltreAffiche = true;
-    }
+    }*/
 
     @Override
     protected void onResume() {
@@ -281,7 +248,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         return true;
     }
 
-    private void configureOnClickRecyclerView() {
+    private void configureOnClickRecyclerViewEvent() {
         ItemClickSupport.addTo(list_recycler_event, R.layout.recycler_list_event)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -298,7 +265,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         adapterEvents = new RecyclerAdapterEvenements(listEventEntities, this);
         list_recycler_event.setAdapter(adapterEvents);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
-        configureOnClickRecyclerView();
+        configureOnClickRecyclerViewEvent();
     }
 
     @Override
@@ -442,7 +409,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         }
     }
 
-    public void decocherCheckbox(List<MaterialCheckBox> list) {
+    /*public void decocherCheckbox(List<MaterialCheckBox> list) {
         for (MaterialCheckBox current : list) {
             current.setChecked(false);
         }
@@ -450,7 +417,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
 
     public void decocherCheckbox(MaterialCheckBox cb) {
         cb.setChecked(false);
-    }
+    }*/
 
     public void decocherTout() {
         decocherFiltre(listFiltreEvenementCategory);
@@ -555,7 +522,7 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         //Log.d(TAG, "Number of City received: " + listFiltreEvenementAdresse.size());
     }
 
-    protected void initCheckboxesSelectAllClick() {
+    /*protected void initCheckboxesSelectAllClick() {
         initCheckboxSelectAllClick(checkboxEvenementFiltreCategorySelectAll, listCheckboxEvenementCategory);
         initCheckboxSelectAllClick(checkboxEvenementFiltreVilleSelectAll, listCheckboxEvenementVille);
     }
@@ -573,5 +540,5 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
                 }
             }
         });
-    }
+    }*/
 }

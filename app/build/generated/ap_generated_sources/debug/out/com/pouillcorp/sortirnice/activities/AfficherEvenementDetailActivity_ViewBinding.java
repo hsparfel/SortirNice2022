@@ -6,16 +6,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
-import butterknife.Unbinder;
 import butterknife.internal.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pouillcorp.sortirnice.R;
 import java.lang.IllegalStateException;
 import java.lang.Override;
 
-public class AfficherEvenementDetailActivity_ViewBinding implements Unbinder {
+public class AfficherEvenementDetailActivity_ViewBinding extends NavDrawerActivity_ViewBinding {
   private AfficherEvenementDetailActivity target;
 
   @UiThread
@@ -26,6 +24,8 @@ public class AfficherEvenementDetailActivity_ViewBinding implements Unbinder {
   @UiThread
   public AfficherEvenementDetailActivity_ViewBinding(AfficherEvenementDetailActivity target,
       View source) {
+    super(target, source);
+
     this.target = target;
 
     target.image = Utils.findRequiredViewAsType(source, R.id.image, "field 'image'", ImageView.class);
@@ -64,7 +64,6 @@ public class AfficherEvenementDetailActivity_ViewBinding implements Unbinder {
   }
 
   @Override
-  @CallSuper
   public void unbind() {
     AfficherEvenementDetailActivity target = this.target;
     if (target == null) throw new IllegalStateException("Bindings already cleared.");
@@ -103,5 +102,7 @@ public class AfficherEvenementDetailActivity_ViewBinding implements Unbinder {
     target.fabFavoriAdd = null;
     target.fabFavoriSuppr = null;
     target.scrollView = null;
+
+    super.unbind();
   }
 }

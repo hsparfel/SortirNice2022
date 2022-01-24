@@ -10,18 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
@@ -52,7 +45,6 @@ import com.pouillcorp.sortirnice.modelentries.Entries;
 import com.pouillcorp.sortirnice.modelentries.Entry;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEntries;
 import com.pouillcorp.sortirnice.utils.DateUtils;
-import com.pouillcorp.sortirnice.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +52,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -74,7 +65,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class AfficherEntriesDiversActivity extends NavDrawerActivity implements RecyclerAdapterEntries.Listener {
 
-    int nbEntries;
+    /*int nbEntries;
     List<Entry> listEntries;
     List<EntryEntity> listEntryEntities = new ArrayList<>();
     List<EntryEntity> listEntryEntitiesBasique = new ArrayList<>();
@@ -100,13 +91,16 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     int cptrEntriesType;
     int compteur = 0;
 
+    @Nullable
     @BindView(R.id.list_recycler_entry)
     RecyclerView list_recycler_entry;
+    @Nullable
     @BindView(R.id.simpleProgressBar)
     ProgressBar progressBar;
-
+    @Nullable
     @BindView(R.id.layout_fragment_entry_filtre)
     FrameLayout layoutFragmentEntryFiltre;
+    @Nullable
     @BindView(R.id.layout_fragment_entry_type)
     FrameLayout layoutFragmentEntryType;
 
@@ -280,6 +274,37 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     boolean filtreStandingLevelDeplie = false;
     List<MaterialCheckBox> listCheckboxEntryStandingLevel = new ArrayList<>();
 
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeBoutique)
+    MaterialCheckBox checkboxEntryTypeBoutique;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeHotel)
+    MaterialCheckBox checkboxEntryTypeHotel;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeShopping)
+    MaterialCheckBox checkboxEntryTypeShopping;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeVisite)
+    MaterialCheckBox checkboxEntryTypeVisite;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeHebergement)
+    MaterialCheckBox checkboxEntryTypeHebergement;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeUtile)
+    MaterialCheckBox checkboxEntryTypeUtile;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeSortie)
+    MaterialCheckBox checkboxEntryTypeSortie;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeTransport)
+    MaterialCheckBox checkboxEntryTypeTransport;
+    @Nullable
+    @BindView(R.id.checkboxEntryTypeRestaurant)
+    MaterialCheckBox checkboxEntryTypeRestaurant;*/
+
+    private static final String TAG = AfficherEntriesDiversActivity.class.getSimpleName();
+    public static final String BASE_URL = "http://opendata.nicecotedazur.org/data/storage/f/DIRECTORY/talend/";
+    public String myUrl = BASE_URL;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -305,41 +330,51 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         chargerTous();
         masquerFragmentFiltre();
         masquerFragmentType();
+        listCheckboxEntryType.add(checkboxEntryTypeBoutique);
+        listCheckboxEntryType.add(checkboxEntryTypeSortie);
+        listCheckboxEntryType.add(checkboxEntryTypeUtile);
+        listCheckboxEntryType.add(checkboxEntryTypeVisite);
+        listCheckboxEntryType.add(checkboxEntryTypeHebergement);
+        listCheckboxEntryType.add(checkboxEntryTypeHotel);
+        listCheckboxEntryType.add(checkboxEntryTypeRestaurant);
+        listCheckboxEntryType.add(checkboxEntryTypeTransport);
+        listCheckboxEntryType.add(checkboxEntryTypeShopping);
     }
 
-    private void loadAllEntryFromDB() {
+    /*protected void loadAllEntryFromDB() {
         entryEntityDao.detachAll();
         listEntryEntities = entryEntityDao.loadAll();
         Collections.sort(listEntryEntities);
     }
 
-    private void masquerFragmentFiltre() {
+    protected void masquerFragmentFiltre() {
         layoutFragmentEntryFiltre.setVisibility(View.GONE);
         layoutFiltreAffiche = false;
     }
 
-    private void afficherFragmentFiltre() {
+    protected void afficherFragmentFiltre() {
         layoutFragmentEntryFiltre.setVisibility(View.VISIBLE);
         layoutFiltreAffiche = true;
     }
 
-    private void masquerFragmentType() {
+    protected void masquerFragmentType() {
         layoutFragmentEntryType.setVisibility(View.GONE);
         layoutTypeAffiche = false;
     }
 
-    private void afficherFragmentType() {
+    protected void afficherFragmentType() {
         layoutFragmentEntryType.setVisibility(View.VISIBLE);
         layoutTypeAffiche = true;
-    }
+    }*/
 
     @Override
     protected void onResume() {
         super.onResume();
-        for (EntryEntity current : listEntryEntities) {
-            current.refresh();
+        for (Object current : listEntryEntities) {
+            //(EntryEntity) current;
+            ((EntryEntity) current).refresh();
         }
-        configureRecyclerView();
+        configureRecyclerViewEntry();
         list_recycler_entry.scrollToPosition(positionScroll);
         Log.e(TAG, "on resume method");
     }
@@ -369,7 +404,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         return true;
     }
 
-    private void configureOnClickRecyclerView() {
+    /*private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(list_recycler_entry, R.layout.recycler_list_entry)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -381,18 +416,18 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
                 });
     }
 
-    public void configureRecyclerView() {
+    public void configureRecyclerViewEntry() {
         adapterEntries = new RecyclerAdapterEntries(listEntryEntities, this);
         list_recycler_entry.setAdapter(adapterEntries);
         list_recycler_entry.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerView();
-    }
+    }*/
 
     @Override
     public void onClickEntriesButton(int position) {
     }
 
-    public void afficherListCbEntryFiltreCategory(View view) {
+    /*public void afficherListCbEntryFiltreCategory(View view) {
         if (!filtreCategoryDeplie) {
             filtreCategoryDeplie = true;
             checkboxEntryFiltreCategorySelectAll.setVisibility(View.VISIBLE);
@@ -544,9 +579,9 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             linearLayoutEntryFiltreStandingLevel.setVisibility(View.GONE);
             buttonEntryFiltreStandingLevel.setIconResource(R.drawable.outline_arrow_right_black_18);
         }
-    }
+    }*/
 
-    protected boolean verifFiltreActif(List<? extends DetailEntryEntitySimple> list) {
+    /*protected boolean verifFiltreEntryActif(List<? extends DetailEntryEntitySimple> list) {
         boolean bool = false;
         for (DetailEntryEntitySimple current : list) {
             if (current.isChecked()) {
@@ -556,7 +591,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         return bool;
     }
 
-    protected void afficherOuMasquerBoutonFiltre(MaterialButton btn, List<? extends DetailEntryEntitySimple> list) {
+    protected void afficherOuMasquerBoutonEntryFiltre(MaterialButton btn, List<? extends DetailEntryEntitySimple> list) {
         if (list.size() == 0) {
             btn.setVisibility(View.GONE);
         } else {
@@ -564,18 +599,18 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         }
     }
 
-    protected void afficherOuMasquerTousBoutonsFiltre() {
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreActivity, listFiltreEntryActivity);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreAmenity, listFiltreEntryAmenity);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreAnimation, listFiltreEntryAnimation);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreAtmospher, listFiltreEntryAtmospher);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreCategory, listFiltreEntryCategory);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreChain, listFiltreEntryChain);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreFurnishedRental, listFiltreEntryFurnishedRental);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreLabel, listFiltreEntryLabel);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreLocation, listFiltreEntryLocation);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreService, listFiltreEntryService);
-        afficherOuMasquerBoutonFiltre(buttonEntryFiltreStandingLevel, listFiltreEntryStandingLevel);
+    protected void afficherOuMasquerTousBoutonsEntryFiltre() {
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreActivity, listFiltreEntryActivity);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreAmenity, listFiltreEntryAmenity);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreAnimation, listFiltreEntryAnimation);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreAtmospher, listFiltreEntryAtmospher);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreCategory, listFiltreEntryCategory);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreChain, listFiltreEntryChain);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreFurnishedRental, listFiltreEntryFurnishedRental);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreLabel, listFiltreEntryLabel);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreLocation, listFiltreEntryLocation);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreService, listFiltreEntryService);
+        afficherOuMasquerBoutonEntryFiltre(buttonEntryFiltreStandingLevel, listFiltreEntryStandingLevel);
     }
 
     protected void reinitListeEntries() {
@@ -601,9 +636,9 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         }
         listEntryEntities.clear();
         listEntryEntities.addAll(listEntryEntityType);
-    }
+    }*/
 
-    @Optional
+    /*@Optional
     @OnClick(R.id.fabEntryValiderFiltre)
     public void fabEntryFiltreClick() {
         progressBar.setVisibility(View.VISIBLE);
@@ -611,7 +646,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         masquerFragmentFiltre();
         listEntryEntityFiltre = new ArrayList<>();
         listEntryEntityFiltre.addAll(listEntryEntities);
-        boolean boolEntryCategory = verifFiltreActif(listFiltreEntryCategory);
+        boolean boolEntryCategory = verifFiltreEntryActif(listFiltreEntryCategory);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryCategory && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -630,7 +665,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryLocation = verifFiltreActif(listFiltreEntryLocation);
+        boolean boolEntryLocation = verifFiltreEntryActif(listFiltreEntryLocation);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryLocation && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -649,7 +684,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryActivity = verifFiltreActif(listFiltreEntryActivity);
+        boolean boolEntryActivity = verifFiltreEntryActif(listFiltreEntryActivity);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryActivity && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -668,7 +703,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryAmenity = verifFiltreActif(listFiltreEntryAmenity);
+        boolean boolEntryAmenity = verifFiltreEntryActif(listFiltreEntryAmenity);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryAmenity && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -687,7 +722,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryAnimation = verifFiltreActif(listFiltreEntryAnimation);
+        boolean boolEntryAnimation = verifFiltreEntryActif(listFiltreEntryAnimation);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryAnimation && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -706,7 +741,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryAtmospher = verifFiltreActif(listFiltreEntryAtmospher);
+        boolean boolEntryAtmospher = verifFiltreEntryActif(listFiltreEntryAtmospher);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryAtmospher && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -725,7 +760,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryChain = verifFiltreActif(listFiltreEntryChain);
+        boolean boolEntryChain = verifFiltreEntryActif(listFiltreEntryChain);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryChain && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -744,7 +779,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryFurnishedRental = verifFiltreActif(listFiltreEntryFurnishedRental);
+        boolean boolEntryFurnishedRental = verifFiltreEntryActif(listFiltreEntryFurnishedRental);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryFurnishedRental && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -763,7 +798,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryLabel = verifFiltreActif(listFiltreEntryLabel);
+        boolean boolEntryLabel = verifFiltreEntryActif(listFiltreEntryLabel);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryLabel && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -782,7 +817,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryService = verifFiltreActif(listFiltreEntryService);
+        boolean boolEntryService = verifFiltreEntryActif(listFiltreEntryService);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryService && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -801,7 +836,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
         }
 
-        boolean boolEntryStandingLevel = verifFiltreActif(listFiltreEntryStandingLevel);
+        boolean boolEntryStandingLevel = verifFiltreEntryActif(listFiltreEntryStandingLevel);
         for (EntryEntity current : listEntryEntities) {
             if (boolEntryStandingLevel && listEntryEntityFiltre.contains(current)) {
                 boolean isFiltered = false;
@@ -821,7 +856,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         }
         listEntryEntities.clear();
         listEntryEntities.addAll(listEntryEntityFiltre);
-        configureRecyclerView();
+        configureRecyclerViewEntry();
         progressBar.setVisibility(View.GONE);
     }
 
@@ -829,6 +864,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     @OnClick(R.id.fabEntryValiderType)
     public void fabEntryTypeClick() {
      //   Log.e(TAG, "Time 1: " + new Date());
+        progressBar.setVisibility(View.VISIBLE);
         masquerFragmentType();
         reinitListeEntries();
         listEntryEntityType = new ArrayList<>();
@@ -852,26 +888,27 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         listEntryEntities.clear();
         listEntryEntities.addAll(listEntryEntityType);
         itemEntryFiltre.setVisible(true);
-        listerFiltreReel();
+        listerFiltreReelEntry();
       //  Log.e(TAG, "Time 3: " + new Date());
-        afficherOuMasquerTousBoutonsFiltre();
-        initListFiltres();
+        afficherOuMasquerTousBoutonsEntryFiltre();
+        initListFiltresEntry();
      //   Log.e(TAG, "Time 4: " + new Date());
         initCheckboxesSelectAllClick();
-        configureRecyclerView();
+        configureRecyclerViewEntry();
    //     Log.e(TAG, "Time 5: " + new Date());
+        progressBar.setVisibility(View.GONE);
     }
 
     @Optional
     @OnClick(R.id.fabEntryRazFiltre)
     public void fabEntryRazFiltreClick() {
         progressBar.setVisibility(View.VISIBLE);
-        decocherTout();
+        decocherToutEntry();
         masquerFragmentFiltre();
         itemEntryFiltre.setVisible(false);
         listEntryEntities.clear();
         listEntryEntities.addAll(listEntryEntityType);
-        configureRecyclerView();
+        configureRecyclerViewEntry();
         progressBar.setVisibility(View.GONE);
     }
 
@@ -879,16 +916,16 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     @OnClick(R.id.fabEntryRazType)
     public void fabEntryRazTypeClick() {
         progressBar.setVisibility(View.VISIBLE);
-        decocherToutType();
+        decocherToutTypeEntry();
         fabEntryRazFiltreClick();
         masquerFragmentType();
         listEntryEntities.clear();
         listEntryEntities.addAll(listEntryEntitiesBasique);
-        configureRecyclerView();
+        configureRecyclerViewEntry();
         progressBar.setVisibility(View.GONE);
     }
 
-    public void decocherFiltre(List<? extends DetailEntryEntitySimple> list) {
+    public void decocherEntryFiltre(List<? extends DetailEntryEntitySimple> list) {
         for (DetailEntryEntitySimple current : list) {
             current.setChecked(false);
         }
@@ -904,48 +941,222 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         cb.setChecked(false);
     }
 
-    public void decocherTout() {
-        decocherFiltre(listFiltreEntryCategory);
+    public void decocherToutEntry() {
+        decocherEntryFiltre(listFiltreEntryCategory);
         decocherCheckbox(listCheckboxEntryCategory);
         decocherCheckbox(checkboxEntryFiltreCategorySelectAll);
-        decocherFiltre(listFiltreEntryLocation);
+        decocherEntryFiltre(listFiltreEntryLocation);
         decocherCheckbox(listCheckboxEntryLocation);
         decocherCheckbox(checkboxEntryFiltreLocationSelectAll);
-        decocherFiltre(listFiltreEntryActivity);
+        decocherEntryFiltre(listFiltreEntryActivity);
         decocherCheckbox(listCheckboxEntryActivity);
         decocherCheckbox(checkboxEntryFiltreActivitySelectAll);
-        decocherFiltre(listFiltreEntryAmenity);
+        decocherEntryFiltre(listFiltreEntryAmenity);
         decocherCheckbox(listCheckboxEntryAmenity);
         decocherCheckbox(checkboxEntryFiltreAmenitySelectAll);
-        decocherFiltre(listFiltreEntryAnimation);
+        decocherEntryFiltre(listFiltreEntryAnimation);
         decocherCheckbox(listCheckboxEntryAnimation);
         decocherCheckbox(checkboxEntryFiltreAnimationSelectAll);
-        decocherFiltre(listFiltreEntryAtmospher);
+        decocherEntryFiltre(listFiltreEntryAtmospher);
         decocherCheckbox(listCheckboxEntryAtmospher);
         decocherCheckbox(checkboxEntryFiltreAtmospherSelectAll);
-        decocherFiltre(listFiltreEntryChain);
+        decocherEntryFiltre(listFiltreEntryChain);
         decocherCheckbox(listCheckboxEntryChain);
         decocherCheckbox(checkboxEntryFiltreChainSelectAll);
-        decocherFiltre(listFiltreEntryFurnishedRental);
+        decocherEntryFiltre(listFiltreEntryFurnishedRental);
         decocherCheckbox(listCheckboxEntryFurnishedRental);
         decocherCheckbox(checkboxEntryFiltreFurnishedRentalSelectAll);
-        decocherFiltre(listFiltreEntryLabel);
+        decocherEntryFiltre(listFiltreEntryLabel);
         decocherCheckbox(listCheckboxEntryLabel);
         decocherCheckbox(checkboxEntryFiltreLabelSelectAll);
-        decocherFiltre(listFiltreEntryService);
+        decocherEntryFiltre(listFiltreEntryService);
         decocherCheckbox(listCheckboxEntryService);
         decocherCheckbox(checkboxEntryFiltreServiceSelectAll);
-        decocherFiltre(listFiltreEntryStandingLevel);
+        decocherEntryFiltre(listFiltreEntryStandingLevel);
         decocherCheckbox(listCheckboxEntryStandingLevel);
         decocherCheckbox(checkboxEntryFiltreStandingLevelSelectAll);
     }
 
-    public void decocherToutType() {
-        decocherFiltre(listEntryType);
+    public void decocherToutTypeEntry() {
+        decocherEntryFiltre(listEntryType);
         decocherCheckbox(listCheckboxEntryType);
     }
 
-    protected void initFiltre(List<? extends DetailEntryEntitySimple> list, LinearLayout ll, List<MaterialCheckBox> listCb, MaterialCheckBox cb) {
+    protected void initTypeEntry(){
+        checkboxEntryTypeHebergement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Hebergement.toString()))
+                        current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Hebergement.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeHotel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Hotel.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Hotel.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeShopping.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Shopping.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Shopping.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeBoutique.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Boutique.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Boutique.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeVisite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Visite.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Visite.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeUtile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Utile.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Utile.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeRestaurant.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Restaurant.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Restaurant.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeSortie.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Sortie.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Sortie.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+        checkboxEntryTypeTransport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Transport.toString()))
+                            current.setChecked(true);
+                    }
+
+                } else {
+                    for (EntryTypeEntity current : listEntryType) {
+                        if (current.getValue().equalsIgnoreCase(EntriesType.Transport.toString()))
+                            current.setChecked(false);
+                    }
+                    //checkboxEntryTypeHebergement.setChecked(false);
+
+                }
+            }
+        });
+    }
+
+    protected void initFiltreEntry(List<? extends DetailEntryEntitySimple> list, LinearLayout ll, List<MaterialCheckBox> listCb, MaterialCheckBox cb) {
         ll.removeAllViews();
         listCb.clear();
         Collections.sort(list);
@@ -961,20 +1172,23 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
                         current.setChecked(true);
                     } else {
                         current.setChecked(false);
-                        if (!verifSiUnFiltreMinimum(list) && cb != null) {
+                        if (!verifSiUnFiltreMinimumEntry(list) && cb != null) {
                             cb.setChecked(false);
                         }
                     }
                 }
             });
             if (ll != null) {
-                ll.addView(checkBox);
+
+
+                    ll.addView(checkBox);
+                //}
             }
             listCb.add(checkBox);
         }
     }
 
-    protected void initListFiltres() {
+    protected void initListFiltresEntry() {
         boolean boolTypeBoutique = false;
         boolean boolTypeHebergement = false;
         boolean boolTypeHotel = false;
@@ -1044,21 +1258,22 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             }
             listEntryType.add(entryTypeEntity);
         }
-        initFiltre(listEntryType, linearLayoutEntryType, listCheckboxEntryType, null);
-        initFiltre(listFiltreEntryCategory, linearLayoutEntryFiltreCategory, listCheckboxEntryCategory, checkboxEntryFiltreCategorySelectAll);
-        initFiltre(listFiltreEntryLocation, linearLayoutEntryFiltreLocation, listCheckboxEntryLocation, checkboxEntryFiltreLocationSelectAll);
-        initFiltre(listFiltreEntryActivity, linearLayoutEntryFiltreActivity, listCheckboxEntryActivity, checkboxEntryFiltreActivitySelectAll);
-        initFiltre(listFiltreEntryAmenity, linearLayoutEntryFiltreAmenity, listCheckboxEntryAmenity, checkboxEntryFiltreAmenitySelectAll);
-        initFiltre(listFiltreEntryAnimation, linearLayoutEntryFiltreAnimation, listCheckboxEntryAnimation, checkboxEntryFiltreAnimationSelectAll);
-        initFiltre(listFiltreEntryAtmospher, linearLayoutEntryFiltreAtmospher, listCheckboxEntryAtmospher, checkboxEntryFiltreAtmospherSelectAll);
-        initFiltre(listFiltreEntryChain, linearLayoutEntryFiltreChain, listCheckboxEntryChain, checkboxEntryFiltreChainSelectAll);
-        initFiltre(listFiltreEntryFurnishedRental, linearLayoutEntryFiltreFurnishedRental, listCheckboxEntryFurnishedRental, checkboxEntryFiltreFurnishedRentalSelectAll);
-        initFiltre(listFiltreEntryLabel, linearLayoutEntryFiltreLabel, listCheckboxEntryLabel, checkboxEntryFiltreLabelSelectAll);
-        initFiltre(listFiltreEntryService, linearLayoutEntryFiltreService, listCheckboxEntryService, checkboxEntryFiltreServiceSelectAll);
-        initFiltre(listFiltreEntryStandingLevel, linearLayoutEntryFiltreStandingLevel, listCheckboxEntryStandingLevel, checkboxEntryFiltreStandingLevelSelectAll);
+        //initFiltre(listEntryType, linearLayoutEntryType, listCheckboxEntryType, null);
+        initTypeEntry();
+        initFiltreEntry(listFiltreEntryCategory, linearLayoutEntryFiltreCategory, listCheckboxEntryCategory, checkboxEntryFiltreCategorySelectAll);
+        initFiltreEntry(listFiltreEntryLocation, linearLayoutEntryFiltreLocation, listCheckboxEntryLocation, checkboxEntryFiltreLocationSelectAll);
+        initFiltreEntry(listFiltreEntryActivity, linearLayoutEntryFiltreActivity, listCheckboxEntryActivity, checkboxEntryFiltreActivitySelectAll);
+        initFiltreEntry(listFiltreEntryAmenity, linearLayoutEntryFiltreAmenity, listCheckboxEntryAmenity, checkboxEntryFiltreAmenitySelectAll);
+        initFiltreEntry(listFiltreEntryAnimation, linearLayoutEntryFiltreAnimation, listCheckboxEntryAnimation, checkboxEntryFiltreAnimationSelectAll);
+        initFiltreEntry(listFiltreEntryAtmospher, linearLayoutEntryFiltreAtmospher, listCheckboxEntryAtmospher, checkboxEntryFiltreAtmospherSelectAll);
+        initFiltreEntry(listFiltreEntryChain, linearLayoutEntryFiltreChain, listCheckboxEntryChain, checkboxEntryFiltreChainSelectAll);
+        initFiltreEntry(listFiltreEntryFurnishedRental, linearLayoutEntryFiltreFurnishedRental, listCheckboxEntryFurnishedRental, checkboxEntryFiltreFurnishedRentalSelectAll);
+        initFiltreEntry(listFiltreEntryLabel, linearLayoutEntryFiltreLabel, listCheckboxEntryLabel, checkboxEntryFiltreLabelSelectAll);
+        initFiltreEntry(listFiltreEntryService, linearLayoutEntryFiltreService, listCheckboxEntryService, checkboxEntryFiltreServiceSelectAll);
+        initFiltreEntry(listFiltreEntryStandingLevel, linearLayoutEntryFiltreStandingLevel, listCheckboxEntryStandingLevel, checkboxEntryFiltreStandingLevelSelectAll);
     }
 
-    protected boolean verifSiUnFiltreMinimum(List<? extends DetailEntryEntitySimple> list) {
+    protected boolean verifSiUnFiltreMinimumEntry(List<? extends DetailEntryEntitySimple> list) {
         boolean bool = false;
         for (DetailEntryEntitySimple current : list) {
             if (current.isChecked()) {
@@ -1068,7 +1283,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         return bool;
     }
 
-    public void listerFiltre() {
+    public void listerFiltreEntry() {
         listFiltreEntryCategory = entryCategoryEntityDao.loadAll();
     //    Log.e(TAG, "Number of Category received: " + listFiltreEntryCategory.size());
         listFiltreEntryLocation = entryLocationEntityDao.loadAll();
@@ -1093,7 +1308,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
       //  Log.e(TAG, "Number of StandingLevel received: " + listFiltreEntryStandingLevel.size());
     }
 
-    public void listerFiltreReel() {
+    public void listerFiltreReelEntry() {
         HashSet<EntryCategoryEntity> hashsetCategory = new HashSet<>();
         listFiltreEntryCategory = new ArrayList<>();
         HashSet<EntryLocationEntity> hashsetLocation = new HashSet<>();
@@ -1218,9 +1433,9 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
             Collections.sort(listFiltreEntryStandingLevel);
         }
         //Log.e(TAG, "Number of StandingLevel reçu: " + listFiltreEntryStandingLevel.size());
-    }
+    }*/
 
-    protected void initCheckboxesSelectAllClick() {
+    /*protected void initCheckboxesSelectAllClick() {
         initCheckboxSelectAllClick(checkboxEntryFiltreCategorySelectAll, listCheckboxEntryCategory);
         initCheckboxSelectAllClick(checkboxEntryFiltreLocationSelectAll, listCheckboxEntryLocation);
         initCheckboxSelectAllClick(checkboxEntryFiltreActivitySelectAll, listCheckboxEntryActivity);
@@ -1247,7 +1462,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
                 }
             }
         });
-    }
+    }*/
 
     public void chargerTous() {
         cptrEntriesType = 0;
@@ -1415,13 +1630,13 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
                                  Log.e(TAG, "Number of entrys received: " + listEntries.size());
                                  loadAllEntryFromDB();
                                  listEntryEntitiesBasique.addAll(listEntryEntities);
-                                 configureRecyclerView();
+                                 configureRecyclerViewEntry();
                                  itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
                                  itemEntryType.setVisible(true);
                                  itemEntryFiltre = menuItems.findItem(R.id.menu_activity_main_entry_filter);
                                  itemEntryFiltre.setVisible(false);
-                                 listerFiltre();
-                                 initListFiltres();
+                                 listerFiltreEntry();
+                                 initListFiltresEntry();
                                  initCheckboxesSelectAllClick();
                                  progressBar.setVisibility(View.GONE);
                              }

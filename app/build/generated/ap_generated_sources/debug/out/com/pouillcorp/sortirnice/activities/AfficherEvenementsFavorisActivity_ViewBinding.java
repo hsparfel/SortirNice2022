@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.Unbinder;
 import butterknife.internal.DebouncingOnClickListener;
 import butterknife.internal.Utils;
 import com.google.android.material.button.MaterialButton;
@@ -19,16 +17,16 @@ import com.pouillcorp.sortirnice.R;
 import java.lang.IllegalStateException;
 import java.lang.Override;
 
-public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
+public class AfficherEvenementsFavorisActivity_ViewBinding extends NavDrawerActivity_ViewBinding {
   private AfficherEvenementsFavorisActivity target;
 
-  private View view7f0801d8;
+  private View view7f0801ea;
 
-  private View view7f0801d7;
+  private View view7f0801e9;
 
-  private View view7f08011d;
+  private View view7f080126;
 
-  private View view7f08011c;
+  private View view7f080125;
 
   @UiThread
   public AfficherEvenementsFavorisActivity_ViewBinding(AfficherEvenementsFavorisActivity target) {
@@ -38,6 +36,8 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
   @UiThread
   public AfficherEvenementsFavorisActivity_ViewBinding(
       final AfficherEvenementsFavorisActivity target, View source) {
+    super(target, source);
+
     this.target = target;
 
     View view;
@@ -46,7 +46,7 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
     target.layoutFragmentEvenementTri = Utils.findRequiredViewAsType(source, R.id.layout_fragment_evenement_tri, "field 'layoutFragmentEvenementTri'", FrameLayout.class);
     view = Utils.findRequiredView(source, R.id.radio_button_evenement_tri_nom, "field 'rbEvenementTriNom' and method 'rbEvenementTriNomClick'");
     target.rbEvenementTriNom = Utils.castView(view, R.id.radio_button_evenement_tri_nom, "field 'rbEvenementTriNom'", MaterialRadioButton.class);
-    view7f0801d8 = view;
+    view7f0801ea = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -55,7 +55,7 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.radio_button_evenement_tri_date, "field 'rbEvenementTridDate' and method 'rbEvenementTriDateClick'");
     target.rbEvenementTridDate = Utils.castView(view, R.id.radio_button_evenement_tri_date, "field 'rbEvenementTridDate'", MaterialRadioButton.class);
-    view7f0801d7 = view;
+    view7f0801e9 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -66,7 +66,7 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEvenementValiderFiltre);
     target.fabEvenementValiderFiltre = Utils.castView(view, R.id.fabEvenementValiderFiltre, "field 'fabEvenementValiderFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f08011d = view;
+      view7f080126 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -77,7 +77,7 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEvenementRazFiltre);
     target.fabEvenementRazFiltre = Utils.castView(view, R.id.fabEvenementRazFiltre, "field 'fabEvenementRazFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f08011c = view;
+      view7f080125 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -94,7 +94,6 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
   }
 
   @Override
-  @CallSuper
   public void unbind() {
     AfficherEvenementsFavorisActivity target = this.target;
     if (target == null) throw new IllegalStateException("Bindings already cleared.");
@@ -115,17 +114,19 @@ public class AfficherEvenementsFavorisActivity_ViewBinding implements Unbinder {
     target.buttonEvenementFiltreCategory = null;
     target.buttonEvenementFiltreVille = null;
 
-    view7f0801d8.setOnClickListener(null);
-    view7f0801d8 = null;
-    view7f0801d7.setOnClickListener(null);
-    view7f0801d7 = null;
-    if (view7f08011d != null) {
-      view7f08011d.setOnClickListener(null);
-      view7f08011d = null;
+    view7f0801ea.setOnClickListener(null);
+    view7f0801ea = null;
+    view7f0801e9.setOnClickListener(null);
+    view7f0801e9 = null;
+    if (view7f080126 != null) {
+      view7f080126.setOnClickListener(null);
+      view7f080126 = null;
     }
-    if (view7f08011c != null) {
-      view7f08011c.setOnClickListener(null);
-      view7f08011c = null;
+    if (view7f080125 != null) {
+      view7f080125.setOnClickListener(null);
+      view7f080125 = null;
     }
+
+    super.unbind();
   }
 }

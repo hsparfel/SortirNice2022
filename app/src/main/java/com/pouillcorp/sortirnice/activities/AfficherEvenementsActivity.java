@@ -182,7 +182,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         connectAndGetApiData(myUrl);
 
         masquerFragmentTri();
-        masquerFragmentFiltre();
+        masquerFragmentFiltreEvent();
     }
 
     @OnClick(R.id.radio_button_evenement_tri_nom)
@@ -221,12 +221,12 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         rbEvenementTridDate.setText(EvenementTri.Date.getNom());
     }
 
-    private void masquerFragmentFiltre() {
+    private void masquerFragmentFiltreEvent() {
         layoutFragmentEvenementFiltre.setVisibility(View.GONE);
         layoutFiltreAffiche = false;
     }
 
-    private void afficherFragmentFiltre() {
+    private void afficherFragmentFiltreEvent() {
         layoutFragmentEvenementFiltre.setVisibility(View.VISIBLE);
         layoutFiltreAffiche = true;
     }
@@ -252,14 +252,14 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 } else {
                     afficherFragmentTri();
                 }
-                masquerFragmentFiltre();
+                masquerFragmentFiltreEvent();
                 break;
             case R.id.menu_activity_main_evenement_filter:
                 Log.e(TAG, "click sur filtre evenement");
                 if (layoutFiltreAffiche) {
-                    masquerFragmentFiltre();
+                    masquerFragmentFiltreEvent();
                 } else {
-                    afficherFragmentFiltre();
+                    afficherFragmentFiltreEvent();
                 }
                 masquerFragmentTri();
                 break;
@@ -748,7 +748,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    private void configureOnClickRecyclerView() {
+    private void configureOnClickRecyclerViewEvent() {
         ItemClickSupport.addTo(list_recycler_event, R.layout.recycler_list_event)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
@@ -765,7 +765,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         adapterEvents = new RecyclerAdapterEvenements(listEventEntities, this);
         list_recycler_event.setAdapter(adapterEvents);
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
-        configureOnClickRecyclerView();
+        configureOnClickRecyclerViewEvent();
     }
 
     @Override
@@ -909,15 +909,15 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         }
     }
 
-    public void decocherCheckbox(List<MaterialCheckBox> list) {
+    /*public void decocherCheckbox(List<MaterialCheckBox> list) {
         for (MaterialCheckBox current : list) {
             current.setChecked(false);
         }
-    }
+    }*/
 
-    public void decocherCheckbox(MaterialCheckBox cb) {
+    /*public void decocherCheckbox(MaterialCheckBox cb) {
         cb.setChecked(false);
-    }
+    }*/
 
     public void decocherTout() {
         decocherFiltre(listFiltreEvenementCategory);
@@ -1027,7 +1027,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
         initCheckboxSelectAllClick(checkboxEvenementFiltreVilleSelectAll, listCheckboxEvenementVille);
     }
 
-    protected void initCheckboxSelectAllClick(MaterialCheckBox cbSelectAll, List<MaterialCheckBox> list) {
+    /*protected void initCheckboxSelectAllClick(MaterialCheckBox cbSelectAll, List<MaterialCheckBox> list) {
         cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -1040,5 +1040,5 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                 }
             }
         });
-    }
+    }*/
 }
