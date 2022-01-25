@@ -23,7 +23,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
      android:icon="@drawable/outline_list_white_36"
      app:showAsAction="ifRoom"
      android:title="Type"
-     android:visible="false"
+     android:visible="true"
 
      >
  </item>

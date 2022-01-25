@@ -124,7 +124,8 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
                     itemEvenementFiltre.setVisible(true);
                     itemEvenementTri = menuItems.findItem(R.id.menu_activity_main_evenement_tri);
                     itemEvenementTri.setVisible(true);
-
+                    itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+                    itemEntryType.setVisible(false);
                     listerFiltre();
                     initListFiltres();
                     initCheckboxesSelectAllClick();

@@ -8,6 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.pouillcorp.sortirnice.entities.DateMaj;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryActivityEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryAddressEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryAffiliationEntity;
@@ -108,6 +109,7 @@ import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEven
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementSectoEntity;
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementStationEntity;
 
+import com.pouillcorp.sortirnice.dao.DateMajDao;
 import com.pouillcorp.sortirnice.dao.EntryActivityEntityDao;
 import com.pouillcorp.sortirnice.dao.EntryAddressEntityDao;
 import com.pouillcorp.sortirnice.dao.EntryAffiliationEntityDao;
@@ -217,6 +219,7 @@ import com.pouillcorp.sortirnice.dao.JoinEvenementEntityWithEvenementStationEnti
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig dateMajDaoConfig;
     private final DaoConfig entryActivityEntityDaoConfig;
     private final DaoConfig entryAddressEntityDaoConfig;
     private final DaoConfig entryAffiliationEntityDaoConfig;
@@ -317,6 +320,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig joinEvenementEntityWithEvenementSectoEntityDaoConfig;
     private final DaoConfig joinEvenementEntityWithEvenementStationEntityDaoConfig;
 
+    private final DateMajDao dateMajDao;
     private final EntryActivityEntityDao entryActivityEntityDao;
     private final EntryAddressEntityDao entryAddressEntityDao;
     private final EntryAffiliationEntityDao entryAffiliationEntityDao;
@@ -420,6 +424,9 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        dateMajDaoConfig = daoConfigMap.get(DateMajDao.class).clone();
+        dateMajDaoConfig.initIdentityScope(type);
 
         entryActivityEntityDaoConfig = daoConfigMap.get(EntryActivityEntityDao.class).clone();
         entryActivityEntityDaoConfig.initIdentityScope(type);
@@ -718,6 +725,7 @@ public class DaoSession extends AbstractDaoSession {
         joinEvenementEntityWithEvenementStationEntityDaoConfig = daoConfigMap.get(JoinEvenementEntityWithEvenementStationEntityDao.class).clone();
         joinEvenementEntityWithEvenementStationEntityDaoConfig.initIdentityScope(type);
 
+        dateMajDao = new DateMajDao(dateMajDaoConfig, this);
         entryActivityEntityDao = new EntryActivityEntityDao(entryActivityEntityDaoConfig, this);
         entryAddressEntityDao = new EntryAddressEntityDao(entryAddressEntityDaoConfig, this);
         entryAffiliationEntityDao = new EntryAffiliationEntityDao(entryAffiliationEntityDaoConfig, this);
@@ -818,6 +826,7 @@ public class DaoSession extends AbstractDaoSession {
         joinEvenementEntityWithEvenementSectoEntityDao = new JoinEvenementEntityWithEvenementSectoEntityDao(joinEvenementEntityWithEvenementSectoEntityDaoConfig, this);
         joinEvenementEntityWithEvenementStationEntityDao = new JoinEvenementEntityWithEvenementStationEntityDao(joinEvenementEntityWithEvenementStationEntityDaoConfig, this);
 
+        registerDao(DateMaj.class, dateMajDao);
         registerDao(EntryActivityEntity.class, entryActivityEntityDao);
         registerDao(EntryAddressEntity.class, entryAddressEntityDao);
         registerDao(EntryAffiliationEntity.class, entryAffiliationEntityDao);
@@ -920,6 +929,7 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
+        dateMajDaoConfig.clearIdentityScope();
         entryActivityEntityDaoConfig.clearIdentityScope();
         entryAddressEntityDaoConfig.clearIdentityScope();
         entryAffiliationEntityDaoConfig.clearIdentityScope();
@@ -1019,6 +1029,10 @@ public class DaoSession extends AbstractDaoSession {
         joinEvenementEntityWithEvenementRefEntriesEntityDaoConfig.clearIdentityScope();
         joinEvenementEntityWithEvenementSectoEntityDaoConfig.clearIdentityScope();
         joinEvenementEntityWithEvenementStationEntityDaoConfig.clearIdentityScope();
+    }
+
+    public DateMajDao getDateMajDao() {
+        return dateMajDao;
     }
 
     public EntryActivityEntityDao getEntryActivityEntityDao() {

@@ -1,21 +1,24 @@
 package com.pouillcorp.sortirnice.activities;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.pouillcorp.sortirnice.R;
-import com.pouillcorp.sortirnice.email.SendEmailService;
+import com.pouillcorp.sortirnice.entities.DateMaj;
 import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
-import com.pouillcorp.sortirnice.entities.entry.detail.EntryTypeEntity;
 import com.pouillcorp.sortirnice.enumeration.EntriesType;
 import com.pouillcorp.sortirnice.interfaces.EntriesBoutiqueApiService;
 import com.pouillcorp.sortirnice.interfaces.EntriesHebergementApiService;
@@ -33,6 +36,7 @@ import com.pouillcorp.sortirnice.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;
@@ -49,10 +53,13 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     public static final String BASE_URL = "http://opendata.nicecotedazur.org/data/storage/f/DIRECTORY/talend/";
     public String myUrl = BASE_URL;
 
+    boolean isMajToday;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //super.onCreateOptionsMenu(Menu menu);
         Icepick.restoreInstanceState(this, savedInstanceState);
         setContentView(R.layout.activity_afficher_entry_various);
 
@@ -63,6 +70,8 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         Log.e(TAG, "on create method");
         listEntries = new ArrayList<>();
         nbEntries = 0;
+
+        //setHasOptionsMenu(true);
 
         setTitle("Divers");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
@@ -94,6 +103,15 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         list_recycler_entry.scrollToPosition(positionScroll);
         Log.e(TAG, "on resume method");
     }
+
+
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        menuItems = menu;
+        return true;
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -136,8 +154,49 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         listEntriesShopping = new ArrayList<>();
         listEntriesSortie = new ArrayList<>();
         listEntriesTransport = new ArrayList<>();
-        AsyncTaskRunnerRechercheGlobale runner = new AsyncTaskRunnerRechercheGlobale();
+        /*AsyncTaskRunnerRechercheGlobale runner = new AsyncTaskRunnerRechercheGlobale();
+        runner.execute();*/
+        AsyncTaskRunnerVerifRechercheJour runner = new AsyncTaskRunnerVerifRechercheJour();
         runner.execute();
+    }
+
+    private class AsyncTaskRunnerVerifRechercheJour extends AsyncTask<Void, Integer, Void> {
+
+        protected Void doInBackground(Void... voids) {
+            String dateString;
+            Date date = new Date();
+            dateString = DateUtils.formatDateDD_MM_YYYY(date);
+            List<DateMaj> listDateLastMaj = dateMajDao.loadAll();new ArrayList<>();
+            listDateLastMaj = dateMajDao.loadAll();
+            isMajToday = false;
+            if (listDateLastMaj.size() > 0) {
+                DateMaj dateLastMaj = listDateLastMaj.get(0);
+                if (dateLastMaj.getDateMajEntry().equalsIgnoreCase(dateString)) {
+                    isMajToday = true;
+                }
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            if (!isMajToday) {
+                AsyncTaskRunnerRechercheGlobale runner = new AsyncTaskRunnerRechercheGlobale();
+                runner.execute();
+            } else {
+                loadAllEntryFromDB();
+                listEntryEntitiesBasique.addAll(listEntryEntities);
+                configureRecyclerViewEntry();
+
+                /*itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+                itemEntryType.setVisible(true);
+                itemEntryFiltre = menuItems.findItem(R.id.menu_activity_main_entry_filter);
+                itemEntryFiltre.setVisible(false);*/
+                listerFiltreEntry();
+                initListFiltresEntry();
+                initCheckboxesSelectAllClickEntry();
+                progressBar.setVisibility(View.GONE);
+            }
+        }
     }
 
     private class AsyncTaskRunnerRechercheGlobale extends AsyncTask<Void, Integer, Void> {
@@ -278,6 +337,19 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
                                  listerFiltreEntry();
                                  initListFiltresEntry();
                                  initCheckboxesSelectAllClickEntry();
+
+                                 Date dateJour = new Date();
+                                 String dateJourString = DateUtils.formatDateDD_MM_YYYY(dateJour);
+                                 List<DateMaj> listDateMaj = dateMajDao.loadAll();
+                                 if (listDateMaj.size() >0) {
+                                     DateMaj dateMaj = listDateMaj.get(0);
+                                     dateMaj.setDateMajEntry(dateJourString);
+                                     dateMajDao.update(dateMaj);
+                                 } else {
+                                     DateMaj dateMaj = new DateMaj();
+                                     dateMaj.setDateMajEntry(dateJourString);
+                                     dateMajDao.insert(dateMaj);
+                                 }
                                  progressBar.setVisibility(View.GONE);
                              }
                          }

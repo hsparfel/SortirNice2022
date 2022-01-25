@@ -33,7 +33,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.pouillcorp.sortirnice.App;
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.dao.*;
@@ -134,6 +133,15 @@ import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEven
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementStationEntity;
 import com.pouillcorp.sortirnice.enumeration.EntriesType;
 import com.pouillcorp.sortirnice.enumeration.EvenementTri;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEntryActivites;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEntryAmenity;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEntryCategorie;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEntryLieu;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEntryService;
+import com.pouillcorp.sortirnice.enumeration.ExclusionEventCategorie;
+import com.pouillcorp.sortirnice.enumeration.FusionEntryActivite;
+import com.pouillcorp.sortirnice.enumeration.FusionEntryCategorie;
+import com.pouillcorp.sortirnice.enumeration.FusionEventCategorie;
 import com.pouillcorp.sortirnice.modelentries.Activity;
 import com.pouillcorp.sortirnice.modelentries.Affiliation;
 import com.pouillcorp.sortirnice.modelentries.AllianceOption;
@@ -309,6 +317,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected JoinEvenementEntityWithEvenementSectoEntityDao joinEvenementEntityWithEvenementSectoEntityDao;
     protected JoinEvenementEntityWithEvenementCategoryEntityDao joinEvenementEntityWithEvenementCategoryEntityDao;
 
+    protected DateMajDao dateMajDao;
     //Entry
     protected int nbEntries;
     protected List<Entry> listEntries;
@@ -613,6 +622,8 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initialiserDao();
 
+        dateMajDao = daoSession.getDateMajDao();
+
         eventEntityDao = daoSession.getEventEntityDao();
         entryEntityDao = daoSession.getEntryEntityDao();
         entryActivityEntityDao = daoSession.getEntryActivityEntityDao();
@@ -721,6 +732,10 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         menuItems = menu;
+        itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+        itemEntryFiltre = menuItems.findItem(R.id.menu_activity_main_entry_filter);
+        itemEvenementFiltre = menuItems.findItem(R.id.menu_activity_main_evenement_filter);
+        itemEvenementTri = menuItems.findItem(R.id.menu_activity_main_evenement_tri);
         return true;
     }
 
@@ -1022,18 +1037,26 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 //enregistrer list amenities
                 if (current.getListAmenities() != null) {
                     for (Amenity amenity : current.getListAmenities()) {
-                        List<EntryAmenityEntity> list = entryAmenityEntityDao.queryRaw("where value = ?", amenity.getValue());
-                        JoinEntryEntityWithEntryAmenityEntity join = new JoinEntryEntityWithEntryAmenityEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryAmenityEntityId(list.get(0).getId());
-                        } else {
-                            EntryAmenityEntity entryAmenityEntity = new EntryAmenityEntity();
-                            entryAmenityEntity.setValue(amenity.getValue());
-                            entryAmenityEntity.setId(entryAmenityEntityDao.insert(entryAmenityEntity));
-                            join.setEntryAmenityEntityId(entryAmenityEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEntryAmenity exclusion : ExclusionEntryAmenity.values()) {
+                            if (amenity.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEntryEntityWithEntryAmenityEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            List<EntryAmenityEntity> list = entryAmenityEntityDao.queryRaw("where value = ?", amenity.getValue());
+                            JoinEntryEntityWithEntryAmenityEntity join = new JoinEntryEntityWithEntryAmenityEntity();
+                            join.setEntryEntityId(entryToSave.getId());
+                            if (list.size() > 0) {
+                                join.setEntryAmenityEntityId(list.get(0).getId());
+                            } else {
+                                EntryAmenityEntity entryAmenityEntity = new EntryAmenityEntity();
+                                entryAmenityEntity.setValue(amenity.getValue());
+                                entryAmenityEntity.setId(entryAmenityEntityDao.insert(entryAmenityEntity));
+                                join.setEntryAmenityEntityId(entryAmenityEntity.getId());
+                            }
+                            joinEntryEntityWithEntryAmenityEntityDao.insert(join);
+                        }
                     }
                 }
 
@@ -1058,55 +1081,108 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 //enregistrer list locations
                 if (current.getListLocations() != null) {
                     for (Location location : current.getListLocations()) {
-                        List<EntryLocationEntity> list = entryLocationEntityDao.queryRaw("where value = ?", location.getValue());
-                        JoinEntryEntityWithEntryLocationEntity join = new JoinEntryEntityWithEntryLocationEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryLocationEntityId(list.get(0).getId());
-                        } else {
-                            EntryLocationEntity entryLocationEntity = new EntryLocationEntity();
-                            entryLocationEntity.setValue(location.getValue());
-                            entryLocationEntity.setId(entryLocationEntityDao.insert(entryLocationEntity));
-                            join.setEntryLocationEntityId(entryLocationEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEntryLieu exclusion : ExclusionEntryLieu.values()) {
+                            if (location.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEntryEntityWithEntryLocationEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            List<EntryLocationEntity> list = entryLocationEntityDao.queryRaw("where value = ?", location.getValue());
+                            JoinEntryEntityWithEntryLocationEntity join = new JoinEntryEntityWithEntryLocationEntity();
+                            join.setEntryEntityId(entryToSave.getId());
+                            if (list.size() > 0) {
+                                join.setEntryLocationEntityId(list.get(0).getId());
+                            } else {
+                                EntryLocationEntity entryLocationEntity = new EntryLocationEntity();
+                                entryLocationEntity.setValue(location.getValue());
+                                entryLocationEntity.setId(entryLocationEntityDao.insert(entryLocationEntity));
+                                join.setEntryLocationEntityId(entryLocationEntity.getId());
+                            }
+                            joinEntryEntityWithEntryLocationEntityDao.insert(join);
+                        } else {
+                            Log.e("Exclusion Lieu ",location.getValue());
+                        }
                     }
                 }
 
                 //enregistrer list activities
                 if (current.getListActivities() != null) {
                     for (Activity activity : current.getListActivities()) {
-                        List<EntryActivityEntity> list = entryActivityEntityDao.queryRaw("where value = ?", activity.getValue());
-                        JoinEntryEntityWithEntryActivityEntity join = new JoinEntryEntityWithEntryActivityEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryActivityEntityId(list.get(0).getId());
-                        } else {
-                            EntryActivityEntity entryActivityEntity = new EntryActivityEntity();
-                            entryActivityEntity.setValue(activity.getValue());
-                            entryActivityEntity.setId(entryActivityEntityDao.insert(entryActivityEntity));
-                            join.setEntryActivityEntityId(entryActivityEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEntryActivites exclusion : ExclusionEntryActivites.values()) {
+                            if (activity.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEntryEntityWithEntryActivityEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            for (FusionEntryActivite fusion : FusionEntryActivite.values()){
+                                if (fusion.toBis().equalsIgnoreCase(activity.getValue())){
+                                    activity.setValue(fusion.toString());
+                                }
+                            }
+                            List<EntryActivityEntity> list = entryActivityEntityDao.queryRaw("where value = ?", activity.getValue());
+
+                            List<JoinEntryEntityWithEntryActivityEntity> listJoin = new ArrayList<>();
+                            if (list.size() > 0) {
+                                listJoin = joinEntryEntityWithEntryActivityEntityDao.queryRaw("where entry_entity_id = ? and entry_activity_entity_id = ?", entryToSave.getId().toString(), list.get(0).getId().toString());
+                            }
+                            if (listJoin.size() == 0) {
+                                JoinEntryEntityWithEntryActivityEntity join = new JoinEntryEntityWithEntryActivityEntity();
+                                join.setEntryEntityId(entryToSave.getId());
+                                if (list.size() > 0) {
+                                    join.setEntryActivityEntityId(list.get(0).getId());
+                                } else {
+                                    EntryActivityEntity entryActivityEntity = new EntryActivityEntity();
+                                    entryActivityEntity.setValue(activity.getValue());
+                                    entryActivityEntity.setId(entryActivityEntityDao.insert(entryActivityEntity));
+                                    join.setEntryActivityEntityId(entryActivityEntity.getId());
+                                }
+                                joinEntryEntityWithEntryActivityEntityDao.insert(join);
+                            }
+                        } else {
+                            Log.e("Exclusion Activite ",activity.getValue());
+                        }
                     }
                 }
 
                 //enregistrer list categories
                 if (current.getListCategories() != null) {
                     for (Category category : current.getListCategories()) {
-                        category.setValue(category.getValue().substring(0,2).equalsIgnoreCase("- ") ? category.getValue().replace("- ","") : category.getValue());
-                        List<EntryCategoryEntity> list = entryCategoryEntityDao.queryRaw("where value = ?", category.getValue());
-                        JoinEntryEntityWithEntryCategoryEntity join = new JoinEntryEntityWithEntryCategoryEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryCategoryEntityId(list.get(0).getId());
-                        } else {
-                            EntryCategoryEntity entryCategoryEntity = new EntryCategoryEntity();
-                            entryCategoryEntity.setValue(category.getValue());
-                            entryCategoryEntity.setId(entryCategoryEntityDao.insert(entryCategoryEntity));
-                            join.setEntryCategoryEntityId(entryCategoryEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEntryCategorie exclusion : ExclusionEntryCategorie.values()) {
+                            if (category.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEntryEntityWithEntryCategoryEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            for (FusionEntryCategorie fusion : FusionEntryCategorie.values()){
+                                if (fusion.toBis().equalsIgnoreCase(category.getValue())){
+                                    category.setValue(fusion.toString());
+                                }
+                            }
+                            category.setValue(category.getValue().substring(0, 2).equalsIgnoreCase("- ") ? category.getValue().replace("- ", "") : category.getValue());
+                            List<EntryCategoryEntity> list = entryCategoryEntityDao.queryRaw("where value = ?", category.getValue());
+                            List<JoinEntryEntityWithEntryCategoryEntity> listJoin = new ArrayList<>();
+                            if (list.size() > 0) {
+                                listJoin = joinEntryEntityWithEntryCategoryEntityDao.queryRaw("where entry_entity_id = ? and entry_category_entity_id = ?", entryToSave.getId().toString(), list.get(0).getId().toString());
+                            }
+                            if (listJoin.size() == 0) {
+                                JoinEntryEntityWithEntryCategoryEntity join = new JoinEntryEntityWithEntryCategoryEntity();
+                                join.setEntryEntityId(entryToSave.getId());
+                                if (list.size() > 0) {
+                                    join.setEntryCategoryEntityId(list.get(0).getId());
+                                } else {
+                                    EntryCategoryEntity entryCategoryEntity = new EntryCategoryEntity();
+                                    entryCategoryEntity.setValue(category.getValue());
+                                    entryCategoryEntity.setId(entryCategoryEntityDao.insert(entryCategoryEntity));
+                                    join.setEntryCategoryEntityId(entryCategoryEntity.getId());
+                                }
+                                joinEntryEntityWithEntryCategoryEntityDao.insert(join);
+                            }
+                        } else {
+                            Log.e("Exclusion Categorie ",category.getValue());
+                        }
                     }
                 }
 
@@ -1221,18 +1297,26 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 //enregistrer list services
                 if (current.getListServices() != null) {
                     for (Service service : current.getListServices()) {
-                        List<EntryServiceEntity> list = entryServiceEntityDao.queryRaw("where value = ?", service.getValue());
-                        JoinEntryEntityWithEntryServiceEntity join = new JoinEntryEntityWithEntryServiceEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryServiceEntityId(list.get(0).getId());
-                        } else {
-                            EntryServiceEntity entryServiceEntity = new EntryServiceEntity();
-                            entryServiceEntity.setValue(service.getValue());
-                            entryServiceEntity.setId(entryServiceEntityDao.insert(entryServiceEntity));
-                            join.setEntryServiceEntityId(entryServiceEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEntryService exclusion : ExclusionEntryService.values()) {
+                            if (service.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEntryEntityWithEntryServiceEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            List<EntryServiceEntity> list = entryServiceEntityDao.queryRaw("where value = ?", service.getValue());
+                            JoinEntryEntityWithEntryServiceEntity join = new JoinEntryEntityWithEntryServiceEntity();
+                            join.setEntryEntityId(entryToSave.getId());
+                            if (list.size() > 0) {
+                                join.setEntryServiceEntityId(list.get(0).getId());
+                            } else {
+                                EntryServiceEntity entryServiceEntity = new EntryServiceEntity();
+                                entryServiceEntity.setValue(service.getValue());
+                                entryServiceEntity.setId(entryServiceEntityDao.insert(entryServiceEntity));
+                                join.setEntryServiceEntityId(entryServiceEntity.getId());
+                            }
+                            joinEntryEntityWithEntryServiceEntityDao.insert(join);
+                        }
                     }
                 }
 
@@ -2232,7 +2316,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         }
 
         protected void onPostExecute(Void result) {
-            itemEntryFiltre.setVisible(false);
+            //itemEntryFiltre.setVisible(false);
 
             progressBar.setVisibility(View.GONE);
             configureRecyclerViewEntry();
@@ -2260,13 +2344,13 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             decocherToutTypeEntry();
             decocherToutEntry();
             listEntryEntities.clear();
-            listEntryEntities.addAll(listEntryEntitiesBasique);
+            listEntryEntities.addAll(listEntryEntityType);
 
             return null;
         }
 
         protected void onPostExecute(Void result) {
-            itemEntryFiltre.setVisible(false);
+            //itemEntryFiltre.setVisible(false);
             progressBar.setVisibility(View.GONE);
             configureRecyclerViewEntry();
         }
@@ -3133,18 +3217,37 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 //enregistrer list Categories
                 if (current.getListCategories() != null) {
                     for (com.pouillcorp.sortirnice.modelevents.Category category : current.getListCategories()) {
-                        List<EvenementCategoryEntity> list = evenementCategoryEntityDao.queryRaw("where value = ?", category.getValue());
-                        JoinEvenementEntityWithEvenementCategoryEntity join = new JoinEvenementEntityWithEvenementCategoryEntity();
-                        join.setEvenementEntityId(evenementToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEvenementCategoryEntityId(list.get(0).getId());
-                        } else {
-                            EvenementCategoryEntity evenementCategoryEntity = new EvenementCategoryEntity();
-                            evenementCategoryEntity.setValue(category.getValue());
-                            evenementCategoryEntity.setId(evenementCategoryEntityDao.insert(evenementCategoryEntity));
-                            join.setEvenementCategoryEntityId(evenementCategoryEntity.getId());
+                        boolean aIgnorer = false;
+                        for (ExclusionEventCategorie exclusion : ExclusionEventCategorie.values()) {
+                            if (category.getValue().equalsIgnoreCase(exclusion.toString())){
+                                aIgnorer = true;
+                            }
                         }
-                        joinEvenementEntityWithEvenementCategoryEntityDao.insert(join);
+                        if (!aIgnorer) {
+                            for (FusionEventCategorie fusion : FusionEventCategorie.values()){
+                                if (fusion.toBis().equalsIgnoreCase(category.getValue())){
+                                    category.setValue(fusion.toString());
+                                }
+                            }
+                            List<EvenementCategoryEntity> list = evenementCategoryEntityDao.queryRaw("where value = ?", category.getValue());
+                            List<JoinEvenementEntityWithEvenementCategoryEntity> listJoin = new ArrayList<>();
+                            if (list.size() > 0) {
+                                listJoin = joinEvenementEntityWithEvenementCategoryEntityDao.queryRaw("where evenement_entity_id = ? and evenement_category_entity_id = ?", evenementToSave.getId().toString(), list.get(0).getId().toString());
+                            }
+                            if (listJoin.size() == 0) {
+                                JoinEvenementEntityWithEvenementCategoryEntity join = new JoinEvenementEntityWithEvenementCategoryEntity();
+                                join.setEvenementEntityId(evenementToSave.getId());
+                                if (list.size() > 0) {
+                                    join.setEvenementCategoryEntityId(list.get(0).getId());
+                                } else {
+                                    EvenementCategoryEntity evenementCategoryEntity = new EvenementCategoryEntity();
+                                    evenementCategoryEntity.setValue(category.getValue());
+                                    evenementCategoryEntity.setId(evenementCategoryEntityDao.insert(evenementCategoryEntity));
+                                    join.setEvenementCategoryEntityId(evenementCategoryEntity.getId());
+                                }
+                                joinEvenementEntityWithEvenementCategoryEntityDao.insert(join);
+                            }
+                        }
                     }
                 }
                 //enregistrer list Options
@@ -3304,7 +3407,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     @OnClick(R.id.fabEvenementValiderFiltre)
     protected void fabEvenementFiltreClick() {
         reinitListeEvents();
-        layoutFragmentEvenementFiltre.setVisibility(View.GONE);
+        masquerFragmentFiltreEvent();
         listEvenementEntityFiltre = new ArrayList<>();
         listEvenementEntityFiltre.addAll(listEventEntities);
         boolean boolEvenementCategory = verifFiltreActif(listFiltreEvenementCategory);
@@ -3361,7 +3464,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     @OnClick(R.id.fabEvenementRazFiltre)
     protected void fabEvenementRazFiltreClick() {
         decocherTout();
-        layoutFragmentEvenementFiltre.setVisibility(View.GONE);
+        masquerFragmentFiltreEvent();
         listEventEntities.clear();
         listEventEntities.addAll(listEventEntitiesBasique);
         triSelonParametre(listEventEntities);

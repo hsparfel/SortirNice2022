@@ -65,6 +65,8 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         itemEvenementFiltre.setVisible(true);
         itemEvenementTri = menuItems.findItem(R.id.menu_activity_main_evenement_tri);
         itemEvenementTri.setVisible(true);
+        itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+        itemEntryType.setVisible(false);
         return true;
     }
 

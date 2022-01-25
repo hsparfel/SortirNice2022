@@ -75,40 +75,41 @@ public class RecyclerViewHolderEntries extends RecyclerView.ViewHolder implement
 
         String category = "";
         int i = 1;
-        int w = 0;
-        for (EntryCategoryEntity current : entry.getListCategories()) {
-            if (current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
+        //int w = 0;
+    //    for (EntryCategoryEntity current : entry.getListCategories()) {
+            /*if (current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
             || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
             || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))
                     || current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sans_categorie))
-            ) {
-                w++;
-            }
-        }
+            ) {*/
+             //   w++;
+         //   }
+       // }
         for (EntryCategoryEntity current : entry.getListCategories()) {
-            if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
+            /*if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sortir_a_nice))
                     && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.toute_boutique))
                     && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.infos_pratiques))
                     && !current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.sans_categorie))
-            ) {
+            ) {*/
                 category += current.getValue();
-                if (i < entry.getListCategories().size()-w) {
+                //if (i < entry.getListCategories().size()-w) {
+                    if (i < entry.getListCategories().size()) {
                     category += " / ";
                 }
                 i++;
-            }
+           // }
 
         }
         String location = "";
         if (entry.getListLocations() != null) {
             int j = 1;
             for (EntryLocationEntity current : entry.getListLocations()) {
-                if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
+                //if (!current.getValue().equalsIgnoreCase(App.getRes().getString(R.string.metropole))) {
                     location += current.getValue();
                     if (j < entry.getListLocations().size()) {
                         location += " / ";
                     }
-                }
+                //}
                 j++;
             }
         }

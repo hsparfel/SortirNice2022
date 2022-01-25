@@ -21,6 +21,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
+        DateMajDao.createTable(db, ifNotExists);
         EntryActivityEntityDao.createTable(db, ifNotExists);
         EntryAddressEntityDao.createTable(db, ifNotExists);
         EntryAffiliationEntityDao.createTable(db, ifNotExists);
@@ -124,6 +125,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
+        DateMajDao.dropTable(db, ifExists);
         EntryActivityEntityDao.dropTable(db, ifExists);
         EntryAddressEntityDao.dropTable(db, ifExists);
         EntryAffiliationEntityDao.dropTable(db, ifExists);
@@ -241,6 +243,7 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(DateMajDao.class);
         registerDaoClass(EntryActivityEntityDao.class);
         registerDaoClass(EntryAddressEntityDao.class);
         registerDaoClass(EntryAffiliationEntityDao.class);
