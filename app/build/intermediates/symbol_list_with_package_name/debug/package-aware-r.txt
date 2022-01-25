@@ -2857,6 +2857,7 @@ string type
 string typeTitre
 string ville
 string visites
+string wait
 string website
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

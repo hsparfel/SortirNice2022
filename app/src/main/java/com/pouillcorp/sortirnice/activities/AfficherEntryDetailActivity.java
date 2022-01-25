@@ -631,7 +631,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         }
         if (entryTransmis.getListClosures() != null){
             for (EntryClosureEntity closures : entryTransmis.getListClosures()){
-                if (closures.getDate() == null && closures.getClosureSpan() == null && closures.getClosureSpan() == null) {
+                if (closures.getDate() == null && closures.getClosureSpan() == null && closures.getClosureDay() == null) {
                     closure.setVisibility(View.GONE);
                 } else {
                     closure.setVisibility(View.VISIBLE);
@@ -718,7 +718,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         sleepsCount.setText("Nb Couchage: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getSleepsCount() : null));
         furnishedRoomCount.setText("Nb Chambre Meuble: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getFurnishedRoomCount() : null));
 
-
         String standingString = "";
         if (entryTransmis.getListStandingLevels()!=null) {
             int i = 1;
@@ -770,7 +769,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
             }
         }
         couchage.setText(couchageString);
-
 
         nameFr.setText(entryTransmis.getNameFr());
         addressLine1.setText(entryTransmis.getAddress() != null ? entryTransmis.getAddress().getAddressLine1() : null);
@@ -852,8 +850,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         if (entryTransmis.getListClosures()!=null) {
             int i = 1;
             for (EntryClosureEntity closure : entryTransmis.getListClosures()) {
-                //if (closures.getListClosure() != null) {
-                    //for (Closure current : closures.getListClosure()) {
                         if (closure.getClosureDay() != null && closure.getClosureSpan() != null) {
                             closureString += closure.getClosureDay() + " - " + closure.getClosureSpan();
                         } else if (closure.getDate()!=null){
@@ -863,8 +859,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
                             closureString += newLine;
                         }
                         i++;
-                   // }
-               // }
             }
         }
         closure.setText(closureString);
@@ -1020,7 +1014,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         fabFavoriAdd.setVisibility(View.GONE);
         fabFavoriSuppr.setVisibility(View.VISIBLE);
         changerCouleur();
-        Log.e("TAG", "Add Favori : "+entryTransmis.getNameFr());
     }
 
     public void favoriDelete(View view) {
@@ -1029,7 +1022,6 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         fabFavoriAdd.setVisibility(View.VISIBLE);
         fabFavoriSuppr.setVisibility(View.GONE);
         changerCouleur();
-        Log.e("TAG", "Suppr Favori : "+entryTransmis.getNameFr());
     }
 
     public void launchGoogleMap(View view) {

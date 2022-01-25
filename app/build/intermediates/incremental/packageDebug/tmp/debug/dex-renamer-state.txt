@@ -1,4 +1,4 @@
-#Mon Jan 24 10:26:12 CET 2022
+#Tue Jan 25 10:56:07 CET 2022
 base.0=C\:\\Users\\TNH\\AndroidStudioProjects\\SortirNice2022\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

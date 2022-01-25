@@ -46,7 +46,6 @@ import icepick.Icepick;
 public class AfficherEvenementDetailActivity extends NavDrawerActivity {
 
     EvenementEntity eventTransmis;
-    //EventSauvegardeEntity eventSauvegardeTransmis;
 
     @BindView(R.id.image)
     ImageView image;
@@ -383,7 +382,6 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
         fabFavoriAdd.setVisibility(View.GONE);
         fabFavoriSuppr.setVisibility(View.VISIBLE);
         changerCouleur();
-        Log.e("TAG", "Add Favori : "+eventTransmis.getNameFr());
     }
 
     public void favoriDelete(View view) {
@@ -392,7 +390,6 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
         fabFavoriAdd.setVisibility(View.VISIBLE);
         fabFavoriSuppr.setVisibility(View.GONE);
         changerCouleur();
-        Log.e("TAG", "Suppr Favori : "+eventTransmis.getNameFr());
     }
 
     public void launchGoogleMap(View view) {

@@ -25,10 +25,10 @@
     <string name="couchage">Couchage</string>
     <string name="stations">Station</string>
     <string name="pratique">Pratique</string>
-    <string name="animation">Animation</string>
+    <string name="animation">Animations</string>
     <string name="ambiance">Ambiance</string>
-    <string name="categorie">Categorie</string>
-    <string name="chaine">Chaîne</string>
+    <string name="categorie">Categories</string>
+    <string name="chaine">Chaînes Hotelières</string>
     <string name="ville">Ville</string>
     <string name="type">Type</string>
     <string name="option_famille">Option Famille</string>
@@ -37,11 +37,11 @@
     <string name="msg_entry_first_connection">Veuillez patienter le traitement peut durer 1/4h (en fonction de votre connexion)</string>
 
     <string name="location">Lieu</string>
-    <string name="activity">Activity</string>
-    <string name="atmospher">Atmospher</string>
-    <string name="furnishedRental">Furnished Rental</string>
+    <string name="activity">Activités</string>
+    <string name="atmospher">Ambiances</string>
+    <string name="furnishedRental">Type d\'étab</string>
     <string name="label">Label</string>
-    <string name="service">Service</string>
+    <string name="service">Cuisines</string>
     <string name="standingLevel">Standing Level</string>
     <string name="total">Total:</string>
 
@@ -79,7 +79,7 @@
     <string name="atmosphere">Atmosphere:</string>
     <string name="atmospherText">atmospher</string>
     <string name="serviceTitre">Service:</string>
-    <string name="serviceText">service</string>
+    <string name="serviceText">Cuisines</string>
     <string name="lieu">Lieu:</string>
     <string name="locationText">location</string>
     <string name="address_line1">address_line1</string>
@@ -114,7 +114,7 @@
     <string name="option">Option:</string>
     <string name="optionText">option</string>
     <string name="pratiqueTitre">Pratique:</string>
-    <string name="amenity">amenity</string>
+    <string name="amenity">Equipements</string>
     <string name="capacit">Capacité:</string>
 
     <string name="capacity_total">capacity_total</string>
@@ -145,5 +145,5 @@
     <string name="meuble">meuble</string>
     <string name="periode_locative">Periode Locative:</string>
 
-
+    <string name="wait">Patientez...</string>
 </resources>

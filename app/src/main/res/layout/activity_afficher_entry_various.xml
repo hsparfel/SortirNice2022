@@ -422,18 +422,25 @@
                         android:orientation="vertical"
                         android:visibility="gone" /> -->
 
+
+
+
+
+
+
+
                     <!-- /////////////////////////////////////////// -->
                     <Button
-                        android:id="@+id/buttonEntryFiltreActivity"
+                        android:id="@+id/buttonEntryFiltreService"
                         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreActivity"
-                        android:text="@string/activity"
+                        android:onClick="afficherListCbEntryFiltreService"
+                        android:text="@string/service"
                         app:icon="@drawable/outline_arrow_right_black_18" />
 
                     <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreActivitySelectAll"
+                        android:id="@+id/checkboxEntryFiltreServiceSelectAll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_small"
@@ -441,26 +448,25 @@
                         android:visibility="gone" />
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreActivity"
+                        android:id="@+id/linearLayoutEntryFiltreService"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_large"
                         android:gravity="left"
                         android:orientation="vertical"
                         android:visibility="gone" />
-
                     <!-- /////////////////////////////////////////// -->
                     <Button
-                        android:id="@+id/buttonEntryFiltreAmenity"
+                        android:id="@+id/buttonEntryFiltreAtmospher"
                         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreAmenity"
-                        android:text="@string/activity"
+                        android:onClick="afficherListCbEntryFiltreAtmospher"
+                        android:text="@string/atmospher"
                         app:icon="@drawable/outline_arrow_right_black_18" />
 
                     <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreAmenitySelectAll"
+                        android:id="@+id/checkboxEntryFiltreAtmospherSelectAll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_small"
@@ -468,14 +474,13 @@
                         android:visibility="gone" />
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreAmenity"
+                        android:id="@+id/linearLayoutEntryFiltreAtmospher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_large"
                         android:gravity="left"
                         android:orientation="vertical"
                         android:visibility="gone" />
-
                     <!-- /////////////////////////////////////////// -->
                     <Button
                         android:id="@+id/buttonEntryFiltreAnimation"
@@ -503,59 +508,6 @@
                         android:orientation="vertical"
                         android:visibility="gone" />
 
-                    <!-- /////////////////////////////////////////// -->
-                    <Button
-                        android:id="@+id/buttonEntryFiltreAtmospher"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreAtmospher"
-                        android:text="@string/atmospher"
-                        app:icon="@drawable/outline_arrow_right_black_18" />
-
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreAtmospherSelectAll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_small"
-                        android:text="@string/selectionner_tout"
-                        android:visibility="gone" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreAtmospher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_large"
-                        android:gravity="left"
-                        android:orientation="vertical"
-                        android:visibility="gone" />
-
-                    <!-- /////////////////////////////////////////// -->
-                    <Button
-                        android:id="@+id/buttonEntryFiltreChain"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreChain"
-                        android:text="@string/chaine"
-                        app:icon="@drawable/outline_arrow_right_black_18" />
-
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreChainSelectAll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_small"
-                        android:text="@string/selectionner_tout"
-                        android:visibility="gone" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreChain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_large"
-                        android:gravity="left"
-                        android:orientation="vertical"
-                        android:visibility="gone" />
 
 
                     <!-- /////////////////////////////////////////// -->
@@ -584,6 +536,98 @@
                         android:gravity="left"
                         android:orientation="vertical"
                         android:visibility="gone" />
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreStandingLevel"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="afficherListCbEntryFiltreStandingLevel"
+                        android:text="@string/standingLevel"
+                        app:icon="@drawable/outline_arrow_right_black_18" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreStandingLevelSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreStandingLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone" />
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreAmenity"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="afficherListCbEntryFiltreAmenity"
+                        android:text="@string/amenity"
+                        app:icon="@drawable/outline_arrow_right_black_18" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreAmenitySelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreAmenity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone" />
+                    <!-- /////////////////////////////////////////// -->
+                    <Button
+                        android:id="@+id/buttonEntryFiltreChain"
+                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="afficherListCbEntryFiltreChain"
+                        android:text="@string/chaine"
+                        app:icon="@drawable/outline_arrow_right_black_18" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/checkboxEntryFiltreChainSelectAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_small"
+                        android:text="@string/selectionner_tout"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutEntryFiltreChain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/filtre_large"
+                        android:gravity="left"
+                        android:orientation="vertical"
+                        android:visibility="gone" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- ///////////////////// EN DERNIER ////////////////////// -->
 
                     <!-- /////////////////////////////////////////// -->
                     <Button
@@ -611,19 +655,17 @@
                         android:gravity="left"
                         android:orientation="vertical"
                         android:visibility="gone" />
-
-                    <!-- /////////////////////////////////////////// -->
                     <Button
-                        android:id="@+id/buttonEntryFiltreService"
+                        android:id="@+id/buttonEntryFiltreActivity"
                         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreService"
-                        android:text="@string/service"
+                        android:onClick="afficherListCbEntryFiltreActivity"
+                        android:text="@string/activity"
                         app:icon="@drawable/outline_arrow_right_black_18" />
 
                     <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreServiceSelectAll"
+                        android:id="@+id/checkboxEntryFiltreActivitySelectAll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_small"
@@ -631,34 +673,7 @@
                         android:visibility="gone" />
 
                     <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreService"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_large"
-                        android:gravity="left"
-                        android:orientation="vertical"
-                        android:visibility="gone" />
-
-                    <!-- /////////////////////////////////////////// -->
-                    <Button
-                        android:id="@+id/buttonEntryFiltreStandingLevel"
-                        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="afficherListCbEntryFiltreStandingLevel"
-                        android:text="@string/standingLevel"
-                        app:icon="@drawable/outline_arrow_right_black_18" />
-
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:id="@+id/checkboxEntryFiltreStandingLevelSelectAll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/filtre_small"
-                        android:text="@string/selectionner_tout"
-                        android:visibility="gone" />
-
-                    <LinearLayout
-                        android:id="@+id/linearLayoutEntryFiltreStandingLevel"
+                        android:id="@+id/linearLayoutEntryFiltreActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/filtre_large"

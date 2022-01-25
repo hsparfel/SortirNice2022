@@ -2856,7 +2856,8 @@ int string type 0x7f0f00ef
 int string typeTitre 0x7f0f00f0
 int string ville 0x7f0f00f1
 int string visites 0x7f0f00f2
-int string website 0x7f0f00f3
+int string wait 0x7f0f00f3
+int string website 0x7f0f00f4
 int style AlertDialog_AppCompat 0x7f100000
 int style AlertDialog_AppCompat_Light 0x7f100001
 int style AndroidThemeColorAccentYellow 0x7f100002

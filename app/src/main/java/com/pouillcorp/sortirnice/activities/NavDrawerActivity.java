@@ -32,10 +32,11 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.radiobutton.MaterialRadioButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.pouillcorp.sortirnice.App;
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.dao.*;
-
 import com.pouillcorp.sortirnice.email.SendEmailService;
 import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.DetailEntryEntitySimple;
@@ -61,7 +62,6 @@ import com.pouillcorp.sortirnice.entities.entry.detail.EntryFrpOptionEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryFurnishedRentalEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryGridEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryGroupOptionEntity;
-import com.pouillcorp.sortirnice.entities.entry.detail.EntryImageEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryLabelEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryLanguageEntity;
 import com.pouillcorp.sortirnice.entities.entry.detail.EntryLivingEntity;
@@ -98,7 +98,6 @@ import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryFam
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryFrpOptionEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryFurnishedRentalEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryGroupOptionEntity;
-import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryImageEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryLabelEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryLanguageEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryLocationEntity;
@@ -115,7 +114,26 @@ import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntrySta
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryStationEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryEntityWithEntryTariffEntity;
 import com.pouillcorp.sortirnice.entities.entry.join.JoinEntryOpeningEntityWithEntryGridEntity;
+import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.DetailEvenementEntitySimple;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementAddressEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementCategoryEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementDescriptionEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementOptionEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementProfileEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementRefEntriesEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementSectoEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementStationEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementAddressEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementCategoryEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementDescriptionEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementOptionEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementProfileEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementRefEntriesEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementSectoEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementStationEntity;
 import com.pouillcorp.sortirnice.enumeration.EntriesType;
+import com.pouillcorp.sortirnice.enumeration.EvenementTri;
 import com.pouillcorp.sortirnice.modelentries.Activity;
 import com.pouillcorp.sortirnice.modelentries.Affiliation;
 import com.pouillcorp.sortirnice.modelentries.AllianceOption;
@@ -138,7 +156,6 @@ import com.pouillcorp.sortirnice.modelentries.FrpOption;
 import com.pouillcorp.sortirnice.modelentries.FurnishedRental;
 import com.pouillcorp.sortirnice.modelentries.Grid;
 import com.pouillcorp.sortirnice.modelentries.GroupOption;
-import com.pouillcorp.sortirnice.modelentries.Image;
 import com.pouillcorp.sortirnice.modelentries.Label;
 import com.pouillcorp.sortirnice.modelentries.Language;
 import com.pouillcorp.sortirnice.modelentries.Location;
@@ -154,7 +171,13 @@ import com.pouillcorp.sortirnice.modelentries.Space;
 import com.pouillcorp.sortirnice.modelentries.StandingLevel;
 import com.pouillcorp.sortirnice.modelentries.Station;
 import com.pouillcorp.sortirnice.modelentries.Tariff;
+import com.pouillcorp.sortirnice.modelevents.Address;
+import com.pouillcorp.sortirnice.modelevents.Event;
+import com.pouillcorp.sortirnice.modelevents.Image;
+import com.pouillcorp.sortirnice.modelevents.RefEntries;
+import com.pouillcorp.sortirnice.modelevents.Secto;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEntries;
+import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEvenements;
 import com.pouillcorp.sortirnice.utils.ItemClickSupport;
 
 import org.greenrobot.greendao.database.Database;
@@ -173,7 +196,7 @@ import icepick.Icepick;
 import retrofit2.Retrofit;
 
 public class NavDrawerActivity<T> extends AppCompatActivity {
-    //FOR DESIGN
+
     protected Toolbar toolbar;
     protected DrawerLayout drawerLayout;
     protected BottomNavigationView bottomNavigationView;
@@ -286,9 +309,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected JoinEvenementEntityWithEvenementSectoEntityDao joinEvenementEntityWithEvenementSectoEntityDao;
     protected JoinEvenementEntityWithEvenementCategoryEntityDao joinEvenementEntityWithEvenementCategoryEntityDao;
 
-
-
-
     //Entry
     protected int nbEntries;
     protected List<Entry> listEntries;
@@ -297,8 +317,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
     protected String dateDemandeString;
     protected Date dateDemande;
-
-
 
     protected static Retrofit retrofit = null;
     protected final static String API_KEY = "dae3988a-a667-40a6-a74c-42df34b5aff9";
@@ -526,11 +544,70 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     @BindView(R.id.checkboxEntryTypeRestaurant)
     MaterialCheckBox checkboxEntryTypeRestaurant;
 
+    //Evenement
+    protected int nbEvents;
+    protected List<Event> listEvents;
+    protected List<EvenementEntity> listEventEntities = new ArrayList<>();
+    protected List<EvenementEntity> listEventEntitiesBasique = new ArrayList<>();
 
+    @Nullable
+    @BindView(R.id.list_recycler_event)
+    RecyclerView list_recycler_event;
+    @Nullable
+    @BindView(R.id.layout_fragment_evenement_tri)
+    FrameLayout layoutFragmentEvenementTri;
+    @Nullable
+    @BindView(R.id.radio_button_evenement_tri_nom)
+    MaterialRadioButton rbEvenementTriNom;
+    @Nullable
+    @BindView(R.id.radio_button_evenement_tri_date)
+    MaterialRadioButton rbEvenementTridDate;
+    @Nullable
+    @BindView(R.id.layout_fragment_evenement_filtre)
+    FrameLayout layoutFragmentEvenementFiltre;
 
+    protected  RecyclerAdapterEvenements adapterEvents;
 
+    protected boolean layoutTriAffiche;
 
-    /////////////////////////////
+    protected EvenementTri triEnCours = EvenementTri.Nom;
+
+    protected List<EvenementAddressEntity> listFiltreEvenementAdresse = new ArrayList<>();
+    protected List<EvenementCategoryEntity> listFiltreEvenementCategory = new ArrayList<>();
+
+    @Nullable
+    @BindView(R.id.fabEvenementValiderFiltre)
+    FloatingActionButton fabEvenementValiderFiltre;
+    @Nullable
+    @BindView(R.id.fabEvenementRazFiltre)
+    FloatingActionButton fabEvenementRazFiltre;
+
+    @Nullable
+    @BindView(R.id.linearLayoutEvenementFiltreCategory)
+    LinearLayout linearLayoutEvenementFiltreCategory;
+    @Nullable
+    @BindView(R.id.checkboxEvenementFiltreCategorySelectAll)
+    MaterialCheckBox checkboxEvenementFiltreCategorySelectAll;
+    @Nullable
+    @BindView(R.id.linearLayoutEvenementFiltreVille)
+    LinearLayout linearLayoutEvenementFiltreVille;
+    @Nullable
+    @BindView(R.id.checkboxEvenementFiltreVilleSelectAll)
+    MaterialCheckBox checkboxEvenementFiltreVilleSelectAll;
+    @Nullable
+    @BindView(R.id.buttonEvenementFiltreCategory)
+    MaterialButton buttonEvenementFiltreCategory;
+    @Nullable
+    @BindView(R.id.buttonEvenementFiltreVille)
+    MaterialButton buttonEvenementFiltreVille;
+
+    protected boolean filtreVilleDeplie = false;
+
+    protected List<MaterialCheckBox> listCheckboxEvenementCategory = new ArrayList<>();
+    protected List<MaterialCheckBox> listCheckboxEvenementVille = new ArrayList<>();
+
+    protected List<EvenementEntity> listEvenementEntityFiltre = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -644,7 +721,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         menuItems = menu;
-        //Log.e("verif menuItem0", "menuItem : "+menuItems);
         return true;
     }
 
@@ -1306,24 +1382,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     }
                 }
 
-                //enregistrer list images
-                /*if (current.getListImages() != null) {
-                    for (Image image : current.getListImages()) {
-                        List<EntryImageEntity> list = entryImageEntityDao.queryRaw("where url = ?", image.getUrl());
-                        JoinEntryEntityWithEntryImageEntity join = new JoinEntryEntityWithEntryImageEntity();
-                        join.setEntryEntityId(entryToSave.getId());
-                        if (list.size() > 0) {
-                            join.setEntryImageEntityId(list.get(0).getId());
-                        } else {
-                            EntryImageEntity entryImageEntity = new EntryImageEntity();
-                            entryImageEntity.setUrl(image.getUrl());
-                            entryImageEntity.setId(entryImageEntityDao.insert(entryImageEntity));
-                            join.setEntryImageEntityId(entryImageEntity.getId());
-                        }
-                        joinEntryEntityWithEntryImageEntityDao.insert(join);
-                    }
-                }*/
-
                 //enregistrer list contacts
                 if (current.getListTariffs() != null) {
                     for (Tariff tariff : current.getListTariffs()) {
@@ -1562,10 +1620,8 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 }
 
                 listEntryEntities.add(entryToSave);
-                Log.e("TAG", "Ajout : " + entryToSave.getNameFr());
             } else {
                 listEntryEntities.add(listEntriesFound.get(0));
-                //Log.e("TAG", "Recup : " + listEntriesFound.get(0).getNameFr());
             }
         }
         return listEntryEntities;
@@ -1590,13 +1646,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //todo gerer la mise à jour
-                        Log.e("TAG", "click MAJ");
                     }
                 })
                 .setNegativeButton("Non Merci", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.e("TAG", "click Non Merci");
                         ouvrirActiviteSuivante(App.getInstance(), AccueilActivity.class, true);
                     }
                 })
@@ -1608,15 +1662,14 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         afficherMessageErreur();
     }
 
-
-
+    //Entry
     protected void loadAllEntryFromDB() {
         entryEntityDao.detachAll();
         listEntryEntities = entryEntityDao.loadAll();
         Collections.sort(listEntryEntities);
     }
 
-    protected void masquerFragmentFiltre() {
+    protected void masquerFragmentFiltreEntry() {
         layoutFragmentEntryFiltre.setVisibility(View.GONE);
         layoutFiltreAffiche = false;
     }
@@ -1861,296 +1914,369 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         positionScroll = position;
                         ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEntryDetailActivity.class, "entryId", listEntryEntities.get(position).getId(), false);
-                        Log.e("TAG", "Position : " + position);
                     }
                 });
+    }
+
+    private class AsyncTaskRunnerClickValidFiltre extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            masquerFragmentFiltreEntry();
+        }
+
+        protected Void doInBackground(Void... voids) {
+            reinitListeEntries();
+            listEntryEntityFiltre = new ArrayList<>();
+            listEntryEntityFiltre.addAll(listEntryEntities);
+            boolean boolEntryCategory = verifFiltreEntryActif(listFiltreEntryCategory);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryCategory && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryCategoryEntity filtre : listFiltreEntryCategory) {
+                        if (filtre.isChecked() && current.getListCategories() != null) {
+                            for (EntryCategoryEntity current2 : current.getListCategories()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryLocation = verifFiltreEntryActif(listFiltreEntryLocation);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryLocation && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryLocationEntity filtre : listFiltreEntryLocation) {
+                        if (filtre.isChecked() && current.getListLocations() != null) {
+                            for (EntryLocationEntity current2 : current.getListLocations()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryActivity = verifFiltreEntryActif(listFiltreEntryActivity);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryActivity && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryActivityEntity filtre : listFiltreEntryActivity) {
+                        if (filtre.isChecked() && current.getListActivities() != null) {
+                            for (EntryActivityEntity current2 : current.getListActivities()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryAmenity = verifFiltreEntryActif(listFiltreEntryAmenity);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryAmenity && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryAmenityEntity filtre : listFiltreEntryAmenity) {
+                        if (filtre.isChecked() && current.getListAmenities() != null) {
+                            for (EntryAmenityEntity current2 : current.getListAmenities()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryAnimation = verifFiltreEntryActif(listFiltreEntryAnimation);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryAnimation && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryAnimationEntity filtre : listFiltreEntryAnimation) {
+                        if (filtre.isChecked() && current.getListAnimations() != null) {
+                            for (EntryAnimationEntity current2 : current.getListAnimations()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryAtmospher = verifFiltreEntryActif(listFiltreEntryAtmospher);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryAtmospher && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryAtmospherEntity filtre : listFiltreEntryAtmospher) {
+                        if (filtre.isChecked() && current.getListAtmosphere() != null) {
+                            for (EntryAtmospherEntity current2 : current.getListAtmosphere()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryChain = verifFiltreEntryActif(listFiltreEntryChain);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryChain && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryChainEntity filtre : listFiltreEntryChain) {
+                        if (filtre.isChecked() && current.getListChains() != null) {
+                            for (EntryChainEntity current2 : current.getListChains()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryFurnishedRental = verifFiltreEntryActif(listFiltreEntryFurnishedRental);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryFurnishedRental && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryFurnishedRentalEntity filtre : listFiltreEntryFurnishedRental) {
+                        if (filtre.isChecked() && current.getListFurnishedRentals() != null) {
+                            for (EntryFurnishedRentalEntity current2 : current.getListFurnishedRentals()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryLabel = verifFiltreEntryActif(listFiltreEntryLabel);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryLabel && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryLabelEntity filtre : listFiltreEntryLabel) {
+                        if (filtre.isChecked() && current.getListLabels() != null) {
+                            for (EntryLabelEntity current2 : current.getListLabels()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryService = verifFiltreEntryActif(listFiltreEntryService);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryService && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryServiceEntity filtre : listFiltreEntryService) {
+                        if (filtre.isChecked() && current.getListServices() != null) {
+                            for (EntryServiceEntity current2 : current.getListServices()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+
+            boolean boolEntryStandingLevel = verifFiltreEntryActif(listFiltreEntryStandingLevel);
+            for (EntryEntity current : listEntryEntities) {
+                if (boolEntryStandingLevel && listEntryEntityFiltre.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryStandingLevelEntity filtre : listFiltreEntryStandingLevel) {
+                        if (filtre.isChecked() && current.getListStandingLevels() != null) {
+                            for (EntryStandingLevelEntity current2 : current.getListStandingLevels()) {
+                                if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                    isFiltered = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isFiltered) {
+                        listEntryEntityFiltre.remove(current);
+                    }
+                }
+            }
+            listEntryEntities.clear();
+            listEntryEntities.addAll(listEntryEntityFiltre);
+
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+
+            progressBar.setVisibility(View.GONE);
+            configureRecyclerViewEntry();
+        }
     }
 
     @Optional
     @OnClick(R.id.fabEntryValiderFiltre)
     protected void fabEntryFiltreClick() {
-        progressBar.setVisibility(View.VISIBLE);
-        reinitListeEntries();
-        masquerFragmentFiltre();
-        listEntryEntityFiltre = new ArrayList<>();
-        listEntryEntityFiltre.addAll(listEntryEntities);
-        boolean boolEntryCategory = verifFiltreEntryActif(listFiltreEntryCategory);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryCategory && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryCategoryEntity filtre : listFiltreEntryCategory) {
-                    if (filtre.isChecked() && current.getListCategories() != null) {
-                        for (EntryCategoryEntity current2 : current.getListCategories()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
+        AsyncTaskRunnerClickValidFiltre runner = new AsyncTaskRunnerClickValidFiltre();
+        runner.execute();
+    }
+
+    private class AsyncTaskRunnerClickValidType extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            masquerFragmentType();
         }
 
-        boolean boolEntryLocation = verifFiltreEntryActif(listFiltreEntryLocation);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryLocation && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryLocationEntity filtre : listFiltreEntryLocation) {
-                    if (filtre.isChecked() && current.getListLocations() != null) {
-                        for (EntryLocationEntity current2 : current.getListLocations()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+        protected Void doInBackground(Void... voids) {
+            reinitListeEntries();
+            listEntryEntityType = new ArrayList<>();
+            listEntryEntityType.addAll(listEntryEntities);
+            for (EntryEntity current : listEntryEntities) {
+                if (listEntryEntityType.contains(current)) {
+                    boolean isFiltered = false;
+                    for (EntryTypeEntity filtre : listEntryType) {
+                        if (filtre.isChecked()) {
+                            if (current.getEntryType().toString().equalsIgnoreCase(filtre.getValue())) {
                                 isFiltered = true;
                             }
                         }
                     }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
+                    if (!isFiltered) {
+                        listEntryEntityType.remove(current);
+                    }
                 }
             }
+            listEntryEntities.clear();
+            listEntryEntities.addAll(listEntryEntityType);
+            listerFiltreReelEntry();
+            initListFiltresEntry();
+            initCheckboxesSelectAllClickEntry();
+
+            return null;
         }
 
-        boolean boolEntryActivity = verifFiltreEntryActif(listFiltreEntryActivity);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryActivity && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryActivityEntity filtre : listFiltreEntryActivity) {
-                    if (filtre.isChecked() && current.getListActivities() != null) {
-                        for (EntryActivityEntity current2 : current.getListActivities()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
+        protected void onPostExecute(Void result) {
+            itemEntryFiltre.setVisible(true);
 
-        boolean boolEntryAmenity = verifFiltreEntryActif(listFiltreEntryAmenity);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryAmenity && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryAmenityEntity filtre : listFiltreEntryAmenity) {
-                    if (filtre.isChecked() && current.getListAmenities() != null) {
-                        for (EntryAmenityEntity current2 : current.getListAmenities()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
+            afficherOuMasquerTousBoutonsEntryFiltre();
 
-        boolean boolEntryAnimation = verifFiltreEntryActif(listFiltreEntryAnimation);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryAnimation && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryAnimationEntity filtre : listFiltreEntryAnimation) {
-                    if (filtre.isChecked() && current.getListAnimations() != null) {
-                        for (EntryAnimationEntity current2 : current.getListAnimations()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
 
-        boolean boolEntryAtmospher = verifFiltreEntryActif(listFiltreEntryAtmospher);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryAtmospher && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryAtmospherEntity filtre : listFiltreEntryAtmospher) {
-                    if (filtre.isChecked() && current.getListAtmosphere() != null) {
-                        for (EntryAtmospherEntity current2 : current.getListAtmosphere()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
+            progressBar.setVisibility(View.GONE);
+            configureRecyclerViewEntry();
         }
-
-        boolean boolEntryChain = verifFiltreEntryActif(listFiltreEntryChain);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryChain && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryChainEntity filtre : listFiltreEntryChain) {
-                    if (filtre.isChecked() && current.getListChains() != null) {
-                        for (EntryChainEntity current2 : current.getListChains()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
-
-        boolean boolEntryFurnishedRental = verifFiltreEntryActif(listFiltreEntryFurnishedRental);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryFurnishedRental && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryFurnishedRentalEntity filtre : listFiltreEntryFurnishedRental) {
-                    if (filtre.isChecked() && current.getListFurnishedRentals() != null) {
-                        for (EntryFurnishedRentalEntity current2 : current.getListFurnishedRentals()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
-
-        boolean boolEntryLabel = verifFiltreEntryActif(listFiltreEntryLabel);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryLabel && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryLabelEntity filtre : listFiltreEntryLabel) {
-                    if (filtre.isChecked() && current.getListLabels() != null) {
-                        for (EntryLabelEntity current2 : current.getListLabels()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
-
-        boolean boolEntryService = verifFiltreEntryActif(listFiltreEntryService);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryService && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryServiceEntity filtre : listFiltreEntryService) {
-                    if (filtre.isChecked() && current.getListServices() != null) {
-                        for (EntryServiceEntity current2 : current.getListServices()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
-
-        boolean boolEntryStandingLevel = verifFiltreEntryActif(listFiltreEntryStandingLevel);
-        for (EntryEntity current : listEntryEntities) {
-            if (boolEntryStandingLevel && listEntryEntityFiltre.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryStandingLevelEntity filtre : listFiltreEntryStandingLevel) {
-                    if (filtre.isChecked() && current.getListStandingLevels() != null) {
-                        for (EntryStandingLevelEntity current2 : current.getListStandingLevels()) {
-                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
-                                isFiltered = true;
-                            }
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityFiltre.remove(current);
-                }
-            }
-        }
-        listEntryEntities.clear();
-        listEntryEntities.addAll(listEntryEntityFiltre);
-        configureRecyclerViewEntry();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Optional
     @OnClick(R.id.fabEntryValiderType)
     protected void fabEntryTypeClick() {
-        //   Log.e(TAG, "Time 1: " + new Date());
-        progressBar.setVisibility(View.VISIBLE);
-        masquerFragmentType();
-        reinitListeEntries();
-        listEntryEntityType = new ArrayList<>();
-        listEntryEntityType.addAll(listEntryEntities);
-        for (EntryEntity current : listEntryEntities) {
-            if (listEntryEntityType.contains(current)) {
-                boolean isFiltered = false;
-                for (EntryTypeEntity filtre : listEntryType) {
-                    if (filtre.isChecked()) {
-                        if (current.getEntryType().toString().equalsIgnoreCase(filtre.getValue())) {
-                            isFiltered = true;
-                        }
-                    }
-                }
-                if (!isFiltered) {
-                    listEntryEntityType.remove(current);
-                }
-            }
+        AsyncTaskRunnerClickValidType runner = new AsyncTaskRunnerClickValidType();
+        runner.execute();
+    }
+
+    private class AsyncTaskRunnerClickRazFiltre extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            masquerFragmentFiltreEntry();
         }
-        //   Log.e(TAG, "Time 2: " + new Date());
-        listEntryEntities.clear();
-        listEntryEntities.addAll(listEntryEntityType);
-        itemEntryFiltre.setVisible(true);
-        listerFiltreReelEntry();
-        //  Log.e(TAG, "Time 3: " + new Date());
-        afficherOuMasquerTousBoutonsEntryFiltre();
-        initListFiltresEntry();
-        //   Log.e(TAG, "Time 4: " + new Date());
-        initCheckboxesSelectAllClick();
-        configureRecyclerViewEntry();
-        //     Log.e(TAG, "Time 5: " + new Date());
-        progressBar.setVisibility(View.GONE);
+
+        protected Void doInBackground(Void... voids) {
+            decocherToutEntry();
+            listEntryEntities.clear();
+            listEntryEntities.addAll(listEntryEntityType);
+
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            itemEntryFiltre.setVisible(false);
+
+            progressBar.setVisibility(View.GONE);
+            configureRecyclerViewEntry();
+        }
     }
 
     @Optional
     @OnClick(R.id.fabEntryRazFiltre)
     protected void fabEntryRazFiltreClick() {
-        progressBar.setVisibility(View.VISIBLE);
-        decocherToutEntry();
-        masquerFragmentFiltre();
-        itemEntryFiltre.setVisible(false);
-        listEntryEntities.clear();
-        listEntryEntities.addAll(listEntryEntityType);
-        configureRecyclerViewEntry();
-        progressBar.setVisibility(View.GONE);
+        AsyncTaskRunnerClickRazFiltre runner = new AsyncTaskRunnerClickRazFiltre();
+        runner.execute();
+    }
+
+    private class AsyncTaskRunnerClickRazType extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            masquerFragmentType();
+        }
+
+        protected Void doInBackground(Void... voids) {
+
+            decocherToutTypeEntry();
+            decocherToutEntry();
+            listEntryEntities.clear();
+            listEntryEntities.addAll(listEntryEntitiesBasique);
+
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            itemEntryFiltre.setVisible(false);
+            progressBar.setVisibility(View.GONE);
+            configureRecyclerViewEntry();
+        }
     }
 
     @Optional
     @OnClick(R.id.fabEntryRazType)
     protected void fabEntryRazTypeClick() {
-        progressBar.setVisibility(View.VISIBLE);
-        decocherToutTypeEntry();
-        fabEntryRazFiltreClick();
-        masquerFragmentType();
-        listEntryEntities.clear();
-        listEntryEntities.addAll(listEntryEntitiesBasique);
-        configureRecyclerViewEntry();
-        progressBar.setVisibility(View.GONE);
+        AsyncTaskRunnerClickRazType runner = new AsyncTaskRunnerClickRazType();
+        runner.execute();
     }
 
     protected void decocherEntryFiltre(List<? extends DetailEntryEntitySimple> list) {
@@ -2225,10 +2351,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Hebergement.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2240,16 +2362,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Hotel.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Hotel.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2261,16 +2378,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Shopping.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Shopping.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2282,16 +2394,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Boutique.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Boutique.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2303,16 +2410,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Visite.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Visite.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2324,16 +2426,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Utile.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Utile.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2345,16 +2442,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Restaurant.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Restaurant.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2366,16 +2458,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Sortie.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Sortie.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2387,16 +2474,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Transport.toString()))
                             current.setChecked(true);
                     }
-
                 } else {
                     for (EntryTypeEntity current : listEntryType) {
                         if (current.getValue().equalsIgnoreCase(EntriesType.Transport.toString()))
                             current.setChecked(false);
                     }
-                    //checkboxEntryTypeHebergement.setChecked(false);
-                    /*if (!verifSiUnFiltreMinimum(list) && cb != null) {
-                        cb.setChecked(false);
-                    }*/
                 }
             }
         });
@@ -2425,44 +2507,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 }
             });
             if (ll != null) {
-
-                /*if (cb == null){
-                    LinearLayout llHorizontal = new LinearLayout(App.getInstance().getApplicationContext());
-                    llHorizontal.setOrientation(LinearLayout.HORIZONTAL);
-                    llHorizontal.addView(checkBox);
-                    ImageView imageView = new ImageView(App.getInstance().getApplicationContext());
-                    if (current.getValue().equalsIgnoreCase(EntriesType.Boutique.toString())) {
-                        imageView.setImageResource(R.drawable.outline_storefront_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Sortie.toString())) {
-                        imageView.setImageResource(R.drawable.outline_nightlife_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Utile.toString())) {
-                        imageView.setImageResource(R.drawable.outline_not_listed_location_black_18dp);
-                    } else  if (current.getValue().equalsIgnoreCase(EntriesType.Visite.toString())) {
-                        imageView.setImageResource(R.drawable.outline_castle_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Shopping.toString())) {
-                        imageView.setImageResource(R.drawable.outline_local_mall_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Hotel.toString())) {
-                        imageView.setImageResource(R.drawable.outline_hotel_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Hebergement.toString())) {
-                        imageView.setImageResource(R.drawable.outline_night_shelter_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Transport.toString())) {
-                        imageView.setImageResource(R.drawable.outline_commute_black_18dp);
-                    } else if (current.getValue().equalsIgnoreCase(EntriesType.Restaurant.toString())) {
-                        imageView.setImageResource(R.drawable.outline_restaurant_black_18dp);
-                    }
-                    /*imageView.setAdjustViewBounds(true);
-                    imageView.setMaxHeight(10);
-                    imageView.setMaxWidth(10);
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);*/
-                    /*imageView.setPadding(10,0,0,0);
-                    imageView.setBaselineAlignBottom(true);
-                    llHorizontal.addView(imageView);
-                    //llHorizontal.setVerticalGravity(View.TEXT_ALIGNMENT_CENTER);
-                    //llHorizontal.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                    ll.addView(llHorizontal);
-                } else {*/
                 ll.addView(checkBox);
-                //}
             }
             listCb.add(checkBox);
         }
@@ -2538,7 +2583,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             }
             listEntryType.add(entryTypeEntity);
         }
-        //initFiltre(listEntryType, linearLayoutEntryType, listCheckboxEntryType, null);
         initTypeEntry();
         initFiltreEntry(listFiltreEntryCategory, linearLayoutEntryFiltreCategory, listCheckboxEntryCategory, checkboxEntryFiltreCategorySelectAll);
         initFiltreEntry(listFiltreEntryLocation, linearLayoutEntryFiltreLocation, listCheckboxEntryLocation, checkboxEntryFiltreLocationSelectAll);
@@ -2565,27 +2609,16 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
     protected void listerFiltreEntry() {
         listFiltreEntryCategory = entryCategoryEntityDao.loadAll();
-        //    Log.e(TAG, "Number of Category received: " + listFiltreEntryCategory.size());
         listFiltreEntryLocation = entryLocationEntityDao.loadAll();
-        //     Log.e(TAG, "Number of Location received: " + listFiltreEntryLocation.size());
         listFiltreEntryActivity = entryActivityEntityDao.loadAll();
-        //     Log.e(TAG, "Number of Activity received: " + listFiltreEntryActivity.size());
         listFiltreEntryAmenity = entryAmenityEntityDao.loadAll();
-        //     Log.e(TAG, "Number of Amenity received: " + listFiltreEntryAmenity.size());
         listFiltreEntryAnimation = entryAnimationEntityDao.loadAll();
-        //    Log.e(TAG, "Number of Animation received: " + listFiltreEntryAnimation.size());
         listFiltreEntryAtmospher = entryAtmospherEntityDao.loadAll();
-        //   Log.e(TAG, "Number of Atmospher received: " + listFiltreEntryAtmospher.size());
         listFiltreEntryChain = entryChainEntityDao.loadAll();
-        //   Log.e(TAG, "Number of Chain received: " + listFiltreEntryChain.size());
         listFiltreEntryFurnishedRental = entryFurnishedRentalEntityDao.loadAll();
-        //    Log.e(TAG, "Number of FurnishedRental received: " + listFiltreEntryFurnishedRental.size());
         listFiltreEntryLabel = entryLabelEntityDao.loadAll();
-        //  Log.e(TAG, "Number of Label received: " + listFiltreEntryLabel.size());
         listFiltreEntryService = entryServiceEntityDao.loadAll();
-        //  Log.e(TAG, "Number of Service received: " + listFiltreEntryService.size());
         listFiltreEntryStandingLevel = entryStandingLevelEntityDao.loadAll();
-        //  Log.e(TAG, "Number of StandingLevel received: " + listFiltreEntryStandingLevel.size());
     }
 
     protected void listerFiltreReelEntry() {
@@ -2611,7 +2644,6 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         listFiltreEntryService = new ArrayList<>();
         HashSet<EntryStandingLevelEntity> hashsetStandingLevel = new HashSet<>();
         listFiltreEntryStandingLevel = new ArrayList<>();
-        //  Log.e(TAG, "Time A: " + new Date());
         for (EntryEntity current : listEntryEntities) {
             if (current.getListCategories().size() > 0) {
                 hashsetCategory.addAll(current.getListCategories());
@@ -2646,76 +2678,64 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             if (current.getListServices().size() > 0) {
                 hashsetService.addAll(current.getListServices());
             }
-            //     Log.e(TAG, "Time B (boucle): " + new Date());
         }
         listFiltreEntryCategory.addAll(hashsetCategory);
         if (listFiltreEntryCategory.size() > 0) {
             Collections.sort(listFiltreEntryCategory);
         }
-        // Log.e(TAG, "Number of Category reçu: " + listFiltreEntryCategory.size());
 
         listFiltreEntryLocation.addAll(hashsetLocation);
         if (listFiltreEntryLocation.size() > 0) {
             Collections.sort(listFiltreEntryLocation);
         }
-        //  Log.e(TAG, "Number of Location reçu: " + listFiltreEntryLocation.size());
 
         listFiltreEntryActivity.addAll(hashsetActivity);
         if (listFiltreEntryActivity.size() > 0) {
             Collections.sort(listFiltreEntryActivity);
         }
-        //    Log.e(TAG, "Number of Activity reçu: " + listFiltreEntryActivity.size());
 
         listFiltreEntryAmenity.addAll(hashsetAmenity);
         if (listFiltreEntryAmenity.size() > 0) {
             Collections.sort(listFiltreEntryAmenity);
         }
-        //   Log.e(TAG, "Number of Amenity reçu: " + listFiltreEntryAmenity.size());
 
         listFiltreEntryAnimation.addAll(hashsetAnimation);
         if (listFiltreEntryAnimation.size() > 0) {
             Collections.sort(listFiltreEntryAnimation);
         }
-        //    Log.e(TAG, "Number of Animation reçu: " + listFiltreEntryAnimation.size());
 
         listFiltreEntryAtmospher.addAll(hashsetAtmospher);
         if (listFiltreEntryAtmospher.size() > 0) {
             Collections.sort(listFiltreEntryAtmospher);
         }
-        //    Log.e(TAG, "Number of Atmospher reçu: " + listFiltreEntryAtmospher.size());
 
         listFiltreEntryChain.addAll(hashsetChain);
         if (listFiltreEntryChain.size() > 0) {
             Collections.sort(listFiltreEntryChain);
         }
-        //   Log.e(TAG, "Number of Chain reçu: " + listFiltreEntryChain.size());
 
         listFiltreEntryFurnishedRental.addAll(hashsetFurnishedRental);
         if (listFiltreEntryFurnishedRental.size() > 0) {
             Collections.sort(listFiltreEntryFurnishedRental);
         }
-        //    Log.e(TAG, "Number of FurnishedRental reçu: " + listFiltreEntryFurnishedRental.size());
 
         listFiltreEntryLabel.addAll(hashsetLabel);
         if (listFiltreEntryLabel.size() > 0) {
             Collections.sort(listFiltreEntryLabel);
         }
-        //    Log.e(TAG, "Number of Label reçu: " + listFiltreEntryLabel.size());
 
         listFiltreEntryService.addAll(hashsetService);
         if (listFiltreEntryService.size() > 0) {
             Collections.sort(listFiltreEntryService);
         }
-        // Log.e(TAG, "Number of Service reçu: " + listFiltreEntryService.size());
 
         listFiltreEntryStandingLevel.addAll(hashsetStandingLevel);
         if (listFiltreEntryStandingLevel.size() > 0) {
             Collections.sort(listFiltreEntryStandingLevel);
         }
-        //Log.e(TAG, "Number of StandingLevel reçu: " + listFiltreEntryStandingLevel.size());
     }
 
-    protected void initCheckboxesSelectAllClick() {
+    protected void initCheckboxesSelectAllClickEntry() {
         initCheckboxSelectAllClick(checkboxEntryFiltreCategorySelectAll, listCheckboxEntryCategory);
         initCheckboxSelectAllClick(checkboxEntryFiltreLocationSelectAll, listCheckboxEntryLocation);
         initCheckboxSelectAllClick(checkboxEntryFiltreActivitySelectAll, listCheckboxEntryActivity);
@@ -2742,5 +2762,727 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //Evenement
+
+    @Optional
+    @OnClick(R.id.radio_button_evenement_tri_nom)
+    protected void rbEvenementTriNomClick() {
+        triEnCours = EvenementTri.Nom;
+        triSelonParametre(listEventEntities);
+        configureRecyclerView();
+        masquerFragmentTri();
+    }
+
+    @Optional
+    @OnClick(R.id.radio_button_evenement_tri_date)
+    protected void rbEvenementTriDateClick() {
+        triEnCours = EvenementTri.Date;
+        triSelonParametre(listEventEntities);
+        configureRecyclerView();
+        masquerFragmentTri();
+    }
+
+    protected void loadAllEvenementFromDB() {
+        evenementEntityDao.detachAll();
+        listEventEntities = evenementEntityDao.loadAll();
+        triSelonParametre(listEventEntities);
+    }
+
+    protected void masquerFragmentTri() {
+        layoutFragmentEvenementTri.setVisibility(View.GONE);
+        layoutTriAffiche = false;
+    }
+
+    protected void afficherFragmentTri() {
+        layoutFragmentEvenementTri.setVisibility(View.VISIBLE);
+        layoutTriAffiche = true;
+        rbEvenementTriNom.setText(EvenementTri.Nom.getNom());
+        rbEvenementTridDate.setText(EvenementTri.Date.getNom());
+    }
+
+    protected void masquerFragmentFiltreEvent() {
+        layoutFragmentEvenementFiltre.setVisibility(View.GONE);
+        layoutFiltreAffiche = false;
+    }
+
+    protected void afficherFragmentFiltreEvent() {
+        layoutFragmentEvenementFiltre.setVisibility(View.VISIBLE);
+        layoutFiltreAffiche = true;
+    }
+
+    protected boolean isEvenementEntityToujoursExistant(EvenementEntity evenementEntity) {
+        for (Event current : listEvents) {
+            if (isEventAndEvenementEntityIdentique(current, evenementEntity)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean isEventAndEvenementEntityIdentique(Event event, EvenementEntity eventEntity) {
+        if (event.getId() != eventEntity.getEvenementEntityId()) {
+            return false;
+        }
+
+        //verif ListAdress
+        boolean boolAdress1 = false;
+        boolean boolAdress2 = false;
+        if (event.getListAddresses() != null && eventEntity.getListAddresses() != null) {
+            for (Address current : event.getListAddresses()) {
+                for (EvenementAddressEntity current2 : eventEntity.getListAddresses()) {
+                    if (current.getType().equalsIgnoreCase(current2.getType()) && current.getAddressContent().equalsIgnoreCase(current2.getAddressContent())
+                            && current.getCity().equalsIgnoreCase(current2.getCity()) && current.getZip().equalsIgnoreCase(current2.getZip())) {
+                        boolAdress1 = true;
+                    }
+                }
+            }
+            for (EvenementAddressEntity current : eventEntity.getListAddresses()) {
+                for (Address current2 : event.getListAddresses()) {
+                    if (current.getType().equalsIgnoreCase(current2.getType()) && current.getAddressContent().equalsIgnoreCase(current2.getAddressContent())
+                            && current.getCity().equalsIgnoreCase(current2.getCity()) && current.getZip().equalsIgnoreCase(current2.getZip())) {
+                        boolAdress2 = true;
+                    }
+                }
+            }
+            if (!boolAdress1 || !boolAdress2) {
+                return false;
+            }
+        }
+
+        //verif ListCategories
+        boolean boolCategories1 = false;
+        boolean boolCategories2 = false;
+        if (event.getListCategories() != null && eventEntity.getListCategories() != null) {
+            for (com.pouillcorp.sortirnice.modelevents.Category current : event.getListCategories()) {
+                for (EvenementCategoryEntity current2 : eventEntity.getListCategories()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolCategories1 = true;
+                    }
+                }
+            }
+            for (EvenementCategoryEntity current : eventEntity.getListCategories()) {
+                for (com.pouillcorp.sortirnice.modelevents.Category current2 : event.getListCategories()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolCategories2 = true;
+                    }
+                }
+            }
+            if (!boolCategories1 || !boolCategories2) {
+                return false;
+            }
+        }
+
+        //verif ListDescriptions
+        boolean boolDescriptions1 = false;
+        boolean boolDescriptions2 = false;
+        if (event.getListDescriptions() != null && eventEntity.getListDescriptions() != null) {
+            for (com.pouillcorp.sortirnice.modelevents.Description current : event.getListDescriptions()) {
+                for (EvenementDescriptionEntity current2 : eventEntity.getListDescriptions()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolDescriptions1 = true;
+                    }
+                }
+            }
+            for (EvenementDescriptionEntity current : eventEntity.getListDescriptions()) {
+                for (com.pouillcorp.sortirnice.modelevents.Description current2 : event.getListDescriptions()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolDescriptions2 = true;
+                    }
+                }
+            }
+            if (!boolDescriptions1 || !boolDescriptions2) {
+                return false;
+            }
+        }
+
+        if (event.getListImages() != null && event.getListImages().size() > 0) {
+            boolean bool = false;
+            for (Image current : event.getListImages()) {
+                if (current.getUrl().equalsIgnoreCase(eventEntity.getImage())) {
+                    bool = true;
+                }
+            }
+            if (!bool) {
+                return false;
+            }
+        }
+
+        //verif ListOptions
+        boolean boolOptions1 = false;
+        boolean boolOptions2 = false;
+        if (event.getListOptions() != null && eventEntity.getListOptions() != null) {
+            for (com.pouillcorp.sortirnice.modelevents.Option current : event.getListOptions()) {
+                for (EvenementOptionEntity current2 : eventEntity.getListOptions()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolOptions1 = true;
+                    }
+                }
+            }
+            for (EvenementOptionEntity current : eventEntity.getListOptions()) {
+                for (com.pouillcorp.sortirnice.modelevents.Option current2 : event.getListOptions()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolOptions2 = true;
+                    }
+                }
+            }
+            if (!boolOptions1 || !boolOptions2) {
+                return false;
+            }
+        }
+
+        //verif ListProfiles
+        boolean boolProfiles1 = false;
+        boolean boolProfiles2 = false;
+        if (event.getListProfiles() != null && eventEntity.getListProfiles() != null) {
+            for (com.pouillcorp.sortirnice.modelevents.Profile current : event.getListProfiles()) {
+                for (EvenementProfileEntity current2 : eventEntity.getListProfiles()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolProfiles1 = true;
+                    }
+                }
+            }
+            for (EvenementProfileEntity current : eventEntity.getListProfiles()) {
+                for (com.pouillcorp.sortirnice.modelevents.Profile current2 : event.getListProfiles()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolProfiles2 = true;
+                    }
+                }
+            }
+            if (!boolProfiles1 || !boolProfiles2) {
+                return false;
+            }
+        }
+
+        //verif ListSectors
+        boolean boolSectors1 = false;
+        boolean boolSectors2 = false;
+        if (event.getListSectors() != null && eventEntity.getListSectos() != null) {
+            for (Secto current : event.getListSectors()) {
+                for (EvenementSectoEntity current2 : eventEntity.getListSectos()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolSectors1 = true;
+                    }
+                }
+            }
+            for (EvenementSectoEntity current : eventEntity.getListSectos()) {
+                for (Secto current2 : event.getListSectors()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolSectors2 = true;
+                    }
+                }
+            }
+            if (!boolSectors1 || !boolSectors2) {
+                return false;
+            }
+        }
+
+        //verif ListStations
+        boolean boolStations1 = false;
+        boolean boolStations2 = false;
+        if (event.getListStations() != null && eventEntity.getListStations() != null) {
+            for (com.pouillcorp.sortirnice.modelevents.Station current : event.getListStations()) {
+                for (EvenementStationEntity current2 : eventEntity.getListStations()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolStations1 = true;
+                    }
+                }
+            }
+            for (EvenementStationEntity current : eventEntity.getListStations()) {
+                for (com.pouillcorp.sortirnice.modelevents.Station current2 : event.getListStations()) {
+                    if (current.getValue().equalsIgnoreCase(current2.getValue())) {
+                        boolStations2 = true;
+                    }
+                }
+            }
+            if (!boolStations1 || !boolStations2) {
+                return false;
+            }
+        }
+
+        if (event.getWebsiteMap() != null && event.getWebsiteMap().get("situation") != null && event.getWebsiteMap().get("principal") != null) {
+            if (!event.getWebsiteMap().get("situation").equalsIgnoreCase(eventEntity.getWebsiteSituation()) || !event.getWebsiteMap().get("principal").equalsIgnoreCase(eventEntity.getWebsitePrincipal())) {
+                return false;
+            }
+
+        }
+        if (event.getCreated() != null && eventEntity.getCreated() != null && !event.getCreated().equalsIgnoreCase(eventEntity.getCreated())) {
+            return false;
+        }
+        if (event.getEmail() != null && eventEntity.getEmail() != null && !event.getEmail().equalsIgnoreCase(eventEntity.getEmail())) {
+            return false;
+        }
+        if (event.getEnd() != null && eventEntity.getEnd() != null && !event.getEnd().equalsIgnoreCase(eventEntity.getEnd())) {
+            return false;
+        }
+        if (event.getLatitude() != eventEntity.getLatitude()) {
+            return false;
+        }
+
+        if (event.getLongitude() != eventEntity.getLongitude()) {
+            return false;
+        }
+        if (event.getNameFr() != null && eventEntity.getNameFr() != null && !event.getNameFr().equalsIgnoreCase(eventEntity.getNameFr())) {
+            return false;
+        }
+        if (event.getNote() != eventEntity.getNote()) {
+            return false;
+        }
+        if (event.getPhone() != null && eventEntity.getPhone() != null && !event.getPhone().equalsIgnoreCase(eventEntity.getPhone())) {
+            return false;
+        }
+        if (event.getStart() != null && eventEntity.getStart() != null && !event.getStart().equalsIgnoreCase(eventEntity.getStart())) {
+            return false;
+        }
+        if (event.getUpdated() != null && eventEntity.getUpdated() != null && !event.getUpdated().equalsIgnoreCase(eventEntity.getUpdated())) {
+            return false;
+        }
+        return true;
+    }
+
+    protected void saveListEvents() {
+        List<EvenementEntity> listEventsNonFavoris = evenementEntityDao.queryRaw("where favori = 0");
+        for (EvenementEntity current : listEventsNonFavoris) {
+            if (!isEvenementEntityToujoursExistant(current)) {
+                evenementEntityDao.delete(current);
+                Log.e("TAG", "suppression evenement obsolete - " + current.getNameFr());
+            }
+        }
+
+        for (Event current : listEvents) {
+            List<EvenementEntity> listEvenemenEntity = evenementEntityDao.loadAll();
+            boolean isPresentEnBaseDonnees = false;
+            for (EvenementEntity evenementEntity : listEvenemenEntity) {
+                if (evenementEntity.getEvenementEntityId() == current.getId()) {
+                    isPresentEnBaseDonnees = true;
+                }
+            }
+
+            if (!isPresentEnBaseDonnees) {
+                EvenementEntity evenementToSave = new EvenementEntity();
+                evenementToSave.setEvenementEntityId(Long.valueOf(current.getId()));
+                evenementToSave.setNameFr(current.getNameFr());
+                evenementToSave.setStart(current.getStart());
+                evenementToSave.setEnd(current.getEnd());
+                evenementToSave.setPhone(current.getPhone());
+                evenementToSave.setEmail(current.getEmail());
+                evenementToSave.setWebsiteSituation(current.getWebsiteMap().get("situation"));
+                evenementToSave.setWebsitePrincipal(current.getWebsiteMap().get("principal"));
+                evenementToSave.setImage((current.getListImages() != null && current.getListImages().size() > 0) ? current.getListImages().get(0).getUrl() : null);
+                evenementToSave.setLatitude(current.getLatitude());
+                evenementToSave.setLongitude(current.getLongitude());
+                evenementToSave.setNote(current.getNote());
+                evenementToSave.setCreated(current.getCreated());
+                evenementToSave.setUpdated(current.getUpdated());
+                evenementToSave.setId(evenementEntityDao.insert(evenementToSave));
+                //enregistrer list Addresses
+                if (current.getListAddresses() != null) {
+                    for (Address address : current.getListAddresses()) {
+                        List<EvenementAddressEntity> list = evenementAddressEntityDao.queryRaw("where address_content = ? and city = ? and type = ? and zip = ?", address.getAddressContent(), address.getCity(), address.getType(), address.getZip());
+                        JoinEvenementEntityWithEvenementAddressEntity join = new JoinEvenementEntityWithEvenementAddressEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementAddressEntityId(list.get(0).getId());
+                        } else {
+                            EvenementAddressEntity evenementAddressEntity = new EvenementAddressEntity();
+                            evenementAddressEntity.setAddressContent(address.getAddressContent());
+                            evenementAddressEntity.setCity(address.getCity());
+                            evenementAddressEntity.setType(address.getType());
+                            evenementAddressEntity.setZip(address.getZip());
+                            evenementAddressEntity.setId(evenementAddressEntityDao.insert(evenementAddressEntity));
+                            join.setEvenementAddressEntityId(evenementAddressEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementAddressEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Profiles
+                if (current.getListProfiles() != null) {
+                    for (com.pouillcorp.sortirnice.modelevents.Profile profile : current.getListProfiles()) {
+                        List<EvenementProfileEntity> list = evenementProfileEntityDao.queryRaw("where value = ?", profile.getValue());
+                        JoinEvenementEntityWithEvenementProfileEntity join = new JoinEvenementEntityWithEvenementProfileEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementProfileEntityId(list.get(0).getId());
+                        } else {
+                            EvenementProfileEntity evenementProfileEntity = new EvenementProfileEntity();
+                            evenementProfileEntity.setValue(profile.getValue());
+                            evenementProfileEntity.setId(evenementProfileEntityDao.insert(evenementProfileEntity));
+                            join.setEvenementProfileEntityId(evenementProfileEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementProfileEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Stations
+                if (current.getListStations() != null) {
+                    for (com.pouillcorp.sortirnice.modelevents.Station station : current.getListStations()) {
+                        List<EvenementStationEntity> list = evenementStationEntityDao.queryRaw("where value = ?", station.getValue());
+                        JoinEvenementEntityWithEvenementStationEntity join = new JoinEvenementEntityWithEvenementStationEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementStationEntityId(list.get(0).getId());
+                        } else {
+                            EvenementStationEntity evenementStationEntity = new EvenementStationEntity();
+                            evenementStationEntity.setValue(station.getValue());
+                            evenementStationEntity.setId(evenementStationEntityDao.insert(evenementStationEntity));
+                            join.setEvenementStationEntityId(evenementStationEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementStationEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Categories
+                if (current.getListCategories() != null) {
+                    for (com.pouillcorp.sortirnice.modelevents.Category category : current.getListCategories()) {
+                        List<EvenementCategoryEntity> list = evenementCategoryEntityDao.queryRaw("where value = ?", category.getValue());
+                        JoinEvenementEntityWithEvenementCategoryEntity join = new JoinEvenementEntityWithEvenementCategoryEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementCategoryEntityId(list.get(0).getId());
+                        } else {
+                            EvenementCategoryEntity evenementCategoryEntity = new EvenementCategoryEntity();
+                            evenementCategoryEntity.setValue(category.getValue());
+                            evenementCategoryEntity.setId(evenementCategoryEntityDao.insert(evenementCategoryEntity));
+                            join.setEvenementCategoryEntityId(evenementCategoryEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementCategoryEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Options
+                if (current.getListOptions() != null) {
+                    for (com.pouillcorp.sortirnice.modelevents.Option option : current.getListOptions()) {
+                        List<EvenementOptionEntity> list = evenementOptionEntityDao.queryRaw("where value = ?", option.getValue());
+                        JoinEvenementEntityWithEvenementOptionEntity join = new JoinEvenementEntityWithEvenementOptionEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementOptionEntityId(list.get(0).getId());
+                        } else {
+                            EvenementOptionEntity evenementOptionEntity = new EvenementOptionEntity();
+                            evenementOptionEntity.setValue(option.getValue());
+                            evenementOptionEntity.setId(evenementOptionEntityDao.insert(evenementOptionEntity));
+                            join.setEvenementOptionEntityId(evenementOptionEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementOptionEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Sectos
+                if (current.getListSectors() != null) {
+                    for (Secto secto : current.getListSectors()) {
+                        List<EvenementSectoEntity> list = evenementSectoEntityDao.queryRaw("where value = ?", secto.getValue());
+                        JoinEvenementEntityWithEvenementSectoEntity join = new JoinEvenementEntityWithEvenementSectoEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementSectoEntityId(list.get(0).getId());
+                        } else {
+                            EvenementSectoEntity evenementSectoEntity = new EvenementSectoEntity();
+                            evenementSectoEntity.setValue(secto.getValue());
+                            evenementSectoEntity.setId(evenementSectoEntityDao.insert(evenementSectoEntity));
+                            join.setEvenementSectoEntityId(evenementSectoEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementSectoEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list Descriptions
+                if (current.getListDescriptions() != null) {
+                    for (com.pouillcorp.sortirnice.modelevents.Description description : current.getListDescriptions()) {
+                        List<EvenementDescriptionEntity> list = evenementDescriptionEntityDao.queryRaw("where language = ? and value = ? and type = ?", description.getLanguage(), description.getValue(), description.getType());
+                        JoinEvenementEntityWithEvenementDescriptionEntity join = new JoinEvenementEntityWithEvenementDescriptionEntity();
+                        join.setEvenementEntityId(evenementToSave.getId());
+                        if (list.size() > 0) {
+                            join.setEvenementDescriptionEntityId(list.get(0).getId());
+                        } else {
+                            EvenementDescriptionEntity evenementDescriptionEntity = new EvenementDescriptionEntity();
+                            evenementDescriptionEntity.setLanguage(description.getLanguage());
+                            evenementDescriptionEntity.setType(description.getType());
+                            evenementDescriptionEntity.setValue(description.getValue());
+                            evenementDescriptionEntity.setId(evenementDescriptionEntityDao.insert(evenementDescriptionEntity));
+                            join.setEvenementDescriptionEntityId(evenementDescriptionEntity.getId());
+                        }
+                        joinEvenementEntityWithEvenementDescriptionEntityDao.insert(join);
+                    }
+                }
+                //enregistrer list RefEntries
+                if (current.getListRefEntries() != null) {
+                    for (RefEntries refEntries : current.getListRefEntries()) {
+                        if (refEntries.getRefEntryId() != null && refEntries.getRefEntryName() != null) {
+                            List<EvenementRefEntriesEntity> list = evenementRefEntriesEntityDao.queryRaw("where ref_entry_id = ? and ref_entry_name = ?", refEntries.getRefEntryId(), refEntries.getRefEntryName());
+
+                            JoinEvenementEntityWithEvenementRefEntriesEntity join = new JoinEvenementEntityWithEvenementRefEntriesEntity();
+                            join.setEvenementEntityId(evenementToSave.getId());
+                            if (list.size() > 0) {
+                                join.setEvenementRefEntriesEntityId(list.get(0).getId());
+                            } else {
+                                EvenementRefEntriesEntity evenementRefEntriesEntity = new EvenementRefEntriesEntity();
+                                evenementRefEntriesEntity.setRefEntryId(refEntries.getRefEntryId());
+                                evenementRefEntriesEntity.setRefEntryName(refEntries.getRefEntryName());
+                                evenementRefEntriesEntity.setId(evenementRefEntriesEntityDao.insert(evenementRefEntriesEntity));
+                                join.setEvenementRefEntriesEntityId(evenementRefEntriesEntity.getId());
+                            }
+                            joinEvenementEntityWithEvenementRefEntriesEntityDao.insert(join);
+                        }
+                    }
+                }
+                Log.e("TAG", "Ajout " + evenementToSave.getNameFr());
+                listEventEntities.add(evenementToSave);
+            } else {
+            }
+        }
+    }
+
+    protected void configureOnClickRecyclerViewEvent() {
+        ItemClickSupport.addTo(list_recycler_event, R.layout.recycler_list_event)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        positionScroll = position;
+                        masquerFragmentTri();
+                        ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEvenementDetailActivity.class, "eventId", listEventEntities.get(position).getId(), false);
+                    }
+                });
+    }
+
+    protected void configureRecyclerView() {
+        adapterEvents = new RecyclerAdapterEvenements(listEventEntities, (RecyclerAdapterEvenements.Listener) this);
+        list_recycler_event.setAdapter(adapterEvents);
+        list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
+        configureOnClickRecyclerViewEvent();
+    }
+
+    public void afficherListCbEvenementFiltreCategory(View view) {
+        if (!filtreCategoryDeplie) {
+            filtreCategoryDeplie = true;
+            checkboxEvenementFiltreCategorySelectAll.setVisibility(View.VISIBLE);
+            linearLayoutEvenementFiltreCategory.setVisibility(View.VISIBLE);
+            buttonEvenementFiltreCategory.setIconResource(R.drawable.outline_arrow_drop_down_black_18);
+        } else {
+            filtreCategoryDeplie = false;
+            checkboxEvenementFiltreCategorySelectAll.setVisibility(View.GONE);
+            linearLayoutEvenementFiltreCategory.setVisibility(View.GONE);
+            buttonEvenementFiltreCategory.setIconResource(R.drawable.outline_arrow_right_black_18);
+        }
+    }
+
+    public void afficherListCbEvenementFiltreVille(View view) {
+        if (!filtreVilleDeplie) {
+            filtreVilleDeplie = true;
+            checkboxEvenementFiltreVilleSelectAll.setVisibility(View.VISIBLE);
+            linearLayoutEvenementFiltreVille.setVisibility(View.VISIBLE);
+            buttonEvenementFiltreVille.setIconResource(R.drawable.outline_arrow_drop_down_black_18);
+        } else {
+            filtreVilleDeplie = false;
+            checkboxEvenementFiltreVilleSelectAll.setVisibility(View.GONE);
+            linearLayoutEvenementFiltreVille.setVisibility(View.GONE);
+            buttonEvenementFiltreVille.setIconResource(R.drawable.outline_arrow_right_black_18);
+        }
+    }
+
+    protected boolean verifFiltreActif(List<? extends DetailEvenementEntitySimple> list) {
+        boolean bool = false;
+        for (DetailEvenementEntitySimple current : list) {
+            if (current.isChecked()) {
+                bool = true;
+            }
+        }
+        return bool;
+    }
+
+    protected boolean verifFiltreAdresseActif(List<EvenementAddressEntity> list) {
+        boolean bool = false;
+        for (EvenementAddressEntity current : list) {
+            if (current.isChecked()) {
+                bool = true;
+            }
+        }
+        return bool;
+    }
+
+    protected void reinitListeEvents() {
+        listEventEntities.clear();
+        listEventEntities.addAll(listEventEntitiesBasique);
+    }
+
+    @Optional
+    @OnClick(R.id.fabEvenementValiderFiltre)
+    protected void fabEvenementFiltreClick() {
+        reinitListeEvents();
+        layoutFragmentEvenementFiltre.setVisibility(View.GONE);
+        listEvenementEntityFiltre = new ArrayList<>();
+        listEvenementEntityFiltre.addAll(listEventEntities);
+        boolean boolEvenementCategory = verifFiltreActif(listFiltreEvenementCategory);
+        for (EvenementEntity current : listEventEntities) {
+            if (boolEvenementCategory && listEvenementEntityFiltre.contains(current)) {
+                boolean isFiltered = false;
+                for (EvenementCategoryEntity filtre : listFiltreEvenementCategory) {
+                    if (filtre.isChecked() && current.getListCategories() != null) {
+                        for (EvenementCategoryEntity current2 : current.getListCategories()) {
+                            if (current2.getValue().equalsIgnoreCase(filtre.getValue())) {
+                                isFiltered = true;
+                            }
+                        }
+                    }
+                }
+                if (!isFiltered) {
+                    listEvenementEntityFiltre.remove(current);
+                }
+            }
+        }
+        boolean boolEvenementVille = verifFiltreAdresseActif(listFiltreEvenementAdresse);
+        for (EvenementEntity current : listEventEntities) {
+            if (boolEvenementVille && listEvenementEntityFiltre.contains(current)) {
+                boolean isFiltered = false;
+                for (EvenementAddressEntity filtre : listFiltreEvenementAdresse) {
+                    if (filtre.isChecked() && current.getListAddresses() != null) {
+                        for (EvenementAddressEntity current2 : current.getListAddresses()) {
+                            if (current2.getCity().equalsIgnoreCase(filtre.getCity())) {
+                                isFiltered = true;
+                            }
+                        }
+                    }
+                }
+                if (!isFiltered) {
+                    listEvenementEntityFiltre.remove(current);
+                }
+            }
+        }
+        triSelonParametre(listEvenementEntityFiltre);
+        listEventEntities.clear();
+        listEventEntities.addAll(listEvenementEntityFiltre);
+        configureRecyclerView();
+    }
+
+    protected void triSelonParametre(List<EvenementEntity> list) {
+        if (triEnCours == EvenementTri.Nom) {
+            Collections.sort(list);
+        } else if (triEnCours == EvenementTri.Date) {
+            Collections.sort(list, EvenementEntity.ComparatorDate);
+        }
+    }
+
+    @Optional
+    @OnClick(R.id.fabEvenementRazFiltre)
+    protected void fabEvenementRazFiltreClick() {
+        decocherTout();
+        layoutFragmentEvenementFiltre.setVisibility(View.GONE);
+        listEventEntities.clear();
+        listEventEntities.addAll(listEventEntitiesBasique);
+        triSelonParametre(listEventEntities);
+        configureRecyclerView();
+    }
+
+    protected void decocherFiltre(List<? extends DetailEvenementEntitySimple> list) {
+        for (DetailEvenementEntitySimple current : list) {
+            current.setChecked(false);
+        }
+    }
+
+    protected void decocherFiltreAdresse(List<EvenementAddressEntity> list) {
+        for (EvenementAddressEntity current : list) {
+            current.setChecked(false);
+        }
+    }
+
+    protected void decocherTout() {
+        decocherFiltre(listFiltreEvenementCategory);
+        decocherFiltreAdresse(listFiltreEvenementAdresse);
+        for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
+            current.setChecked(false);
+        }
+        decocherCheckbox(listCheckboxEvenementCategory);
+        decocherCheckbox(listCheckboxEvenementVille);
+        decocherCheckbox(checkboxEvenementFiltreCategorySelectAll);
+        decocherCheckbox(checkboxEvenementFiltreVilleSelectAll);
+    }
+
+    protected void initFiltre(List<? extends DetailEvenementEntitySimple> list, LinearLayout ll, List<MaterialCheckBox> listCb, MaterialCheckBox cb) {
+        Collections.sort(list);
+        for (DetailEvenementEntitySimple current : list) {
+            MaterialCheckBox checkBox = new MaterialCheckBox(this);
+            checkBox.setText(current.getValue());
+            checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        current.setChecked(true);
+                    } else {
+                        current.setChecked(false);
+                        if (!verifSiUnFiltreMinimum(list)) {
+                            cb.setChecked(false);
+                        }
+                    }
+                }
+            });
+            if (ll != null) {
+                ll.addView(checkBox);
+            }
+            listCb.add(checkBox);
+        }
+    }
+
+    protected List<EvenementAddressEntity> supprimerDoublonVille(List<EvenementAddressEntity> list) {
+        List<EvenementAddressEntity> listTemp = new ArrayList<>();
+        EvenementAddressEntity previous = null;
+        for (EvenementAddressEntity current : list) {
+            if (previous == null) {
+                listTemp.add(current);
+            } else if (!current.getCity().equalsIgnoreCase(previous.getCity())) {
+                listTemp.add(current);
+            }
+            previous = current;
+        }
+        return listTemp;
+    }
+
+    protected void initListFiltres() {
+        initFiltre(listFiltreEvenementCategory, linearLayoutEvenementFiltreCategory, listCheckboxEvenementCategory, checkboxEvenementFiltreCategorySelectAll);
+        Collections.sort(listFiltreEvenementAdresse);
+        listFiltreEvenementAdresse = supprimerDoublonVille(listFiltreEvenementAdresse);
+        for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
+            MaterialCheckBox checkBox = new MaterialCheckBox(this);
+            checkBox.setText(current.getCity());
+            checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        current.setChecked(true);
+                    } else {
+                        current.setChecked(false);
+                        boolean bool = false;
+                        for (EvenementAddressEntity current : listFiltreEvenementAdresse) {
+                            if (current.isChecked()) {
+                                bool = true;
+                            }
+                        }
+                        if (!bool) {
+                            checkboxEvenementFiltreVilleSelectAll.setChecked(false);
+                        }
+                    }
+                }
+            });
+            if (linearLayoutEvenementFiltreVille != null) {
+                linearLayoutEvenementFiltreVille.addView(checkBox);
+            }
+            listCheckboxEvenementVille.add(checkBox);
+        }
+    }
+
+    protected boolean verifSiUnFiltreMinimum(List<? extends DetailEvenementEntitySimple> list) {
+        boolean bool = false;
+        for (DetailEvenementEntitySimple current : list) {
+            if (current.isChecked()) {
+                bool = true;
+            }
+        }
+        return bool;
+    }
+
+    protected void listerFiltre() {
+        listFiltreEvenementCategory = evenementCategoryEntityDao.loadAll();
+        listFiltreEvenementAdresse = evenementAddressEntityDao.loadAll();
+    }
+
+    protected void initCheckboxesSelectAllClick() {
+        initCheckboxSelectAllClick(checkboxEvenementFiltreCategorySelectAll, listCheckboxEvenementCategory);
+        initCheckboxSelectAllClick(checkboxEvenementFiltreVilleSelectAll, listCheckboxEvenementVille);
     }
 }
