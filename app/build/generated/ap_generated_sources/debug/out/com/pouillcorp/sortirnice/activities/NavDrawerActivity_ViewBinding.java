@@ -22,21 +22,21 @@ import java.lang.Override;
 public class NavDrawerActivity_ViewBinding implements Unbinder {
   private NavDrawerActivity target;
 
+  private View view7f080125;
+
   private View view7f080123;
 
-  private View view7f080121;
+  private View view7f0801ec;
 
-  private View view7f0801ea;
+  private View view7f0801eb;
 
-  private View view7f0801e9;
+  private View view7f080128;
+
+  private View view7f080127;
 
   private View view7f080126;
 
-  private View view7f080125;
-
   private View view7f080124;
-
-  private View view7f080122;
 
   @UiThread
   public NavDrawerActivity_ViewBinding(NavDrawerActivity target) {
@@ -55,7 +55,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEntryValiderFiltre);
     target.fabEntryValiderFiltre = Utils.castView(view, R.id.fabEntryValiderFiltre, "field 'fabEntryValiderFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f080123 = view;
+      view7f080125 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -66,7 +66,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEntryRazFiltre);
     target.fabEntryRazFiltre = Utils.castView(view, R.id.fabEntryRazFiltre, "field 'fabEntryRazFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f080121 = view;
+      view7f080123 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -122,7 +122,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.radio_button_evenement_tri_nom);
     target.rbEvenementTriNom = Utils.castView(view, R.id.radio_button_evenement_tri_nom, "field 'rbEvenementTriNom'", MaterialRadioButton.class);
     if (view != null) {
-      view7f0801ea = view;
+      view7f0801ec = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -133,7 +133,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.radio_button_evenement_tri_date);
     target.rbEvenementTridDate = Utils.castView(view, R.id.radio_button_evenement_tri_date, "field 'rbEvenementTridDate'", MaterialRadioButton.class);
     if (view != null) {
-      view7f0801e9 = view;
+      view7f0801eb = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -145,7 +145,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEvenementValiderFiltre);
     target.fabEvenementValiderFiltre = Utils.castView(view, R.id.fabEvenementValiderFiltre, "field 'fabEvenementValiderFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f080126 = view;
+      view7f080128 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -156,7 +156,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     view = source.findViewById(R.id.fabEvenementRazFiltre);
     target.fabEvenementRazFiltre = Utils.castView(view, R.id.fabEvenementRazFiltre, "field 'fabEvenementRazFiltre'", FloatingActionButton.class);
     if (view != null) {
-      view7f080125 = view;
+      view7f080127 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -172,7 +172,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     target.buttonEvenementFiltreVille = Utils.findOptionalViewAsType(source, R.id.buttonEvenementFiltreVille, "field 'buttonEvenementFiltreVille'", MaterialButton.class);
     view = source.findViewById(R.id.fabEntryValiderType);
     if (view != null) {
-      view7f080124 = view;
+      view7f080126 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -182,7 +182,7 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     }
     view = source.findViewById(R.id.fabEntryRazType);
     if (view != null) {
-      view7f080122 = view;
+      view7f080124 = view;
       view.setOnClickListener(new DebouncingOnClickListener() {
         @Override
         public void doClick(View p0) {
@@ -262,37 +262,37 @@ public class NavDrawerActivity_ViewBinding implements Unbinder {
     target.buttonEvenementFiltreCategory = null;
     target.buttonEvenementFiltreVille = null;
 
+    if (view7f080125 != null) {
+      view7f080125.setOnClickListener(null);
+      view7f080125 = null;
+    }
     if (view7f080123 != null) {
       view7f080123.setOnClickListener(null);
       view7f080123 = null;
     }
-    if (view7f080121 != null) {
-      view7f080121.setOnClickListener(null);
-      view7f080121 = null;
+    if (view7f0801ec != null) {
+      view7f0801ec.setOnClickListener(null);
+      view7f0801ec = null;
     }
-    if (view7f0801ea != null) {
-      view7f0801ea.setOnClickListener(null);
-      view7f0801ea = null;
+    if (view7f0801eb != null) {
+      view7f0801eb.setOnClickListener(null);
+      view7f0801eb = null;
     }
-    if (view7f0801e9 != null) {
-      view7f0801e9.setOnClickListener(null);
-      view7f0801e9 = null;
+    if (view7f080128 != null) {
+      view7f080128.setOnClickListener(null);
+      view7f080128 = null;
+    }
+    if (view7f080127 != null) {
+      view7f080127.setOnClickListener(null);
+      view7f080127 = null;
     }
     if (view7f080126 != null) {
       view7f080126.setOnClickListener(null);
       view7f080126 = null;
     }
-    if (view7f080125 != null) {
-      view7f080125.setOnClickListener(null);
-      view7f080125 = null;
-    }
     if (view7f080124 != null) {
       view7f080124.setOnClickListener(null);
       view7f080124 = null;
-    }
-    if (view7f080122 != null) {
-      view7f080122.setOnClickListener(null);
-      view7f080122 = null;
     }
   }
 }

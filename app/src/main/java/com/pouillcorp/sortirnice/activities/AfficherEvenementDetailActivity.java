@@ -133,10 +133,11 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
 
         ButterKnife.bind(this);
 
-        traiterIntent();
+
         setTitle("Detail");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_evenement).setChecked(true);
+        traiterIntent();
     }
 
     public void changerCouleur() {
@@ -145,6 +146,18 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
         } else {
             scrollView.setBackgroundColor(getResources().getColor(R.color.white));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        menuItems = menu;
+        itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+        itemEntryFiltre = menuItems.findItem(R.id.menu_activity_main_entry_filter);
+        itemEvenementFiltre = menuItems.findItem(R.id.menu_activity_main_evenement_filter);
+        itemEvenementTri = menuItems.findItem(R.id.menu_activity_main_evenement_tri);
+        itemEntryType.setVisible(false);
+        return true;
     }
 
     public void traiterIntent() {
@@ -159,7 +172,13 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
             runnerImage.execute();
             changerCouleur();
         }
+        if (intent.hasExtra("FromFavori") && intent.getBooleanExtra("FromFavori",false)) {
+            Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
+            bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);
+        }
     }
+
+
 
     private boolean isListDescriptionRenseigne(List<EvenementDescriptionEntity> listDescription, EvenementDescriptionType type) {
         if (listDescription != null && listDescription.size() > 0) {

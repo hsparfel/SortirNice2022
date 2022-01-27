@@ -1,5 +1,6 @@
 package com.pouillcorp.sortirnice.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,7 +64,10 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
 
         masquerFragmentTri();
         masquerFragmentFiltreEvent();
+
     }
+
+
 
     @Override
     protected void onResume() {

@@ -2,22 +2,22 @@
     <item
         android:id="@+id/bottom_navigation_home"
         android:enabled="true"
-        android:icon="@drawable/outline_home_black_24dp"
-        android:title="Accueil"/>
+        android:icon="@drawable/outline_home_black_24"
+        android:title="@string/accueil"/>
     <item
         android:id="@+id/bottom_navigation_evenement"
         android:enabled="true"
-        android:icon="@drawable/outline_search_white_18"
-        android:title="Evenements"/>
+        android:icon="@drawable/outline_event_black_24"
+        android:title="@string/evenements"/>
     <item
         android:id="@+id/bottom_navigation_entry"
         android:enabled="true"
-        android:icon="@drawable/outline_search_white_18"
-        android:title="Autres"/>
+        android:icon="@drawable/outline_search_black_24"
+        android:title="@string/divers"/>
     <item
         android:id="@+id/bottom_navigation_my_datas"
         android:enabled="true"
-        android:icon="@drawable/outline_favorite_white_18"
+        android:icon="@drawable/outline_favorite_black_24"
         android:title="@string/mes_favoris"/>
 
 </menu>

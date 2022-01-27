@@ -27,6 +27,7 @@
             android:layout_height="0dp" />
 
         <Button
+            android:id="@+id/btnEventFavori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Evenements Favoris"
@@ -35,6 +36,7 @@
             />
 
         <Button
+            android:id="@+id/btnEntryFavori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Entries Favoris"
@@ -42,9 +44,20 @@
             android:onClick="afficherEntriesFavoris"
             />
 
+        <TextView
+            android:id="@+id/textFavoriVide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_view_detail_middle"
+            android:layout_marginBottom="@dimen/text_view_detail_middle"
+            android:text="@string/aucun_favoris"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary" />
+
     </LinearLayout>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom">

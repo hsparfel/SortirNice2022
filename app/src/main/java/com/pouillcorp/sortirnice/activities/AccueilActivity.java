@@ -6,6 +6,14 @@ import android.view.View;
 
 import com.facebook.stetho.Stetho;
 import com.pouillcorp.sortirnice.R;
+import com.pouillcorp.sortirnice.entities.DateMaj;
+import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
+import com.pouillcorp.sortirnice.entities.entry.detail.EntryProfileEntity;
+import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
+import com.pouillcorp.sortirnice.entities.event.detail.EvenementProfileEntity;
+import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementProfileEntity;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;
@@ -48,5 +56,29 @@ public class AccueilActivity extends NavDrawerActivity {
 
     public void afficherMesFavoris(View view) {
         ouvrirActiviteSuivante(this, AfficherFavorisActivity.class,false);
+    }
+
+    public void forcerDateEntry(View view) {
+        DateMaj date = dateMajDao.load(1l);
+        date.setDateMajEntry("01/01/2022");
+        dateMajDao.update(date);
+    }
+
+    public void majDb(View view) {
+        /*evenementEntityDao.deleteByKey(114l);
+        List<JoinEvenementEntityWithEvenementProfileEntity> list = joinEvenementEntityWithEvenementProfileEntityDao.queryRaw("where evenement_entity_id = 114");
+        for (JoinEvenementEntityWithEvenementProfileEntity current : list) {
+            joinEvenementEntityWithEvenementProfileEntityDao.delete(current);
+        }*/
+        List<EvenementEntity> listEvent = evenementEntityDao.queryRaw("where favori = 1");
+        List<EntryEntity> listEntry = entryEntityDao.queryRaw("where favori = 1");
+        for (EvenementEntity event : listEvent) {
+            event.setFavori(false);
+            evenementEntityDao.update(event);
+        }
+        for (EntryEntity entry : listEntry) {
+            entry.setFavori(false);
+            entryEntityDao.update(entry);
+        }
     }
 }

@@ -8,6 +8,7 @@
     <string name="infos_pratiques">Infos pratiques</string>
     <string name="sans_categorie">Sans catégorie</string>
     <string name="evenements">Evenements</string>
+    
     <string name="visites">Visites</string>
     <string name="sorties">Sorties</string>
     <string name="restaurants">Restaurants</string>
@@ -19,7 +20,7 @@
     <string name="adresses_utiles">Adresses Utiles</string>
     <string name="rechercher">Rechercher</string>
     <string name="rechercher_entries">Rechercher divers</string>
-    <string name="mes_favoris">Mes Favoris</string>
+    <string name="mes_favoris">Favoris</string>
     <string name="services">Services</string>
     <string name="selectionner_tout">Selectionner Tout</string>
     <string name="couchage">Couchage</string>
@@ -43,42 +44,42 @@
     <string name="label">Label</string>
     <string name="service">Cuisines</string>
     <string name="standingLevel">Standing Level</string>
-    <string name="total">Total: </string>
+    <string name="total">Total - </string>
 
     <string name="room_count">room_count</string>
-    <string name="sdb">Sdb: </string>
+    <string name="sdb">Sdb - </string>
     <string name="room_bath_count">room_bath_count</string>
-    <string name="douche">Douche: </string>
+    <string name="douche">Douche - </string>
     <string name="room_shower_count">room_shower_count</string>
-    <string name="suite">Suite: </string>
+    <string name="suite">Suite - </string>
     <string name="suite_count">suite_count</string>
-    <string name="studio">Studio: </string>
+    <string name="studio">Studio - </string>
     <string name="studio_count">studio_count</string>
     <string name="appartement">Appartement: </string>
     <string name="apartment_count">apartment_count</string>
-    <string name="accessible">Accessible: </string>
+    <string name="accessible">Accessible - </string>
     <string name="room_accessible_count">room_accessible_count</string>
-    <string name="simple">Simple: </string>
+    <string name="simple">Simple - </string>
     <string name="single_count">single_count</string>
-    <string name="doubleRoom">Double: </string>
+    <string name="doubleRoom">Double - </string>
     <string name="double_count">double_count</string>
-    <string name="triple">Triple: </string>
+    <string name="triple">Triple - </string>
     <string name="triple_count">triple_count</string>
-    <string name="twin">Twin: </string>
+    <string name="twin">Twin - </string>
     <string name="twins_count">twins_count</string>
-    <string name="famille">Famille: </string>
+    <string name="famille">Famille - </string>
     <string name="family_count">family_count</string>
     <string name="surface">Surface: </string>
     <string name="area">area</string>
-    <string name="typeTitre">Type: </string>
-    <string name="etage">Etage: </string>
+    <string name="typeTitre">Type - </string>
+    <string name="etage">Etage - </string>
     <string name="floor">floor</string>
     <string name="bedroom_count">bedroom_count</string>
     <string name="sleeps_count">sleeps_count</string>
     <string name="furnished_room_count">furnished_room_count</string>
     <string name="atmosphere">Atmosphere: </string>
     <string name="atmospherText">atmospher</string>
-    <string name="serviceTitre">Service: </string>
+    <string name="serviceTitre">Cuisines: </string>
     <string name="serviceText">Cuisines</string>
     <string name="lieu">Lieu: </string>
     <string name="locationText">location</string>
@@ -113,25 +114,25 @@
     <string name="animationText">animation</string>
     <string name="option">Option: </string>
     <string name="optionText">option</string>
-    <string name="pratiqueTitre">Pratique: </string>
+    <string name="pratiqueTitre">Equipements: </string>
     <string name="amenity">Equipements</string>
     <string name="capacit">Capacité: </string>
 
     <string name="capacity_total">capacity_total</string>
-    <string name="int_rieur">Intérieur: </string>
+    <string name="int_rieur">Intérieur - </string>
     <string name="capacity_interieur">capacity_interieur</string>
-    <string name="ext_rieur">Extérieur: </string>
+    <string name="ext_rieur">Extérieur - </string>
     <string name="capacity_exterieur">capacity_exterieur</string>
-    <string name="debout">Debout: </string>
+    <string name="debout">Debout - </string>
     <string name="capacity_debout">capacity_debout</string>
-    <string name="groupe">Groupe: </string>
+    <string name="groupe">Groupe - </string>
     <string name="capacity_group">capacity_group</string>
-    <string name="salle">Salle: </string>
+    <string name="salle">Salle - </string>
     <string name="capacity_salle">capacity_salle</string>
-    <string name="sector">Sector: </string>
+    <string name="sector">Sector - </string>
     <string name="secto">secto</string>
     <string name="capacity_assis">capacity_assis</string>
-    <string name="assis">Assis: </string>
+    <string name="assis">Assis - </string>
     <string name="periode">periode</string>
     <string name="couchageTitre">Couchage: </string>
     <string name="couchageText">couchage</string>
@@ -146,4 +147,8 @@
     <string name="periode_locative">Periode Locative: </string>
 
     <string name="wait">Patientez...</string>
+    <string name="aucun_favoris">aucun favoris</string>
+
+    <string name="accueil">Accueil</string>
+    <string name="divers">Divers</string>
 </resources>

@@ -42,7 +42,7 @@ public class AfficherEntriesFavorisActivity extends NavDrawerActivity implements
 
         setTitle("Entries Favoris");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
-        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_entry).setChecked(true);
+        bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);
 
         loadAllEntryFavorisFromDB();
         listEntryEntitiesBasique.addAll(listEntryEntities);

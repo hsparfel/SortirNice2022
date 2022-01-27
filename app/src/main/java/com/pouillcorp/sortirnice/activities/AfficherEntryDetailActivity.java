@@ -293,10 +293,11 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
 
         ButterKnife.bind(this);
 
-        traiterIntent();
+
         setTitle("Detail Entry");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_entry).setChecked(true);
+        traiterIntent();
     }
 
     public void changerCouleur() {
@@ -316,7 +317,24 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
             fillAllFields();
             hideFields();
             changerCouleur();
+            //itemEntryType.setVisible(false);
         }
+        if (intent.hasExtra("FromFavori") && intent.getBooleanExtra("FromFavori",false)) {
+            Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
+            bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        menuItems = menu;
+        itemEntryType = menuItems.findItem(R.id.menu_activity_main_entry_type);
+        itemEntryFiltre = menuItems.findItem(R.id.menu_activity_main_entry_filter);
+        itemEvenementFiltre = menuItems.findItem(R.id.menu_activity_main_evenement_filter);
+        itemEvenementTri = menuItems.findItem(R.id.menu_activity_main_evenement_tri);
+        itemEntryType.setVisible(false);
+        return true;
     }
 
     private void hideFields() {
@@ -401,6 +419,7 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         } else {
             blocChambreEtage.setVisibility(View.VISIBLE);
         }
+
         if (entryTransmis.getLiving() == null || entryTransmis.getLiving().getBedroomCount() == 0) {
             bedroomCount.setVisibility(View.GONE);
         } else {
@@ -416,6 +435,20 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         } else {
             furnishedRoomCount.setVisibility(View.VISIBLE);
         }
+
+        if (blocChambreTotal.getVisibility() == View.GONE && blocChambreSdb.getVisibility() == View.GONE && blocChambreDouche.getVisibility() == View.GONE
+                && blocChambreSuite.getVisibility() == View.GONE && blocChambreStudio.getVisibility() == View.GONE && blocChambreAppartement.getVisibility() == View.GONE
+                && blocChambreAccessible.getVisibility() == View.GONE && blocChambreSingle.getVisibility() == View.GONE && blocChambreDouble.getVisibility() == View.GONE
+                && blocChambreTriple.getVisibility() == View.GONE && blocChambreTwin.getVisibility() == View.GONE && blocChambreFamille.getVisibility() == View.GONE
+                && blocChambreType.getVisibility() == View.GONE && blocChambreEtage.getVisibility() == View.GONE) {
+            blocChambre.setVisibility(View.GONE);
+        } else {
+            blocChambre.setVisibility(View.VISIBLE);
+        }
+
+
+
+
         if (entryTransmis.getListStandingLevels() == null || entryTransmis.getListStandingLevels().size() == 0) {
             blocStanding.setVisibility(View.GONE);
         } else {
@@ -461,37 +494,37 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         } else {
             blocAddress.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getAddressLine1() == null
+        if ((entryTransmis.getAddress() == null || (entryTransmis.getAddress().getAddressLine1() == null
                 && entryTransmis.getAddress().getAddressLine2() == null
                 && entryTransmis.getAddress().getAddressLine3() == null
                 && entryTransmis.getAddress().getZip() == null
-                && entryTransmis.getAddress().getCity() == null
-                && location.getVisibility() == View.GONE) {
+                && entryTransmis.getAddress().getCity() == null)) && entryTransmis.getLongitude() == 0 && entryTransmis.getLatitude() == 0
+                ) {
             boutonsMapWaze.setVisibility(View.GONE);
         } else {
             boutonsMapWaze.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getAddressLine1() == null) {
+        if (entryTransmis.getAddress() == null || entryTransmis.getAddress().getAddressLine1() == null) {
             addressLine1.setVisibility(View.GONE);
         } else {
             addressLine1.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getAddressLine2() == null) {
+        if (entryTransmis.getAddress() == null || entryTransmis.getAddress().getAddressLine2() == null) {
             addressLine2.setVisibility(View.GONE);
         } else {
             addressLine2.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getAddressLine3() == null) {
+        if (entryTransmis.getAddress() == null || entryTransmis.getAddress().getAddressLine3() == null) {
             addressLine3.setVisibility(View.GONE);
         } else {
             addressLine3.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getZip() == null) {
+        if (entryTransmis.getAddress() == null || entryTransmis.getAddress().getZip() == null) {
             adressZip.setVisibility(View.GONE);
         } else {
             adressZip.setVisibility(View.VISIBLE);
         }
-        if (entryTransmis.getAddress() != null && entryTransmis.getAddress().getCity() == null) {
+        if (entryTransmis.getAddress() == null || entryTransmis.getAddress().getCity() == null) {
             adressCity.setVisibility(View.GONE);
         } else {
             adressCity.setVisibility(View.VISIBLE);
@@ -711,12 +744,12 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         tripleCount.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getTripleCount() : null));
         twinsCount.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getTwinsCount() : null));
         familyCount.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getFamilyCount() : null));
-        area.setText("Surface: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getArea() : null)+" m²");
+        area.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getArea() : null)+" m²");
         type.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getType() : null));
         floor.setText(""+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getFloor() : null));
-        bedroomCount.setText("Nb Chambre: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getBedroomCount() : null));
-        sleepsCount.setText("Nb Couchage: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getSleepsCount() : null));
-        furnishedRoomCount.setText("Nb Chambre Meuble: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getFurnishedRoomCount() : null));
+        bedroomCount.setText("Chambre: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getBedroomCount() : null));
+        sleepsCount.setText("Couchage: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getSleepsCount() : null));
+        furnishedRoomCount.setText("Chambre Meuble: "+(entryTransmis.getLiving() != null ? entryTransmis.getLiving().getFurnishedRoomCount() : null));
 
         String standingString = "";
         if (entryTransmis.getListStandingLevels()!=null) {
@@ -784,12 +817,12 @@ public class AfficherEntryDetailActivity extends NavDrawerActivity {
         twitter.setText(entryTransmis.getTwitter());
         opening.setText(entryTransmis.getOpening());
         closing.setText(entryTransmis.getClosing());
-        capacityTotal.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getTotal()  : null) +" pers");
-        capacityInterieur.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getIndoor()  : null) +" pers");
-        capacityExterieur.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getOutdoor()  : null) +" pers");
-        capacityAssis.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getSeated()  : null) +" pers");
-        capacityDebout.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getCocktail()  : null) +" pers");
-        capacityGroup.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getGroup()  : null) +" pers");
+        capacityTotal.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getTotal()  : null));
+        capacityInterieur.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getIndoor()  : null));
+        capacityExterieur.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getOutdoor()  : null));
+        capacityAssis.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getSeated()  : null));
+        capacityDebout.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getCocktail()  : null));
+        capacityGroup.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getGroup()  : null));
         capacitySalle.setText(""+(entryTransmis.getCapacity() != null ? entryTransmis.getCapacity().getRoomCount()  : null));
 
         String descriptionString = "";

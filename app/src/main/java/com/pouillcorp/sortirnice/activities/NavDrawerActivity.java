@@ -214,7 +214,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     protected MenuItem itemEntryFiltre;
     protected MenuItem itemEntryType;
 
-    protected EventEntityDao eventEntityDao;
+
     protected EntryEntityDao entryEntityDao;
     protected EntryActivityEntityDao entryActivityEntityDao;
     protected EntryAddressEntityDao entryAddressEntityDao;
@@ -624,7 +624,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
         dateMajDao = daoSession.getDateMajDao();
 
-        eventEntityDao = daoSession.getEventEntityDao();
+
         entryEntityDao = daoSession.getEntryEntityDao();
         entryActivityEntityDao = daoSession.getEntryActivityEntityDao();
         entryAddressEntityDao = daoSession.getEntryAddressEntityDao();
@@ -794,6 +794,16 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     public void ouvrirActiviteSuivante(Context context, Class classe, String nomExtra, Long objetIdExtra, boolean bool) {
         Intent intent = new Intent(context, classe);
         intent.putExtra(nomExtra, objetIdExtra);
+        startActivity(intent);
+        if (bool) {
+            finish();
+        }
+    }
+
+    public void ouvrirActiviteSuivante(Context context, Class classe, String nomExtra, Long objetIdExtra, boolean bool, boolean boolFavori) {
+        Intent intent = new Intent(context, classe);
+        intent.putExtra(nomExtra, objetIdExtra);
+        intent.putExtra("FromFavori",boolFavori);
         startActivity(intent);
         if (bool) {
             finish();
@@ -1773,6 +1783,54 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         layoutTypeAffiche = true;
     }
 
+    protected void replierEntryTousFiltre() {
+        filtreCategoryDeplie = false;
+        checkboxEntryFiltreCategorySelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreCategory.setVisibility(View.GONE);
+        buttonEntryFiltreCategory.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreLocationDeplie = false;
+        checkboxEntryFiltreLocationSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreLocation.setVisibility(View.GONE);
+        buttonEntryFiltreLocation.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreActivityDeplie = false;
+        checkboxEntryFiltreActivitySelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreActivity.setVisibility(View.GONE);
+        buttonEntryFiltreActivity.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreAmenityDeplie = false;
+        checkboxEntryFiltreAmenitySelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreAmenity.setVisibility(View.GONE);
+        buttonEntryFiltreAmenity.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreAnimationDeplie = false;
+        checkboxEntryFiltreAnimationSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreAnimation.setVisibility(View.GONE);
+        buttonEntryFiltreAnimation.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreAtmospherDeplie = false;
+        checkboxEntryFiltreAtmospherSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreAtmospher.setVisibility(View.GONE);
+        buttonEntryFiltreAtmospher.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreChainDeplie = false;
+        checkboxEntryFiltreChainSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreChain.setVisibility(View.GONE);
+        buttonEntryFiltreChain.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreFurnishedRentalDeplie = false;
+        checkboxEntryFiltreFurnishedRentalSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreFurnishedRental.setVisibility(View.GONE);
+        buttonEntryFiltreFurnishedRental.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreLabelDeplie = false;
+        checkboxEntryFiltreLabelSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreLabel.setVisibility(View.GONE);
+        buttonEntryFiltreLabel.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreServiceDeplie = false;
+        checkboxEntryFiltreServiceSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreService.setVisibility(View.GONE);
+        buttonEntryFiltreService.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreStandingLevelDeplie = false;
+        checkboxEntryFiltreStandingLevelSelectAll.setVisibility(View.GONE);
+        linearLayoutEntryFiltreStandingLevel.setVisibility(View.GONE);
+        buttonEntryFiltreStandingLevel.setIconResource(R.drawable.outline_arrow_right_black_18);
+
+    }
+
     public void afficherListCbEntryFiltreCategory(View view) {
         if (!filtreCategoryDeplie) {
             filtreCategoryDeplie = true;
@@ -1997,7 +2055,12 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         positionScroll = position;
-                        ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEntryDetailActivity.class, "entryId", listEntryEntities.get(position).getId(), false);
+                        masquerFragmentFiltreEntry();
+                        masquerFragmentType();
+                        Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
+                        //bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);
+                        boolean boolFavori = bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).isChecked();
+                        ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEntryDetailActivity.class, "entryId", listEntryEntities.get(position).getId(), false, boolFavori);
                     }
                 });
     }
@@ -2305,6 +2368,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
             masquerFragmentFiltreEntry();
+            replierEntryTousFiltre();
         }
 
         protected Void doInBackground(Void... voids) {
@@ -2337,6 +2401,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
             masquerFragmentType();
+            replierEntryTousFiltre();
         }
 
         protected Void doInBackground(Void... voids) {
@@ -2344,13 +2409,13 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
             decocherToutTypeEntry();
             decocherToutEntry();
             listEntryEntities.clear();
-            listEntryEntities.addAll(listEntryEntityType);
+            listEntryEntities.addAll(listEntryEntitiesBasique);
 
             return null;
         }
 
         protected void onPostExecute(Void result) {
-            //itemEntryFiltre.setVisible(false);
+            itemEntryFiltre.setVisible(false);
             progressBar.setVisibility(View.GONE);
             configureRecyclerViewEntry();
         }
@@ -2941,6 +3006,11 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         if (event.getListCategories() != null && eventEntity.getListCategories() != null) {
             for (com.pouillcorp.sortirnice.modelevents.Category current : event.getListCategories()) {
                 for (EvenementCategoryEntity current2 : eventEntity.getListCategories()) {
+                    for (FusionEventCategorie enumeration : FusionEventCategorie.values()){
+                        if (current.getValue().equalsIgnoreCase(enumeration.toBis())){
+                            current.setValue(enumeration.toString());
+                        }
+                    }
                     if (current.getValue().equalsIgnoreCase(current2.getValue())) {
                         boolCategories1 = true;
                     }
@@ -3338,7 +3408,12 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         positionScroll = position;
                         masquerFragmentTri();
-                        ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEvenementDetailActivity.class, "eventId", listEventEntities.get(position).getId(), false);
+                        masquerFragmentFiltreEvent();
+                        //masquerFragmentType();
+                        Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
+                        //bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);
+                        boolean boolFavori = bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).isChecked();
+                        ouvrirActiviteSuivante(App.getInstance().getApplicationContext(), AfficherEvenementDetailActivity.class, "eventId", listEventEntities.get(position).getId(), false, boolFavori);
                     }
                 });
     }
@@ -3349,6 +3424,18 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         list_recycler_event.setLayoutManager(new LinearLayoutManager(this));
         configureOnClickRecyclerViewEvent();
     }
+
+    protected void replierEventTousFiltre() {
+        filtreCategoryDeplie = false;
+        checkboxEvenementFiltreCategorySelectAll.setVisibility(View.GONE);
+        linearLayoutEvenementFiltreCategory.setVisibility(View.GONE);
+        buttonEvenementFiltreCategory.setIconResource(R.drawable.outline_arrow_right_black_18);
+        filtreVilleDeplie = false;
+        checkboxEvenementFiltreVilleSelectAll.setVisibility(View.GONE);
+        linearLayoutEvenementFiltreVille.setVisibility(View.GONE);
+        buttonEvenementFiltreVille.setIconResource(R.drawable.outline_arrow_right_black_18);
+    }
+
 
     public void afficherListCbEvenementFiltreCategory(View view) {
         if (!filtreCategoryDeplie) {
@@ -3464,6 +3551,7 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
     @OnClick(R.id.fabEvenementRazFiltre)
     protected void fabEvenementRazFiltreClick() {
         decocherTout();
+        replierEventTousFiltre();
         masquerFragmentFiltreEvent();
         listEventEntities.clear();
         listEventEntities.addAll(listEventEntitiesBasique);

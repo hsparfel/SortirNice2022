@@ -2,6 +2,7 @@ package com.pouillcorp.sortirnice.activities;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -91,7 +92,10 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         listCheckboxEntryType.add(checkboxEntryTypeRestaurant);
         listCheckboxEntryType.add(checkboxEntryTypeTransport);
         listCheckboxEntryType.add(checkboxEntryTypeShopping);
+
     }
+
+
 
     @Override
     protected void onResume() {

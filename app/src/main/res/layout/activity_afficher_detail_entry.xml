@@ -70,7 +70,8 @@
                             android:id="@+id/category"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/text_view_detail_middle"
+                            android:layout_marginBottom="@dimen/text_view_detail_middle"
                             android:text="@string/category"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary" />
@@ -102,7 +103,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/standing"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/standing"
                     android:layout_width="wrap_content"
@@ -123,7 +125,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/style"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/meuble"
                     android:layout_width="wrap_content"
@@ -144,7 +147,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/periode_locative"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/periode"
                     android:layout_width="wrap_content"
@@ -165,7 +169,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/couchageTitre"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/couchage"
                     android:layout_width="wrap_content"
@@ -186,7 +191,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/chambre"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,7 +208,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/total"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/room_count"
                     android:layout_width="wrap_content"
@@ -221,7 +228,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sdb"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/room_bath_count"
                     android:layout_width="wrap_content"
@@ -240,7 +248,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/douche"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/room_shower_count"
                     android:layout_width="wrap_content"
@@ -259,7 +268,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/suite"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/suite_count"
                     android:layout_width="wrap_content"
@@ -297,7 +307,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/appartement"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/apartment_count"
                     android:layout_width="wrap_content"
@@ -316,7 +327,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/accessible"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/room_accessible_count"
                     android:layout_width="wrap_content"
@@ -335,7 +347,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/simple"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/single_count"
                     android:layout_width="wrap_content"
@@ -354,7 +367,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/doubleRoom"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/double_count"
                     android:layout_width="wrap_content"
@@ -373,7 +387,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/triple"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/triple_count"
                     android:layout_width="wrap_content"
@@ -392,7 +407,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/twin"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/twins_count"
                     android:layout_width="wrap_content"
@@ -411,7 +427,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/famille"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/family_count"
                     android:layout_width="wrap_content"
@@ -430,7 +447,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/typeTitre"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
@@ -449,7 +467,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/etage"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/floor"
                     android:layout_width="wrap_content"
@@ -466,13 +485,15 @@
                 android:id="@+id/bloc_chambre_surface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/text_view_detail_large">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/surface"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/area"
                     android:layout_width="wrap_content"
@@ -513,7 +534,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/atmosphere"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/atmosphere"
                 android:layout_width="wrap_content"
@@ -533,7 +555,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/serviceTitre"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/service"
                 android:layout_width="wrap_content"
@@ -559,7 +582,8 @@
 
                 android:text="@string/lieu"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
 
 
         <LinearLayout
@@ -689,7 +713,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tel"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
@@ -712,7 +737,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/fax"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/fax"
                     android:layout_width="wrap_content"
@@ -734,7 +760,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/iconeEmail"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
@@ -757,7 +784,8 @@
             android:layout_height="wrap_content"
             android:text="@string/site"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginRight="@dimen/text_view_detail_short"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -786,7 +814,8 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/facebook"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/icons8_facebook_24" />
+                    app:srcCompat="@drawable/icons8_facebook_24"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <!-- <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -822,7 +851,8 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/twitter"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/icons8_twitter_24" />
+                    app:srcCompat="@drawable/icons8_twitter_24"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                <!--  <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -856,7 +886,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/paiements"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/payment"
                     android:layout_width="wrap_content"
@@ -877,7 +908,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ouvert"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -911,7 +943,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ferme"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -953,7 +986,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/labelTitre"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/label"
                     android:layout_width="wrap_content"
@@ -974,7 +1008,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/animationTitre"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/animation"
                     android:layout_width="wrap_content"
@@ -998,7 +1033,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/option"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/option"
                 android:layout_width="wrap_content"
@@ -1019,7 +1055,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/pratiqueTitre"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary" />
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/amenity"
                     android:layout_width="wrap_content"
@@ -1040,7 +1077,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/capacit"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1056,7 +1094,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/total"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_total"
                     android:layout_width="wrap_content"
@@ -1075,7 +1114,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/int_rieur"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_interieur"
                     android:layout_width="wrap_content"
@@ -1094,7 +1134,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ext_rieur"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_exterieur"
                     android:layout_width="wrap_content"
@@ -1113,7 +1154,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/assis"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_assis"
                     android:layout_width="wrap_content"
@@ -1132,7 +1174,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/debout"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_debout"
                     android:layout_width="wrap_content"
@@ -1151,7 +1194,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/groupe"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_group"
                     android:layout_width="wrap_content"
@@ -1170,7 +1214,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/salle"
                         android:textAppearance="?attr/textAppearanceBody2"
-                        android:textColor="?android:attr/textColorSecondary" />
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:layout_marginRight="@dimen/text_view_detail_short"/>
                 <TextView
                     android:id="@+id/capacity_salle"
                     android:layout_width="wrap_content"
@@ -1193,7 +1238,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sector"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_marginRight="@dimen/text_view_detail_short"/>
             <TextView
                 android:id="@+id/secto"
                 android:layout_width="wrap_content"

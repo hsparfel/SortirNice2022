@@ -50,6 +50,22 @@
             android:onClick="afficherMesFavoris"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forcer Date pour entry"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="forcerDateEntry"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maj DB"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:onClick="majDb"
+            />
+
     </LinearLayout>
 
     <LinearLayout

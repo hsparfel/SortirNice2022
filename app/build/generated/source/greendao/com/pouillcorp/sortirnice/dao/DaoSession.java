@@ -99,7 +99,6 @@ import com.pouillcorp.sortirnice.entities.event.detail.EvenementRefEntriesEntity
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementSectoEntity;
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementStationEntity;
 import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
-import com.pouillcorp.sortirnice.entities.event.EventEntity;
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementAddressEntity;
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementCategoryEntity;
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementDescriptionEntity;
@@ -200,7 +199,6 @@ import com.pouillcorp.sortirnice.dao.EvenementRefEntriesEntityDao;
 import com.pouillcorp.sortirnice.dao.EvenementSectoEntityDao;
 import com.pouillcorp.sortirnice.dao.EvenementStationEntityDao;
 import com.pouillcorp.sortirnice.dao.EvenementEntityDao;
-import com.pouillcorp.sortirnice.dao.EventEntityDao;
 import com.pouillcorp.sortirnice.dao.JoinEvenementEntityWithEvenementAddressEntityDao;
 import com.pouillcorp.sortirnice.dao.JoinEvenementEntityWithEvenementCategoryEntityDao;
 import com.pouillcorp.sortirnice.dao.JoinEvenementEntityWithEvenementDescriptionEntityDao;
@@ -310,7 +308,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig evenementSectoEntityDaoConfig;
     private final DaoConfig evenementStationEntityDaoConfig;
     private final DaoConfig evenementEntityDaoConfig;
-    private final DaoConfig eventEntityDaoConfig;
     private final DaoConfig joinEvenementEntityWithEvenementAddressEntityDaoConfig;
     private final DaoConfig joinEvenementEntityWithEvenementCategoryEntityDaoConfig;
     private final DaoConfig joinEvenementEntityWithEvenementDescriptionEntityDaoConfig;
@@ -411,7 +408,6 @@ public class DaoSession extends AbstractDaoSession {
     private final EvenementSectoEntityDao evenementSectoEntityDao;
     private final EvenementStationEntityDao evenementStationEntityDao;
     private final EvenementEntityDao evenementEntityDao;
-    private final EventEntityDao eventEntityDao;
     private final JoinEvenementEntityWithEvenementAddressEntityDao joinEvenementEntityWithEvenementAddressEntityDao;
     private final JoinEvenementEntityWithEvenementCategoryEntityDao joinEvenementEntityWithEvenementCategoryEntityDao;
     private final JoinEvenementEntityWithEvenementDescriptionEntityDao joinEvenementEntityWithEvenementDescriptionEntityDao;
@@ -698,9 +694,6 @@ public class DaoSession extends AbstractDaoSession {
         evenementEntityDaoConfig = daoConfigMap.get(EvenementEntityDao.class).clone();
         evenementEntityDaoConfig.initIdentityScope(type);
 
-        eventEntityDaoConfig = daoConfigMap.get(EventEntityDao.class).clone();
-        eventEntityDaoConfig.initIdentityScope(type);
-
         joinEvenementEntityWithEvenementAddressEntityDaoConfig = daoConfigMap.get(JoinEvenementEntityWithEvenementAddressEntityDao.class).clone();
         joinEvenementEntityWithEvenementAddressEntityDaoConfig.initIdentityScope(type);
 
@@ -816,7 +809,6 @@ public class DaoSession extends AbstractDaoSession {
         evenementSectoEntityDao = new EvenementSectoEntityDao(evenementSectoEntityDaoConfig, this);
         evenementStationEntityDao = new EvenementStationEntityDao(evenementStationEntityDaoConfig, this);
         evenementEntityDao = new EvenementEntityDao(evenementEntityDaoConfig, this);
-        eventEntityDao = new EventEntityDao(eventEntityDaoConfig, this);
         joinEvenementEntityWithEvenementAddressEntityDao = new JoinEvenementEntityWithEvenementAddressEntityDao(joinEvenementEntityWithEvenementAddressEntityDaoConfig, this);
         joinEvenementEntityWithEvenementCategoryEntityDao = new JoinEvenementEntityWithEvenementCategoryEntityDao(joinEvenementEntityWithEvenementCategoryEntityDaoConfig, this);
         joinEvenementEntityWithEvenementDescriptionEntityDao = new JoinEvenementEntityWithEvenementDescriptionEntityDao(joinEvenementEntityWithEvenementDescriptionEntityDaoConfig, this);
@@ -917,7 +909,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(EvenementSectoEntity.class, evenementSectoEntityDao);
         registerDao(EvenementStationEntity.class, evenementStationEntityDao);
         registerDao(EvenementEntity.class, evenementEntityDao);
-        registerDao(EventEntity.class, eventEntityDao);
         registerDao(JoinEvenementEntityWithEvenementAddressEntity.class, joinEvenementEntityWithEvenementAddressEntityDao);
         registerDao(JoinEvenementEntityWithEvenementCategoryEntity.class, joinEvenementEntityWithEvenementCategoryEntityDao);
         registerDao(JoinEvenementEntityWithEvenementDescriptionEntity.class, joinEvenementEntityWithEvenementDescriptionEntityDao);
@@ -1020,7 +1011,6 @@ public class DaoSession extends AbstractDaoSession {
         evenementSectoEntityDaoConfig.clearIdentityScope();
         evenementStationEntityDaoConfig.clearIdentityScope();
         evenementEntityDaoConfig.clearIdentityScope();
-        eventEntityDaoConfig.clearIdentityScope();
         joinEvenementEntityWithEvenementAddressEntityDaoConfig.clearIdentityScope();
         joinEvenementEntityWithEvenementCategoryEntityDaoConfig.clearIdentityScope();
         joinEvenementEntityWithEvenementDescriptionEntityDaoConfig.clearIdentityScope();
@@ -1393,10 +1383,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public EvenementEntityDao getEvenementEntityDao() {
         return evenementEntityDao;
-    }
-
-    public EventEntityDao getEventEntityDao() {
-        return eventEntityDao;
     }
 
     public JoinEvenementEntityWithEvenementAddressEntityDao getJoinEvenementEntityWithEvenementAddressEntityDao() {
