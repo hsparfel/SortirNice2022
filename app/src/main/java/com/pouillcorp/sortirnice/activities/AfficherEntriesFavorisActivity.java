@@ -40,6 +40,8 @@ public class AfficherEntriesFavorisActivity extends NavDrawerActivity implements
         listEntries = new ArrayList<>();
         nbEntries = 0;
 
+        progressBar.setVisibility(View.VISIBLE);
+
         setTitle("Entries Favoris");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);

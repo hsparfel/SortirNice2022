@@ -48,6 +48,7 @@ public class AfficherEvenementsActivity extends NavDrawerActivity implements Rec
 
         ButterKnife.bind(this);
 
+        progressBar.setVisibility(View.VISIBLE);
         listEvents = new ArrayList<>();
         nbEvents = 0;
 

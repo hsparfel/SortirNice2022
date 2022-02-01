@@ -362,13 +362,15 @@ public class AfficherEvenementDetailActivity extends NavDrawerActivity {
                 if (eventTransmis.getImage()!= null && eventTransmis.getImage().length()>0) {
                     try {
                         url = new URL(eventTransmis.getImage());
-                        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                        HttpURLConnection httpConn = null;
+                        httpConn = (HttpURLConnection) url.openConnection();
                         httpConn.connect();
                         int resCode = httpConn.getResponseCode();
                         if (resCode == HttpURLConnection.HTTP_OK) {
                             InputStream in = httpConn.getInputStream();
                             bitmap = BitmapFactory.decodeStream(in);
                         }
+                        httpConn = null;
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

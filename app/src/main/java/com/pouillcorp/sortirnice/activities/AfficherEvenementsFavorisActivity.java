@@ -38,6 +38,8 @@ public class AfficherEvenementsFavorisActivity extends NavDrawerActivity impleme
         listEvents = new ArrayList<>();
         nbEvents = 0;
 
+        progressBar.setVisibility(View.VISIBLE);
+
         setTitle("Evenements Favoris");
         Menu bottomNavigationViewMenu = bottomNavigationView.getMenu();
         bottomNavigationViewMenu.findItem(R.id.bottom_navigation_my_datas).setChecked(true);

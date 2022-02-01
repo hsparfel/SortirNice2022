@@ -33,7 +33,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
+
             android:background="#E5E7E9"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
@@ -290,7 +290,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
+
             android:background="#E5E7E9"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
@@ -738,7 +738,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        android:background="@color/colorPrimaryDark">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -752,17 +753,18 @@
         app:menu="@menu/bottom_navigation_menu" />
 
     <ProgressBar
-        android:id="@+id/simpleProgressBar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:elevation="10dp"
-        android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+    android:id="@+id/simpleProgressBar"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center_horizontal"
+    android:elevation="10dp"
+    android:indeterminate="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:visibility="visible"
+    android:indeterminateTint="@color/progress"/>
 
 
     <!-- afficher detail -->

@@ -13,87 +13,399 @@
 11    <uses-permission android:name="android.permission.INTERNET" />
 11-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:5:5-66
 11-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:5:22-64
-12
-13    <application
-13-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:7:5-37:19
-14        android:name="com.pouillcorp.sortirnice.App"
-14-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:8:9-28
-15        android:allowBackup="true"
-15-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:9:9-35
-16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-16-->[androidx.core:core:1.3.1] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\6e8583a434c5cddf525693bfa164bcd8\core-1.3.1\AndroidManifest.xml:24:18-86
-17        android:debuggable="true"
-18        android:extractNativeLibs="false"
-19        android:icon="@mipmap/logo_app"
-19-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:10:9-40
-20        android:label="@string/app_name"
-20-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:11:9-41
-21        android:roundIcon="@mipmap/logo_app"
-21-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:12:9-45
-22        android:supportsRtl="true"
-22-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:13:9-35
-23        android:testOnly="true"
-24        android:theme="@style/AppTheme" >
-24-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:14:9-40
-25        <activity
-25-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:9-22:20
-26            android:name="com.pouillcorp.sortirnice.activities.AccueilActivity"
-26-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:15:19-61
-27            android:windowSoftInputMode="stateHidden" >
-27-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:16:13-54
-28            <intent-filter>
-28-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:17:13-21:29
-29                <action android:name="android.intent.action.MAIN" />
-29-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:17-69
-29-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:25-66
-30
-31                <category android:name="android.intent.category.LAUNCHER" />
-31-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:17-77
-31-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:20:27-74
-32            </intent-filter>
-33        </activity>
-34        <activity
-34-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:9-24:56
-35            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsActivity"
-35-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:23:19-72
-36            android:windowSoftInputMode="stateHidden" />
-36-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:24:13-54
-37        <activity
-37-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:9-26:56
-38            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesDiversActivity"
-38-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:19-75
-39            android:windowSoftInputMode="stateHidden" />
-39-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:26:13-54
-40        <activity
-40-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:9-28:56
-41            android:name="com.pouillcorp.sortirnice.activities.AfficherEntryDetailActivity"
-41-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:19-73
-42            android:windowSoftInputMode="stateHidden" />
-42-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:28:13-54
-43        <activity
-43-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:9-30:56
-44            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementDetailActivity"
-44-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:19-77
-45            android:windowSoftInputMode="stateHidden" />
-45-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:30:13-54
-46        <activity
-46-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:9-32:56
-47            android:name="com.pouillcorp.sortirnice.activities.AfficherFavorisActivity"
-47-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:19-69
-48            android:windowSoftInputMode="stateHidden" />
-48-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:32:13-54
-49        <activity
-49-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:9-34:56
-50            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsFavorisActivity"
-50-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:19-79
-51            android:windowSoftInputMode="stateHidden" />
-51-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:34:13-54
-52        <activity
-52-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:9-36:56
-53            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesFavorisActivity"
-53-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:19-76
-54            android:windowSoftInputMode="stateHidden" />
-54-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:36:13-54
-55    </application>
-56
-57</manifest>
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:24:5-79
+12-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:24:22-76
+13    <uses-permission android:name="com.google.android.gms.permission.AD_ID" /> <!-- Android package visibility setting -->
+13-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:25:5-79
+13-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:25:22-76
+14    <queries>
+14-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:28:5-44:15
+15
+16        <!-- For browser content -->
+17        <intent>
+17-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:31:9-37:18
+18            <action android:name="android.intent.action.VIEW" />
+18-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:32:13-65
+18-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:32:21-62
+19
+20            <category android:name="android.intent.category.BROWSABLE" />
+20-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:34:13-74
+20-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:34:23-71
+21
+22            <data android:scheme="https" />
+22-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:36:13-44
+22-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:36:19-41
+23        </intent>
+24        <!-- End of browser content -->
+25        <!-- For CustomTabsService -->
+26        <intent>
+26-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:31:9-37:18
+27            <action android:name="android.support.customtabs.action.CustomTabsService" />
+28        </intent>
+29        <!-- End of CustomTabsService -->
+30    </queries>
+31
+32    <uses-permission android:name="android.permission.WAKE_LOCK" />
+32-->[com.google.android.gms:play-services-measurement-sdk-api:18.0.3] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\1883a11a49e6eaee76125c4100077b2a\jetified-play-services-measurement-sdk-api-18.0.3\AndroidManifest.xml:25:5-68
+32-->[com.google.android.gms:play-services-measurement-sdk-api:18.0.3] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\1883a11a49e6eaee76125c4100077b2a\jetified-play-services-measurement-sdk-api-18.0.3\AndroidManifest.xml:25:22-65
+33    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+33-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:27:5-81
+33-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:27:22-78
+34    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+34-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:28:5-77
+34-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:28:22-74
+35
+36    <application
+36-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:7:5-46:19
+37        android:name="com.pouillcorp.sortirnice.App"
+37-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:8:9-28
+38        android:allowBackup="true"
+38-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:9:9-35
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\11cfb2cb4e9024584b363b3940e08a2b\core-1.6.0\AndroidManifest.xml:24:18-86
+40        android:debuggable="true"
+41        android:extractNativeLibs="false"
+42        android:icon="@mipmap/logo_app"
+42-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:10:9-40
+43        android:label="@string/app_name"
+43-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:11:9-41
+44        android:roundIcon="@mipmap/logo_app"
+44-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:12:9-45
+45        android:supportsRtl="true"
+45-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:13:9-35
+46        android:testOnly="true"
+47        android:theme="@style/AppTheme" >
+47-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:14:9-40
+48        <activity
+48-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:16:9-23:20
+49            android:name="com.pouillcorp.sortirnice.activities.AccueilActivity"
+49-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:16:19-61
+50            android:windowSoftInputMode="stateHidden" >
+50-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:17:13-54
+51            <intent-filter>
+51-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:18:13-22:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:19:17-69
+52-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:19:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:21:17-77
+54-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:21:27-74
+55            </intent-filter>
+56        </activity>
+57        <activity
+57-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:24:9-25:56
+58            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsActivity"
+58-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:24:19-72
+59            android:windowSoftInputMode="stateHidden" />
+59-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:25:13-54
+60        <activity
+60-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:26:9-27:56
+61            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesDiversActivity"
+61-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:26:19-75
+62            android:windowSoftInputMode="stateHidden" />
+62-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:27:13-54
+63        <activity
+63-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:28:9-29:56
+64            android:name="com.pouillcorp.sortirnice.activities.AfficherEntryDetailActivity"
+64-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:28:19-73
+65            android:windowSoftInputMode="stateHidden" />
+65-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:29:13-54
+66        <activity
+66-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:30:9-31:56
+67            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementDetailActivity"
+67-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:30:19-77
+68            android:windowSoftInputMode="stateHidden" />
+68-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:31:13-54
+69        <activity
+69-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:32:9-33:56
+70            android:name="com.pouillcorp.sortirnice.activities.AfficherFavorisActivity"
+70-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:32:19-69
+71            android:windowSoftInputMode="stateHidden" />
+71-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:33:13-54
+72        <activity
+72-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:34:9-35:56
+73            android:name="com.pouillcorp.sortirnice.activities.AfficherEvenementsFavorisActivity"
+73-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:34:19-79
+74            android:windowSoftInputMode="stateHidden" />
+74-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:35:13-54
+75        <activity
+75-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:36:9-37:56
+76            android:name="com.pouillcorp.sortirnice.activities.AfficherEntriesFavorisActivity"
+76-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:36:19-76
+77            android:windowSoftInputMode="stateHidden" />
+77-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:37:13-54
+78
+79        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+80        <meta-data
+80-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:43:9-45:69
+81            android:name="com.google.android.gms.ads.APPLICATION_ID"
+81-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:44:13-69
+82            android:value="ca-app-pub-4063990686626392~4008761721" />
+82-->C:\Users\TNH\AndroidStudioProjects\SortirNice2022\app\src\main\AndroidManifest.xml:45:13-67
+83
+84        <provider
+84-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\a3a841c2133867c7cf47ff11111b9f9b\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+85            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+85-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\a3a841c2133867c7cf47ff11111b9f9b\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+86            android:authorities="com.pouillcorp.sortirnice.lifecycle-process"
+86-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\a3a841c2133867c7cf47ff11111b9f9b\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+87            android:exported="false"
+87-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\a3a841c2133867c7cf47ff11111b9f9b\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+88            android:multiprocess="true" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+88-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\a3a841c2133867c7cf47ff11111b9f9b\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+89        <activity
+89-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:49:9-53:64
+90            android:name="com.google.android.gms.ads.AdActivity"
+90-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:50:13-65
+91            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+91-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:51:13-122
+92            android:exported="false"
+92-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:52:13-37
+93            android:theme="@android:style/Theme.Translucent" />
+93-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:53:13-61
+94
+95        <provider
+95-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:55:9-59:39
+96            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
+96-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:56:13-76
+97            android:authorities="com.pouillcorp.sortirnice.mobileadsinitprovider"
+97-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:57:13-73
+98            android:exported="false"
+98-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:58:13-37
+99            android:initOrder="100" />
+99-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:59:13-36
+100
+101        <service
+101-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:61:9-64:40
+102            android:name="com.google.android.gms.ads.AdService"
+102-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:62:13-64
+103            android:enabled="true"
+103-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:63:13-35
+104            android:exported="false" />
+104-->[com.google.android.gms:play-services-ads-lite:20.5.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\e9cbd5ed1c094c103a23dc784e89bbfb\jetified-play-services-ads-lite-20.5.0\AndroidManifest.xml:64:13-37
+105
+106        <activity
+106-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\010c05df398db2a9f462fa0b5e7267b5\jetified-play-services-base-17.6.0\AndroidManifest.xml:23:9-26:75
+107            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+107-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\010c05df398db2a9f462fa0b5e7267b5\jetified-play-services-base-17.6.0\AndroidManifest.xml:24:13-79
+108            android:exported="false"
+108-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\010c05df398db2a9f462fa0b5e7267b5\jetified-play-services-base-17.6.0\AndroidManifest.xml:25:13-37
+109            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+109-->[com.google.android.gms:play-services-base:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\010c05df398db2a9f462fa0b5e7267b5\jetified-play-services-base-17.6.0\AndroidManifest.xml:26:13-72
+110
+111        <meta-data
+111-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\f775150d7ed1cf29d83a5c8d7c25b3bf\jetified-play-services-basement-17.6.0\AndroidManifest.xml:23:9-25:69
+112            android:name="com.google.android.gms.version"
+112-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\f775150d7ed1cf29d83a5c8d7c25b3bf\jetified-play-services-basement-17.6.0\AndroidManifest.xml:24:13-58
+113            android:value="@integer/google_play_services_version" />
+113-->[com.google.android.gms:play-services-basement:17.6.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\f775150d7ed1cf29d83a5c8d7c25b3bf\jetified-play-services-basement-17.6.0\AndroidManifest.xml:25:13-66
+114
+115        <provider
+115-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:31:9-39:20
+116            android:name="androidx.startup.InitializationProvider"
+116-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:32:13-67
+117            android:authorities="com.pouillcorp.sortirnice.androidx-startup"
+117-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:33:13-68
+118            android:exported="false" >
+118-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:34:13-37
+119            <meta-data
+119-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:36:13-38:52
+120                android:name="androidx.work.WorkManagerInitializer"
+120-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:37:17-68
+121                android:value="androidx.startup" />
+121-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:38:17-49
+122        </provider>
+123
+124        <service
+124-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:41:9-46:35
+125            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+125-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:42:13-88
+126            android:directBootAware="false"
+126-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:43:13-44
+127            android:enabled="@bool/enable_system_alarm_service_default"
+127-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:44:13-72
+128            android:exported="false" />
+128-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:45:13-37
+129        <service
+129-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:47:9-53:35
+130            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+130-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:48:13-84
+131            android:directBootAware="false"
+131-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:49:13-44
+132            android:enabled="@bool/enable_system_job_service_default"
+132-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:50:13-70
+133            android:exported="true"
+133-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:51:13-36
+134            android:permission="android.permission.BIND_JOB_SERVICE" />
+134-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:52:13-69
+135        <service
+135-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:54:9-59:35
+136            android:name="androidx.work.impl.foreground.SystemForegroundService"
+136-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:55:13-81
+137            android:directBootAware="false"
+137-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:56:13-44
+138            android:enabled="@bool/enable_system_foreground_service_default"
+138-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:57:13-77
+139            android:exported="false" />
+139-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:58:13-37
+140
+141        <receiver
+141-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:61:9-66:35
+142            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+142-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:62:13-88
+143            android:directBootAware="false"
+143-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:63:13-44
+144            android:enabled="true"
+144-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:64:13-35
+145            android:exported="false" />
+145-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:65:13-37
+146        <receiver
+146-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:67:9-77:20
+147            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+147-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:68:13-106
+148            android:directBootAware="false"
+148-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:69:13-44
+149            android:enabled="false"
+149-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:70:13-36
+150            android:exported="false" >
+150-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:71:13-37
+151            <intent-filter>
+151-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:73:13-76:29
+152                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+152-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:74:17-87
+152-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:74:25-84
+153                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+153-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:75:17-90
+153-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:75:25-87
+154            </intent-filter>
+155        </receiver>
+156        <receiver
+156-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:78:9-88:20
+157            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+157-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:79:13-104
+158            android:directBootAware="false"
+158-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:80:13-44
+159            android:enabled="false"
+159-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:81:13-36
+160            android:exported="false" >
+160-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:82:13-37
+161            <intent-filter>
+161-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:84:13-87:29
+162                <action android:name="android.intent.action.BATTERY_OKAY" />
+162-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:85:17-77
+162-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:85:25-74
+163                <action android:name="android.intent.action.BATTERY_LOW" />
+163-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:86:17-76
+163-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:86:25-73
+164            </intent-filter>
+165        </receiver>
+166        <receiver
+166-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:89:9-99:20
+167            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+167-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:90:13-104
+168            android:directBootAware="false"
+168-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:91:13-44
+169            android:enabled="false"
+169-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:92:13-36
+170            android:exported="false" >
+170-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:93:13-37
+171            <intent-filter>
+171-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:95:13-98:29
+172                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+172-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:96:17-83
+172-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:96:25-80
+173                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+173-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:97:17-82
+173-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:97:25-79
+174            </intent-filter>
+175        </receiver>
+176        <receiver
+176-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:100:9-109:20
+177            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+177-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:101:13-103
+178            android:directBootAware="false"
+178-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:102:13-44
+179            android:enabled="false"
+179-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:103:13-36
+180            android:exported="false" >
+180-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:104:13-37
+181            <intent-filter>
+181-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:106:13-108:29
+182                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+182-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:107:17-79
+182-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:107:25-76
+183            </intent-filter>
+184        </receiver>
+185        <receiver
+185-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:110:9-121:20
+186            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+186-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:111:13-88
+187            android:directBootAware="false"
+187-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:112:13-44
+188            android:enabled="false"
+188-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:113:13-36
+189            android:exported="false" >
+189-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:114:13-37
+190            <intent-filter>
+190-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:116:13-120:29
+191                <action android:name="android.intent.action.BOOT_COMPLETED" />
+191-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:117:17-79
+191-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:117:25-76
+192                <action android:name="android.intent.action.TIME_SET" />
+192-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:118:17-73
+192-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:118:25-70
+193                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+193-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:119:17-81
+193-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:119:25-78
+194            </intent-filter>
+195        </receiver>
+196        <receiver
+196-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:122:9-131:20
+197            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+197-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:123:13-99
+198            android:directBootAware="false"
+198-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:124:13-44
+199            android:enabled="@bool/enable_system_alarm_service_default"
+199-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:125:13-72
+200            android:exported="false" >
+200-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:126:13-37
+201            <intent-filter>
+201-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:128:13-130:29
+202                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+202-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:129:17-98
+202-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:129:25-95
+203            </intent-filter>
+204        </receiver>
+205        <receiver
+205-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:132:9-142:20
+206            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+206-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:133:13-78
+207            android:directBootAware="false"
+207-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:134:13-44
+208            android:enabled="true"
+208-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:135:13-35
+209            android:exported="true"
+209-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:136:13-36
+210            android:permission="android.permission.DUMP" >
+210-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:137:13-57
+211            <intent-filter>
+211-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:139:13-141:29
+212                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+212-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:140:17-88
+212-->[androidx.work:work-runtime:2.7.0] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\b0bf26567dbffe447b0dfd9344175168\work-runtime-2.7.0\AndroidManifest.xml:140:25-85
+213            </intent-filter>
+214        </receiver>
+215
+216        <service
+216-->[androidx.room:room-runtime:2.2.5] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\6a531bb1c4218be621d881fbbaf50489\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+217            android:name="androidx.room.MultiInstanceInvalidationService"
+217-->[androidx.room:room-runtime:2.2.5] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\6a531bb1c4218be621d881fbbaf50489\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+218            android:directBootAware="true"
+218-->[androidx.room:room-runtime:2.2.5] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\6a531bb1c4218be621d881fbbaf50489\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+219            android:exported="false" />
+219-->[androidx.room:room-runtime:2.2.5] C:\Users\TNH\.gradle\caches\transforms-2\files-2.1\6a531bb1c4218be621d881fbbaf50489\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+220    </application>
+221
+222</manifest>

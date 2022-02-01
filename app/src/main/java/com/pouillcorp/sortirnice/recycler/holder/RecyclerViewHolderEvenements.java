@@ -167,7 +167,8 @@ public class RecyclerViewHolderEvenements extends RecyclerView.ViewHolder implem
             if (currentEvent.getImage() != null && !currentEvent.getImage().equalsIgnoreCase("")) {
                 try {
                     url = new URL(currentEvent.getImage());
-                    HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+                    HttpURLConnection httpConn = null;
+                    httpConn = (HttpURLConnection) url.openConnection();
                     httpConn.connect();
                     int resCode = httpConn.getResponseCode();
                     if (resCode == HttpURLConnection.HTTP_OK) {
@@ -175,6 +176,7 @@ public class RecyclerViewHolderEvenements extends RecyclerView.ViewHolder implem
                         bitmap = BitmapFactory.decodeStream(in);
                         //this.image.setImageBitmap(bitmap);
                         //RecyclerViewHolderEvents.this.image.setImageBitmap(bitmap);
+                        httpConn = null;
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

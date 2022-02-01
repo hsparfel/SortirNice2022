@@ -1,10 +1,24 @@
 package com.pouillcorp.sortirnice.activities;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.pouillcorp.sortirnice.R;
 import com.pouillcorp.sortirnice.entities.DateMaj;
 import com.pouillcorp.sortirnice.entities.entry.EntryEntity;
@@ -13,12 +27,17 @@ import com.pouillcorp.sortirnice.entities.event.EvenementEntity;
 import com.pouillcorp.sortirnice.entities.event.detail.EvenementProfileEntity;
 import com.pouillcorp.sortirnice.entities.event.join.JoinEvenementEntityWithEvenementProfileEntity;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;
 
 public class AccueilActivity extends NavDrawerActivity {
+
+    public static final String TAG = AccueilActivity.class.getSimpleName();
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +46,50 @@ public class AccueilActivity extends NavDrawerActivity {
         setContentView(R.layout.activity_accueil);
         Stetho.initializeWithDefaults(this);
 
+
+
+
+
+
+
         this.configureToolBar();
         this.configureBottomView();
 
         ButterKnife.bind(this);
+        long nbEntry = entryEntityDao.count();
+        if (nbEntry == 0) {
+            AsyncTaskRunnerPrepopulate runner = new AsyncTaskRunnerPrepopulate();
+            runner.execute();
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
         setTitle("Accueil");
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(AccueilActivity.this);
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
     }
+
+    protected class AsyncTaskRunnerPrepopulate extends AsyncTask<Void, Integer, Void> {
+
+        protected void onPreExecute() {
+            Log.e("tag", "import affiche progress");
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        protected Void doInBackground(Void... voids) {
+            remplirDbSiEntryVide(db);
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            Log.e("tag","import FINI !!!!!!!!!!!!!!!!!!!!!!");
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

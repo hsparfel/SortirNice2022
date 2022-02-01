@@ -3,6 +3,7 @@ package com.pouillcorp.sortirnice.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
@@ -184,18 +186,31 @@ import com.pouillcorp.sortirnice.modelevents.Event;
 import com.pouillcorp.sortirnice.modelevents.Image;
 import com.pouillcorp.sortirnice.modelevents.RefEntries;
 import com.pouillcorp.sortirnice.modelevents.Secto;
+import com.pouillcorp.sortirnice.prepopulate.Descriptif;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEntries;
 import com.pouillcorp.sortirnice.recycler.adapter.RecyclerAdapterEvenements;
 import com.pouillcorp.sortirnice.utils.ItemClickSupport;
 
+import org.greenrobot.greendao.DaoLog;
+import org.greenrobot.greendao.DbUtils;
 import org.greenrobot.greendao.database.Database;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -617,10 +632,12 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
 
     protected List<EvenementEntity> listEvenementEntityFiltre = new ArrayList<>();
 
+    Database db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initialiserDao();
+        db = initialiserDao();
 
         dateMajDao = daoSession.getDateMajDao();
 
@@ -726,7 +743,85 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         joinEvenementEntityWithEvenementRefEntriesEntityDao = daoSession.getJoinEvenementEntityWithEvenementRefEntriesEntityDao();
         joinEvenementEntityWithEvenementSectoEntityDao = daoSession.getJoinEvenementEntityWithEvenementSectoEntityDao();
         joinEvenementEntityWithEvenementCategoryEntityDao = daoSession.getJoinEvenementEntityWithEvenementCategoryEntityDao();
+
+        //remplirDbSiEntryVide(db);
+        /*long nbEntry = entryEntityDao.count();
+        if (nbEntry == 0) {
+            AsyncTaskRunnerPrepopulate runner = new AsyncTaskRunnerPrepopulate();
+            runner.execute();
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }*/
     }
+
+    /*protected class AsyncTaskRunnerPrepopulate extends AsyncTask<Void, Integer, Void> {
+
+        protected void onPreExecute() {
+            Log.e("tag", "import affiche progress");
+            //progressBar.setVisibility(View.VISIBLE);
+        }
+
+        protected Void doInBackground(Void... voids) {
+            remplirDbSiEntryVide(db);
+            return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            Log.e("tag","import FINI !!!!!!!!!!!!!!!!!!!!!!");
+            progressBar.setVisibility(View.GONE);
+        }
+    }*/
+
+
+
+    public void remplirDbSiEntryVide(Database db)  {
+        //entryEntityDao = daoSession.getEntryEntityDao();
+        //long nbEntry = entryEntityDao.count();
+        Log.e("tag","import debute");
+        //AssetManager am = this.getAssets();
+        /*InputStream is = null;
+        try {
+            is = am.open("sortir_nice_2022_db_A_integrera1.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String result = new BufferedReader(new InputStreamReader(is))
+                .lines().collect(Collectors.joining("\n"));*/
+
+
+
+
+
+        //if (nbEntry == 0) {
+            Log.e("tag","import en cours");
+            for (Descriptif current : Descriptif.values()){
+                EntryDescriptionEntity desc = new  EntryDescriptionEntity();
+                desc.setId(current.getId());
+                desc.setValue(current.getValue());
+                entryDescriptionEntityDao.insert(desc);
+            }
+            Log.e("tag","import descriptif fait");
+            try {
+                //DbUtils.executeSqlScript(this, db, result);
+                DbUtils.executeSqlScript(this, db, "A_integrer.sql");
+                Log.e("tag","import fait");
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("tag","erreur import");
+            }
+            Log.e("tag","import over");
+       // }
+
+
+
+    }
+
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -825,11 +920,13 @@ public class NavDrawerActivity<T> extends AppCompatActivity {
         return daoSession;
     }
 
-    public void initialiserDao() {
+    public Database initialiserDao() {
         AppOpenHelper helper = new AppOpenHelper(this, "sortir_nice_2022_db", null);
         Database db = helper.getWritableDb();
         DaoMaster daoMaster = new DaoMaster(db);
         daoSession = daoMaster.newSession();
+
+        return db;
     }
 
     @Override

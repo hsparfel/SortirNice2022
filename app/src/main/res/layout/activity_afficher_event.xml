@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.AfficherEventsActivity">
+        tools:context=".activities.AfficherEvenementsActivity">
 
         <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -35,7 +35,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
+
             android:background="#E5E7E9"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
@@ -160,13 +160,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#E5E7E9"
-            android:layout_marginRight="10dip"
+
             >
             <TextView
                 android:id="@+id/tri_textView"
                 android:layout_width="200dip"
                 android:layout_height="wrap_content"
-                android:text="Trier selon:"
+                android:text="@string/trier_selon"
                 android:layout_marginTop="@dimen/text_view_detail_middle"
                 android:layout_marginLeft="@dimen/text_view_detail_middle"/>
 
@@ -181,12 +181,12 @@
                     android:id="@+id/radio_button_evenement_tri_nom"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tri1"/>
+                    android:text="@string/tri1"/>
                 <RadioButton
                     android:id="@+id/radio_button_evenement_tri_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="tri2"/>
+                    android:text="@string/tri2"/>
             </RadioGroup>
         </LinearLayout>
     </FrameLayout>
@@ -197,7 +197,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_toolbar"
+        android:background="@color/colorPrimaryDark">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -221,6 +222,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:indeterminateTint="@color/progress"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

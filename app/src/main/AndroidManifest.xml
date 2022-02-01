@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo_app"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".activities.AccueilActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -34,6 +35,14 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activities.AfficherEntriesFavorisActivity"
             android:windowSoftInputMode="stateHidden"/>
+
+
+
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4063990686626392~4008761721"/>
     </application>
 
 </manifest>

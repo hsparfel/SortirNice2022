@@ -72,6 +72,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
         listEntries = new ArrayList<>();
         nbEntries = 0;
 
+        progressBar.setVisibility(View.VISIBLE);
         //setHasOptionsMenu(true);
 
         setTitle("Divers");
@@ -206,6 +207,7 @@ public class AfficherEntriesDiversActivity extends NavDrawerActivity implements 
     private class AsyncTaskRunnerRechercheGlobale extends AsyncTask<Void, Integer, Void> {
 
         protected Void doInBackground(Void... voids) {
+            //remplirDbSiEntryVide(db);
             lancerRechercheGlobale();
             return null;
         }

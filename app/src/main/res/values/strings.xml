@@ -8,7 +8,7 @@
     <string name="infos_pratiques">Infos pratiques</string>
     <string name="sans_categorie">Sans catégorie</string>
     <string name="evenements">Evenements</string>
-    
+    <string name="evenementsFavoris">Evenements Favoris</string>
     <string name="visites">Visites</string>
     <string name="sorties">Sorties</string>
     <string name="restaurants">Restaurants</string>
@@ -147,8 +147,20 @@
     <string name="periode_locative">Periode Locative: </string>
 
     <string name="wait">Patientez...</string>
-    <string name="aucun_favoris">aucun favoris</string>
+    <string name="aucun_favoris">Vous n\'avez enregistré aucun favori pour le moment</string>
 
     <string name="accueil">Accueil</string>
     <string name="divers">Divers</string>
+    <string name="diversFavoris">Divers Favoris</string>
+    <string name="textOfficeTourisme">App non-officielle de l\'Office du Tourisme Métropolitain Nice Côte d\'Azur.\nSeules les données fournies par celui-ci sont exploitées.\nPour de plus amples informations, visiter le site officiel.</string>
+    <string name="urlOfficeTourisme">http://www.nicetourisme.com/</string>
+    <string name="bienvenue">Bienvenue</string>
+    <string name="descriptif">Découvrez les meilleurs spots pour vos sorties\nRepérez les plus beaux lieux à visiter\n
+    Trouvez votre hébergement etc...\n
+    Agenda de tous les évènements culturels à venir à Nice et ses environs</string>
+    <string name="trier_selon">Trier selon:</string>
+    <string name="tri1">tri1</string>
+    <string name="tri2">tri2</string>
+
+
 </resources>
